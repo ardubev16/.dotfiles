@@ -39,6 +39,10 @@ set signcolumn=yes
 "vim-plug plugin manager
 
 
+"map for ubuntu
+map <Esc>j <A-j>
+map <Esc>k <A-k>
+
 nnoremap <A-j> :m .+1<CR>==
 nnoremap <A-k> :m .-2<CR>==
 inoremap <A-j> <Esc>:m .+1<CR>==gi
