@@ -10,7 +10,7 @@ endif
 
 set wildmenu
 set showcmd
-"set ruler
+" set ruler
 
 set tabstop=4 softtabstop=4
 set shiftwidth=4
@@ -47,8 +47,13 @@ call plug#begin()
 
 Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
-Plug 'octol/vim-cpp-enhanced-highlight'
+" Plug 'vim-airline/vim-airline-themes'
+
+"syntax-highlighting
+" Plug 'octol/vim-cpp-enhanced-highlight'
+" Plug 'vim-python/python-syntax'
+
+Plug 'tpope/vim-commentary'
 
 call plug#end()
 
@@ -99,6 +104,9 @@ let g:gruvbox_italic = '1'
 colorscheme gruvbox
 let g:airline_theme='gruvbox'
 set background=dark
+
+" let g:python_highlight_all = 1
+
 
 " symbols section for unicode/airline symbols
 "let g:airline_powerline_fonts = 1
