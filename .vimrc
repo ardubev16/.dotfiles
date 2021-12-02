@@ -50,7 +50,7 @@ Plug 'vim-airline/vim-airline'
 " Plug 'vim-airline/vim-airline-themes'
 
 "syntax-highlighting
-" Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'octol/vim-cpp-enhanced-highlight'
 " Plug 'vim-python/python-syntax'
 
 Plug 'tpope/vim-commentary'
