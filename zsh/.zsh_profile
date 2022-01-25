@@ -1,0 +1,5 @@
+VIM="vim"
+
+export GIT_EDITOR=$VIM
+export DOTFILES=$HOME/.dotfiles
+

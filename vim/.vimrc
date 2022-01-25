@@ -1,13 +1,5 @@
 set nocompatible
 
-if has('filetype')
-    filetype indent plugin on
-endif
-
-if has('syntax')
-    syntax on
-endif
-
 set wildmenu
 set showcmd
 " set ruler
@@ -35,6 +27,8 @@ set incsearch
 set scrolloff=8
 set colorcolumn=80
 set signcolumn=yes
+
+filetype indent plugin on
 
 "vim-plug plugin manager
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
@@ -104,6 +98,7 @@ let g:gruvbox_italic = '1'
 colorscheme gruvbox
 let g:airline_theme='gruvbox'
 set background=dark
+syntax on
 
 " let g:python_highlight_all = 1
 
