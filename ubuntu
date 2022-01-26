@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 if [[ -z $STOW_FOLDERS ]]; then
-    STOW_FOLDERS="autostart,git,plank,ulauncher,vim,zsh"
+    STOW_FOLDERS="alacritty,autostart,git,plank,tmux,ulauncher,vim,zsh"
 fi
 
 if [[ -z $DOTFILES ]]; then
