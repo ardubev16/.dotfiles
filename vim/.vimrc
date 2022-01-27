@@ -39,41 +39,50 @@ endif
 
 call plug#begin()
 
+"themes
 Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 " Plug 'vim-airline/vim-airline-themes'
 
-"syntax-highlighting
-Plug 'octol/vim-cpp-enhanced-highlight'
-" Plug 'vim-python/python-syntax'
+"syntax highlighting
+Plug 'sheerun/vim-polyglot'
+" Plug 'frazrepo/vim-rainbow'
+" Plug 'junegunn/rainbow_parentheses.vim'
+" Plug 'octol/vim-cpp-enhanced-highlight'
 
+"syntax checking, autocomplete
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'dense-analysis/ale'
+
+"misc
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+
+"nerdTree
+" Plug 'preservim/nerdtree' |
+"             \ Plug 'Xuyuanp/nerdtree-git-plugin' |
+"             \ Plug 'tiagofumo/vim-nerdtree-syntax-highlight' |
+"             \ Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
+
+"MAPS
+let mapleader = " "
 
 "map for ubuntu
 map <Esc>j <A-j>
 map <Esc>k <A-k>
 
+"move lines
 nnoremap <A-j> :m .+1<CR>==
 nnoremap <A-k> :m .-2<CR>==
 inoremap <A-j> <Esc>:m .+1<CR>==gi
 inoremap <A-k> <Esc>:m .-2<CR>==gi
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
-
-
-fun! TrimWhitespace()
-    let l:save = winsaveview()
-    keeppatterns %s/\s\+$//e
-    call winrestview(l:save)
-endfun
-
-augroup group
-    autocmd!
-    autocmd BufWritePre * :call TrimWhitespace()
-augroup END
 
 
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
@@ -92,6 +101,8 @@ if (empty($TMUX))
   endif
 endif
 
+set encoding=UTF-8
+let g:rainbow_active = 1
 
 let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_italic = '1'
