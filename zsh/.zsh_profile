@@ -1,5 +1,5 @@
 export XDG_CONFIG_HOME=$HOME/.config
-VIM="vim"
+VIM="nvim"
 
 # sourced from ThePrimogen/.config/personal/alias
 # misc
@@ -11,8 +11,8 @@ alias zp="dotFileInstall && source ~/.zshrc"
 alias czp="cat $DOTFILES/zsh/.zsh_profile"
 alias ezp="$VIM $DOTFILES/zsh/.zsh_profile"
 # .vimrc
-alias cvrc="cat $DOTFILES/vimrc/.vimrc"
-alias evrc="$VIM $DOTFILES/vim/.vimrc"
+alias cvrc="cat $DOTFILES/nvim/.config/nvim/init.vim"
+alias evrc="$VIM $DOTFILES/nvim/.config/nvim/init.vim"
 # .tmux.conf
 alias ctc="cat $DOTFILES/tmux/.tmux.conf"
 alias etc="$VIM $DOTFILES/tmux/.tmux.conf"
@@ -20,7 +20,7 @@ alias etc="$VIM $DOTFILES/tmux/.tmux.conf"
 
 export GIT_EDITOR=$VIM
 export DOTFILES=$HOME/.dotfiles
-export STOW_FOLDERS="alacritty,autostart,bin,git,plank,tmux,ulauncher,vim,zsh"
+export STOW_FOLDERS="alacritty,autostart,bin,git,plank,tmux,ulauncher,nvim,zsh"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

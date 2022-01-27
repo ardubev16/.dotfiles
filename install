@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 # The Primogen "ubuntu"
 if [[ -z $STOW_FOLDERS ]]; then
-    STOW_FOLDERS="alacritty,autostart,bin,git,plank,tmux,ulauncher,vim,zsh"
+    STOW_FOLDERS="alacritty,autostart,bin,git,plank,tmux,ulauncher,nvim,zsh"
 fi
 
 if [[ -z $DOTFILES ]]; then
