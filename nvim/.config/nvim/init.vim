@@ -42,26 +42,39 @@ Plug 'tpope/vim-repeat'
 call plug#end()
 
 
-filetype indent plugin on
-
 "MAPS
 let mapleader = " "
 
-"map for ubuntu
-map <Esc>j <A-j>
-map <Esc>k <A-k>
+"Y behave like C D
+nnoremap Y y$
+
+"keep centered with n N J
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap J mzJ`z
+
+"undo break points with , . ! ?
+inoremap , ,<C-g>u
+inoremap . .<C-g>u
+inoremap ! !<C-g>u
+inoremap ? ?<C-g>u
+
+"jumplist with relative jumps <C-o>
+nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
+nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
 
 "move lines
-nnoremap <A-j> :m .+1<CR>==
-nnoremap <A-k> :m .-2<CR>==
-inoremap <A-j> <Esc>:m .+1<CR>==gi
-inoremap <A-k> <Esc>:m .-2<CR>==gi
-vnoremap <A-j> :m '>+1<CR>gv=gv
-vnoremap <A-k> :m '<-2<CR>gv=gv
+nnoremap <leader>j :m .+1<CR>==
+nnoremap <leader>k :m .-2<CR>==
+inoremap <C-j> <Esc>:m .+1<CR>==gi
+inoremap <C-k> <Esc>:m .-2<CR>==gi
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
 
 let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_italic = '1'
 colorscheme gruvbox
 " let g:airline_theme='gruvbox'
 " set background=dark
+filetype indent plugin on
 syntax on
