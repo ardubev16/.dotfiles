@@ -71,6 +71,16 @@ inoremap <C-k> <Esc>:m .-2<CR>==gi
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
+"yank to clipboard
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+nnoremap <leader>Y gg"+yG
+
+"deletes to the black hole register
+xnoremap <leader>p "_dP
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
+
 let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_italic = '1'
 colorscheme gruvbox
