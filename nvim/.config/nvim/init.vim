@@ -81,6 +81,10 @@ xnoremap <leader>p "_dP
 nnoremap <leader>d "_d
 vnoremap <leader>d "_d
 
+"NeoFormat
+nnoremap <leader>f :Neoformat<CR>
+
+
 let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_italic = '1'
 colorscheme gruvbox
