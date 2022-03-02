@@ -4,8 +4,9 @@ export GIT_EDITOR=$VIM
 
 # sourced from ThePrimogen/.config/personal/alias
 # misc
-alias xsc="xclip -selection clipboard"
 alias vim="$VIM"
+alias xsc="xclip -selection clipboard"
+alias abup="antibody bundle < $ZDOTDIR/plugins.txt > $ZDOTDIR/.plugins"
 alias dotFileInstall="$DOTFILES/install"
 alias zp="dotFileInstall && source ~/.zshrc"
 # .zsh_profile
@@ -18,7 +19,3 @@ alias evrc="$VIM $DOTFILES/nvim/.config/nvim/init.vim"
 alias ctc="cat $DOTFILES/tmux/.tmux.conf"
 alias etc="$VIM $DOTFILES/tmux/.tmux.conf"
 
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

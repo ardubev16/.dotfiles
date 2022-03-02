@@ -30,3 +30,4 @@ export XDG_CONFIG_HOME=$HOME/.config
 export DOTFILES=$HOME/.dotfiles
 export REPOS
 export STOW_FOLDERS
+
