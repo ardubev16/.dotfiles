@@ -23,10 +23,6 @@ source $ZDOTDIR/.plugins
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
-
-# DEFAULT_USER=ardubev_16
-
-
 source $ZDOTDIR/aliases.zsh
 source $ZDOTDIR/paths.zsh
 

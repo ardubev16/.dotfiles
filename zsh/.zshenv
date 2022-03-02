@@ -1,3 +1,1 @@
 ZDOTDIR=$HOME/.config/zsh
-
-
