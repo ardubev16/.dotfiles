@@ -41,6 +41,8 @@ Plug 'tpope/vim-repeat'
 
 call plug#end()
 
+filetype indent plugin on
+syntax on
 
 "MAPS
 let mapleader = " "
@@ -60,8 +62,8 @@ inoremap ! !<C-g>u
 inoremap ? ?<C-g>u
 
 "jumplist with relative jumps <C-o>
-nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
-nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
+" nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
+" nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
 
 "move lines
 nnoremap <leader>j :m .+1<CR>==
@@ -84,11 +86,12 @@ vnoremap <leader>d "_d
 "NeoFormat
 nnoremap <leader>f :Neoformat<CR>
 
+"cpp '//' comment
+autocmd FileType cpp setlocal commentstring=//\ %s
 
+"Theme gruvbox
 let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_italic = '1'
 colorscheme gruvbox
 " let g:airline_theme='gruvbox'
 " set background=dark
-filetype indent plugin on
-syntax on
