@@ -4,10 +4,9 @@ My personal .dotfiles repository.
 
 ## TODO:
 
-* fix stow: if file already exist -> error, shell error if want to restow
-* $PATH: $PATH is full of junk, needs cleanup
 * bins: add more custom scripts to optimize workflow
 * tmux: move .tmux folder to standard ~/.config/tmux 
+* nvim: Neoformat lacks configurations
 
 ## Modules
 
