@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 
-# define ZDOTDIR
-if [ -z $ZDOTDIR ]; then
+# define ZDOTDIR and DOTFILES
+if [[ -z $ZDOTDIR ]]; then
     ZDOTDIR=$HOME/.config/zsh
+fi
+if [[ -z $DOTFILES ]]; then
+    DOTFILES=$HOME/.dotfiles
 fi
 
 # define nix packages
@@ -30,23 +33,27 @@ stow_dirs=(
 # ============================================================================
 
 # install and sources nix if not installed
-echo "* Installing nix"
 if ! command -v nix-env &> /dev/null; then
+    echo "* Installing Nix"
     sh <(curl -L https://nixos.org/nix/install)
     source $HOME/.nix-profile/etc/profile.d/nix.sh
+else
+    echo "* Nix already installed"
 fi
 
 # install nix packages
-echo "* Installing nix packages"
+echo "* Installing Nix packages"
 for package in ${packages[@]}; do
     nix-env -iA nixpkgs.$package
 done
 
 # stow stow_dirs
 echo "* Stowing dirs"
+pushd $DOTFILES
 for stow_dir in ${stow_dirs[@]}; do
-    stow $stow_dir
+    stow -R $stow_dir 2> /dev/null # throws a warning for some reason, works anyway
 done
+popd
 
 # use zsh as default shell
 sudo chsh -s $(which zsh) $USER
@@ -60,5 +67,5 @@ echo "* Installing Neovim plugins"
 nvim --headless +PlugInstall +quitall
 
 # starts/restarts zsh
-echo "* Starting zsh"
+echo "* Starting Zsh"
 exec zsh
