@@ -1,7 +1,6 @@
 VIM="nvim"
 export GIT_EDITOR=$VIM
 
-
 # edit .dotfiles
 alias ezsh="$VIM $DOTFILES/zsh/.config/zsh"
 alias evim="$VIM $DOTFILES/nvim/.config/nvim"

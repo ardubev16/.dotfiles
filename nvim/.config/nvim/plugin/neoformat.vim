@@ -13,3 +13,8 @@ let g:neoformat_cpp_clangformat = {
             \}
 let g:neoformat_enabled_cpp = ['clangformat']
 let g:neoformat_enabled_c = ['clangformat']
+
+" Shell
+let g:shfmt_opt="-ci"
+let g:neoformat_enabled_shell = ['shfmt']
+let g:neoformat_enabled_zsh = ['shfmt']
