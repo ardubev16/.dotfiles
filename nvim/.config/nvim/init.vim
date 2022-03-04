@@ -20,6 +20,8 @@ Plug 'sbdchd/neoformat'
 
 "lsp
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
+" Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 
 "telescope
 " Plug 'nvim-lua/popup.nvim'
@@ -40,6 +42,9 @@ Plug 'tpope/vim-repeat'
 "             \ Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
+
+
+let g:coc_global_extensions = ['coc-clangd', 'coc-diagnostic', 'coc-docker', 'coc-json', 'coc-pyright', 'coc-sh', 'coc-solidity']
 
 filetype indent plugin on
 syntax on
@@ -88,6 +93,10 @@ nnoremap <leader>f :Neoformat<CR>
 
 "cpp '//' comment
 autocmd FileType cpp setlocal commentstring=//\ %s
+
+"coc maps
+nmap <silent> <leader>jd <Plug>(coc-definition)
+nmap <silent> <leader>jr <Plug>(coc-references)
 
 "Theme gruvbox
 let g:gruvbox_contrast_dark = 'hard'
