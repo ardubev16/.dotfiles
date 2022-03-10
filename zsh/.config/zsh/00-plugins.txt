@@ -3,6 +3,8 @@ lukechilds/zsh-nvm
 robbyrussell/oh-my-zsh
 robbyrussell/oh-my-zsh path:plugins/colored-man-pages
 robbyrussell/oh-my-zsh path:plugins/command-not-found
+robbyrussell/oh-my-zsh path:plugins/docker kind:fpath
+robbyrussell/oh-my-zsh path:plugins/docker-compose
 robbyrussell/oh-my-zsh path:plugins/git
 robbyrussell/oh-my-zsh path:plugins/node
 robbyrussell/oh-my-zsh path:plugins/npm
@@ -12,6 +14,7 @@ robbyrussell/oh-my-zsh path:plugins/zsh-interactive-cd
 romkatv/powerlevel10k
 
 rupa/z
+changyuheng/fz
 
 zsh-users/zsh-autosuggestions
 zsh-users/zsh-completions

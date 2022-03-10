@@ -4,38 +4,38 @@ My personal .dotfiles repository.
 
 ## TODO:
 
-* bins: add more custom scripts to optimize workflow
-* tmux: move .tmux folder to standard ~/.config/tmux 
-* nvim: Neoformat lacks configurations
+- bins: add more custom scripts to optimize workflow
+- zsh: setup completion through `compinstall`
+- nvim: Neoformat lacks configurations
 
 ## Modules
 
-* bin:
-    * various shell scripts to make life easier
-* git:
-    * git name, email configuration
-* nvim:
-    * neovim configuration, /plugin contains subject specific configs
-* tmux:
-    * terminal multiplexer configs, /.tmux contains cht.sh commands & languages lists
-* zsh:
-    * shell configuration, uses Antibody, **WIP**
-* ulauncher:
-    * spotlight like search bar
-    * only Linux
-* alacritty:
-    * Cool terminal emulator
-    * only Xubuntu
-* autostart:
-    * autostart folder for ulauncher and plank
-    * only Xubuntu
-* plank:
-    * temporary dock, will not use it for long
-    * only Xubuntu
+- bin:
+  - various shell scripts to make life easier
+- git:
+  - git name, email configuration
+- nvim:
+  - neovim configuration, /plugin contains subject specific configs
+- tmux:
+  - terminal multiplexer configs, /.tmux contains cht.sh commands & languages lists
+- zsh:
+  - shell configuration, uses Antibody, **WIP**
+- ulauncher:
+  - spotlight like search bar
+  - only Linux
+- alacritty:
+  - Cool terminal emulator
+  - only Xubuntu
+- autostart:
+  - autostart folder for ulauncher and plank
+  - only Xubuntu
+- plank:
+  - temporary dock, will not use it for long
+  - only Xubuntu
 
 ## Installation
 
-Uses nix packet manager, so no need to manually install dependencies. Maybe on MacOS needs to install XCode CLI tools:
+Uses nix packet manager, so only need to manually install `git`. On MacOS needs to install XCode CLI tools:
 
 ```bash
 xcode-select --install

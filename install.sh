@@ -17,6 +17,7 @@ packages=(
     git
     neovim
     stow
+    thefuck
     tmux
     zsh
 )
@@ -49,18 +50,18 @@ done
 
 # stow stow_dirs
 echo "* Stowing dirs"
-pushd $DOTFILES
+pushd $DOTFILES 1>/dev/null
 for stow_dir in ${stow_dirs[@]}; do
     stow -R $stow_dir 2>/dev/null # throws a warning for some reason, works anyway
 done
-popd
+popd 1>/dev/null
 
 # use zsh as default shell
 sudo chsh -s $(which zsh) $USER
 
 # bundle zsh plugins
 echo "* Bundling antibody plugins"
-antibody bundle <$ZDOTDIR/plugins.txt >$ZDOTDIR/.plugins
+antibody bundle <$ZDOTDIR/00-plugins.txt >$ZDOTDIR/.plugins
 
 # install neovim plugins
 echo "* Installing Neovim plugins"

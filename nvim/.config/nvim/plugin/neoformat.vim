@@ -18,3 +18,7 @@ let g:neoformat_enabled_c = ['clangformat']
 let g:shfmt_opt="-ci"
 let g:neoformat_enabled_shell = ['shfmt']
 let g:neoformat_enabled_zsh = ['shfmt']
+
+" Prettier
+let g:neoformat_enabled_sol = ['prettier']
+let g:neoformat_enabled_md = ['prettier']

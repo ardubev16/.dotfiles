@@ -21,9 +21,10 @@ export NVM_COMPLETION=true
 source $ZDOTDIR/.plugins
 
 # Other sources
-source $ZDOTDIR/aliases.zsh
+source $ZDOTDIR/01-aliases.zsh
+source $ZDOTDIR/02-completions.zsh
 source $ZDOTDIR/paths.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 # [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
-[[ ! -f ~/.config/zsh/p10k-robbyrussell.zsh ]] || source ~/.config/zsh/p10k-robbyrussell.zsh
+[[ ! -f ~/.config/zsh/99-p10k_robbyrussell.zsh ]] || source ~/.config/zsh/99-p10k_robbyrussell.zsh
