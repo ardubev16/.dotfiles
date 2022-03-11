@@ -3,7 +3,7 @@ zstyle ':completion:*:*:docker:*' option-stacking yes
 zstyle ':completion:*:*:docker-*:*' option-stacking yes
 
 # The following lines were added by compinstall
-zstyle :compinstall filename '/home/ardubev_16/.config/zsh/02-completions.zsh'
+zstyle :compinstall filename '~/.config/zsh/02-completions.zsh'
 
 autoload -Uz compinit
 compinit

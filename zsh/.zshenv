@@ -1,4 +1,9 @@
-ZDOTDIR=$HOME/.config/zsh
+export ZDOTDIR=$HOME/.config/zsh
+export XDG_CONFIG_HOME=$HOME/.config
+export DOTFILES=$HOME/.dotfiles
+
+export ZSH_COMPDUMP=$HOME/.cache/zsh/zcompdump-$HOST-$ZSH_VERSION
+
 
 pathAppend() {
     # Only adds to the path if it's not already there
