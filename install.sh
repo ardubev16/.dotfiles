@@ -15,6 +15,7 @@ packages=(
     fzf
     gcc
     git
+    jq
     neovim
     stow
     thefuck
