@@ -32,9 +32,11 @@ alias va="source ./venv/activate"
 
 # docker containers
 alias ctf-stego="docker run --rm -itv \$PWD:/data -p 6901:6901 dominicbreuker/stego-toolkit /bin/bash"
+alias yafu="docker run --rm -it eyjhb/yafu -threads 4"
 
 # misc
 alias xsc="xclip -selection clipboard"
 alias abup="antibody bundle < $ZDOTDIR/00-plugins.txt > $ZDOTDIR/.plugins && exec zsh"
 alias ez="exec zsh"
+alias err="echo $?"
 alias :q="exit" # vim goodness
