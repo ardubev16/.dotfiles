@@ -28,7 +28,7 @@ alias site-dl="wget --random-wait -rpe robots=off -U mozilla"
 alias py3="python3"
 alias py2="python2"
 alias ve="python3 -m venv ./venv"
-alias va="source ./venv/activate"
+alias va="source ./venv/bin/activate"
 
 # docker containers
 alias ctf-stego="docker run --rm -itv \$PWD:/data -p 6901:6901 dominicbreuker/stego-toolkit /bin/bash"
