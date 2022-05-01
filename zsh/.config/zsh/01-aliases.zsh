@@ -4,7 +4,7 @@ export GIT_EDITOR=$VIM
 # edit .dotfiles
 alias ezsh="$VIM $DOTFILES/zsh/.config/zsh"
 alias evim="$VIM $DOTFILES/nvim/.config/nvim"
-alias etmx="$VIM $DOTFILES/tmux/.tmux.conf"
+alias etmx="$VIM $DOTFILES/tmux/.config/tmux/tmux.conf"
 
 # better commands
 alias vim="$VIM"
