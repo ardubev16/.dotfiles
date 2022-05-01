@@ -1,4 +1,5 @@
 VIM="nvim"
+export EDITOR=$VIM
 export GIT_EDITOR=$VIM
 
 # edit .dotfiles
@@ -29,6 +30,11 @@ alias py3="python3"
 alias py2="python2"
 alias ve="python3 -m venv ./venv"
 alias va="source ./venv/bin/activate"
+
+# GDB
+alias gdb-peda="gdb -q -ex init-peda"
+alias gdb-pwndbg="gdb -q -ex init-pwndbg"
+alias gdb-gef="gdb -q -ex init-gef"
 
 # docker containers
 alias ctf-stego="docker run --rm -itv \$PWD:/data -p 6901:6901 dominicbreuker/stego-toolkit /bin/bash"

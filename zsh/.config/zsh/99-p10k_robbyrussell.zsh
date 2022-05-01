@@ -27,7 +27,7 @@
   autoload -Uz is-at-least && is-at-least 5.1 || return
 
   # Left prompt segments.
-  typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(prompt_char dir vcs)
+  typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(vi_mode dir vcs)
   # Right prompt segments.
   typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status virtualenv)
 
@@ -37,6 +37,12 @@
   typeset -g POWERLEVEL9K_{LEFT,RIGHT}_SUBSEGMENT_SEPARATOR=' '  # separate segments with a space
   typeset -g POWERLEVEL9K_{LEFT,RIGHT}_SEGMENT_SEPARATOR=        # no end-of-line symbol
   typeset -g POWERLEVEL9K_VISUAL_IDENTIFIER_EXPANSION=           # no segment icons
+
+  # vi-mode symbols
+  typeset -g POWERLEVEL9K_VI_COMMAND_MODE_STRING='N'
+  typeset -g POWERLEVEL9K_VI_INSERT_MODE_STRING='I'
+  typeset -g POWERLEVEL9K_VI_VISUAL_MODE_STRING='V'
+  typeset -g POWERLEVEL9K_VI_MODE_VISUAL_FOREGROUND=red
 
   # Green prompt symbol if the last command succeeded.
   typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_{VIINS,VICMD,VIVIS}_FOREGROUND=green

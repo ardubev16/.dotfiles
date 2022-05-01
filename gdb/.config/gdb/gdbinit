@@ -1,0 +1,21 @@
+define init-peda
+source ~/.config/gdb/peda/peda.py
+set history save off
+end
+document init-peda
+Initializes the PEDA (Python Exploit Development Assistant for GDB) framework
+end
+
+define init-pwndbg
+source ~/.config/gdb/pwndbg/gdbinit.py
+end
+document init-pwndbg
+Initializes PwnDBG
+end
+
+define init-gef
+source ~/.config/gdb/gef/gef.py
+end
+document init-gef
+Initializes GEF (GDB Enhanced Features)
+end
