@@ -35,7 +35,12 @@ My personal .dotfiles repository.
 
 ## Installation
 
-Uses nix packet manager, so only need to manually install `git`. On MacOS needs to install XCode CLI tools:
+Currently supported distros:
+
+- MacOS
+- Ubuntu
+
+Installs packages with the default packet manager for the current distro. On MacOS needs to install XCode CLI tools:
 
 ```bash
 xcode-select --install
@@ -50,9 +55,12 @@ git clone https://github.com/ardubev16/.dotfiles
 
 `install.sh` will do the following things:
 
-1. install nix packet manager
-1. install dependencies: zsh, antibody, git, neovim, tmux, stow, fzf, bat, gcc
+1. install dependencies, check `install.sh` for full list
 1. set zsh as default shell
 1. creates Antibody plugin bundle
 1. installs Neovim plugins
 1. ...(use stow to create simlinks for all configurations)
+
+## Other
+
+The function structure of `install.sh` is heavily inspired by the _pwndbg_ install script.

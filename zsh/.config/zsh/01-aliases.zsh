@@ -46,4 +46,5 @@ alias abup="antibody bundle < $ZDOTDIR/00-plugins.txt > $ZDOTDIR/.plugins && exe
 alias ez="exec zsh"
 alias err="echo $?"
 alias :q="exit" # vim goodness
+alias bat="batcat"
 alias canial="cowsay canial | lolcat"
