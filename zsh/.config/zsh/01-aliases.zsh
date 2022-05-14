@@ -10,6 +10,7 @@ alias etmx="$VIM $DOTFILES/tmux/.config/tmux/tmux.conf"
 # better commands
 alias vim="$VIM"
 alias ivm="$VIM" # because I can't type
+alias vi="$VIM"
 alias mkdir="mkdir -pv"
 alias tmx="tmux -2u a || tmux -2u"
 eval $(thefuck --alias)
@@ -39,6 +40,7 @@ alias gdb-gef="gdb -q -ex init-gef"
 # docker containers
 alias ctf-stego="docker run --rm -itv \$PWD:/data -p 6901:6901 dominicbreuker/stego-toolkit /bin/bash"
 alias yafu="docker run --rm -it eyjhb/yafu -threads 4"
+function ilspy { docker run --rm -itv $PWD:/ilspy bannsec/ilspy_docker /bin/sh -c "cd /ilspy && ilspycmd  $@";}
 
 # misc
 alias xsc="xclip -selection clipboard"
