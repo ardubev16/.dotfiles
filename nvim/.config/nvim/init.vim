@@ -45,7 +45,7 @@ Plug 'tpope/vim-obsession'
 call plug#end()
 
 
-let g:coc_global_extensions = ['coc-clangd', 'coc-diagnostic', 'coc-docker', 'coc-json', 'coc-pyright', 'coc-sh', 'coc-solidity']
+let g:coc_global_extensions = ['coc-clangd', 'coc-diagnostic', 'coc-docker', 'coc-json', 'coc-pyright', 'coc-sh', 'coc-solidity', 'coc-sumneko-lua']
 
 filetype indent plugin on
 syntax on
