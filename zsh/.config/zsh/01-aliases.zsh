@@ -46,6 +46,7 @@ function ilspy { docker run --rm -itv $PWD:/ilspy bannsec/ilspy_docker /bin/sh -
 alias xsc="xclip -selection clipboard"
 alias abup="antibody bundle < $ZDOTDIR/00-plugins.txt > $ZDOTDIR/.plugins && exec zsh"
 alias ez="exec zsh"
+alias gspull="git pull && git submodule foreach \"git checkout master\""
 alias err="echo $?"
 alias :q="exit" # vim goodness
 alias bat="batcat"
