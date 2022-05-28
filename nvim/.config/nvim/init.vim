@@ -23,6 +23,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 " Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 
+Plug 'github/copilot.vim'
+
 "telescope
 " Plug 'nvim-lua/popup.nvim'
 " Plug 'nvim-lua/plenary.nvim'
