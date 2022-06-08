@@ -6,48 +6,48 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
 endif
 
 
+set colorcolumn=80
+set encoding=UTF-8
+set expandtab
+set exrc
+set guicursor=
+set hidden
+set incsearch
+set nobackup
+set noerrorbells
+set nohlsearch
+set noswapfile
+set nowrap
+set number
+set relativenumber
+set scrolloff=8
+set shiftwidth=4
+set showcmd
+set signcolumn=yes
+set smartindent
+set softtabstop=4
+set tabstop=4
+set termguicolors
+set undofile
+set wildmenu
+
+
 call plug#begin()
+
+Plug 'github/copilot.vim'
 
 "themes
 Plug 'gruvbox-community/gruvbox'
 Plug 'vim-airline/vim-airline'
 
-"syntax highlighting
-Plug 'sheerun/vim-polyglot'
-
-"prettier
-Plug 'sbdchd/neoformat'
-
-"lsp
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
-" Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
-
-Plug 'github/copilot.vim'
-
-"telescope
-" Plug 'nvim-lua/popup.nvim'
-" Plug 'nvim-lua/plenary.nvim'
-" Plug 'nvim-telescope/telescope.nvim'
-" Plug 'nvim-telescope/telescope-fzy-native.nvim'
-
 "misc
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-obsession'
 
-"nerdTree
-" Plug 'preservim/nerdtree' |
-"             \ Plug 'Xuyuanp/nerdtree-git-plugin' |
-"             \ Plug 'tiagofumo/vim-nerdtree-syntax-highlight' |
-"             \ Plug 'ryanoasis/vim-devicons'
-
 call plug#end()
 
-
-let g:coc_global_extensions = ['coc-clangd', 'coc-diagnostic', 'coc-docker', 'coc-json', 'coc-pyright', 'coc-sh', 'coc-solidity', 'coc-sumneko-lua']
 
 filetype indent plugin on
 syntax on
@@ -68,10 +68,6 @@ inoremap , ,<C-g>u
 inoremap . .<C-g>u
 inoremap ! !<C-g>u
 inoremap ? ?<C-g>u
-
-"jumplist with relative jumps <C-o>
-" nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
-" nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
 
 "move lines
 nnoremap <leader>j :m .+1<CR>==
@@ -105,5 +101,3 @@ nmap <silent> <leader>jr <Plug>(coc-references)
 let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_italic = '1'
 colorscheme gruvbox
-" let g:airline_theme='gruvbox'
-" set background=dark
