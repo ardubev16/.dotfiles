@@ -15,7 +15,7 @@ packages=(
     jq
     lolcat
     make
-    neovim
+    # neovim
     python2
     python3
     stow
@@ -46,6 +46,10 @@ if ! command -v sudo &>/dev/null && whoami | grep root; then
 fi
 
 # Helper functions
+log_info() {
+    echo "[*] $@"
+}
+
 linux() {
     uname | grep -i Linux &>/dev/null
 }
@@ -54,37 +58,41 @@ osx() {
 }
 
 not_supported() {
-    echo "Sorry, this distro is not yet supported!"
+    echo "[!] Sorry, this distro is not yet supported!"
     exit 1
 }
 
 install_brew() {
     if ! command -v brew &>/dev/null; then
-        echo "* Installing Homebrew"
+        log_info "Installing Homebrew"
         bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     else
-        echo "* Homebrew already installed"
+        log_info "Homebrew already installed"
     fi
-    echo "* Installing packages with Homebrew"
+    log_info "Installing packages with Homebrew"
     brew install ${packages[@]} antibody
+    log_info "Installing Nerd-Font"
+    brew install --cask caskroom/fonts/font-hack
 }
 
 install_apt() {
-    echo "* Installing packages with apt"
+    log_info "Installing packages with apt"
     sudo apt update
     sudo apt install -y ${packages[@]}
     if ! command -v antibody &>/dev/null; then
         curl -sfL git.io/antibody | sudo sh -s - -b /usr/local/bin
     fi
+    log_info "Installing Nerd-Font"
+    sudo apt install -y fonts-hack-ttf
 }
 
 # Install packages depending on OS
 if osx; then
-    echo "* Mac OS detected!"
+    log_info "Mac OS detected!"
     install_brew
 elif linux; then
     distro=$(grep "^ID=" /etc/os-release | cut -d'=' -f2 | sed -e 's/"//g')
-    echo "* $distro detected!"
+    log_info "$distro detected!"
 
     case $distro in
         "ubuntu")
@@ -103,7 +111,7 @@ else
 fi
 
 # Stow stow_dirs
-echo "* Stowing dirs"
+log_info "Stowing dirs"
 pushd $DOTFILES 1>/dev/null
 for stow_dir in ${stow_dirs[@]}; do
     stow -R $stow_dir 2>/dev/null # throws a warning for some reason, works anyway
@@ -111,17 +119,17 @@ done
 popd 1>/dev/null
 
 # Use Zsh as default shell
-echo "* Setting Zsh as default shell"
+log_info "Setting Zsh as default shell"
 sudo chsh -s $(which zsh) $USER
 
 # Bundle Zsh plugins
-echo "* Bundling antibody plugins"
+log_info "Bundling antibody plugins"
 antibody bundle <$ZDOTDIR/00-plugins.txt >$ZDOTDIR/.plugins
 
 # Install Neovim plugins
-echo "* Installing Neovim plugins"
-nvim --headless +PlugInstall +quitall
+# log_info "Installing Neovim plugins"
+# nvim --headless +PlugInstall +quitall
 
 # Starts/Restarts Zsh
-echo "* Starting Zsh"
+log_info "Starting Zsh"
 exec zsh
