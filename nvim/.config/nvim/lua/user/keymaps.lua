@@ -17,7 +17,7 @@ vim.g.maploacalleader = ' '
 --   term_mode = "t"
 --   command_mode = "c"
 
-keymap('n', '<leader>e', ':Lex 30<CR>', opts)
+keymap('n', '<leader>e', '<cmd>Lex 30<CR>', opts)
 
 -- Y behave like C D
 keymap('n', 'Y', 'y$', opts)
@@ -34,10 +34,10 @@ keymap('i', '!', '!<C-g>u', opts)
 keymap('i', '?', '?<C-g>u', opts)
 
 -- Move lines
-keymap('n', '<A-j>', ':m .+1<CR>==', opts)
-keymap('n', '<A-k>', ':m .-2<CR>==', opts)
-keymap('v', '<A-j>', ':m \'>+1<CR>gv=gv', opts)
-keymap('v', '<A-k>', ':m \'<-2<CR>gv=gv', opts)
+keymap('n', '<M-j>', '<cmd>m .+1<CR>==', opts)
+keymap('n', '<M-k>', '<cmd>m .-2<CR>==', opts)
+keymap('v', '<M-j>', '<cmd>m \'>+1<CR>gv=gv', opts)
+keymap('v', '<M-k>', '<cmd>m \'<-2<CR>gv=gv', opts)
 
 -- Stay in indent mode
 keymap('v', '<', '<gv', opts)
@@ -53,11 +53,15 @@ keymap('x', '<leader>p', '"_dP', opts)
 keymap('n', '<leader>d', '"_d', opts)
 keymap('v', '<leader>d', '"_d', opts)
 
+-- Telescope
+keymap('n', '<leader>t', '<cmd>Telescope find_files<CR>', opts)
+keymap('n', '<C-t>', '<cmd>Telescope live_grep<CR>', opts)
+
 -- Git
-keymap('n', '<leader>gs', ':G<CR>', opts)
-keymap('n', '<leader>gc', ':Git commit<CR>', opts)
-keymap('n', '<leader>gd', ':Git diff<CR>', opts)
-keymap('n', '<leader>gm', ':Gvdiffsplit!<CR>', opts)
-keymap('n', '<leader>gj', ':diffget //3<CR>', opts)
-keymap('n', '<leader>gf', ':diffget //2<CR>', opts)
-keymap('n', '<leader>ga', ':Git fetch --all<CR>', opts)
+keymap('n', '<leader>gs', '<cmd>G<CR>', opts)
+keymap('n', '<leader>gc', '<cmd>Git commit<CR>', opts)
+keymap('n', '<leader>gd', '<cmd>Git diff<CR>', opts)
+keymap('n', '<leader>gm', '<cmd>Gvdiffsplit!<CR>', opts)
+keymap('n', '<leader>gj', '<cmd>diffget //3<CR>', opts)
+keymap('n', '<leader>gf', '<cmd>diffget //2<CR>', opts)
+keymap('n', '<leader>ga', '<cmd>Git fetch --all<CR>', opts)

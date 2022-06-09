@@ -18,6 +18,7 @@ packages=(
     # neovim
     python2
     python3
+    ripgrep
     stow
     thefuck
     tmux
@@ -71,8 +72,10 @@ install_brew() {
     fi
     log_info "Installing packages with Homebrew"
     brew install ${packages[@]} antibody
+
     log_info "Installing Nerd-Font"
-    brew install --cask caskroom/fonts/font-hack
+    nerd_font="hack"
+    brew tap homebrew/cask-fonts && brew install --cask font-${nerd_font}-nerd-font
 }
 
 install_apt() {
@@ -82,8 +85,13 @@ install_apt() {
     if ! command -v antibody &>/dev/null; then
         curl -sfL git.io/antibody | sudo sh -s - -b /usr/local/bin
     fi
+
     log_info "Installing Nerd-Font"
-    sudo apt install -y fonts-hack-ttf
+    nerd_font="Hack"
+    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/${nerd_font}.zip
+    unzip ${nerd_font}.zip -d $HOME/.local/share/fonts
+    rm ${nerd_font}.zip
+    fc-cache -fv
 }
 
 # Install packages depending on OS

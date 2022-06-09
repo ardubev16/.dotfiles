@@ -117,22 +117,22 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: "Hack"
+    family: Hack Nerd Font
     style: Regular
 
   # Bold font face
   bold:
-    family: "Hack"
+    family: Hack Nerd Font
     style: Bold
 
   # Italic font face
   italic:
-    family: "Hack"
+    family: Hack Nerd Font
     style: Italic
 
   # Bold italic font face
   bold_italic:
-    family: "Hack"
+    family: Hack Nerd Font
     style: Bold Italic
 
   # Point size

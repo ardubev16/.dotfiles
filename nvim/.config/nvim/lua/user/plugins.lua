@@ -1,5 +1,6 @@
 local fn = vim.fn
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+local packer_bootstrap
 if fn.empty(fn.glob(install_path)) > 0 then
     packer_bootstrap = fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
     --  print("Installing packer close and reopen Neovim...")
@@ -31,8 +32,12 @@ packer.init({
 
 -- Installed plugins
 return packer.startup(function(use)
-    -- Have packer manage itself
-    use 'wbthomason/packer.nvim'
+    -- Misc
+    use 'wbthomason/packer.nvim' -- Have packer manage itself
+    use 'nvim-lua/popup.nvim' -- An implementation of the Popup API from vim in Neovim
+    use 'nvim-lua/plenary.nvim' -- Useful lua functions used ny lots of plugins
+    use 'windwp/nvim-autopairs' -- Autopairs, integrates with both cmp and treesitter
+    use 'numToStr/Comment.nvim' -- Easily comment stuff
 
     -- Themes
     use 'gruvbox-community/gruvbox'
@@ -40,26 +45,40 @@ return packer.startup(function(use)
 
     -- Completion
     use 'github/copilot.vim'
-    use 'hrsh7th/nvim-cmp'
-    use 'hrsh7th/cmp-buffer'
-    use 'hrsh7th/cmp-path'
-    use 'hrsh7th/cmp-cmdline'
-    use 'saadparwaiz1/cmp_luasnip'
+    use 'hrsh7th/nvim-cmp' -- The completion plugin
+    use 'hrsh7th/cmp-buffer' -- Buffer completions
+    use 'hrsh7th/cmp-path' -- Path completions
+    use 'hrsh7th/cmp-cmdline' -- Cmdline completions
     use 'hrsh7th/cmp-nvim-lsp'
-    use "hrsh7th/cmp-nvim-lua"
-    use 'onsails/lspkind.nvim'
+    use 'hrsh7th/cmp-nvim-lua'
+    use 'saadparwaiz1/cmp_luasnip' -- Snippet completions
+    use 'onsails/lspkind.nvim' -- Colored icons for cmp
 
     -- Snippets
-    use 'L3MON4D3/LuaSnip'
-    use 'rafamadriz/friendly-snippets'
+    use 'L3MON4D3/LuaSnip' -- Snippet engine
+    use 'rafamadriz/friendly-snippets' -- A bunch of snippets to use
 
     -- LSP
-    use 'neovim/nvim-lspconfig'
-    use 'williamboman/nvim-lsp-installer'
+    use 'neovim/nvim-lspconfig' -- Enable LSP
+    use 'williamboman/nvim-lsp-installer' -- Simple to use language server installer
+
+    -- Telescope
+    use 'nvim-telescope/telescope.nvim'
+    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+
+    -- Treesitter
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate',
+    }
+    use 'JoosepAlviste/nvim-ts-context-commentstring'
+    use 'p00f/nvim-ts-rainbow'
+
+    -- Git
+    use 'lewis6991/gitsigns.nvim'
+    use 'tpope/vim-fugitive'
 
     -- Tpope
-    use 'tpope/vim-commentary'
-    use 'tpope/vim-fugitive'
     use 'tpope/vim-surround'
     use 'tpope/vim-repeat'
     use 'tpope/vim-obsession'
