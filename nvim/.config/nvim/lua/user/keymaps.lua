@@ -1,3 +1,4 @@
+-- TODO: add more keymaps, plugin keymaps
 local opts = { noremap = true, silent = true }
 local term_opts = { silent = true }
 
@@ -17,7 +18,15 @@ vim.g.maploacalleader = ' '
 --   term_mode = "t"
 --   command_mode = "c"
 
-keymap('n', '<leader>e', '<cmd>Lex 30<CR>', opts)
+-- Better window navigation
+keymap('n', '<C-h>', '<C-w>h', opts)
+keymap('n', '<C-j>', '<C-w>j', opts)
+keymap('n', '<C-k>', '<C-w>k', opts)
+keymap('n', '<C-l>', '<C-w>l', opts)
+
+-- Navigate buffers
+keymap('n', '<S-l>', '<cmd>bnext<CR>', opts)
+keymap('n', '<S-h>', '<cmd>bprevious<CR>', opts)
 
 -- Y behave like C D
 keymap('n', 'Y', 'y$', opts)
@@ -57,7 +66,11 @@ keymap('v', '<leader>d', '"_d', opts)
 keymap('n', '<leader>t', '<cmd>Telescope find_files<CR>', opts)
 keymap('n', '<C-t>', '<cmd>Telescope live_grep<CR>', opts)
 
+-- Nvimtree
+keymap('n', '<leader>e', '<cmd>NvimTreeToggle<CR>', opts)
+
 -- Git
+-- TODO: substitute with gitsigns
 keymap('n', '<leader>gs', '<cmd>G<CR>', opts)
 keymap('n', '<leader>gc', '<cmd>Git commit<CR>', opts)
 keymap('n', '<leader>gd', '<cmd>Git diff<CR>', opts)

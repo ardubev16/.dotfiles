@@ -46,18 +46,17 @@ end
 
 local function lsp_highlight_document(client)
     -- Set autocommands conditional on server_capabilities
-    if client.resolved_capabilities.document_highlight then
-        vim.api.nvim_exec([[
-        augroup lsp_document_highlight
-        autocmd! * <buffer>
-        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-        augroup END
-        ]], false)
+    local status_ok, illuminate = pcall(require, 'illuminate')
+    if not status_ok then
+        return
     end
+    illuminate.on_attach(client)
+    -- TODO: check need to add other to blacklist
+    vim.g.Illuminate_ftblacklist = { 'NvimTree', 'Telescope' }
 end
 
 local function lsp_keymaps(bufnr)
+    -- TODO: learn keymaps
     local keymap = vim.keymap.set
     local opts = { noremap = true, silent = true }
     keymap('n', 'gl', vim.diagnostic.open_float, opts)
@@ -68,6 +67,7 @@ local function lsp_keymaps(bufnr)
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
     keymap('n', 'gD', vim.lsp.buf.declaration, bufopts)
     keymap('n', 'gd', vim.lsp.buf.definition, bufopts)
+    keymap('n', 'gr', vim.lsp.buf.references, bufopts)
     keymap('n', 'K', vim.lsp.buf.hover, bufopts)
     keymap('n', 'gi', vim.lsp.buf.implementation, bufopts)
     keymap('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
@@ -79,14 +79,10 @@ local function lsp_keymaps(bufnr)
     keymap('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
     keymap('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
     keymap('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
-    keymap('n', 'gr', vim.lsp.buf.references, bufopts)
     keymap('n', '<leader>f', vim.lsp.buf.formatting, bufopts)
 end
 
 M.on_attach = function(client, bufnr)
-    -- if client.name == 'tsserver' then
-    --     client.resolved_capabilities.document_formatting = false
-    -- end
     lsp_keymaps(bufnr)
     lsp_highlight_document(client)
 end

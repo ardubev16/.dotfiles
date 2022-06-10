@@ -109,28 +109,19 @@ window:
 
 # Font configuration
 font:
-  # Normal (roman) font face
   normal:
-    # Font family
-    #
     # Default:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
     family: Hack Nerd Font
     style: Regular
-
-  # Bold font face
   bold:
     family: Hack Nerd Font
     style: Bold
-
-  # Italic font face
   italic:
     family: Hack Nerd Font
     style: Italic
-
-  # Bold italic font face
   bold_italic:
     family: Hack Nerd Font
     style: Bold Italic
@@ -170,8 +161,6 @@ colors:
     # normal contrast:  background: '#282828'
     # soft contrast:    background: '#32302f'
     foreground: '#ebdbb2'
-
-  # Normal colors
   normal:
     black:   '#282828'
     red:     '#cc241d'
@@ -181,8 +170,6 @@ colors:
     magenta: '#b16286'
     cyan:    '#689d6a'
     white:   '#a89984'
-
-  # Bright colors
   bright:
     black:   '#928374'
     red:     '#fb4934'

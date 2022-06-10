@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# TODO: install here necessary packages to run install.lua, refactor everything in lua
 # Define ZDOTDIR and DOTFILES
 ZDOTDIR=$HOME/.config/zsh
 DOTFILES=$HOME/.dotfiles

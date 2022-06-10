@@ -4,9 +4,10 @@ My personal .dotfiles repository.
 
 ## TODO:
 
+- neovim: MORE PLUGINSSSS
+- tmux: reconfigure using more heavily plugins
+- zsh: reconfigure and fix long startup time (`compinstall`?)
 - bins: add more custom scripts to optimize workflow
-- zsh: setup completion through `compinstall`
-- nvim: Neoformat lacks configurations
 
 ## Modules
 
@@ -15,23 +16,15 @@ My personal .dotfiles repository.
 - git:
   - git name, email configuration
 - nvim:
-  - neovim configuration, /plugin contains subject specific configs
+  - neovim IDE-like configuration, lsp, autocomplete, ecc.
+- vim:
+  - basic vim config with some simple plugins for IDE and Editors (e.g. VSCode, IntelliJ, ecc.)
 - tmux:
   - terminal multiplexer configs, /.tmux contains cht.sh commands & languages lists
 - zsh:
   - shell configuration, uses Antibody, **WIP**
-- ulauncher:
-  - spotlight like search bar
-  - only Linux
 - alacritty:
   - Cool terminal emulator
-  - only Xubuntu
-- autostart:
-  - autostart folder for ulauncher and plank
-  - only Xubuntu
-- plank:
-  - temporary dock, will not use it for long
-  - only Xubuntu
 
 ## Installation
 
@@ -46,21 +39,84 @@ Installs packages with the default packet manager for the current distro. On Mac
 xcode-select --install
 ```
 
-Then clone the repo in the home directory: ~/.dotfilse.
+Then clone the repo in the home directory: ~/.dotfilse and run the `init.sh` script.
 
 ```bash
 git clone https://github.com/ardubev16/.dotfiles
-./.dotfiles/install.sh
+./.dotfiles/init.sh
 ```
 
-`install.sh` will do the following things:
+`init.sh` will install lua based on the packet manager available (also install brew on MacOS) and then run `install.lua` (**TODO**).
+`install.lua` will do the following:
 
-1. install dependencies, check `install.sh` for full list
+1. install dependencies
 1. set zsh as default shell
-1. creates Antibody plugin bundle
-1. installs Neovim plugins
+1. create Antibody plugin bundle
+1. install Neovim plugins
 1. ...(use stow to create simlinks for all configurations)
 
-## Other
+## Neovim Keybindings
 
-The function structure of `install.sh` is heavily inspired by the _pwndbg_ install script.
+### LSP
+
+Normal mode:
+
+- `gl`: show line diagnostic
+- `[d`: show previous diagnostic
+- `]d`: show next diagnostic
+- `gD`: go to declaration
+- `gd`: go to definition
+- `gr`: go to references
+- `<leader>wa`: add workspace folder
+- `<leader>wr`: remove workspace folder
+- `<leader>wl`: list workspace folders
+- `<leader>rn`: rename variable / function
+- `<leader>f`: format buffer
+
+- `<leader>q`, vim.diagnostic.setloclist, opts)
+- `K`, vim.lsp.buf.hover, bufopts)
+- `gi`, vim.lsp.buf.implementation, bufopts)
+- `<C-k>`, vim.lsp.buf.signature_help, bufopts)
+- `<leader>D`, vim.lsp.buf.type_definition, bufopts)
+- `<leader>ca`, vim.lsp.buf.code_action, bufopts)
+
+### Completion
+
+Insert mode:
+
+- `<C-Space>`: summon autocomplete list
+
+Completion mode:
+
+- `<C-f>`: scroll documentation downwords
+- `<C-b>`: scroll documentation upwords
+- `<C-e>`: close autocomplete list
+- `<C-n>`: next list item
+- `<C-p>`: previous list item
+
+### Telescope
+
+Normal mode:
+
+- `<leader>t`: find files
+- `<C-t>`: grep files
+
+### Misc
+
+Normal mode:
+
+- Y behave like C D
+- `<leader>e`: open folder tree (NvimTree)
+- `<C-h>`, `<C-j>`, `<C-k>`, `<C-l>`: better window navigation
+- `<S-l>`, `<S-h>`: navigate buffers
+- `<M-j>`, `<M-k>`: move lines down and up
+- `<leader>y`: yank to clipboard
+- `<leader>Y`: yank file to clipboard
+- `<leader>d`: delete without overwriting register
+
+Visual mode:
+
+- `<M-j>`, `<M-k>`: move lines down and up
+- `<leader>y`: yank to clipboard
+- `<leader>p`: paste without overwriting register
+- `<leader>d`: delete without overwriting register

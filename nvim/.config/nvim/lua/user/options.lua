@@ -1,3 +1,4 @@
+-- TODO: check for more options
 local options = {
     backup = false, -- no backup
     colorcolumn = '80', -- column number for color column

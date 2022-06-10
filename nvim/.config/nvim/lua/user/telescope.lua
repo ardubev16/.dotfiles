@@ -78,6 +78,7 @@ telescope.setup {
         },
     },
     pickers = {
+        -- TODO: figure out what are pickers
         -- Default configuration for builtin pickers goes here:
         -- picker_name = {
         --   picker_config_key = value,
@@ -87,6 +88,7 @@ telescope.setup {
         -- builtin picker
     },
     extensions = {
+        -- TODO: add more extensions (e.g. tmux integration, cheatsheet, vimspector, ecc.)
         fzf = {
             fuzzy = true, -- false will only do exact matching
             override_generic_sorter = true, -- override the generic sorter

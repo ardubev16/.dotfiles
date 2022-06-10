@@ -1,19 +1,24 @@
 require('user.options')
-require('user.keymaps')
 require('user.plugins')
-require('user.colorscheme')
+require('user.keymaps')
+require('user.impatient')
+
 require('user.cmp')
 require('user.lsp')
-require('user.telescope')
 require('user.treesitter')
-require('user.autopairs')
-require('user.comment')
 require('user.gitsigns')
 
+require('user.autopairs')
+require('user.comment')
+require('user.telescope')
 
--- "cpp '//' comment
--- autocmd FileType cpp setlocal commentstring=//\ %s
+require('user.colorscheme')
+require('user.lualine')
+require('user.bufferline')
+require('user.nvim-tree')
 
+
+-- TODO: find out if this stuff works &/or is necessary
 -- "jumplist with relative jumps <C-o>
 -- " nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
 -- " nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
