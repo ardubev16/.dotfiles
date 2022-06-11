@@ -73,6 +73,7 @@ Normal mode:
 - `<leader>rn`: rename variable / function
 - `<leader>f`: format buffer
 
+
 - `<leader>q`, vim.diagnostic.setloclist, opts)
 - `K`, vim.lsp.buf.hover, bufopts)
 - `gi`, vim.lsp.buf.implementation, bufopts)
@@ -93,6 +94,29 @@ Completion mode:
 - `<C-e>`: close autocomplete list
 - `<C-n>`: next list item
 - `<C-p>`: previous list item
+
+### Git
+
+Normal mode:
+
+- `<leader>gj`: go to next hunk
+- `<leader>gk`: go to previous hunk
+- `<leader>gb`: show line blame
+- `<leader>gp`: show hunk preview
+- `<leader>gs`: stage hunk
+- `<leader>gr`: reset hunk
+- `<leader>gu`: undo stage hunk
+- `<leader>gS`: stage buffer
+- `<leader>gR`: reset buffer
+- `<leader>gd`: side to side git diff
+- `<leader>gD`: toggle deleted hunks
+
+
+- `<leader>Gs`: show git status (vim fugitive)
+
+Visual mode:
+
+- `gh`: select current hunk
 
 ### Telescope
 

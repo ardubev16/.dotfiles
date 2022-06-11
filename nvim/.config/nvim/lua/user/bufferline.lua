@@ -88,6 +88,7 @@ bufferline.setup({
         separator_style = 'thin', -- "slant" | "thick" | "thin" | { 'any', 'any' },
         enforce_regular_tabs = true,
         always_show_bufferline = true,
+        -- TODO: sort buffers by some criteria
         -- sort_by = 'insert_after_current' | 'insert_at_end' | 'id' | 'extension' | 'relative_directory' | 'directory' | 'tabs' | function(buffer_a, buffer_b)
         --     -- add custom logic
         --     return buffer_a.modified > buffer_b.modified
