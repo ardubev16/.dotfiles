@@ -1,6 +1,7 @@
 -- TODO: check for more options
 local options = {
     backup = false, -- no backup
+    -- cmdheight = 0, -- no cmdheight
     colorcolumn = '80', -- column number for color column
     completeopt = { 'menu', 'menuone', 'noselect' }, -- completeopt
     conceallevel = 0, -- no conceal

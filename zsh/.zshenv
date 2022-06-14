@@ -1,19 +1,9 @@
-export ZDOTDIR=$HOME/.config/zsh
 export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CACHE_HOME=$HOME/.cache
+export XDG_DATA_HOME=$HOME/.local/share
+export XDG_STATE_HOME=$HOME/.local/state
+
+export ZDOTDIR=$XDG_CONFIG_HOME/zsh
 export DOTFILES=$HOME/.dotfiles
-export CTF=$HOME/CTF
 
-export ZSH_COMPDUMP=$HOME/.cache/zsh/zcompdump-$HOST
-
-
-pathPrepend() {
-    # Only adds to the path if it's not already there
-    if ! echo $PATH | egrep -q "(^|:)$1($|:)"; then
-        PATH=$1:$PATH
-    fi
-}
-
-pathPrepend "$CTF/00-tools/scripts"
-
-# Remove duplicate entries from PATH:
-PATH=$(echo "$PATH" | awk -v RS=':' -v ORS=":" '!a[$1]++{if (NR > 1) printf ORS; printf $a[$1]}')
+export ZSH_COMPDUMP=$XDG_CACHE_HOME/zsh/zcompdump

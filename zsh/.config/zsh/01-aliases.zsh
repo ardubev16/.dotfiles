@@ -4,7 +4,7 @@ export GIT_EDITOR=$VIM
 
 # edit .dotfiles
 alias ezsh="$VIM $DOTFILES/zsh/.config/zsh"
-alias evim="$VIM $DOTFILES/nvim/.config/nvim"
+alias evim="$VIM $DOTFILES/nvim/.config/nvim/lua/user"
 alias etmx="$VIM $DOTFILES/tmux/.config/tmux/tmux.conf"
 
 # better commands
@@ -31,19 +31,9 @@ alias py2="python2"
 alias ve="python3 -m venv ./venv"
 alias va="source ./venv/bin/activate"
 
-# GDB
-alias gdb-peda="gdb -q -ex init-peda"
-alias gdb-pwndbg="gdb -q -ex init-pwndbg"
-alias gdb-gef="gdb -q -ex init-gef"
-
-# docker containers
-alias ctf-stego="docker run --rm -itv \$PWD:/data -p 6901:6901 dominicbreuker/stego-toolkit /bin/bash"
-alias yafu="docker run --rm -it eyjhb/yafu -threads 4"
-function ilspy { docker run --rm -itv $PWD:/ilspy bannsec/ilspy_docker /bin/sh -c "cd /ilspy && ilspycmd  $@";}
-
 # misc
 alias xsc="xclip -selection clipboard"
-alias abup="antibody bundle < $ZDOTDIR/00-plugins.txt > $ZDOTDIR/.plugins && exec zsh"
+alias abup="antibody bundle < $ZDOTDIR/99-plugins.txt > $ZDOTDIR/.plugins && exec zsh"
 alias ez="exec zsh"
 alias gspull="git pull && git submodule foreach \"git checkout master\""
 alias err="echo $?"

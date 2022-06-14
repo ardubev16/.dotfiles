@@ -1,0 +1,4 @@
+# zsh completions dump
+.zcompdump*
+# antibody plugin bundle
+.plugins

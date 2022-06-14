@@ -50,6 +50,9 @@ return packer.startup(function(use)
     use 'kyazdani42/nvim-tree.lua' -- Tree view of directory structure
     use 'akinsho/bufferline.nvim' -- Buffer line
     use 'nvim-lualine/lualine.nvim'
+    -- use { 'vimpostor/vim-tpipeline',
+    --     config = 'vim.g.tpipeline_cursormoved = 1',
+    -- }
 
     -- Completion
     use 'github/copilot.vim'

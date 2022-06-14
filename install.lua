@@ -191,7 +191,7 @@ end
 -- Bundle Zsh plugins
 local function bundle_zsh_plugins()
     log.info("Bundling antibody plugins")
-    local cmd = 'antibody bundle <' .. ZDOTDIR .. '/00-plugins.txt >' .. ZDOTDIR .. '/.plugins'
+    local cmd = 'antibody bundle <' .. ZDOTDIR .. '/99-plugins.txt >' .. ZDOTDIR .. '/.plugins'
     local status = os.execute(cmd)
     if status == nil then
         log.error("Error bundling antibody plugins")
