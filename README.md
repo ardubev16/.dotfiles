@@ -74,6 +74,7 @@ Normal mode:
 - `<leader>f`: format buffer
 
 
+
 - `<leader>q`, vim.diagnostic.setloclist, opts)
 - `K`, vim.lsp.buf.hover, bufopts)
 - `gi`, vim.lsp.buf.implementation, bufopts)
@@ -112,6 +113,7 @@ Normal mode:
 - `<leader>gD`: toggle deleted hunks
 
 
+
 - `<leader>Gs`: show git status (vim fugitive)
 
 Visual mode:
@@ -125,12 +127,23 @@ Normal mode:
 - `<leader>t`: find files
 - `<C-t>`: grep files
 
+### NvimTree
+
+Normal mode:
+
+- `<leader>e`: open folder tree (NvimTree)
+
+NvimTree:
+
+- `l`, `<CR>`, `o`: open folder / file
+- `h`: close folder
+- `v`: open in vertical split
+
 ### Misc
 
 Normal mode:
 
 - Y behave like C D
-- `<leader>e`: open folder tree (NvimTree)
 - `<C-h>`, `<C-j>`, `<C-k>`, `<C-l>`: better window navigation
 - `<S-l>`, `<S-h>`: navigate buffers
 - `<M-j>`, `<M-k>`: move lines down and up

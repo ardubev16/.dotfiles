@@ -44,7 +44,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-obsession'
 
 call plug#end()
 
@@ -87,15 +86,8 @@ xnoremap <leader>p "_dP
 nnoremap <leader>d "_d
 vnoremap <leader>d "_d
 
-"NeoFormat
-nnoremap <leader>f :Neoformat<CR>
-
 "cpp '//' comment
 autocmd FileType cpp setlocal commentstring=//\ %s
-
-"coc maps
-nmap <silent> <leader>jd <Plug>(coc-definition)
-nmap <silent> <leader>jr <Plug>(coc-references)
 
 "Theme gruvbox
 let g:gruvbox_contrast_dark = 'hard'

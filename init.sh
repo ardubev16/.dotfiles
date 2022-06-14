@@ -1,0 +1,79 @@
+#!/usr/bin/env bash
+
+ZDOTDIR=$HOME/.config/zsh
+DOTFILES=$HOME/.dotfiles
+
+lua_ver="lua5.3"
+
+###############################################################################
+
+# Helper functions
+log_info() {
+    printf "\u001b[36m[*] $@\u001b[0m\n"
+}
+
+linux() {
+    uname | grep -i Linux &>/dev/null
+}
+osx() {
+    uname | grep -i Darwin &>/dev/null
+}
+
+not_supported() {
+    printf "\u001b[31m[!] This OS is not yet supported.\u001b[0m\n"
+    exit 1
+}
+
+install_brew() {
+    if ! command -v brew &>/dev/null; then
+        log_info "Installing Homebrew"
+        bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    else
+        log_info "Homebrew already installed"
+    fi
+    log_info "Installing lua"
+    brew install lua
+    if [ $? -ne 0 ]; then
+        log_info "Failed to install lua"
+        exit 1
+    fi
+}
+
+install_apt() {
+    log_info "Installing lua"
+    sudo apt update
+    sudo apt install -y $lua_ver
+    if [ $? -ne 0 ]; then
+        log_info "Failed to install lua"
+        exit 1
+    fi
+}
+
+###############################################################################
+
+# Install lua depending on OS
+if osx; then
+    log_info "Mac OS detected!"
+    install_brew
+elif linux; then
+    distro=$(grep "^ID=" /etc/os-release | cut -d'=' -f2 | sed -e 's/"//g')
+    log_info "$distro detected!"
+
+    case $distro in
+        "ubuntu")
+            install_apt
+            ;;
+        *)
+            if command -v apt &>/dev/null; then
+                install_apt
+            else
+                not_supported
+            fi
+            ;;
+    esac
+else
+    not_supported
+fi
+
+# Install dotfiles with lua script
+exec $DOTFILES/install.lua
