@@ -16,10 +16,15 @@ fi
 # zmodload zsh/zprof
 setopt extendedglob
 
+export VIM="nvim"
+export EDITOR=$VIM
+export GIT_EDITOR=$VIM
+
 # NVM plugin config
 export NVM_DIR=$HOME/.nvm
 export NVM_COMPLETION=true
 export NVM_LAZY_LOAD=true
+export NVM_LAZY_LOAD_EXTRA_COMMANDS=("$VIM")
 
 # Sources Antibody plugins
 source $ZDOTDIR/.plugins

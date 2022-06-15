@@ -28,7 +28,7 @@ local dependencies = {
     cmake = {},
     neovim = {
         ubuntu = {
-            command = [[sudo snap install nvim --classic]],
+            command = [[sudo add-apt-repository ppa:neovim-ppa/unstable -y && sudo apt update && sudo apt install -y neovim]],
         },
     },
     ripgrep = {},
