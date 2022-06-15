@@ -6,7 +6,6 @@ My personal .dotfiles repository.
 
 - neovim: MORE PLUGINSSSS
 - tmux: reconfigure using more heavily plugins
-- zsh: reconfigure and fix long startup time (`compinstall`?)
 - bins: add more custom scripts to optimize workflow
 
 ## Modules
@@ -75,6 +74,7 @@ Normal mode:
 
 
 
+
 - `<leader>q`, vim.diagnostic.setloclist, opts)
 - `K`, vim.lsp.buf.hover, bufopts)
 - `gi`, vim.lsp.buf.implementation, bufopts)
@@ -111,6 +111,7 @@ Normal mode:
 - `<leader>gR`: reset buffer
 - `<leader>gd`: side to side git diff
 - `<leader>gD`: toggle deleted hunks
+
 
 
 

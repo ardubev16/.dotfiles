@@ -16,7 +16,7 @@ fi
 # zmodload zsh/zprof
 setopt extendedglob
 
-export VIM="nvim"
+VIM="nvim"
 export EDITOR=$VIM
 export GIT_EDITOR=$VIM
 
