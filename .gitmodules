@@ -1,9 +1,0 @@
-[submodule "gdb/.config/gdb/gef"]
-	path = gdb/.config/gdb/gef
-	url = https://github.com/hugsy/gef
-[submodule "gdb/.config/gdb/peda"]
-	path = gdb/.config/gdb/peda
-	url = https://github.com/longld/peda
-[submodule "gdb/.config/gdb/pwndbg"]
-	path = gdb/.config/gdb/pwndbg
-	url = https://github.com/pwndbg/pwndbg
