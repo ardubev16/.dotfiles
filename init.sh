@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 ZDOTDIR=$HOME/.config/zsh
 DOTFILES=$HOME/.dotfiles
 

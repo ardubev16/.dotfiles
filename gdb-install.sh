@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 
+set -e
+
 if [[ -z "$DOTFILES" ]]; then
     echo "DOTFILES not set!"
     exit 1
 fi
-
 
 pushd $DOTFILES/gdb/.config/gdb
 
