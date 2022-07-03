@@ -17,6 +17,9 @@ local dependencies = {
         ubuntu = {
             command = [[curl -sfL git.io/antibody | sudo sh -s - -b /usr/local/bin]],
         },
+        endeavouros = {
+            command = [[curl -sfL git.io/antibody | sudo sh -s - -b /usr/local/bin]],
+        }
     },
     bat = {},
     fzf = {},
@@ -103,26 +106,28 @@ local function check_os()
     end
 end
 
+local function install_generic(pkg_manager_cmd, pkg_name)
+    local cmd = pkg_manager_cmd .. pkg_name
+    log.command(cmd)
+    local status = os.execute(cmd)
+    if status == nil then
+        log.error('Failed to install ' .. pkg_name)
+        os.exit(1)
+    end
+end
+
 local install = {
     -- Brew should already be installed by init.sh
     brew = function(pkg_name)
-        local cmd = 'brew install ' .. pkg_name
-        log.command(cmd)
-        local status = os.execute(cmd)
-        if status == nil then
-            log.error('Failed to install ' .. pkg_name)
-            os.exit(1)
-        end
+        install_generic('brew install', pkg_name)
     end,
 
     apt = function(pkg_name)
-        local cmd = 'sudo apt install -y ' .. pkg_name
-        log.command(cmd)
-        local status = os.execute(cmd)
-        if status == nil then
-            log.error('Failed to install ' .. pkg_name)
-            os.exit(1)
-        end
+        install_generic('sudo apt install -y', pkg_name)
+    end,
+
+    pacman = function(pkg_name)
+        install_generic('yes | sudo pacman -S', pkg_name)
     end,
 
     manual = function(command)
@@ -161,8 +166,9 @@ local install = {
 
 -- Supported distros and default package managers
 local supported = {
-    ubuntu = install.apt,
     darwin = install.brew,
+    endeavouros = install.pacman,
+    ubuntu = install.apt,
 }
 
 -- Stow stow_dirs

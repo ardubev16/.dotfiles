@@ -35,20 +35,17 @@ install_brew() {
     fi
     log_info "Installing lua"
     brew install lua
-    if [ $? -ne 0 ]; then
-        log_info "Failed to install lua"
-        exit 1
-    fi
 }
 
 install_apt() {
     log_info "Installing lua"
     sudo apt update
     sudo apt install -y $lua_ver
-    if [ $? -ne 0 ]; then
-        log_info "Failed to install lua"
-        exit 1
-    fi
+}
+
+install_pacman() {
+    log_info "Installing lua"
+    yes | sudo pacman -S lua
 }
 
 ###############################################################################
@@ -64,6 +61,9 @@ elif linux; then
     case $distro in
         "ubuntu")
             install_apt
+            ;;
+        "endeavouros")
+            install_pacman
             ;;
         *)
             if command -v apt &>/dev/null; then
