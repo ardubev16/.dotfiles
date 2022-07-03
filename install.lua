@@ -119,15 +119,15 @@ end
 local install = {
     -- Brew should already be installed by init.sh
     brew = function(pkg_name)
-        install_generic('brew install', pkg_name)
+        install_generic('brew install ', pkg_name)
     end,
 
     apt = function(pkg_name)
-        install_generic('sudo apt install -y', pkg_name)
+        install_generic('sudo apt install -y ', pkg_name)
     end,
 
     pacman = function(pkg_name)
-        install_generic('yes | sudo pacman -S', pkg_name)
+        install_generic('yes | sudo pacman -S ', pkg_name)
     end,
 
     manual = function(command)
