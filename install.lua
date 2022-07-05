@@ -9,15 +9,16 @@ local dep_font = 'Hack'
 local dependencies = {
     -- pkg_name = {
     --    <distro_name> = {
-    --        command = "<command>", -- fallback command if pkg is not in pkg_manager or has different name
     --        ignore = true | false, -- if true, the package will not be installed (default: false)
+    --        command = "<command>", -- fallback command if pkg is not in pkg_manager or has different name
+    --        name = "<name>"        -- name if it contains "-" or is different from other distros
     --    }
     -- }
     antibody = {
         ubuntu = {
             command = [[curl -sfL git.io/antibody | sudo sh -s - -b /usr/local/bin]],
         },
-        endeavouros = {
+        arch = {
             command = [[curl -sfL git.io/antibody | sudo sh -s - -b /usr/local/bin]],
         }
     },
@@ -38,6 +39,17 @@ local dependencies = {
     stow = {},
     tmux = {},
     zsh = {},
+    papirus = {
+        darwin = {
+            ignore = true,
+        },
+        ubuntu = {
+            command = [[sudo add-apt-repository ppa:papirus/papirus -y && sudo apt update && sudo apt install -y papirus-icon-theme]]
+        },
+        arch = {
+            name = "papirus-icon-theme",
+        }
+    },
 
     python2 = {
         darwin = {
@@ -92,6 +104,11 @@ local function not_supported()
 end
 
 local function check_os()
+    local distros_table = {
+        endeavouros = "arch",
+        ubuntu = "ubuntu",
+    }
+
     local distro = io.popen('uname'):read()
     if distro == 'Darwin' then
         log.info("Mac OS detected!")
@@ -99,8 +116,8 @@ local function check_os()
     elseif distro == 'Linux' then
         log.info("Linux OS detected!")
         distro = io.popen([[grep "^ID=" /etc/os-release | cut -d "=" -f2 | sed -e 's/"//g']]):read()
-        log.info(distro .. " detected!")
-        return distro
+        log.info(distro .. " detected! " .. distros_table[distro])
+        return distros_table[distro]
     else
         not_supported()
     end
@@ -167,7 +184,7 @@ local install = {
 -- Supported distros and default package managers
 local supported = {
     darwin = install.brew,
-    endeavouros = install.pacman,
+    arch = install.pacman,
     ubuntu = install.apt,
 }
 
@@ -228,6 +245,8 @@ for pkg, args in pairs(dependencies) do
             log.info("Ignoring " .. pkg)
         elseif current_pkg.command then
             install.manual(current_pkg.command)
+        elseif current_pkg.name then
+            supported[current_os](current_pkg.name)
         end
     else
         supported[current_os](pkg)
