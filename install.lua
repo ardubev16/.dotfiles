@@ -5,7 +5,8 @@ local ZDOTDIR = HOME .. '/.config/zsh'
 local DOTFILES = HOME .. '/.dotfiles'
 
 -- Define dependencies
-local dep_font = 'Hack'
+-- local dep_font = 'Hack'
+local dep_font = 'JetBrainsMono'
 local dependencies = {
     -- pkg_name = {
     --    <distro_name> = {
@@ -23,6 +24,7 @@ local dependencies = {
         }
     },
     bat = {},
+    curl = {},
     fzf = {},
     gcc = {},
     gdb = {},
@@ -62,6 +64,7 @@ local dependencies = {
         }
     },
 
+    wget = {},
     -- lolcat,
     -- cowsay,
 }
