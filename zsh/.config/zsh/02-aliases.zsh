@@ -9,6 +9,7 @@ alias ivm="$VIM" # because I can't type
 alias vi="$VIM"
 alias mkdir="mkdir -pv"
 alias tmx="tmux -2u a || tmux -2u"
+alias wget="wget --hsts-file=$XDG_DATA_HOME/wget-hsts"
 
 # grep
 alias agrep="alias | grep"

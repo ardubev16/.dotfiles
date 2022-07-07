@@ -21,7 +21,6 @@ export EDITOR=$VIM
 export GIT_EDITOR=$VIM
 
 # NVM plugin config
-export NVM_DIR=$HOME/.nvm
 export NVM_COMPLETION=true
 export NVM_LAZY_LOAD=true
 export NVM_LAZY_LOAD_EXTRA_COMMANDS=("$VIM")
@@ -30,11 +29,11 @@ export NVM_LAZY_LOAD_EXTRA_COMMANDS=("$VIM")
 source $ZDOTDIR/.plugins
 
 # Other sources
-source $ZDOTDIR/01-aliases.zsh
-source $ZDOTDIR/02-functions.zsh
-source $ZDOTDIR/03-completions.zsh
-source $ZDOTDIR/04-prompt.zsh
-source $ZDOTDIR/05-ctf.zsh
+source $ZDOTDIR/02-aliases.zsh
+source $ZDOTDIR/03-functions.zsh
+source $ZDOTDIR/04-completions.zsh
+source $ZDOTDIR/05-prompt.zsh
+source $ZDOTDIR/06-ctf.zsh
 
 # Remove duplicate entries from PATH:
 PATH=$(echo "$PATH" | awk -v RS=':' -v ORS=":" '!a[$1]++{if (NR > 1) printf ORS; printf $a[$1]}')

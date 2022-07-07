@@ -2,7 +2,6 @@ export CTF=$HOME/CTF
 pathPrepend "$CTF/00-tools/scripts"
 
 # GDB
-alias gdb-peda="gdb -q -ex init-peda"
 alias gdb-pwndbg="gdb -q -ex init-pwndbg"
 alias gdb-gef="gdb -q -ex init-gef"
 
