@@ -1,0 +1,23 @@
+configuration {
+    font: "JetBrains Mono Medium Nerd Font 12";
+    hide-scrollbar: true;
+    modi: "dmenu";
+}
+
+@theme "./themes/gruvbox.rasi"
+
+window {
+    location: northwest;
+    y-offset: 30;
+    x-offset: 5;
+    width: 140;
+}
+
+listview {
+    columns: 1;
+    lines: 5;
+}
+
+inputbar {
+    children: [entry];
+}

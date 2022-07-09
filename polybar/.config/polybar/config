@@ -1,33 +1,35 @@
 [global/wm]
 margin-top    = 0
 margin-bottom = 0
-include-file = $XDG_CONFIG_HOME/polybar/colors.ini
-include-file = $XDG_CONFIG_HOME/polybar/modules.ini
+include-file = ~/.config/polybar/colors.ini
+include-file = ~/.config/polybar/modules.ini
 
 [bar/main]
 width = 100%
-height = 25
-radius = 0
+height = 25pt
 fixed-center = true
 ; monitor = DP-0
 background = ${colors.bg}
 foreground = ${colors.fg}
+line-size = 1pt
 
-border-size  = 1
-border-color = ${colors.black}
+separator = |
+separator-foreground = ${colors.black}
 
-padding       = 1
 module-margin = 1
 
 font-0 = JetbrainsMono Nerd Font:style=Medium:size=11;2
 
-modules-left    = xkeyboard menu i3
-modules-center  = time
-modules-right   = pulseaudio cpu memory filesystem blt network battery
+modules-left    = powermenu xworkspaces xwindow
+modules-center  = date
+modules-right   = pulseaudio cpu memory filesystem wlan eth battery
 
-wm-restack = i3
+tray-position = right
+tray-padding = 1
+enable-ipc = true
 
-cursor-click  = pointer
+cursor-click = pointer
+cursor-scroll = ns-resize
 
 [settings]
 screenchange-reload = true
@@ -36,7 +38,6 @@ screenchange-reload = true
 ; [bar/mybar]
 ; height = 24pt
 ;
-; line-size = 3pt
 ;
 ; border-size = 4pt
 ; border-color = #00000000
@@ -44,16 +45,6 @@ screenchange-reload = true
 ; padding-left = 0
 ; padding-right = 1
 ;
-; module-margin = 1
-;
-; separator = |
-; separator-foreground = ${colors.disabled}
-;
-; ; font-0 = JetBrains Mono Nerd Font:size=12;2
-; font-0 = JetBrains Mono Nerd Font:style=Medium:size=11;2
-;
-; modules-left = xworkspaces xwindow
-; modules-right = filesystem pulseaudio xkeyboard memory cpu wlan eth date
 ;
 ; cursor-click = pointer
 ; cursor-scroll = ns-resize

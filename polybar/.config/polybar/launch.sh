@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
+
+# Terminate already running bar instances
 killall -q polybar
 
+# Wait for bar instances to terminate
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
-polybar -q main -c $XDG_CONFIG_HOME/polybar/config.ini &
-# polybar -q main2 -c $XDG_CONFIG_HOME/polybar/config.ini &
+
+# Laung the bars
+polybar main 2>&1 | tee -a /tmp/polybar.log & disown
+
+echo "Polybar launched..."
