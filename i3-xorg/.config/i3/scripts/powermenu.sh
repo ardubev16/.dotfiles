@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 i3lock() {
     ~/.config/i3/scripts/blur-lock.sh

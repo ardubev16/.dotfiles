@@ -2,6 +2,8 @@ configuration {
     font: "JetBrains Mono Medium Nerd Font 12";
     hide-scrollbar: true;
     modi: "dmenu";
+    kb-row-up: "k,Up,Control+p,ISO_Left_Tab";
+    kb-row-down: "j,Down,Control+n";
 }
 
 @theme "./themes/gruvbox.rasi"
@@ -19,5 +21,5 @@ listview {
 }
 
 inputbar {
-    children: [entry];
+    children: [];
 }
