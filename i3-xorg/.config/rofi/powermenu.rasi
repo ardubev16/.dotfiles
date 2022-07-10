@@ -4,6 +4,9 @@ configuration {
     modi: "dmenu";
     kb-row-up: "k,Up,Control+p,ISO_Left_Tab";
     kb-row-down: "j,Down,Control+n";
+    hover-select: true;
+    me-select-entry: "";
+    me-accept-entry: "MousePrimary,MouseSecondary";
 }
 
 @theme "./themes/gruvbox.rasi"

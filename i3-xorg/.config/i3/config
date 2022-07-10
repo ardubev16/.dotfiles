@@ -5,8 +5,14 @@
 # Authentication agent (lxpolkit)
 # exec --no-startup-id lxpolkit
 
+# Set xss-lock
+# exec --no-startup-id xss-lock -- i3lock-fancy -ngf "JetBrains-Mono-Medium-Nerd-Font-Complete"
+
 # NetworkManager-applet
 exec --no-startup-id nm-applet
+
+# File manager deamon (pcmanfm)
+# exec --no-startup-id pcmanfm -d
 
 # Polybar
 exec_always --no-startup-id ~/.config/polybar/launch.sh
@@ -231,7 +237,7 @@ bindsym $mod+q kill
 bindsym Print exec ~/.config/i3/scripts/screenshot.sh
 
 # lock by blurring the screen:
-bindsym $mod+x exec ~/.config/i3/scripts/blur-lock.sh
+bindsym $mod+x exec i3lock-fancy -ngf "JetBrains-Mono-Medium-Nerd-Font-Complete" 
 
 # reload the configuration file
 bindsym $mod+Shift+c reload

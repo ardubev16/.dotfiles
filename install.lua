@@ -41,17 +41,6 @@ local dependencies = {
     stow = {},
     tmux = {},
     zsh = {},
-    papirus = {
-        darwin = {
-            ignore = true,
-        },
-        ubuntu = {
-            command = [[sudo add-apt-repository ppa:papirus/papirus -y && sudo apt update && sudo apt install -y papirus-icon-theme]]
-        },
-        arch = {
-            name = "papirus-icon-theme",
-        }
-    },
 
     python2 = {
         darwin = {
@@ -65,8 +54,49 @@ local dependencies = {
     },
 
     wget = {},
+    xclip = {
+        darwin = {
+            ignore = true,
+        }
+    },
     -- lolcat,
     -- cowsay,
+}
+
+local i3xorg_deps = {
+    i3 = {},
+    polybar = {},
+    rofi = {},
+    lxpolkit = {},
+    xss_lock = {
+        ubuntu = {
+            name = "xss-lock",
+        },
+        arch = {
+            name = "xss-lock",
+        },
+    },
+    i3lock_fancy = {
+        ubuntu = {
+            name = "i3lock-fancy",
+        },
+        arch = {
+            command = [[yes | sudo yay -S i3lock-fancy-git]],
+        },
+    },
+    lxappearance = {},
+    scrot = {},
+    pcmanfm = {},
+    feh = {},
+    -- nitrogen = {},
+    papirus = {
+        ubuntu = {
+            command = [[sudo add-apt-repository ppa:papirus/papirus -y && sudo apt update && sudo apt install -y papirus-icon-theme]]
+        },
+        arch = {
+            name = "papirus-icon-theme",
+        },
+    },
 }
 
 -- Define to_stow
@@ -191,6 +221,23 @@ local supported = {
     ubuntu = install.apt,
 }
 
+local function install_deps(distro, deps)
+    for pkg, args in pairs(deps) do
+        if args[distro] ~= nil then
+            local current_pkg = args[distro]
+            if current_pkg.ignore then
+                log.info("Ignoring " .. pkg)
+            elseif current_pkg.command then
+                install.manual(current_pkg.command)
+            elseif current_pkg.name then
+                supported[distro](current_pkg.name)
+            end
+        else
+            supported[distro](pkg)
+        end
+    end
+end
+
 -- Stow stow_dirs
 local function stow_dirs(dirs)
     for _, dir in ipairs(dirs) do
@@ -235,31 +282,32 @@ local function nvim_setup()
     end
 end
 
+-- Install i3-xorg
+local function install_i3xorg(distro)
+    log.info("Do you want to install i3-xorg? [y/n] ")
+    local ans = io.read() == "y"
+    if ans then
+        log.info("Installing i3-xorg")
+        install_deps(distro, i3xorg_deps)
+        stow_dirs({"i3-xorg"})
+    else
+        log.info("Not installing i3-xorg")
+    end
+end
 -------------------------------------------------------------------------------
 
 local current_os = check_os()
 if supported[current_os] == nil then
     not_supported()
 end
-for pkg, args in pairs(dependencies) do
-    if args[current_os] ~= nil then
-        local current_pkg = args[current_os]
-        if current_pkg.ignore then
-            log.info("Ignoring " .. pkg)
-        elseif current_pkg.command then
-            install.manual(current_pkg.command)
-        elseif current_pkg.name then
-            supported[current_os](current_pkg.name)
-        end
-    else
-        supported[current_os](pkg)
-    end
-end
+install_deps(current_os, dependencies)
 install.font(current_os, dep_font)
 
 stow_dirs(to_stow)
 set_zsh()
 bundle_zsh_plugins()
-nvim_setup()
+-- nvim_setup()
+
+install_i3xorg(current_os)
 
 log.info("Run \"exec zsh\" to start Zsh")

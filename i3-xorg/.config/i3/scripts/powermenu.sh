@@ -1,7 +1,9 @@
 #!/bin/bash
 
+set -e
+
 i3lock() {
-    ~/.config/i3/scripts/blur-lock.sh
+    i3lock-fancy -ngf "JetBrains-Mono-Medium-Nerd-Font-Complete" 
 }
 
 # Options for powermenu

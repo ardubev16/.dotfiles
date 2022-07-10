@@ -10,9 +10,10 @@
     width: 600;
 }
 
-element-text, element-icon , mode-switcher {
+element-text, element-icon, mode-switcher {
     background-color: inherit;
-    text-color:       inherit;
+    text-color: inherit;
+    cursor: pointer;
 }
 
 inputbar {
