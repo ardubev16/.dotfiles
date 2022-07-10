@@ -24,7 +24,7 @@ font-0 = JetbrainsMono Nerd Font:style=Medium:pixelsize=11;2
 
 modules-left    = powermenu xworkspaces xwindow
 modules-center  = date
-modules-right   = pulseaudio cpu memory filesystem wlan eth battery
+modules-right   = pulseaudio temperature cpu memory filesystem wlan eth battery
 
 tray-position = right
 tray-padding = 1

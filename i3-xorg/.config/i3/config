@@ -2,42 +2,33 @@
 # Autostart applications/services on login #
 ############################################
 
+# Authentication agent (lxpolkit)
+# exec --no-startup-id lxpolkit
+
+# NetworkManager-applet
+exec --no-startup-id nm-applet
+
+# Polybar
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 
-# TODO: - Polkit
-#       - feh / nitrogen
+# TODO: - feh / nitrogen
 #       - picom
-#       - nm-applet
 #       - dunst
 #       - bluez (!)
 #       - volumeicon (?)
 #       - tmux deamon
 
 # TODO
-#get auth work with polkit-gnome
-# exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-
-# picom: https://wiki.archlinux.org/title/Picom
-# manpage: https://man.archlinux.org/man/picom.1.en
-# The default configuration is available in /etc/xdg/picom.conf 
-# For modifications, it can be copied to ~/.config/picom/picom.conf or ~/.config/picom.conf
-#
-# using default config 
+# Compositor (picom)
 # exec / exec_always (???)
 # exec_always --no-startup-id picom --experimental-backends -b
 exec_always --no-startup-id picom -b
-
-# start welcome app
-#exec --no-startup-id sh /usr/share/endeavouros/scripts/welcome --startdelay=3 
 
 # num lock activated
 #exec --no-startup-id numlockx on
 
 # configure multiple keyboard layouts and hotkey to switch (Alt+CAPSLOCK in this example)
 #exec --no-startup-id setxkbmap -layout 'us,sk' -variant altgr-intl,qwerty -option 'grp:alt_caps_toggle'
-
-# start conky:
-#exec_always --no-startup-id conky
 
 # start a script to setup displays
 # uncomment the next line, use arandr to setup displays and save the file as monitor:
@@ -71,9 +62,6 @@ exec_always --no-startup-id picom -b
 
 # start blueberry app for managing bluetooth devices from tray:
 #exec --no-startup-id blueberry-tray
-
-# networkmanager-applet
-exec --no-startup-id nm-applet
 
 # clipman-applet
 #exec --no-startup-id xfce4-clipman
@@ -348,7 +336,7 @@ set $ws4 "4"
 set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
-set $ws8 "8"
+set $ws8 "8: "
 set $ws9 "9:ﭮ "
 set $ws10 "10: "
 
@@ -365,12 +353,14 @@ set $ws10 "10: "
 # assign [class="Alacritty"] $ws1
 assign [class="(?i)firefox"] $ws2
 assign [class="ghidra-Ghidra"] $ws3
+assign [class="Thunderbird"] $ws8
 assign [class="discord"] $ws9
 assign [class="TelegramDesktop"] $ws10
 
 # automatic set focus new window if it opens on another workspace then the current:
 for_window [class="Alacritty"] focus
 for_window [class="(?i)firefox"] focus
+for_window [class="Thunderbird"] focus
 for_window [class="discord"] focus
 for_window [class="TelegramDesktop"] focus
 
@@ -380,6 +370,7 @@ for_window [class="TelegramDesktop"] focus
 ####################
 
 for_window [class="ghidra-Ghidra" title="Ghidra: "] floating enable resize set 640 480
+for_window [class="Nm-connection-editor"] floating enable
 
 # set floating (nontiling) for apps needing it
 for_window [class="Yad" instance="yad"] floating enable
@@ -390,7 +381,6 @@ for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
 for_window [class="Xsane" instance="xsane"] floating enable
 for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
 for_window [class="qt5ct" instance="qt5ct"] floating enable
-for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
 for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
 for_window [class="Pamac-manager"] floating enable
 for_window [window_role="About"] floating enable
@@ -403,7 +393,7 @@ for_window [class="urxvt"] border pixel 1
 #for_window [class=".*"] resize set 640 480 #to change size of all floating windows 
 
 # set position of floating window
-for_window [class=".*"] move position center
+# for_window [class=".*"] move position center
 
 # Make the currently focused window a scratchpad
 bindsym $mod+Shift+minus move scratchpad
