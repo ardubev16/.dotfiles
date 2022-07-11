@@ -2,10 +2,6 @@
 
 set -e
 
-i3lock() {
-    i3lock-fancy -ngf "JetBrains-Mono-Medium-Nerd-Font-Complete" 
-}
-
 # Options for powermenu
 lock=" Lock"
 logout=" Logout"
@@ -26,13 +22,13 @@ $shutdown" | rofi -dmenu\
 # Do something based on selected option
 case "$selected_option" in
     "$lock")
-        i3lock
+        loginctl lock-session
         ;;
     "$logout")
         i3-msg exit
         ;;
     "$sleep")
-        i3lock && systemctl suspend
+        systemctl suspend
         ;;
     "$reboot")
         systemctl reboot

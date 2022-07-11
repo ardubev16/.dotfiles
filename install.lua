@@ -78,7 +78,8 @@ local i3xorg_deps = {
     },
     i3lock_fancy = {
         ubuntu = {
-            name = "i3lock-fancy",
+            ignore = true,
+            -- name = "i3lock-fancy",
         },
         arch = {
             command = [[yes | sudo yay -S i3lock-fancy-git]],
@@ -87,8 +88,9 @@ local i3xorg_deps = {
     lxappearance = {},
     scrot = {},
     pcmanfm = {},
+    blueman = {},
     feh = {},
-    -- nitrogen = {},
+    nitrogen = {},
     papirus = {
         ubuntu = {
             command = [[sudo add-apt-repository ppa:papirus/papirus -y && sudo apt update && sudo apt install -y papirus-icon-theme]]

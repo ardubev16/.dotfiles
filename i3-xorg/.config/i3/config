@@ -3,24 +3,28 @@
 ############################################
 
 # Authentication agent (lxpolkit)
-# exec --no-startup-id lxpolkit
+exec --no-startup-id lxpolkit
 
 # Set xss-lock
-# exec --no-startup-id xss-lock -- i3lock-fancy -ngf "JetBrains-Mono-Medium-Nerd-Font-Complete"
+exec --no-startup-id xss-lock -l -- i3lock-fancy -gf "JetBrains-Mono-Medium-Nerd-Font-Complete"
 
 # NetworkManager-applet
 exec --no-startup-id nm-applet
 
+# Bluetooth applet (blueman)
+exec --no-startup-id blueman-applet
+
 # File manager deamon (pcmanfm)
-# exec --no-startup-id pcmanfm -d
+exec --no-startup-id pcmanfm -d
+
+# Set wallpaper
+exec --no-startup-id nitrogen --restore
 
 # Polybar
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 
-# TODO: - feh / nitrogen
-#       - picom
+# TODO: - picom
 #       - dunst
-#       - bluez (!)
 #       - volumeicon (?)
 #       - tmux deamon
 
@@ -39,10 +43,6 @@ exec_always --no-startup-id picom -b
 # start a script to setup displays
 # uncomment the next line, use arandr to setup displays and save the file as monitor:
 #exec --no-startup-id ~/.screenlayout/monitor.sh
-
-# set wallpaper
-#exec --no-startup-id sleep 2 && nitrogen --restore
-#exec --no-startup-id feh --bg-fill /usr/share/endeavouros/backgrounds/endeavouros_i3.png
 
 # set powersavings for display:
 #exec --no-startup-id xset s 480 dpms 600 600 600
@@ -65,9 +65,6 @@ exec_always --no-startup-id picom -b
 # https://github.com/nwg-piotr/autotiling
 # `yay -S autotiling ;) (it is in AUR)
 #exec_always --no-startup-id autotiling
-
-# start blueberry app for managing bluetooth devices from tray:
-#exec --no-startup-id blueberry-tray
 
 # clipman-applet
 #exec --no-startup-id xfce4-clipman
@@ -237,7 +234,7 @@ bindsym $mod+q kill
 bindsym Print exec ~/.config/i3/scripts/screenshot.sh
 
 # lock by blurring the screen:
-bindsym $mod+x exec i3lock-fancy -ngf "JetBrains-Mono-Medium-Nerd-Font-Complete" 
+bindsym $mod+x exec loginctl lock-session
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
