@@ -17,10 +17,10 @@ local dependencies = {
     -- }
     antibody = {
         ubuntu = {
-            command = [[curl -sfL git.io/antibody | sudo sh -s - -b /usr/local/bin]],
+            command = [[curl -sfL git.io/antibody | sudo sh -s - -b /usr/local/bin]]
         },
         arch = {
-            command = [[curl -sfL git.io/antibody | sudo sh -s - -b /usr/local/bin]],
+            command = [[curl -sfL git.io/antibody | sudo sh -s - -b /usr/local/bin]]
         }
     },
     bat = {},
@@ -34,7 +34,7 @@ local dependencies = {
     cmake = {},
     neovim = {
         ubuntu = {
-            command = [[sudo add-apt-repository ppa:neovim-ppa/unstable -y && sudo apt update && sudo apt install -y neovim]],
+            command = [[sudo add-apt-repository ppa:neovim-ppa/unstable -y && sudo apt update && sudo apt install -y neovim]]
         },
     },
     ripgrep = {},
@@ -44,19 +44,19 @@ local dependencies = {
 
     python2 = {
         darwin = {
-            ignore = true,
+            ignore = true
         }
     },
     python3 = {
         darwin = {
-            ignore = true,
+            ignore = true
         }
     },
 
     wget = {},
     xclip = {
         darwin = {
-            ignore = true,
+            ignore = true
         }
     },
     -- lolcat,
@@ -67,22 +67,23 @@ local i3xorg_deps = {
     i3 = {},
     polybar = {},
     rofi = {},
+    dunst = {},
     lxpolkit = {},
     xss_lock = {
         ubuntu = {
-            name = "xss-lock",
+            name = "xss-lock"
         },
         arch = {
-            name = "xss-lock",
+            name = "xss-lock"
         },
     },
     i3lock_fancy = {
         ubuntu = {
-            ignore = true,
-            -- name = "i3lock-fancy",
+            ignore = true
+            -- name = "i3lock-fancy"
         },
         arch = {
-            command = [[yes | sudo yay -S i3lock-fancy-git]],
+            command = [[yes | sudo yay -S i3lock-fancy-git]]
         },
     },
     lxappearance = {},
@@ -96,9 +97,17 @@ local i3xorg_deps = {
             command = [[sudo add-apt-repository ppa:papirus/papirus -y && sudo apt update && sudo apt install -y papirus-icon-theme]]
         },
         arch = {
-            name = "papirus-icon-theme",
+            name = "papirus-icon-theme"
         },
     },
+    gruvbox_dark_gtk = {
+        ubuntu = {
+            command = [[sudo git clone https://github.com/jmattheis/gruvbox-dark-gtk /usr/share/themes/gruvbox-dark-gtk]]
+        },
+        arch = {
+            command = [[yes | sudo yay -S gruvbox-dark-gtk]]
+        }
+    }
 }
 
 -- Define to_stow

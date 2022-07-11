@@ -37,32 +37,4 @@ cursor-scroll = ns-resize
 [settings]
 screenchange-reload = true
 
-
-; [bar/mybar]
-; wm-restack = i3
-;
-; ; override-redirect = true
-;
-; [module/pulseaudio]
-; type = internal/pulseaudio
-;
-; format-volume-prefix = "VOL "
-; format-volume-prefix-foreground = ${colors.primary}
-; format-volume = <label-volume>
-;
-; label-volume = %percentage%%
-;
-; label-muted = muted
-; label-muted-foreground = ${colors.disabled}
-;
-; [module/xkeyboard]
-; type = internal/xkeyboard
-; blacklist-0 = num lock
-;
-; label-layout = %layout%
-; label-layout-foreground = ${colors.primary}
-;
-; label-indicator-padding = 2
-; label-indicator-margin = 1
-; label-indicator-foreground = ${colors.background}
-; label-indicator-background = ${colors.secondary}
+; vim: ft=dosini

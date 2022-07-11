@@ -14,10 +14,7 @@ selected_option=$(echo "$lock
 $logout
 $sleep
 $reboot
-$shutdown" | rofi -dmenu\
-                  -i\
-                  -p "Power"\
-                  -config "~/.config/rofi/powermenu.rasi" )
+$shutdown" | rofi -dmenu -config "~/.config/rofi/powermenu.rasi" )
 
 # Do something based on selected option
 case "$selected_option" in

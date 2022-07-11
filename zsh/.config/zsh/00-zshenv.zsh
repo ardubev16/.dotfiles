@@ -24,4 +24,4 @@ export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 export WINEPREFIX="$XDG_DATA_HOME/wine"
 
 # Cache files
-export ZSH_COMPDUMP="$XDG_CACHE_HOME"/zsh/zcompdump
+export ZSH_COMPDUMP="$XDG_CACHE_HOME/zsh/zcompdump"
