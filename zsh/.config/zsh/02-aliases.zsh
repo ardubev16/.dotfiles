@@ -37,5 +37,7 @@ alias ez="exec zsh"
 alias gspull="git pull && git submodule foreach \"git checkout master\""
 alias err="echo $?"
 alias :q="exit" # vim goodness
-alias bat="batcat"
+if command -v batcat &>/dev/null; then
+    alias bat="batcat"
+fi
 alias canial="cowsay canial | lolcat"
