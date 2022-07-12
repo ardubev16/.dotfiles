@@ -6,7 +6,7 @@
 exec --no-startup-id lxpolkit
 
 # Set xss-lock
-exec --no-startup-id xss-lock -l -- i3lock-fancy -gf "JetBrains-Mono-Medium-Nerd-Font-Complete"
+exec --no-startup-id xss-lock -l -- i3lock-fancy -f "JetBrains-Mono-Medium-Nerd-Font-Complete"
 
 # Desktop notifications (dunst)
 exec --no-startup-id dunst
@@ -27,7 +27,6 @@ exec --no-startup-id nitrogen --restore
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 
 # TODO: - picom
-#       - dunst
 #       - volumeicon (?)
 #       - tmux deamon
 
@@ -42,10 +41,6 @@ exec_always --no-startup-id picom -b
 
 # configure multiple keyboard layouts and hotkey to switch (Alt+CAPSLOCK in this example)
 #exec --no-startup-id setxkbmap -layout 'us,sk' -variant altgr-intl,qwerty -option 'grp:alt_caps_toggle'
-
-# start a script to setup displays
-# uncomment the next line, use arandr to setup displays and save the file as monitor:
-#exec --no-startup-id ~/.screenlayout/monitor.sh
 
 # set powersavings for display:
 #exec --no-startup-id xset s 480 dpms 600 600 600
@@ -232,6 +227,7 @@ bindsym $mod+q kill
 
 # make screenshot
 bindsym Print exec ~/.config/i3/scripts/screenshot.sh
+bindsym Shift+Print exec ~/.config/i3/scripts/screenshot.sh -s
 
 # lock by blurring the screen:
 bindsym $mod+x exec loginctl lock-session

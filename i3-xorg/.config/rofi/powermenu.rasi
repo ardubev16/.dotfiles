@@ -25,5 +25,5 @@ listview {
 }
 
 inputbar {
-    children: [];
+    enabled: false;
 }

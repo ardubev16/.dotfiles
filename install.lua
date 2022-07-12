@@ -64,11 +64,24 @@ local dependencies = {
 }
 
 local i3xorg_deps = {
-    i3 = {},
+    alacritty = {
+        ubuntu = {
+            ignore = true
+        },
+    },
+    i3 = {
+        arch = {
+            name = "i3-gaps"
+        }
+    },
     polybar = {},
     rofi = {},
     dunst = {},
-    lxpolkit = {},
+    lxpolkit = {
+        arch = {
+            name = "lxsession"
+        }
+    },
     xss_lock = {
         ubuntu = {
             name = "xss-lock"
@@ -83,11 +96,20 @@ local i3xorg_deps = {
             -- name = "i3lock-fancy"
         },
         arch = {
-            command = [[yes | sudo yay -S i3lock-fancy-git]]
+            command = [[yay -S i3lock-fancy-git]]
+        },
+    },
+    i3lock_color = {
+        ubuntu = {
+            ignore = true
+        },
+        arch = {
+            command = [[yay -S i3lock-color-git]]
         },
     },
     lxappearance = {},
     scrot = {},
+    slop = {},
     pcmanfm = {},
     blueman = {},
     feh = {},
@@ -105,7 +127,7 @@ local i3xorg_deps = {
             command = [[sudo git clone https://github.com/jmattheis/gruvbox-dark-gtk /usr/share/themes/gruvbox-dark-gtk]]
         },
         arch = {
-            command = [[yes | sudo yay -S gruvbox-dark-gtk]]
+            command = [[yay -S gruvbox-dark-gtk]]
         }
     }
 }
@@ -300,7 +322,7 @@ local function install_i3xorg(distro)
     if ans then
         log.info("Installing i3-xorg")
         install_deps(distro, i3xorg_deps)
-        stow_dirs({"i3-xorg"})
+        stow_dirs({"i3-xorg", "alacritty"})
     else
         log.info("Not installing i3-xorg")
     end
