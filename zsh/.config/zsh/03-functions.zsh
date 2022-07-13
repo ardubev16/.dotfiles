@@ -12,3 +12,6 @@ pathAppend() {
     fi
 }
 
+setwp() {
+    nitrogen --set-auto --save --head="${2-0}" "$1"
+}
