@@ -1,76 +1,9 @@
-############################################
-# Autostart applications/services on login #
-############################################
-
-# Authentication agent (lxpolkit)
-exec --no-startup-id lxpolkit
-
-# Set xss-lock
-exec --no-startup-id xss-lock -l -- i3lock-fancy -f "JetBrains-Mono-Medium-Nerd-Font-Complete"
-
-# Desktop notifications (dunst)
-exec --no-startup-id dunst
-
-# NetworkManager-applet
-exec --no-startup-id nm-applet
-
-# Bluetooth applet (blueman)
-exec --no-startup-id blueman-applet
-
-# File manager daemon (pcmanfm)
-exec --no-startup-id pcmanfm -d
-
-# Set wallpaper
-exec --no-startup-id nitrogen --restore
-
-# Polybar
-exec_always --no-startup-id ~/.config/polybar/launch.sh
-
-# TODO: - picom
-#       - volumeicon (?)
-#       - tmux daemon
-
-# TODO
-# Compositor (picom)
-# exec / exec_always (???)
-# exec_always --no-startup-id picom --experimental-backends -b
-exec --no-startup-id picom -b
-
-# num lock activated
-#exec --no-startup-id numlockx on
-
-# configure multiple keyboard layouts and hotkey to switch (Alt+CAPSLOCK in this example)
-#exec --no-startup-id setxkbmap -layout 'us,sk' -variant altgr-intl,qwerty -option 'grp:alt_caps_toggle'
-
-# set powersavings for display:
-#exec --no-startup-id xset s 480 dpms 600 600 600
-
-# disable power saving (for example if using xscreensaver)
-#exec --no-startup-id xset -dpms
-
-# use xautolock to use autosuspend rules for mobile devices
-# https://wiki.archlinux.org/title/Session_lock#xautolock
-#exec --no-startup-id xautolock -time 60 -locker "systemctl suspend"
-
-# xscreensaver
-# https://www.jwz.org/xscreensaver
-#exec --no-startup-id xscreensaver --no-splash
-
-# autotiling script
-# https://github.com/nwg-piotr/autotiling
-# `yay -S autotiling ;) (it is in AUR)
-#exec_always --no-startup-id autotiling
-
-# clipman-applet
-#exec --no-startup-id xfce4-clipman
-# TODO
-
-
-##########
-# Global #
-##########
+###########
+# General #
+###########
 
 # Includes
+include ~/.config/i3/autostart.conf
 include ~/.config/i3/workspace_kb.conf
 include ~/.config/i3/window_kb.conf
 
@@ -84,9 +17,6 @@ set $alt Mod1
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# Focus doesn't follow mouse
-# focus_follows_mouse no
-
 # default i3 tiling mode:
 workspace_layout default
 
@@ -95,7 +25,11 @@ default_border none
 default_floating_border none
 
 # Set inner gaps
-# gaps inner 10
+smart_gaps on
+gaps inner 10
+
+# Focus doesn't follow mouse
+# focus_follows_mouse no
 
 
 #########
@@ -205,8 +139,10 @@ assign [class="^ghidra-Ghidra$"] $ws4
 assign [class="^jetbrains-idea-ce$"] $ws4
 
 assign [class="^Thunderbird$"] $ws8
+
 assign [class="^discord$"] $ws9
 assign [class="^TelegramDesktop$"] $ws10
+assign [class="^whatsdesk$"] $ws10
 
 # Automatic set focus new window if it opens on another workspace then the current:
 for_window [class="^Alacritty$"] focus
@@ -216,7 +152,8 @@ for_window [class="^ghidra-Ghidra$"] focus
 for_window [class="^jetbrains-idea-ce$"] focus
 for_window [class="^Thunderbird$"] focus
 for_window [class="^discord$"] focus
-for_window [class="^TelegramDesktop$"] focus
+for_window [class="^TelegramDesktop$"] focus, resize set width 40 ppt, move right
+for_window [class="^whatsdesk$"] focus, resize set width 46 ppt, move left
 
 
 ####################
