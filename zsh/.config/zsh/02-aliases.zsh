@@ -12,6 +12,7 @@ alias vi="$VIM"
 alias mkdir="mkdir -pv"
 alias tmx="tmux -2u a || tmux -2u"
 alias wget="wget --hsts-file=$XDG_DATA_HOME/wget-hsts"
+alias btop="btop --utf-force"
 
 # grep
 alias agrep="alias | grep"

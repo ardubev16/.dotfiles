@@ -59,6 +59,11 @@ local dependencies = {
             ignore = true
         }
     },
+    xsel = {
+        darwin = {
+            ignore = true
+        }
+    },
     -- lolcat,
     -- cowsay,
 }
@@ -77,9 +82,12 @@ local i3xorg_deps = {
     polybar = {},
     rofi = {},
     dunst = {},
-    lxpolkit = {
+    polkit_gnome = {
+        ubuntu = {
+            ignore = true
+        },
         arch = {
-            name = "lxsession"
+            name = "polkit-gnome"
         }
     },
     xss_lock = {

@@ -56,14 +56,18 @@ bindsym $mod+r mode "resize"
 # Misc keybindings #
 ####################
 
-# Start a terminal
+# Start/open apps
 bindsym $mod+Return exec alacritty
-
-# Start firefox
 bindsym $mod+w exec firefox
 
 # Kill focused window
 bindsym $mod+q kill
+
+# Make the currently focused window a scratchpad
+bindsym $mod+Shift+minus [floating] move scratchpad
+
+# Show the first scratchpad window
+bindsym $mod+minus scratchpad show
 
 # Make screenshot
 bindsym Print exec ~/.config/i3/scripts/screenshot.sh
@@ -88,11 +92,11 @@ bindsym XF86MonBrightnessUp exec ~/.config/i3/scripts/brightness.sh -i 5
 bindsym XF86MonBrightnessDown exec ~/.config/i3/scripts/brightness.sh -d 5
 
 # Volume control
-bindsym XF86AudioMute exec amixer -D pulse sset Master toggle
-bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 5%+
-bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 5%-
-bindsym $mod+XF86AudioRaiseVolume exec amixer -D pulse sset Master 1%+
-bindsym $mod+XF86AudioLowerVolume exec amixer -D pulse sset Master 1%-
+bindsym XF86AudioMute exec ~/.config/i3/scripts/volume.sh -m
+bindsym XF86AudioRaiseVolume exec ~/.config/i3/scripts/volume.sh -i 5
+bindsym XF86AudioLowerVolume exec ~/.config/i3/scripts/volume.sh -d 5
+bindsym $mod+XF86AudioRaiseVolume exec ~/.config/i3/scripts/volume.sh -i 1
+bindsym $mod+XF86AudioLowerVolume exec ~/.config/i3/scripts/volume.sh -d 1
 
 # Media control
 bindsym XF86AudioPlay exec playerctl play
@@ -182,12 +186,6 @@ for_window [window_role="About"] floating enable
 
 # Set size of floating window
 for_window [floating class=".*"] move position center, resize set 640 480
-
-# Make the currently focused window a scratchpad
-bindsym $mod+Shift+minus [floating] move scratchpad
-
-# Show the first scratchpad window
-bindsym $mod+minus scratchpad show
 
 
 ##############

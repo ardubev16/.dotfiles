@@ -11,12 +11,8 @@ EOF
     exit 1
 }
 
-get_brightness() {
-    xbacklight -get | xargs printf %.0f
-}
-
 send_notification() {
-    brightness=$(get_brightness)
+    brightness=$(xbacklight -get | xargs printf %.0f)
     dunstify -u low -h "string:x-dunst-stack-tag:brightness" -h "int:value:$brightness" -i "display-brightness" "Brightness" "$brightness%"
 }
 
