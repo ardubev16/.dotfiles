@@ -1,65 +1,64 @@
 #!/bin/bash
 
-# Example notifier script -- lowers screen brightness, then waits to be killed
-# and restores previous brightness on exit.
+set -e
 
 ## CONFIGURATION ##############################################################
 
 # Brightness will be lowered to this value.
-min_brightness=1
+min_brightness=0
 
-# If your video driver works with xbacklight, set -time and -steps for fading
-# to $min_brightness here. Setting steps to 1 disables fading.
+# Set time and steps for fading to $min_brightness here.
+# Setting steps to 1 disables fading.
 fade_time=200
 fade_steps=20
+fade_step_time=$(printf 0.%03d $(( $fade_time / $fade_steps )))
 
-# If you have a driver without RandR backlight property (e.g. radeon), set this
-# to use the sysfs interface and create a .conf file in /etc/tmpfiles.d/
-# containing the following line to make the sysfs file writable for group
-# "users":
-#
-#     m /sys/class/backlight/acpi_video0/brightness 0664 root users - -
-#
-#sysfs_path=/sys/class/backlight/acpi_video0/brightness
-
-# Time to sleep (in seconds) between increments when using sysfs. If unset or
-# empty, fading is disabled.
-fade_step_time=0.05
+# If you have a driver without RandR backlight property (e.g. radeon),
+# brightnessctl will be used
 
 ###############################################################################
 
+xbacklight_works() {
+    [[ ! -z $(xbacklight) ]]
+}
+
 get_brightness() {
-    if [[ -z $sysfs_path ]]; then
-        xbacklight -get
+    if xbacklight_works; then
+        xbacklight -get | xargs printf %.0f
     else
-        cat $sysfs_path
+        echo -n $(( $(brightnessctl get) * 100 / $(brightnessctl max) ))
     fi
 }
 
 set_brightness() {
-    if [[ -z $sysfs_path ]]; then
-        xbacklight -steps 1 -set $1
+    if xbacklight_works; then
+        xbacklight -set $1
     else
-        echo $1 > $sysfs_path
+        brightnessctl set $1% &>/dev/null
     fi
 }
 
 fade_brightness() {
-    if [[ -z $sysfs_path ]]; then
+    if xbacklight_works; then
         xbacklight -time $fade_time -steps $fade_steps -set $1
-    elif [[ -z $fade_step_time ]]; then
-        set_brightness $1
     else
-        local level
-        for level in $(eval echo {$(get_brightness)..$1}); do
-            set_brightness $level
+        if [[ $brightness -le $fade_steps ]]; then
+            brightness_step=-1
+        else
+            brightness_step=$(( - ($brightness - $1) / $fade_steps ))
+        fi
+        for curr_brightness in $(seq $brightness $brightness_step $1); do
+            set_brightness $curr_brightness
             sleep $fade_step_time
         done
+        set_brightness $1
     fi
 }
 
+brightness=$(get_brightness)
+
 trap 'exit 0' TERM INT
-trap "set_brightness $(get_brightness); kill %%" EXIT
+trap "set_brightness $brightness; kill %%" EXIT
 fade_brightness $min_brightness
 sleep 2147483647 &
 wait

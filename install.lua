@@ -180,6 +180,7 @@ end
 local function check_os()
     local distros_table = {
         endeavouros = "arch",
+	arch = "arch",
         ubuntu = "ubuntu",
     }
 

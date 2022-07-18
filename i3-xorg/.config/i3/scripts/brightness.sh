@@ -11,20 +11,48 @@ EOF
     exit 1
 }
 
+xbacklight_works() {
+    [[ ! -z $(xbacklight) ]]
+}
+
+get_brightness() {
+    if xbacklight_works; then
+        xbacklight -get | xargs printf %.0f
+    else
+        echo -n $(( $(brightnessctl get) * 100 / $(brightnessctl max) ))
+    fi
+}
+
+inc_brightness() {
+    if xbacklight_works; then
+        xbacklight -inc $1
+    else
+        brightnessctl set $1%+ &>/dev/null
+    fi
+}
+
+dec_brightness() {
+    if xbacklight_works; then
+        xbacklight -dec $1
+    else
+        brightnessctl set $1%- &>/dev/null
+    fi
+}
+
 send_notification() {
-    brightness=$(xbacklight -get | xargs printf %.0f)
+    brightness=$(get_brightness)
     dunstify -u low -h "string:x-dunst-stack-tag:brightness" -h "int:value:$brightness" -i "display-brightness" "Brightness" "$brightness%"
 }
 
 while getopts "hi:d:" opt; do
     case $opt in
         i)
-            xbacklight -inc $OPTARG
+            inc_brightness $OPTARG
             send_notification
             exit 0
             ;;
         d)
-            xbacklight -dec $OPTARG
+            dec_brightness $OPTARG
             send_notification
             exit 0
             ;;

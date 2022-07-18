@@ -62,7 +62,7 @@ elif linux; then
         "ubuntu")
             install_apt
             ;;
-        "endeavouros")
+        "endeavouros" | "arch")
             install_pacman
             ;;
         *)
