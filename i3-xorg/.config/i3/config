@@ -117,8 +117,8 @@ bindsym XF86AudioPrev exec playerctl previous
 # Define names for default workspaces
 set $ws1 "1: "
 set $ws2 "2: "
-set $ws3 "3: "
-set $ws4 "4: "
+set $ws3 "3: "
+set $ws4 "4: "
 set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
@@ -137,10 +137,12 @@ set $ws10 "10: "
 # Bind program to workspace and focus to them on startup:
 # assign [class="Alacritty"] $ws1
 assign [class="^firefox$"] $ws2
-assign [class="^Virt-manager$"] $ws3
 
-assign [class="^ghidra-Ghidra$"] $ws4
-assign [class="^jetbrains-idea-ce$"] $ws4
+assign [class="^ghidra-Ghidra$"] $ws3
+assign [class="^jetbrains-idea-ce$"] $ws3
+
+assign [class="^Virt-manager$"] $ws4
+
 
 assign [class="^Thunderbird$"] $ws8
 

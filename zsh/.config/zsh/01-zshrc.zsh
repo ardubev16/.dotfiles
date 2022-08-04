@@ -37,4 +37,5 @@ source $ZDOTDIR/05-prompt.zsh
 source $ZDOTDIR/06-ctf.zsh
 
 # Remove duplicate entries from PATH:
+pathPrepend "$HOME/.local/bin"
 PATH=$(echo "$PATH" | awk -v RS=':' -v ORS=":" '!a[$1]++{if (NR > 1) printf ORS; printf $a[$1]}')

@@ -19,7 +19,7 @@ send_notification() {
         volume=0
     else
         volume=$(amixer -D pulse sget Master | tail -1 | awk '{print $5}' | sed 's/[^0-9]*//g')
-        if [[ $volume -gt 0 && $volume -le 33 ]]; then
+        if [[ $volume -le 33 ]]; then
             icon="audio-volume-low-symbolic"
         elif [[ $volume -gt 33 && $volume -le 66 ]]; then
             icon="audio-volume-medium-symbolic"
@@ -33,19 +33,24 @@ send_notification() {
 while getopts "hmi:d:" opt; do
     case $opt in
         m)
-            amixer -D pulse sset Master toggle &>/dev/null
+            # amixer -D pulse sset Master toggle &>/dev/null
+            pactl set-sink-mute 0 toggle
             send_notification
             exit 0
             ;;
         i)
-            amixer -D pulse sset Master on &>/dev/null
-            amixer -D pulse sset Master $OPTARG%+ &>/dev/null
+            # amixer -D pulse sset Master on &>/dev/null
+            # amixer -D pulse sset Master $OPTARG%+ &>/dev/null
+            pactl set-sink-mute 0 false
+            pactl set-sink-volume 0 +$OPTARG%
             send_notification
             exit 0
             ;;
         d)
-            amixer -D pulse sset Master on &>/dev/null
-            amixer -D pulse sset Master $OPTARG%- &>/dev/null
+            # amixer -D pulse sset Master on &>/dev/null
+            # amixer -D pulse sset Master $OPTARG%- &>/dev/null
+            pactl set-sink-mute 0 false
+            pactl set-sink-volume 0 -$OPTARG%
             send_notification
             exit 0
             ;;
