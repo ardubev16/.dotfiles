@@ -43,7 +43,7 @@ Plug 'vim-airline/vim-airline'
 "misc
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
+"Plug 'tpope/vim-repeat'
 
 call plug#end()
 
@@ -63,10 +63,10 @@ nnoremap N Nzzzv
 nnoremap J mzJ`z
 
 "undo break points with , . ! ?
-inoremap , ,<C-g>u
-inoremap . .<C-g>u
-inoremap ! !<C-g>u
-inoremap ? ?<C-g>u
+" inoremap , ,<C-g>u
+" inoremap . .<C-g>u
+" inoremap ! !<C-g>u
+" inoremap ? ?<C-g>u
 
 "move lines
 nnoremap <leader>j :m .+1<CR>==
