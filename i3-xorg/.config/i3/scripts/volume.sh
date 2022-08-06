@@ -5,9 +5,10 @@ set -e
 usage() {
     cat <<EOF
 "Usage: $0 [-id amount]"
+    -m:     operates on microphone volume
     -i n:   increase by n
     -d n:   decrease by n
-    -m:     toggle mute
+    -t:     toggle mute
 EOF
     exit 1
 }
@@ -30,29 +31,53 @@ send_notification() {
     dunstify -u low -h "string:x-dunst-stack-tag:volume" -h "int:value:$volume" -i "$icon" "Volume" "$volume%"
 }
 
-while getopts "hmi:d:" opt; do
+inc_volume() {
+    if [[ $microphone ]]; then
+        pactl set-source-mute 0 false
+        pactl set-source-volume 0 +$1%
+    else
+        pactl set-sink-mute 0 false
+        pactl set-sink-volume 0 +$1%
+        send_notification
+    fi
+    exit 0
+}
+
+dec_volume() {
+    if [[ $microphone ]]; then
+        pactl set-source-mute 0 false
+        pactl set-source-volume 0 -$1%
+    else
+        pactl set-sink-mute 0 false
+        pactl set-sink-volume 0 -$1%
+        send_notification
+    fi
+    exit 0
+}
+
+toggle_mute() {
+    if [[ $microphone ]]; then
+        pactl set-source-mute 0 toggle
+    else
+        pactl set-sink-mute 0 toggle
+        send_notification
+    fi
+    exit 0
+}
+
+while getopts "hmti:d:" opt; do
     case $opt in
         m)
-            # amixer -D pulse sset Master toggle &>/dev/null
-            pactl set-sink-mute 0 toggle
-            send_notification
-            exit 0
+            microphone=true
+            ;;
+        t)
+            toggle_mute
             ;;
         i)
-            # amixer -D pulse sset Master on &>/dev/null
-            # amixer -D pulse sset Master $OPTARG%+ &>/dev/null
-            pactl set-sink-mute 0 false
-            pactl set-sink-volume 0 +$OPTARG%
-            send_notification
-            exit 0
+            inc_volume $OPTARG
             ;;
         d)
-            # amixer -D pulse sset Master on &>/dev/null
-            # amixer -D pulse sset Master $OPTARG%- &>/dev/null
-            pactl set-sink-mute 0 false
-            pactl set-sink-volume 0 -$OPTARG%
-            send_notification
-            exit 0
+            dec_volume $OPTARG
             ;;
         h|*)
             usage
