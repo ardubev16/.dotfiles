@@ -50,6 +50,7 @@ return packer.startup(function(use)
     use 'kyazdani42/nvim-tree.lua' -- Tree view of directory structure
     use 'akinsho/bufferline.nvim' -- Buffer line
     use 'nvim-lualine/lualine.nvim'
+    use 'norcalli/nvim-colorizer.lua'
     -- use { 'vimpostor/vim-tpipeline',
     --     config = 'vim.g.tpipeline_cursormoved = 1',
     -- }
@@ -86,6 +87,7 @@ return packer.startup(function(use)
         run = ':TSUpdate',
     }
     use 'JoosepAlviste/nvim-ts-context-commentstring'
+    use 'windwp/nvim-ts-autotag'
 
     -- Git
     use 'lewis6991/gitsigns.nvim'

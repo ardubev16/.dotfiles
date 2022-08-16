@@ -50,4 +50,18 @@ nvim_tree.setup({
             info = '',
         },
     },
+    renderer = {
+        icons = {
+            git_placement = 'signcolumn',
+            show = {
+                folder_arrow = false,
+            },
+            glyphs = {
+                folder = {
+                    default = "",
+                    open = "",
+                },
+            },
+        },
+    },
 })

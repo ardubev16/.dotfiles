@@ -13,6 +13,7 @@ local options = {
     hlsearch = false, -- no highlight search
     ignorecase = true, -- ignore case
     incsearch = true, -- incremental search
+    mouse = 'n', -- normal mouse
     number = true, -- show line number
     relativenumber = true, -- show relative line number
     scrolloff = 8, -- scroll offset

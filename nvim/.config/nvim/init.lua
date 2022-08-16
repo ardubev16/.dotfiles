@@ -1,6 +1,7 @@
 require('user.options')
 require('user.plugins')
 require('user.keymaps')
+require('user.autocommands')
 require('user.impatient')
 
 require('user.cmp')
@@ -16,6 +17,7 @@ require('user.colorscheme')
 require('user.lualine')
 require('user.bufferline')
 require('user.nvim-tree')
+require('user.colorizer')
 
 
 -- TODO: find out if this stuff works &/or is necessary

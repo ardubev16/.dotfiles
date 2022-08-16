@@ -6,7 +6,7 @@ end
 local lspconfig = require('lspconfig')
 
 -- TODO: other default servers, learn configuration
-local servers = { 'bashls', 'clangd', 'jsonls', 'pyright', 'sumneko_lua', 'tsserver' }
+local servers = { 'bashls', 'clangd', 'html', 'jsonls', 'pyright', 'sumneko_lua', 'tsserver' }
 
 -- TODO: check other settings, automatic_installation?
 lsp_installer.setup({
