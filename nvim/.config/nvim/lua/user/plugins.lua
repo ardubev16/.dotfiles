@@ -41,7 +41,6 @@ return packer.startup(function(use)
     use 'moll/vim-bbye'
 
     -- Misc
-    use 'windwp/nvim-autopairs' -- Autopairs, integrates with both cmp and treesitter
     use 'numToStr/Comment.nvim' -- Easily comment stuff
     use 'lewis6991/impatient.nvim'
 
@@ -75,6 +74,7 @@ return packer.startup(function(use)
     use 'williamboman/nvim-lsp-installer' -- Simple to use language server installer
     use 'tamago324/nlsp-settings.nvim'
     use 'RRethy/vim-illuminate'
+    use 'jose-elias-alvarez/null-ls.nvim'
     -- use 'simrat39/symbols-outline.nvim'
 
     -- Telescope
@@ -87,7 +87,9 @@ return packer.startup(function(use)
         run = ':TSUpdate',
     }
     use 'JoosepAlviste/nvim-ts-context-commentstring'
+    use 'windwp/nvim-autopairs'
     use 'windwp/nvim-ts-autotag'
+    use 'danymat/neogen'
 
     -- Git
     use 'lewis6991/gitsigns.nvim'

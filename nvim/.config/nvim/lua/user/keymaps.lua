@@ -80,6 +80,11 @@ keymap('n', '<C-t>', '<cmd>Telescope live_grep<CR>', opts)
 -- Nvimtree
 keymap('n', '<leader>e', '<cmd>NvimTreeToggle<CR>', opts)
 
+-- Neogen
+keymap('n', '<leader>nf', '<cmd>lua require("neogen").generate({ type = "func" })<CR>', opts)
+keymap('n', '<leader>nc', '<cmd>lua require("neogen").generate({ type = "class" })<CR>', opts)
+keymap('n', '<leader>nt', '<cmd>lua require("neogen").generate({ type = "type" })<CR>', opts)
+
 -- Vim fugitive
 -- TODO: substitute with gitsigns
 keymap('n', '<leader>Gs', '<cmd>G<CR>', opts)

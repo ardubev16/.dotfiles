@@ -23,18 +23,23 @@ configs.setup({
         -- Instead of true it can also be a list of languages
         additional_vim_regex_highlighting = false,
     },
+    indent = { enable = true },
+
+    -- Extensions
+    context_commentstring = {
+        enable = true,
+        enable_autocmd = false,
+    },
     autopairs = {
         enable = true,
     },
     autotag = {
         enable = true,
     },
-    -- indent = { enable = true, disable = { 'yaml' } },
-    indent = { enable = true },
-
-    context_commentstring = {
-        enable = true,
-        enable_autocmd = false,
-    },
     -- TODO: find more extensions
+})
+
+require('neogen').setup({
+    enabled = true,
+    snippet_engine = 'luasnip',
 })

@@ -79,7 +79,7 @@ local function lsp_keymaps(bufnr)
     keymap('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
     keymap('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
     keymap('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
-    keymap('n', '<leader>f', vim.lsp.buf.formatting, bufopts)
+    keymap('n', '<leader>f', vim.lsp.buf.format, bufopts)
 end
 
 M.on_attach = function(client, bufnr)
