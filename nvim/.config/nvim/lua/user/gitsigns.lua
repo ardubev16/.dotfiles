@@ -38,10 +38,10 @@ gitsigns.setup({
         style = 'minimal',
         relative = 'cursor',
         row = 0,
-        col = 1
+        col = 1,
     },
     yadm = {
-        enable = false
+        enable = false,
     },
 
     on_attach = function(bufnr)
@@ -55,14 +55,22 @@ gitsigns.setup({
 
         -- Navigation
         map('n', '<leader>gj', function()
-            if vim.wo.diff then return '<leader>gj' end
-            vim.schedule(function() gs.next_hunk() end)
+            if vim.wo.diff then
+                return '<leader>gj'
+            end
+            vim.schedule(function()
+                gs.next_hunk()
+            end)
             return '<Ignore>'
         end, { expr = true })
 
         map('n', '<leader>gk', function()
-            if vim.wo.diff then return '<leader>gk' end
-            vim.schedule(function() gs.prev_hunk() end)
+            if vim.wo.diff then
+                return '<leader>gk'
+            end
+            vim.schedule(function()
+                gs.prev_hunk()
+            end)
             return '<Ignore>'
         end, { expr = true })
 
@@ -79,5 +87,5 @@ gitsigns.setup({
 
         -- Text object
         map({ 'o', 'x' }, 'gh', '<cmd><C-U>Gitsigns select_hunk<CR>')
-    end
+    end,
 })

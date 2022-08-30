@@ -75,8 +75,8 @@ bufferline.setup({
                 filetype = 'NvimTree',
                 text = 'File Explorer',
                 highlight = 'Directory',
-                text_align = 'center'
-            }
+                text_align = 'center',
+            },
         },
         color_icons = true, -- whether or not to add the filetype icon highlights
         show_buffer_icons = true, -- disable filetype icons for buffers
@@ -95,5 +95,5 @@ bufferline.setup({
         --     -- add custom logic
         --     return buffer_a.modified > buffer_b.modified
         -- end
-    }
+    },
 })

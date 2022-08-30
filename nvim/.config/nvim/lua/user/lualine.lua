@@ -13,7 +13,7 @@ local diff = {
     'diff',
     cond = function()
         return vim.fn.winwidth(0) > 80
-    end
+    end,
 }
 
 local filetype = {

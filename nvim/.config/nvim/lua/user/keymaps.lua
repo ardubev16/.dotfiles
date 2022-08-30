@@ -60,8 +60,8 @@ keymap('n', '<leader>9', '<cmd>BufferLineGoToBuffer 9<CR>', opts)
 -- Move lines
 keymap('n', '<M-j>', '<cmd>m .+1<CR>==', opts)
 keymap('n', '<M-k>', '<cmd>m .-2<CR>==', opts)
-keymap('v', '<M-j>', '<cmd>m \'>+1<CR>gv=gv', opts)
-keymap('v', '<M-k>', '<cmd>m \'<-2<CR>gv=gv', opts)
+keymap('v', '<M-j>', "<cmd>m '>+1<CR>gv=gv", opts)
+keymap('v', '<M-k>', "<cmd>m '<-2<CR>gv=gv", opts)
 
 -- Yank to clipboard
 keymap('n', '<leader>y', '"+y', opts)

@@ -17,8 +17,7 @@ require('user.colorscheme')
 require('user.lualine')
 require('user.bufferline')
 require('user.nvim-tree')
-require('user.colorizer')
-
+require('user.illuminate')
 
 -- TODO: find out if this stuff works &/or is necessary
 -- "jumplist with relative jumps <C-o>

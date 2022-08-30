@@ -17,11 +17,11 @@ local dependencies = {
     -- }
     antibody = {
         ubuntu = {
-            command = [[curl -sfL git.io/antibody | sudo sh -s - -b /usr/local/bin]]
+            command = [[curl -sfL git.io/antibody | sudo sh -s - -b /usr/local/bin]],
         },
         arch = {
-            command = [[curl -sfL git.io/antibody | sudo sh -s - -b /usr/local/bin]]
-        }
+            command = [[curl -sfL git.io/antibody | sudo sh -s - -b /usr/local/bin]],
+        },
     },
     bat = {},
     curl = {},
@@ -34,7 +34,7 @@ local dependencies = {
     cmake = {},
     neovim = {
         ubuntu = {
-            command = [[sudo add-apt-repository ppa:neovim-ppa/unstable -y && sudo apt update && sudo apt install -y neovim]]
+            command = [[sudo add-apt-repository ppa:neovim-ppa/unstable -y && sudo apt update && sudo apt install -y neovim]],
         },
     },
     ripgrep = {},
@@ -44,25 +44,25 @@ local dependencies = {
 
     python2 = {
         darwin = {
-            ignore = true
-        }
+            ignore = true,
+        },
     },
     python3 = {
         darwin = {
-            ignore = true
-        }
+            ignore = true,
+        },
     },
 
     wget = {},
     xclip = {
         darwin = {
-            ignore = true
-        }
+            ignore = true,
+        },
     },
     xsel = {
         darwin = {
-            ignore = true
-        }
+            ignore = true,
+        },
     },
     -- lolcat,
     -- cowsay,
@@ -71,48 +71,48 @@ local dependencies = {
 local i3xorg_deps = {
     alacritty = {
         ubuntu = {
-            ignore = true
+            ignore = true,
         },
     },
     i3 = {
         arch = {
-            name = "i3-gaps"
-        }
+            name = 'i3-gaps',
+        },
     },
     polybar = {},
     rofi = {},
     dunst = {},
     polkit_gnome = {
         ubuntu = {
-            ignore = true
+            ignore = true,
         },
         arch = {
-            name = "polkit-gnome"
-        }
+            name = 'polkit-gnome',
+        },
     },
     xss_lock = {
         ubuntu = {
-            name = "xss-lock"
+            name = 'xss-lock',
         },
         arch = {
-            name = "xss-lock"
+            name = 'xss-lock',
         },
     },
     i3lock_fancy = {
         ubuntu = {
-            ignore = true
+            ignore = true,
             -- name = "i3lock-fancy"
         },
         arch = {
-            command = [[yay -S i3lock-fancy-git]]
+            command = [[yay -S i3lock-fancy-git]],
         },
     },
     i3lock_color = {
         ubuntu = {
-            ignore = true
+            ignore = true,
         },
         arch = {
-            command = [[yay -S i3lock-color-git]]
+            command = [[yay -S i3lock-color-git]],
         },
     },
     lxappearance = {},
@@ -124,20 +124,20 @@ local i3xorg_deps = {
     nitrogen = {},
     papirus = {
         ubuntu = {
-            command = [[sudo add-apt-repository ppa:papirus/papirus -y && sudo apt update && sudo apt install -y papirus-icon-theme]]
+            command = [[sudo add-apt-repository ppa:papirus/papirus -y && sudo apt update && sudo apt install -y papirus-icon-theme]],
         },
         arch = {
-            name = "papirus-icon-theme"
+            name = 'papirus-icon-theme',
         },
     },
     gruvbox_dark_gtk = {
         ubuntu = {
-            command = [[sudo git clone https://github.com/jmattheis/gruvbox-dark-gtk /usr/share/themes/gruvbox-dark-gtk]]
+            command = [[sudo git clone https://github.com/jmattheis/gruvbox-dark-gtk /usr/share/themes/gruvbox-dark-gtk]],
         },
         arch = {
-            command = [[yay -S gruvbox-dark-gtk]]
-        }
-    }
+            command = [[yay -S gruvbox-dark-gtk]],
+        },
+    },
 }
 
 -- Define to_stow
@@ -154,44 +154,44 @@ local to_stow = {
 
 -- Log functions
 local function reset_color()
-    io.write("\27[0m" .. "\n")
+    io.write('\27[0m' .. '\n')
 end
 
 local log = {
     info = function(msg)
-        io.write("\27[36m[*] " .. msg)
+        io.write('\27[36m[*] ' .. msg)
         reset_color()
     end,
     command = function(msg)
-        io.write("\27[32m[+] " .. msg)
+        io.write('\27[32m[+] ' .. msg)
         reset_color()
     end,
     error = function(msg)
-        io.write("\27[31m[!] " .. msg)
+        io.write('\27[31m[!] ' .. msg)
         reset_color()
     end,
 }
 
 local function not_supported()
-    log.error("This OS is not yet supported.")
+    log.error('This OS is not yet supported.')
     os.exit(1)
 end
 
 local function check_os()
     local distros_table = {
-        endeavouros = "arch",
-	arch = "arch",
-        ubuntu = "ubuntu",
+        endeavouros = 'arch',
+        arch = 'arch',
+        ubuntu = 'ubuntu',
     }
 
     local distro = io.popen('uname'):read()
     if distro == 'Darwin' then
-        log.info("Mac OS detected!")
+        log.info('Mac OS detected!')
         return 'darwin'
     elseif distro == 'Linux' then
-        log.info("Linux OS detected!")
+        log.info('Linux OS detected!')
         distro = io.popen([[grep "^ID=" /etc/os-release | cut -d "=" -f2 | sed -e 's/"//g']]):read()
-        log.info(distro .. " detected! " .. distros_table[distro])
+        log.info(distro .. ' detected! ' .. distros_table[distro])
         return distros_table[distro]
     else
         not_supported()
@@ -232,8 +232,8 @@ local install = {
     end,
 
     font = function(distro, font)
-        log.info("Installing Nerd-Font: " .. font)
-        local status = true
+        log.info('Installing Nerd-Font: ' .. font)
+        local status
         if distro == 'darwin' then
             font = font:lower()
             local cmd = 'brew tap homebrew/cask-fonts && brew install --cask font-' .. font .. '-nerd-font'
@@ -268,7 +268,7 @@ local function install_deps(distro, deps)
         if args[distro] ~= nil then
             local current_pkg = args[distro]
             if current_pkg.ignore then
-                log.info("Ignoring " .. pkg)
+                log.info('Ignoring ' .. pkg)
             elseif current_pkg.command then
                 install.manual(current_pkg.command)
             elseif current_pkg.name then
@@ -283,11 +283,11 @@ end
 -- Stow stow_dirs
 local function stow_dirs(dirs)
     for _, dir in ipairs(dirs) do
-        log.info("Stowing " .. dir)
+        log.info('Stowing ' .. dir)
         local cmd = 'cd ' .. DOTFILES .. ' && stow ' .. dir
         local status = os.execute(cmd)
         if status == nil then
-            log.error("Error stowing " .. dir .. ": " .. cmd)
+            log.error('Error stowing ' .. dir .. ': ' .. cmd)
             os.exit(1)
         end
     end
@@ -295,45 +295,45 @@ end
 
 -- Use Zsh as default shell
 local function set_zsh()
-    log.info("Setting Zsh as default shell")
+    log.info('Setting Zsh as default shell')
     local status = os.execute([[sudo chsh -s $(which zsh) $USER]])
     if status == nil then
-        log.error("Error setting Zsh as default shell")
+        log.error('Error setting Zsh as default shell')
         os.exit(1)
     end
 end
 
 -- Bundle Zsh plugins
 local function bundle_zsh_plugins()
-    log.info("Bundling antibody plugins")
+    log.info('Bundling antibody plugins')
     local cmd = 'antibody bundle <' .. ZDOTDIR .. '/99-plugins.txt >' .. ZDOTDIR .. '/.plugins'
     local status = os.execute(cmd)
     if status == nil then
-        log.error("Error bundling antibody plugins")
+        log.error('Error bundling antibody plugins')
         os.exit(1)
     end
 end
 
 -- Install Neovim plugins
 local function nvim_setup()
-    log.info("Setting up Neovim")
+    log.info('Setting up Neovim')
     local status = os.execute('nvim --headless +PackerSync +quitall')
     if status == nil then
-        log.error("Error setting up Neovim")
+        log.error('Error setting up Neovim')
         os.exit(1)
     end
 end
 
 -- Install i3-xorg
 local function install_i3xorg(distro)
-    log.info("Do you want to install i3-xorg? [y/n] ")
-    local ans = io.read() == "y"
+    log.info('Do you want to install i3-xorg? [y/n] ')
+    local ans = io.read() == 'y'
     if ans then
-        log.info("Installing i3-xorg")
+        log.info('Installing i3-xorg')
         install_deps(distro, i3xorg_deps)
-        stow_dirs({"i3-xorg", "alacritty"})
+        stow_dirs({ 'i3-xorg', 'alacritty' })
     else
-        log.info("Not installing i3-xorg")
+        log.info('Not installing i3-xorg')
     end
 end
 -------------------------------------------------------------------------------
@@ -352,4 +352,4 @@ bundle_zsh_plugins()
 
 install_i3xorg(current_os)
 
-log.info("Run \"exec zsh\" to start Zsh")
+log.info('Run "exec zsh" to start Zsh')

@@ -6,6 +6,6 @@ vim.g.gruvbox_underline = false
 
 local status_ok, _ = pcall(vim.cmd, 'colorscheme ' .. colorscheme)
 if not status_ok then
-    vim.notify("Colorscheme " .. colorscheme .. " not found!")
+    vim.notify('Colorscheme ' .. colorscheme .. ' not found!')
     return
 end
