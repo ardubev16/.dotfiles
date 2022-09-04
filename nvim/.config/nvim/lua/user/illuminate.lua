@@ -7,5 +7,6 @@ illuminate.configure({
     filetypes_denylist = {
         'NvimTree',
         'Telescope',
+        'gitcommit',
     },
 })

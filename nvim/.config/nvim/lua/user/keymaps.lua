@@ -45,8 +45,7 @@ keymap('n', '<C-l>', '<C-w>l', opts)
 -- Navigate buffers
 keymap('n', '<S-l>', '<cmd>BufferLineCycleNext<CR>', opts)
 keymap('n', '<S-h>', '<cmd>BufferLineCyclePrev<CR>', opts)
--- CHECK: there is a conflict with <leader>c
-keymap('n', '<leader>c', '<cmd>Bdelete<CR>', opts)
+keymap('n', '<leader>x', '<cmd>Bdelete<CR>', opts)
 keymap('n', '<leader>1', '<cmd>BufferLineGoToBuffer 1<CR>', opts)
 keymap('n', '<leader>2', '<cmd>BufferLineGoToBuffer 2<CR>', opts)
 keymap('n', '<leader>3', '<cmd>BufferLineGoToBuffer 3<CR>', opts)

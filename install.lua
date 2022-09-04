@@ -240,7 +240,7 @@ local install = {
             log.command(cmd)
             status = os.execute(cmd)
         else
-            local wget = 'wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/' .. font .. '.zip'
+            local wget = 'wget https://github.com/ryanoasis/nerd-fonts/releases/download/latest/' .. font .. '.zip'
             local unzip = 'unzip ' .. font .. '.zip -d ' .. HOME .. '/.local/share/fonts'
             log.command(wget)
             status = status and os.execute(wget)
