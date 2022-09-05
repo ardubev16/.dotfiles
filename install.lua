@@ -22,6 +22,9 @@ local dependencies = {
         arch = {
             command = [[curl -sfL git.io/antibody | sudo sh -s - -b /usr/local/bin]],
         },
+        fedora = {
+            command = [[curl -sfL git.io/antibody | sudo sh -s - -b /usr/local/bin]],
+        },
     },
     bat = {},
     curl = {},
@@ -36,17 +39,23 @@ local dependencies = {
         ubuntu = {
             command = [[sudo add-apt-repository ppa:neovim-ppa/unstable -y && sudo apt update && sudo apt install -y neovim]],
         },
+        arch = {
+            command = [[yay -S neovim-git]],
+        },
+        fedora = {
+            command = [[sudo dnf copr enable agriffis/neovim-nightly -y && sudo dnf install -y neovim]],
+        }
     },
     ripgrep = {},
     stow = {},
     tmux = {},
     zsh = {},
 
-    python2 = {
-        darwin = {
-            ignore = true,
-        },
-    },
+    -- python2 = {
+    --     darwin = {
+    --         ignore = true,
+    --     },
+    -- },
     python3 = {
         darwin = {
             ignore = true,
@@ -182,6 +191,7 @@ local function check_os()
         endeavouros = 'arch',
         arch = 'arch',
         ubuntu = 'ubuntu',
+        fedora = 'fedora',
     }
 
     local distro = io.popen('uname'):read()
@@ -222,6 +232,10 @@ local install = {
         install_generic('yes | sudo pacman -S ', pkg_name)
     end,
 
+    dnf = function(pkg_name)
+        install_generic('sudo dnf install -y ', pkg_name)
+    end,
+
     manual = function(command)
         log.command(command)
         local status = os.execute(command)
@@ -233,7 +247,7 @@ local install = {
 
     font = function(distro, font)
         log.info('Installing Nerd-Font: ' .. font)
-        local status
+        local status = true
         if distro == 'darwin' then
             font = font:lower()
             local cmd = 'brew tap homebrew/cask-fonts && brew install --cask font-' .. font .. '-nerd-font'
@@ -261,6 +275,7 @@ local supported = {
     darwin = install.brew,
     arch = install.pacman,
     ubuntu = install.apt,
+    fedora = install.dnf,
 }
 
 local function install_deps(distro, deps)

@@ -48,6 +48,11 @@ install_pacman() {
     yes | sudo pacman -S lua
 }
 
+install_dnf() {
+    log_info "Installing lua"
+    sudo dnf install -y lua
+}
+
 ###############################################################################
 
 # Install lua depending on OS
@@ -64,6 +69,9 @@ elif linux; then
             ;;
         "endeavouros" | "arch")
             install_pacman
+            ;;
+        "fedora")
+            install_dnf
             ;;
         *)
             if command -v apt &>/dev/null; then
