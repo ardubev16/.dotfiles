@@ -36,7 +36,6 @@ alias xsc="xclip -selection clipboard"
 alias abup="antibody bundle < $ZDOTDIR/99-plugins.txt > $ZDOTDIR/.plugins && exec zsh"
 alias ez="exec zsh"
 alias gspull="git pull && git submodule foreach \"git checkout master\""
-alias err="echo $?"
 alias :q="exit" # vim goodness
 if command -v batcat &>/dev/null; then
     alias bat="batcat"

@@ -64,7 +64,7 @@
     if [[ -n $P9K_CONTENT ]]; then
       # If P9K_CONTENT is not empty, it's either "loading" or from vcs_info (not from
       # gitstatus plugin). VCS_STATUS_* parameters are not available in this case.
-      typeset -g my_git_format=$P9K_CONTENT
+      typeset -g my_git_format="$P9K_CONTENT"
     else
       # Use VCS_STATUS_* parameters to assemble Git status. See reference:
       # https://github.com/romkatv/gitstatus/blob/master/gitstatus.plugin.zsh.
@@ -113,5 +113,5 @@
 # Tell `p10k configure` which file it should overwrite.
 typeset -g POWERLEVEL9K_CONFIG_FILE=${${(%):-%x}:a}
 
-(( ${#p10k_config_opts} )) && setopt ${p10k_config_opts[@]}
+(( ${#p10k_config_opts} )) && setopt "${p10k_config_opts[@]}"
 'builtin' 'unset' 'p10k_config_opts' 

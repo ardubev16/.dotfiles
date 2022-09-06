@@ -11,5 +11,5 @@ alias yafu="docker run --rm -it eyjhb/yafu -threads 4"
 
 # docker container for ilspy
 ilspy() {
-    docker run --rm -itv $PWD:/ilspy bannsec/ilspy_docker /bin/sh -c "cd /ilspy && ilspycmd  $@";
+    docker run --rm -itv "$PWD":/ilspy bannsec/ilspy_docker /bin/sh -c "cd /ilspy && ilspycmd  $*";
 }

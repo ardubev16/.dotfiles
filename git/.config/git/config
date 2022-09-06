@@ -3,3 +3,5 @@
 	name = ardubev16
 [submodule]
 	recurse = true
+[core]
+	excludefile = ~/.config/git/ignore

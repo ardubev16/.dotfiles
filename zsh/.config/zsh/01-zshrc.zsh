@@ -27,16 +27,16 @@ export NVM_LAZY_LOAD=true
 export NVM_LAZY_LOAD_EXTRA_COMMANDS=("$VIM")
 
 # Sources Antibody plugins
-source $ZDOTDIR/.plugins
+source "$ZDOTDIR"/.plugins
 
 # Other sources
-source $ZDOTDIR/02-aliases.zsh
-source $ZDOTDIR/03-functions.zsh
-source $ZDOTDIR/04-completions.zsh
-source $ZDOTDIR/05-prompt.zsh
-source $ZDOTDIR/06-ctf.zsh
+source "$ZDOTDIR"/02-aliases.zsh
+source "$ZDOTDIR"/03-functions.zsh
+source "$ZDOTDIR"/04-completions.zsh
+source "$ZDOTDIR"/05-prompt.zsh
+source "$ZDOTDIR"/06-ctf.zsh
 
 # Remove duplicate entries from PATH:
-pathPrepend "$HOME/.local/bin"
-pathPrepend "$HOME/.local/share/cargo/bin"
+pathPrepend "$HOME"/.local/bin
+pathPrepend "$HOME"/.local/share/cargo/bin
 PATH=$(echo "$PATH" | awk -v RS=':' -v ORS=":" '!a[$1]++{if (NR > 1) printf ORS; printf $a[$1]}')
