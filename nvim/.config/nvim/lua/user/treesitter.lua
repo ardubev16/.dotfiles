@@ -38,8 +38,3 @@ configs.setup({
     },
     -- TODO: find more extensions
 })
-
-require('neogen').setup({
-    enabled = true,
-    snippet_engine = 'luasnip',
-})

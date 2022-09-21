@@ -43,19 +43,28 @@ return packer.startup(function(use)
 
     -- Misc
     use('numToStr/Comment.nvim') -- Easily comment stuff
+    use('danymat/neogen')
     use('lewis6991/impatient.nvim')
+    use('makerj/vim-pdf')
+    use({
+        'xeluxee/competitest.nvim',
+        requires = 'MunifTanjim/nui.nvim',
+    })
+    use({ 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' })
 
     -- UI
     use('ellisonleao/gruvbox.nvim') -- Gruvbox colorscheme
     use('kyazdani42/nvim-tree.lua') -- Tree view of directory structure
     use('akinsho/bufferline.nvim') -- Buffer line
     use('nvim-lualine/lualine.nvim')
+    use('RRethy/vim-illuminate')
     use({
         'norcalli/nvim-colorizer.lua',
         config = function()
             require('colorizer').setup()
         end,
     })
+    use('rcarriga/nvim-notify')
     -- use { 'vimpostor/vim-tpipeline',
     --     config = 'vim.g.tpipeline_cursormoved = 1',
     -- }
@@ -79,7 +88,6 @@ return packer.startup(function(use)
     use('neovim/nvim-lspconfig') -- Enable LSP
     use('williamboman/nvim-lsp-installer') -- Simple to use language server installer
     use('tamago324/nlsp-settings.nvim')
-    use('RRethy/vim-illuminate')
     -- FIXME: the next commit refactors using the nvim RPC, don't know why it doesn't work
     -- @see https://github.com/jose-elias-alvarez/null-ls.nvim/commit/43cf6d732b4e7e550ce8f9f46570e5eb25a19025
     use({ 'jose-elias-alvarez/null-ls.nvim', commit = '76d0573fc159839a9c4e62a0ac4f1046845cdd50' })
@@ -97,12 +105,14 @@ return packer.startup(function(use)
     use('JoosepAlviste/nvim-ts-context-commentstring')
     use('windwp/nvim-autopairs')
     use('windwp/nvim-ts-autotag')
-    use('danymat/neogen')
 
     -- Git
     use('lewis6991/gitsigns.nvim')
     -- TODO: remove vim-fugitive
     use('tpope/vim-fugitive')
+
+    -- Debugging
+    -- use({ 'rcarriga/nvim-dap-ui', requires = { 'mfussenegger/nvim-dap' } })
 
     -- Tpope
     use('tpope/vim-surround')

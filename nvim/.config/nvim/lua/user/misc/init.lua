@@ -1,0 +1,5 @@
+require('user.misc.autopairs')
+require('user.misc.comment')
+require('user.misc.competitest')
+require('user.misc.fold')
+require('user.misc.telescope')

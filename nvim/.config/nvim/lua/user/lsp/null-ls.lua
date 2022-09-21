@@ -20,8 +20,8 @@ local sources = {
     diagnostics.eslint_d,
     code_actions.eslint_d,
     -- html, xml
-    formatting.tidy,
-    diagnostics.tidy,
+    formatting.tidy.with({ extra_filetypes = { 'handlebars' } }),
+    diagnostics.tidy.with({ extra_filetypes = { 'handlebars' } }),
     -- shell
     formatting.shellharden.with({ extra_filetypes = { 'zsh' } }),
     diagnostics.shellcheck.with({ extra_filetypes = { 'zsh' } }),
@@ -62,13 +62,3 @@ null_ls.setup({
     debug = true,
     sources = sources,
 })
-
--- FIXME: this is a workaround for the multiple offset_encodings issue
-local notify = vim.notify
-vim.notify = function(msg, ...)
-    if msg:match('warning: multiple different client offset_encodings') then
-        return
-    end
-
-    notify(msg, ...)
-end
