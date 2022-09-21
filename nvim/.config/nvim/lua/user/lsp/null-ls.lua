@@ -3,13 +3,37 @@ if not status_ok then
     return
 end
 
--- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
 local formatting = null_ls.builtins.formatting
--- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
 local diagnostics = null_ls.builtins.diagnostics
--- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/code_actions
 local code_actions = null_ls.builtins.code_actions
 local hover = null_ls.builtins.hover
+
+local sources = {
+    -- c, cpp
+    formatting.clang_format.with({
+        -- FIXME: works only on save (had to also write it to ~/.clang-format)
+        extra_args = { '--style={IndentWidth: 4}' },
+    }),
+    diagnostics.cppcheck,
+    -- js, ts
+    formatting.eslint_d,
+    diagnostics.eslint_d,
+    code_actions.eslint_d,
+    -- html, xml
+    formatting.tidy,
+    diagnostics.tidy,
+    -- shell
+    formatting.shellharden.with({ extra_filetypes = { 'zsh' } }),
+    diagnostics.shellcheck.with({ extra_filetypes = { 'zsh' } }),
+    code_actions.shellcheck.with({ extra_filetypes = { 'zsh' } }),
+    hover.printenv.with({ extra_filetypes = { 'zsh' } }),
+    -- lua
+    formatting.stylua.with({
+        extra_args = { '--indent-type', 'Spaces', '--indent-width', 4, '--quote-style', 'AutoPreferSingle' },
+    }),
+    -- python
+    -- diagnostics.flake8
+}
 
 local lsp_formatting = function(bufnr)
     vim.lsp.buf.format({
@@ -35,23 +59,16 @@ null_ls.setup({
             })
         end
     end,
-    debug = false,
-    sources = {
-        -- js, ts
-        formatting.eslint_d,
-        diagnostics.eslint_d,
-        code_actions.eslint_d,
-        -- html, xml
-        formatting.tidy,
-        diagnostics.tidy,
-        -- shell
-        formatting.shellharden.with({ extra_filetypes = { 'zsh' } }),
-        diagnostics.shellcheck.with({ extra_filetypes = { 'zsh' } }),
-        code_actions.shellcheck.with({ extra_filetypes = { 'zsh' } }),
-        hover.printenv.with({ extra_filetypes = { 'zsh' } }),
-        -- lua
-        formatting.stylua,
-        -- python
-        -- diagnostics.flake8
-    },
+    debug = true,
+    sources = sources,
 })
+
+-- FIXME: this is a workaround for the multiple offset_encodings issue
+local notify = vim.notify
+vim.notify = function(msg, ...)
+    if msg:match('warning: multiple different client offset_encodings') then
+        return
+    end
+
+    notify(msg, ...)
+end
