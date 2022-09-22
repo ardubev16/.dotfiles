@@ -31,6 +31,11 @@ local sources = {
     formatting.stylua.with({
         extra_args = { '--indent-type', 'Spaces', '--indent-width', 4, '--quote-style', 'AutoPreferSingle' },
     }),
+    -- markdown
+    formatting.prettier.with({ filetypes = { 'markdown' } }),
+    -- diagnostics.markdownlint,
+    code_actions.proselint,
+    hover.dictionary,
     -- python
     -- diagnostics.flake8
 }

@@ -8,7 +8,7 @@ require('user.cmp')
 require('user.lsp')
 require('user.treesitter')
 require('user.gitsigns')
--- require('user.dapui')
+require('user.dap')
 
 require('user.misc')
 require('user.ui')

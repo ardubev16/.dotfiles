@@ -112,7 +112,7 @@ return packer.startup(function(use)
     use('tpope/vim-fugitive')
 
     -- Debugging
-    -- use({ 'rcarriga/nvim-dap-ui', requires = { 'mfussenegger/nvim-dap' } })
+    use({ 'rcarriga/nvim-dap-ui', requires = { 'mfussenegger/nvim-dap' } })
 
     -- Tpope
     use('tpope/vim-surround')
