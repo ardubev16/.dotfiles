@@ -14,7 +14,7 @@ configuration {
 
 window {
     location: northwest;
-    y-offset: 30;
+    y-offset: 5;
     x-offset: 5;
     width: 140;
 }

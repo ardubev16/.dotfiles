@@ -3,13 +3,13 @@
 configuration {
     disable-history: false;
     display-drun: "  Apps ";
-    display-window: " 﩯  window";
+    /* display-window: " 﩯  window"; */
     drun-display-format: "{icon} {name}";
     font: "JetBrains Mono Medium Nerd Font 12";
     hide-scrollbar: true;
     icon-theme: "Papirus";
     matching: "fuzzy";
-    modi: "run,drun,window";
+    modi: "run,drun";
     show-icons: true;
     sidebar-mode: false;
     sorting-method: "fzf";
