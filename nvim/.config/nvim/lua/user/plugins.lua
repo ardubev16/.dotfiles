@@ -86,7 +86,14 @@ return packer.startup(function(use)
 
     -- LSP
     use('neovim/nvim-lspconfig') -- Enable LSP
+    -- TODO: migrate from "nvim-lsp-installer" to "mason.nvim"
     use('williamboman/nvim-lsp-installer') -- Simple to use language server installer
+    -- use({
+    --     'williamboman/mason.nvim',
+    --     config = function()
+    --         require('mason').setup()
+    --     end,
+    -- })
     use('tamago324/nlsp-settings.nvim')
     -- FIXME: the next commit refactors using the nvim RPC, don't know why it doesn't work
     -- @see https://github.com/jose-elias-alvarez/null-ls.nvim/commit/43cf6d732b4e7e550ce8f9f46570e5eb25a19025

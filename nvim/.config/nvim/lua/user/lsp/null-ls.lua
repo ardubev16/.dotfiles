@@ -37,7 +37,8 @@ local sources = {
     code_actions.proselint,
     hover.dictionary,
     -- python
-    -- diagnostics.flake8
+    formatting.black,
+    diagnostics.flake8,
 }
 
 local lsp_formatting = function(bufnr)

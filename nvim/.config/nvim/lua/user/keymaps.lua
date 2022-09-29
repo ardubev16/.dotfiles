@@ -85,6 +85,7 @@ keymap(Mode.NORMAL, '<leader>nt', '<cmd>lua require("neogen").generate({ type = 
 
 -- Competitest (the 'cp' prefix shouldn't conflict with anything)
 keymap(Mode.NORMAL, 'cpa', '<cmd>CompetiTestAdd<CR>', opts)
+keymap(Mode.NORMAL, 'cpe', '<cmd>CompetiTestEdit<CR>', opts)
 keymap(Mode.NORMAL, 'cpt', '<cmd>CompetiTestReceive<CR>', opts)
 keymap(Mode.NORMAL, 'cpr', '<cmd>CompetiTestRun<CR>', opts)
 
