@@ -12,3 +12,6 @@ neogen.setup({
     enabled = true,
     snippet_engine = 'luasnip',
 })
+
+local ft = require('Comment.ft')
+ft.vhdl = '-- %s'

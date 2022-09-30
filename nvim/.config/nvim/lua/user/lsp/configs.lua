@@ -1,17 +1,23 @@
-local status_ok, lsp_installer = pcall(require, 'nvim-lsp-installer')
+local status_ok, mason_lspconfig = pcall(require, 'mason-lspconfig')
 if not status_ok then
     return
 end
 
-local lspconfig = require('lspconfig')
+local servers = {
+    'bashls',
+    'clangd',
+    'ghdl_ls',
+    'hdl_checker',
+    'html',
+    'jsonls',
+    'pyright',
+    'sumneko_lua',
+    'tsserver',
+}
 
--- TODO: other default servers, learn configuration
-local servers = { 'bashls', 'clangd', 'html', 'jsonls', 'pyright', 'sumneko_lua', 'tsserver' }
-
--- TODO: check other settings, automatic_installation?
-lsp_installer.setup({
+mason_lspconfig.setup({
     ensure_installed = servers,
-    -- automatic_installation = true,
+    automatic_installation = true,
 })
 
 -- Tell the server the capability of foldingRange,
@@ -22,6 +28,7 @@ capabilities.textDocument.foldingRange = {
     lineFoldingOnly = true,
 }
 
+local lspconfig = require('lspconfig')
 for _, server in pairs(servers) do
     local opts = {
         on_attach = require('user.lsp.handlers').on_attach,
