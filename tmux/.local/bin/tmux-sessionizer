@@ -1,13 +1,44 @@
 #!/usr/bin/env bash
 
-if [[ $# -eq 1 ]]; then
-    selected=$1
-else
-    selected=$(find "$REPOS"/work "$REPOS"/personal "$REPOS"/unitn -mindepth 1 -maxdepth 1 -type d | fzf)
-fi
+set -e
 
-if [[ -z $selected ]]; then
-    exit 0
+usage() {
+    cat <<EOF
+"Usage: $0 [options] [command]"
+    -a:                 show all repos
+    -w:                 show only work repos
+    -p:                 show only personal repos
+    -u:                 show only university repos
+    -s /path/to/repo:   select specific repo
+    -h:                 show this help
+EOF
+    exit 1
+}
+
+while getopts "awpus:h" opt; do
+    case $opt in
+        a)
+            selected=$(find "$REPOS"/work "$REPOS"/personal "$REPOS"/unitn -mindepth 1 -maxdepth 1 -type d | fzf)
+            ;;
+        w)
+            selected=$(find "$REPOS"/work -mindepth 1 -maxdepth 1 -type d | fzf)
+            ;;
+        p)
+            selected=$(find "$REPOS"/personal -mindepth 1 -maxdepth 1 -type d | fzf)
+            ;;
+        u)
+            selected=$(find "$REPOS"/unitn -mindepth 1 -maxdepth 1 -type d | fzf)
+            ;;
+        s)
+            selected=$OPTARG
+            ;;
+        h|*)
+            usage
+            ;;
+    esac
+done
+if [ "$OPTIND" -eq 1 ]; then
+    usage
 fi
 
 if [[ -e "$selected/.tmuxp.yaml" ]]; then

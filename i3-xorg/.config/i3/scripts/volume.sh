@@ -34,10 +34,10 @@ send_notification() {
 inc_volume() {
     if [[ $microphone ]]; then
         pactl set-source-mute 0 false
-        pactl set-source-volume 0 +$1%
+        pactl set-source-volume 0 +"$1"%
     else
         pactl set-sink-mute 0 false
-        pactl set-sink-volume 0 +$1%
+        pactl set-sink-volume 0 +"$1"%
         send_notification
     fi
     exit 0
@@ -46,10 +46,10 @@ inc_volume() {
 dec_volume() {
     if [[ $microphone ]]; then
         pactl set-source-mute 0 false
-        pactl set-source-volume 0 -$1%
+        pactl set-source-volume 0 -"$1"%
     else
         pactl set-sink-mute 0 false
-        pactl set-sink-volume 0 -$1%
+        pactl set-sink-volume 0 -"$1"%
         send_notification
     fi
     exit 0
@@ -74,16 +74,16 @@ while getopts "hmti:d:" opt; do
             toggle_mute
             ;;
         i)
-            inc_volume $OPTARG
+            inc_volume "$OPTARG"
             ;;
         d)
-            dec_volume $OPTARG
+            dec_volume "$OPTARG"
             ;;
         h|*)
             usage
             ;;
     esac
 done
-if [ $OPTIND -eq 1 ]; then
+if [ "$OPTIND" -eq 1 ]; then
     usage
 fi
