@@ -5,7 +5,7 @@ end
 
 notify.setup({
     background_colour = 'Normal',
-    fps = 30,
+    fps = 60,
     icons = {
         DEBUG = '',
         ERROR = '',
@@ -15,9 +15,10 @@ notify.setup({
     },
     level = 2,
     minimum_width = 50,
+    max_width = 50,
     render = 'default',
-    stages = 'fade_in_slide_out',
-    timeout = 5000,
+    stages = 'fade',
+    timeout = 3000,
     top_down = true,
 })
 

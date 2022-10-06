@@ -40,16 +40,15 @@ return packer.startup(function(use)
     use('nvim-lua/plenary.nvim') -- Useful lua functions used ny lots of plugins
     use('kyazdani42/nvim-web-devicons') -- Add web devicons to nvim
     use('moll/vim-bbye')
+    use('MunifTanjim/nui.nvim')
 
     -- Misc
     use('numToStr/Comment.nvim') -- Easily comment stuff
     use('danymat/neogen')
+    use('folke/todo-comments.nvim')
     use('lewis6991/impatient.nvim')
     use('makerj/vim-pdf')
-    use({
-        'xeluxee/competitest.nvim',
-        requires = 'MunifTanjim/nui.nvim',
-    })
+    use('xeluxee/competitest.nvim')
     use({ 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' })
     use({
         'williamboman/mason.nvim',
