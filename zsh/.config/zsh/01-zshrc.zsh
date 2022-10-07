@@ -16,9 +16,6 @@ fi
 # zmodload zsh/zprof
 setopt extendedglob
 
-VIM="nvim"
-export EDITOR=$VIM
-export GIT_EDITOR=$VIM
 export ZVM_INIT_MODE="sourcing"
 
 # NVM plugin config
