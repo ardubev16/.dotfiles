@@ -38,7 +38,7 @@ return packer.startup(function(use)
     -- Dependencies
     use('nvim-lua/popup.nvim') -- An implementation of the Popup API from vim in Neovim
     use('nvim-lua/plenary.nvim') -- Useful lua functions used ny lots of plugins
-    use('kyazdani42/nvim-web-devicons') -- Add web devicons to nvim
+    use('nvim-tree/nvim-web-devicons') -- Add web devicons to nvim
     use('moll/vim-bbye')
     use('MunifTanjim/nui.nvim')
 
@@ -59,7 +59,7 @@ return packer.startup(function(use)
 
     -- UI
     use('ellisonleao/gruvbox.nvim') -- Gruvbox colorscheme
-    use('kyazdani42/nvim-tree.lua') -- Tree view of directory structure
+    use('nvim-tree/nvim-tree.lua') -- Tree view of directory structure
     use('akinsho/bufferline.nvim') -- Buffer line
     use('nvim-lualine/lualine.nvim')
     use('RRethy/vim-illuminate')
