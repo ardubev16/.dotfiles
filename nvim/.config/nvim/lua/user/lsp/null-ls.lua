@@ -17,6 +17,7 @@ local sources = {
     diagnostics.cppcheck,
     -- js, ts
     formatting.eslint_d,
+    formatting.prettier,
     diagnostics.eslint_d,
     code_actions.eslint_d,
     -- html, xml
@@ -33,9 +34,10 @@ local sources = {
     }),
     -- markdown
     formatting.prettier.with({ filetypes = { 'markdown' } }),
-    -- diagnostics.markdownlint,
+    diagnostics.vale,
     code_actions.proselint,
-    hover.dictionary,
+    -- diagnostics.markdownlint,
+    -- hover.dictionary,
     -- python
     formatting.black,
     diagnostics.flake8,

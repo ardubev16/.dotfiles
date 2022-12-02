@@ -2,59 +2,47 @@
 
 My personal .dotfiles repository.
 
-## TODO:
-
-- neovim: MORE PLUGINSSSS
-- tmux: reconfigure using more heavily plugins
-- bins: add more custom scripts to optimize workflow
-
 ## Modules
 
-- bin:
-  - various shell scripts to make life easier
-- git:
-  - git name, email configuration
-- nvim:
-  - neovim IDE-like configuration, lsp, autocomplete, ecc.
-- vim:
-  - basic vim config with some simple plugins for IDE and Editors (e.g. VSCode, IntelliJ, ecc.)
-- tmux:
-  - terminal multiplexer configs, /.tmux contains cht.sh commands & languages lists
-- zsh:
-  - shell configuration, uses Antibody, **WIP**
-- alacritty:
-  - Cool terminal emulator
+- _git:_ git name, email configuration
+- _nvim:_ neovim IDE-like configuration, lsp, autocomplete, ecc.
+- _vim:_ basic vim config with some simple plugins for IDE and Editors vim-plugin (e.g. VSCode, IntelliJ, etc.)
+- _tmux:_ terminal multiplexer configs, also contains some convenient scripts to use with Tmuxp
+- _zsh:_ shell configuration, uses Antibody for the various plugins
+- _alacritty:_ cool and minimal terminal emulator
+- _i3-xorg:_ all the configs of my desktop environment, including i3, Polybar, Dunst, Rofi
 
 ## Installation
 
 Currently supported distros:
 
-- MacOS
+- Arch Linux
 - Ubuntu
 
-Installs packages with the default packet manager for the current distro. On MacOS needs to install XCode CLI tools:
+There is a convenience script which hasn't been tested in a while, **use it at your own risk**!
 
-```bash
-xcode-select --install
-```
+**WARNING:** Neovim plugins aren't set to a fixed commit, when you install / update them something may brake or not work.
 
-Then clone the repo in the home directory: ~/.dotfilse and run the `init.sh` script.
-
-```bash
-git clone https://github.com/ardubev16/.dotfiles
-./.dotfiles/init.sh
-```
-
-`init.sh` will install lua based on the packet manager available (also install brew on MacOS) and then run `install.lua` (**TODO**).
+`init.sh` will install lua based on the packet manager available (also install brew on MacOS) and then run `install.lua`.
 `install.lua` will do the following:
 
 1. install dependencies
 1. set zsh as default shell
+1. use stow to create simlinks for all configurations
 1. create Antibody plugin bundle
 1. install Neovim plugins
-1. ...(use stow to create simlinks for all configurations)
+
+## Tmux Keybindings
+
+- `<leader>S`: opens fzf to select one of the folders inside ~/Repos/unitn
+- `<leader>P`: opens fzf to select one of the folders inside ~/Repos/personal
+- `<leader>W`: opens fzf to select one of the folders inside ~/Repos/work
+- `<leader>C`: opens fzf to select one of the folders inside ~/Repos/ctf
+- `<leader>A`: opens fzf to select one of the folders inside ~/Repos/\*
 
 ## Neovim Keybindings
+
+**WARNING:** This list is not exhaustive
 
 ### LSP
 
@@ -71,10 +59,6 @@ Normal mode:
 - `<leader>wl`: list workspace folders
 - `<leader>rn`: rename variable / function
 - `<leader>f`: format buffer
-
-
-
-
 - `<leader>q`, vim.diagnostic.setloclist, opts)
 - `K`, vim.lsp.buf.hover, bufopts)
 - `gi`, vim.lsp.buf.implementation, bufopts)
@@ -111,10 +95,6 @@ Normal mode:
 - `<leader>gR`: reset buffer
 - `<leader>gd`: side to side git diff
 - `<leader>gD`: toggle deleted hunks
-
-
-
-
 - `<leader>Gs`: show git status (vim fugitive)
 
 Visual mode:

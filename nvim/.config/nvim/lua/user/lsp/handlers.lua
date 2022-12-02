@@ -48,7 +48,7 @@ local function lsp_keymaps(bufnr)
     -- TODO: learn keymaps
     local keymap = vim.keymap.set
     local opts = { noremap = true, silent = true }
-    keymap('n', 'gl', vim.diagnostic.open_float, opts)
+    -- keymap('n', 'gl', vim.diagnostic.open_float, opts)
     keymap('n', '[d', vim.diagnostic.goto_prev, opts)
     keymap('n', ']d', vim.diagnostic.goto_next, opts)
     keymap('n', '<leader>q', vim.diagnostic.setloclist, opts)

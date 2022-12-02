@@ -71,6 +71,9 @@ keymap(Mode.VISUAL_BLOCK, '<leader>p', '"_dP', opts)
 keymap(Mode.NORMAL, '<leader>d', '"_d', opts)
 keymap(Mode.VISUAL, '<leader>d', '"_d', opts)
 
+-- LSP
+keymap(Mode.NORMAL, 'gl', vim.diagnostic.open_float, opts)
+
 -- Telescope
 keymap(Mode.NORMAL, '<leader>t', '<cmd>Telescope find_files<CR>', opts)
 keymap(Mode.NORMAL, '<C-t>', '<cmd>Telescope live_grep<CR>', opts)

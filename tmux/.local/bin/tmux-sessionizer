@@ -15,10 +15,10 @@ EOF
     exit 1
 }
 
-while getopts "awpus:h" opt; do
+while getopts "awpucs:h" opt; do
     case $opt in
         a)
-            selected=$(find "$REPOS"/work "$REPOS"/personal "$REPOS"/unitn -mindepth 1 -maxdepth 1 -type d | fzf)
+            selected=$(find "$REPOS"/work "$REPOS"/personal "$REPOS"/unitn "$REPOS"/ctf -mindepth 1 -maxdepth 1 -type d | fzf)
             ;;
         w)
             selected=$(find "$REPOS"/work -mindepth 1 -maxdepth 1 -type d | fzf)
@@ -28,6 +28,9 @@ while getopts "awpus:h" opt; do
             ;;
         u)
             selected=$(find "$REPOS"/unitn -mindepth 1 -maxdepth 1 -type d | fzf)
+            ;;
+        c)
+            selected=$(find "$REPOS"/ctf -mindepth 1 -maxdepth 1 -type d | fzf)
             ;;
         s)
             selected=$OPTARG
