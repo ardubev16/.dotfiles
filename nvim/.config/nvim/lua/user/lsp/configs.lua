@@ -11,8 +11,10 @@ local servers = {
     'html',
     'jsonls',
     'pyright',
+    'rust_analyzer',
     'sumneko_lua',
     'tsserver',
+    'jdtls',
 }
 
 mason_lspconfig.setup({

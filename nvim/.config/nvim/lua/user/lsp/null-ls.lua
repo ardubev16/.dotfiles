@@ -17,7 +17,7 @@ local sources = {
     diagnostics.cppcheck,
     -- js, ts
     formatting.eslint_d,
-    formatting.prettier,
+    -- formatting.prettier,
     diagnostics.eslint_d,
     code_actions.eslint_d,
     -- html, xml
