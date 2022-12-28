@@ -9,9 +9,4 @@ vim.cmd([[
         autocmd!
         autocmd Filetype markdown setlocal wrap
     augroup end
-
-    augroup _nocopilot
-        autocmd!
-        autocmd Filetype cpp Copilot disable
-    augroup end
 ]])
