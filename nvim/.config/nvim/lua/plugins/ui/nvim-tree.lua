@@ -3,8 +3,7 @@ local M = {
     dependencies = {
         'nvim-tree/nvim-web-devicons',
     },
-    -- TODO: add lazy loading
-    event = 'VeryLazy',
+    -- TODO: add lazy loading ('VeryLazy' doesn't work the way I use it)
 }
 
 function M.config()

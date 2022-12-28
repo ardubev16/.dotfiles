@@ -8,4 +8,5 @@ return {
     require('plugins.ui.colorizer'),
     require('plugins.ui.gitsigns'),
     require('plugins.ui.telescope'),
+    require('plugins.ui.noice'),
 }

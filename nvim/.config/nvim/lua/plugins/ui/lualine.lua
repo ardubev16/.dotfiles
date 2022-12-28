@@ -2,6 +2,7 @@ local M = {
     'nvim-lualine/lualine.nvim',
     dependencies = {
         'nvim-tree/nvim-web-devicons',
+        -- 'folke/noice.nvim',
     },
     event = 'VeryLazy',
 }
@@ -25,6 +26,8 @@ function M.config()
         colored = false,
     }
 
+    -- local noice = require('noice')
+
     require('lualine').setup({
         options = {
             icons_enabled = true,
@@ -47,7 +50,14 @@ function M.config()
             lualine_a = {},
             lualine_b = {},
             lualine_c = { 'filename' },
-            lualine_x = { 'location' },
+            lualine_x = {
+                'location',
+                -- {
+                --     noice.api.statusline.mode.get,
+                --     cond = noice.api.statusline.mode.has,
+                --     color = { fg = '#ff9e64' },
+                -- },
+            },
             lualine_y = {},
             lualine_z = {},
         },
