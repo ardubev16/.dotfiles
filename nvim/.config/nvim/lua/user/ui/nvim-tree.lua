@@ -15,7 +15,6 @@ vim.api.nvim_create_autocmd('BufEnter', {
 })
 
 nvim_tree.setup({
-    create_in_closed_folder = true,
     disable_netrw = true,
     open_on_setup = true,
     ignore_ft_on_setup = {

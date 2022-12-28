@@ -93,10 +93,8 @@ return packer.startup(function(use)
     use('neovim/nvim-lspconfig') -- Enable LSP
     use('williamboman/mason-lspconfig.nvim')
     use('tamago324/nlsp-settings.nvim')
-    -- FIXME: the next commit refactors using the nvim RPC, don't know why it doesn't work
-    -- @see https://github.com/jose-elias-alvarez/null-ls.nvim/commit/43cf6d732b4e7e550ce8f9f46570e5eb25a19025
     -- TODO: integrate null-ls with mason
-    use({ 'jose-elias-alvarez/null-ls.nvim', commit = '76d0573fc159839a9c4e62a0ac4f1046845cdd50' })
+    use({ 'jose-elias-alvarez/null-ls.nvim' })
     -- use 'simrat39/symbols-outline.nvim'
 
     -- Telescope

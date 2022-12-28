@@ -6,8 +6,8 @@ end
 local servers = {
     'bashls',
     'clangd',
-    'ghdl_ls',
-    'hdl_checker',
+    -- 'ghdl_ls',
+    -- 'hdl_checker',
     'html',
     'jsonls',
     'pyright',
