@@ -1,10 +1,7 @@
 local M = {
     'williamboman/mason-lspconfig.nvim',
     dependencies = {
-        {
-            'williamboman/mason.nvim',
-            config = {},
-        },
+        'williamboman/mason.nvim',
         'neovim/nvim-lspconfig',
         'tamago324/nlsp-settings.nvim',
         'hrsh7th/cmp-nvim-lsp',
@@ -50,19 +47,7 @@ function M.config()
     })
 
     -- lspconfig
-    local servers = {
-        'bashls',
-        'clangd',
-        -- 'ghdl_ls',
-        -- 'hdl_checker',
-        'html',
-        'jsonls',
-        'pyright',
-        'rust_analyzer',
-        'sumneko_lua',
-        'tsserver',
-        'jdtls',
-    }
+    local servers = require('user.settings').lsp.servers
     local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
     local mason_lspconfig = require('mason-lspconfig')
