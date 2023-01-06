@@ -2,31 +2,25 @@ local M = {
     'nvim-lualine/lualine.nvim',
     dependencies = {
         'nvim-tree/nvim-web-devicons',
-        -- 'folke/noice.nvim',
     },
     event = 'VeryLazy',
 }
 
 function M.config()
+    local symbols = require('user.settings').icons
     local diagnostics = {
         'diagnostics',
         sources = { 'nvim_diagnostic' },
-        symbols = { error = ' ', warn = ' ', hint = ' ', info = ' ' },
+        symbols = symbols.diagnostic,
     }
 
     local diff = {
         'diff',
+        symbols = symbols.git,
         cond = function()
             return vim.fn.winwidth(0) > 80
         end,
     }
-
-    local filetype = {
-        'filetype',
-        colored = false,
-    }
-
-    -- local noice = require('noice')
 
     require('lualine').setup({
         options = {
@@ -42,7 +36,11 @@ function M.config()
             lualine_a = { 'mode' },
             lualine_b = { 'branch', diff },
             lualine_c = { diagnostics },
-            lualine_x = { 'fileformat', 'encoding', filetype },
+            lualine_x = {
+                'fileformat',
+                'encoding',
+                { 'filetype', colored = false },
+            },
             lualine_y = { 'progress' },
             lualine_z = { 'location' },
         },
@@ -50,14 +48,7 @@ function M.config()
             lualine_a = {},
             lualine_b = {},
             lualine_c = { 'filename' },
-            lualine_x = {
-                'location',
-                -- {
-                --     noice.api.statusline.mode.get,
-                --     cond = noice.api.statusline.mode.has,
-                --     color = { fg = '#ff9e64' },
-                -- },
-            },
+            lualine_x = { 'location' },
             lualine_y = {},
             lualine_z = {},
         },
