@@ -1,6 +1,5 @@
 -- TODO: add more keymaps, find plugin to make this better
 local opts = { noremap = true, silent = true }
-local term_opts = { silent = true }
 local keymap = vim.keymap.set
 
 local Mode = {
@@ -11,9 +10,6 @@ local Mode = {
     TERM = 't',
     COMMAND = 'c',
 }
-
--- Remap space as leader key
-keymap('', '<Space>', '<Nop>', opts)
 
 -- Y behave like C D
 keymap(Mode.NORMAL, 'Y', 'y$', opts)
@@ -54,9 +50,6 @@ keymap(Mode.NORMAL, '<leader>Y', 'gg"+yG', opts)
 keymap(Mode.VISUAL_BLOCK, '<leader>p', '"_dP', opts)
 keymap(Mode.NORMAL, '<leader>d', '"_d', opts)
 keymap(Mode.VISUAL, '<leader>d', '"_d', opts)
-
--- LSP
-keymap(Mode.NORMAL, 'gl', vim.diagnostic.open_float, opts)
 
 -- Telescope
 keymap(Mode.NORMAL, '<leader>t', '<cmd>Telescope find_files<CR>', opts)
