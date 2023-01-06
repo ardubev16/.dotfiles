@@ -14,8 +14,6 @@ local Mode = {
 
 -- Remap space as leader key
 keymap('', '<Space>', '<Nop>', opts)
-vim.g.mapleader = ' '
-vim.g.maploacalleader = ' '
 
 -- Y behave like C D
 keymap(Mode.NORMAL, 'Y', 'y$', opts)
