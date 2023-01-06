@@ -1,12 +1,24 @@
-vim.cmd([[
-    augroup _indentations
-        autocmd!
-        autocmd Filetype html,css,json,javascript,javascriptreact,typescript,typescriptreact 
-                \ setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
-    augroup end
+local augroup = vim.api.nvim_create_augroup
+local autocmd = vim.api.nvim_create_autocmd
 
-    augroup _markdown
-        autocmd!
-        autocmd Filetype markdown setlocal wrap
-    augroup end
-]])
+local _indentations = augroup('_indentations', { clear = true })
+autocmd({ 'Filetype' }, {
+    pattern = {
+        'html',
+        'css',
+        'json',
+        'javascript',
+        'javascriptreact',
+        'typescript',
+        'typescriptreact',
+    },
+    command = 'setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2',
+    group = _indentations,
+})
+
+local _markdown = augroup('_markdown', { clear = true })
+autocmd({ 'Filetype' }, {
+    pattern = 'markdown',
+    command = 'setlocal wrap',
+    group = _markdown,
+})
