@@ -21,7 +21,7 @@ return {
                 ['n'] = { name = '+neogen' },
                 -- ['o'] = { name = '+open' },
                 ['s'] = { name = '+search' },
-                -- ['t'] = { name = '+toggle' },
+                ['t'] = { name = '+competitest' },
                 ['x'] = {
                     name = '+diagnostics/quickfix',
                     ['t'] = { name = '+trouble' },
