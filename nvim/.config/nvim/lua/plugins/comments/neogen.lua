@@ -10,12 +10,10 @@ local M = {
     },
 }
 
-function M.init()
-    local opts = { noremap = true, silent = true }
-
-    vim.keymap.set('n', '<leader>nf', '<cmd>lua require("neogen").generate({ type = "func" })<CR>', opts)
-    vim.keymap.set('n', '<leader>nc', '<cmd>lua require("neogen").generate({ type = "class" })<CR>', opts)
-    vim.keymap.set('n', '<leader>nt', '<cmd>lua require("neogen").generate({ type = "type" })<CR>', opts)
-end
+M.keys = {
+    { '<leader>nf', '<cmd>lua require("neogen").generate({ type = "func" })<CR>', desc = 'Generate function docs' },
+    { '<leader>nc', '<cmd>lua require("neogen").generate({ type = "class" })<CR>', desc = 'Generate class docs' },
+    { '<leader>nt', '<cmd>lua require("neogen").generate({ type = "type" })<CR>', desc = 'Generate type docs' },
+}
 
 return M

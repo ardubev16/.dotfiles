@@ -1,6 +1,6 @@
 # edit .dotfiles
 alias ezsh="$VIM $DOTFILES/zsh/.config/zsh"
-alias evim="$VIM $DOTFILES/nvim/.config/nvim/lua/user"
+alias evim="$VIM $DOTFILES/nvim/.config/nvim/lua"
 alias etmx="$VIM $DOTFILES/tmux/.config/tmux/tmux.conf"
 alias ei3="$VIM $DOTFILES/i3-xorg/.config/i3/config"
 alias epbr="$VIM $DOTFILES/i3-xorg/.config/polybar"

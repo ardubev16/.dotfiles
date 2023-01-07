@@ -72,4 +72,8 @@ function M.config()
     })
 end
 
+function M.init()
+    vim.keymap.set('n', '<leader>e', '<cmd>NvimTreeToggle<CR>', { desc = 'Toggle NvimTree' })
+end
+
 return M

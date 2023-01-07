@@ -5,7 +5,7 @@ function M.on_attach(client, buffer)
     local self = M.new(client, buffer)
 
     -- self:map('<leader>cl', 'LspInfo', { desc = 'Lsp Info' })
-    -- self:map('<leader>xd', 'Telescope diagnostics', { desc = 'Telescope Diagnostics' })
+    self:map('<leader>xd', 'Telescope diagnostics', { desc = 'Telescope Diagnostics' })
     self:map('gl', vim.diagnostic.open_float, { desc = 'Line Diagnostics' })
     self:map('gd', 'Telescope lsp_definitions', { desc = 'Goto Definition' })
     self:map('gr', 'Telescope lsp_references', { desc = 'References' })
@@ -28,9 +28,9 @@ function M.on_attach(client, buffer)
     self:map('<leader>ca', vim.lsp.buf.code_action, { desc = 'Code Action', mode = { 'n', 'v' }, has = 'codeAction' })
 
     local format = require('plugins.lsp.format').format
-    self:map('<leader>f', format, { desc = 'Format Document', has = 'documentFormatting' })
-    self:map('<leader>f', format, { desc = 'Format Range', mode = 'v', has = 'documentRangeFormatting' })
-    self:map('<leader>cr', M.rename, { desc = 'Rename', has = 'rename' })
+    self:map('<leader>cf', format, { desc = 'Format Document', has = 'documentFormatting' })
+    self:map('<leader>cf', format, { desc = 'Format Range', mode = 'v', has = 'documentRangeFormatting' })
+    self:map('<leader>cn', M.rename, { desc = 'Rename', has = 'rename' })
 
     if client.name == 'tsserver' and pcall(require, 'typescript') then
         self:map('<leader>co', 'TypescriptOrganizeImports', { desc = 'Organize Imports' })

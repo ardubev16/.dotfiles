@@ -11,12 +11,12 @@ return {
             untracked = { text = '▎' },
         },
 
-        on_attach = function(bufnr)
+        on_attach = function(buffer)
             local gs = package.loaded.gitsigns
 
             local function map(mode, l, r, opts)
                 opts = opts or {}
-                opts.buffer = bufnr
+                opts.buffer = buffer
                 vim.keymap.set(mode, l, r, opts)
             end
 
@@ -29,7 +29,7 @@ return {
                     gs.next_hunk()
                 end)
                 return '<Ignore>'
-            end, { expr = true })
+            end, { expr = true, desc = 'Goto next hunk' })
 
             map('n', '<leader>gk', function()
                 if vim.wo.diff then
@@ -39,18 +39,18 @@ return {
                     gs.prev_hunk()
                 end)
                 return '<Ignore>'
-            end, { expr = true })
+            end, { expr = true, desc = 'Goto previous hunk' })
 
             -- Actions
-            map('n', '<leader>gb', gs.blame_line)
-            map('n', '<leader>gp', gs.preview_hunk)
-            map('n', '<leader>gs', gs.stage_hunk)
-            map('n', '<leader>gr', gs.reset_hunk)
-            map('n', '<leader>gu', gs.undo_stage_hunk)
-            map('n', '<leader>gS', gs.stage_buffer)
-            map('n', '<leader>gR', gs.reset_buffer)
-            map('n', '<leader>gd', gs.diffthis)
-            map('n', '<leader>gD', gs.toggle_deleted)
+            map('n', '<leader>gb', gs.blame_line, { desc = 'Show blame' })
+            map('n', '<leader>gp', gs.preview_hunk, { desc = 'Show hunk preview' })
+            map('n', '<leader>ga', gs.stage_hunk, { desc = 'Add hunk' })
+            map('n', '<leader>gr', gs.reset_hunk, { desc = 'Reset hunk' })
+            map('n', '<leader>gu', gs.undo_stage_hunk, { desc = 'Undo stage hunk' })
+            map('n', '<leader>gA', gs.stage_buffer, { desc = 'Add buffer' })
+            map('n', '<leader>gR', gs.reset_buffer, { desc = 'Reset buffer' })
+            map('n', '<leader>gd', gs.diffthis, { desc = 'Show side-by-side diff' })
+            map('n', '<leader>gD', gs.toggle_deleted, { desc = 'Toggle show deleted' })
 
             -- Text object
             map({ 'o', 'x' }, 'gh', '<cmd><C-U>Gitsigns select_hunk<CR>')
