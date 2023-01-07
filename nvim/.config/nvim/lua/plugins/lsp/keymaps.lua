@@ -5,7 +5,7 @@ function M.on_attach(client, buffer)
     local self = M.new(client, buffer)
 
     -- self:map('<leader>cl', 'LspInfo', { desc = 'Lsp Info' })
-    self:map('<leader>xd', 'Telescope diagnostics', { desc = 'Telescope Diagnostics' })
+    self:map('<leader>ld', 'Telescope diagnostics', { desc = 'Telescope Diagnostics' })
     self:map('gl', vim.diagnostic.open_float, { desc = 'Line Diagnostics' })
     self:map('gd', 'Telescope lsp_definitions', { desc = 'Goto Definition' })
     self:map('gr', 'Telescope lsp_references', { desc = 'References' })

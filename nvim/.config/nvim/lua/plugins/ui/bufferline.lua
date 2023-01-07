@@ -38,7 +38,7 @@ function M.init()
 
     vim.keymap.set('n', '<S-l>', '<cmd>BufferLineCycleNext<CR>', opts)
     vim.keymap.set('n', '<S-h>', '<cmd>BufferLineCyclePrev<CR>', opts)
-    vim.keymap.set('n', '<leader>q', '<cmd>bdelete<CR>', { desc = 'Close buffer' })
+    vim.keymap.set('n', '<leader>x', '<cmd>bdelete<CR>', { desc = 'Exit buffer' })
 end
 
 return M

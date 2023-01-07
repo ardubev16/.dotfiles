@@ -18,14 +18,14 @@ return {
                 ['f'] = { name = '+file' },
                 ['g'] = { name = '+git' },
                 ['h'] = { name = '+help' },
+                ['l'] = {
+                    name = '+lsp',
+                    ['t'] = { name = '+trouble' },
+                },
                 ['n'] = { name = '+neogen' },
                 -- ['o'] = { name = '+open' },
                 ['s'] = { name = '+search' },
                 ['t'] = { name = '+competitest' },
-                ['x'] = {
-                    name = '+diagnostics/quickfix',
-                    ['t'] = { name = '+trouble' },
-                },
                 -- ['w'] = { name = '+windows' },
                 -- ['<tab>'] = { name = '+tabs' },
             },

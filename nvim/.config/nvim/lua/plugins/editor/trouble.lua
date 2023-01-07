@@ -6,7 +6,7 @@ return {
     cmd = { 'TroubleToggle', 'Trouble' },
     config = { use_diagnostic_signs = true },
     keys = {
-        { '<leader>xx', '<cmd>TroubleToggle document_diagnostics<cr>', desc = 'Document Diagnostics (Trouble)' },
-        { '<leader>xX', '<cmd>TroubleToggle workspace_diagnostics<cr>', desc = 'Workspace Diagnostics (Trouble)' },
+        { '<leader>lD', '<cmd>TroubleToggle document_diagnostics<cr>', desc = 'Document Diagnostics (Trouble)' },
+        { '<leader>lW', '<cmd>TroubleToggle workspace_diagnostics<cr>', desc = 'Workspace Diagnostics (Trouble)' },
     },
 }
