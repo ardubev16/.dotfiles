@@ -4,6 +4,11 @@ return {
     require('plugins.ui.illuminate'),
     require('plugins.ui.lualine'),
     require('plugins.ui.notify'),
-    require('plugins.ui.colorizer'),
     -- require('plugins.ui.noice'),
+
+    {
+        'j-hui/fidget.nvim',
+        event = 'VeryLazy',
+        config = {},
+    },
 }
