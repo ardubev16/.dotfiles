@@ -4,7 +4,13 @@ return {
     config = function()
         local wk = require('which-key')
         wk.setup({
-            plugins = { spelling = true },
+            plugins = {
+                spelling = true,
+                presets = {
+                    operators = false,
+                    motions = false,
+                },
+            },
             key_labels = { ['<leader>'] = 'SPC' },
         })
         wk.register({

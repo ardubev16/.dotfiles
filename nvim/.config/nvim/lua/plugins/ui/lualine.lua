@@ -62,9 +62,9 @@ function M.config()
             lualine_z = {},
         },
         tabline = {},
-        winbar = {
-            lualine_c = { { navic.get_location, cond = navic.is_available } },
-        },
+        -- winbar = {
+        --     lualine_c = { { navic.get_location, cond = navic.is_available } },
+        -- },
         extensions = { 'nvim-tree' },
     })
 end

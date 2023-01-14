@@ -10,4 +10,9 @@ return {
         event = 'BufReadPre',
         config = {},
     },
+    {
+        'lukas-reineke/indent-blankline.nvim',
+        event = 'BufReadPre',
+        config = {},
+    },
 }
