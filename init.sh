@@ -2,7 +2,6 @@
 
 set -e
 
-ZDOTDIR=$HOME/.config/zsh
 DOTFILES=$HOME/.dotfiles
 
 lua_ver="lua5.3"
@@ -11,7 +10,7 @@ lua_ver="lua5.3"
 
 # Helper functions
 log_info() {
-    printf "\u001b[36m[*] $@\u001b[0m\n"
+    printf "\u001b[36m[*] %s\u001b[0m\n" "$@"
 }
 
 linux() {
@@ -40,7 +39,7 @@ install_brew() {
 install_apt() {
     log_info "Installing lua"
     sudo apt update
-    sudo apt install -y $lua_ver
+    sudo apt install -y "$lua_ver"
 }
 
 install_pacman() {
@@ -86,4 +85,4 @@ else
 fi
 
 # Install dotfiles with lua script
-exec $DOTFILES/install.lua
+exec "$DOTFILES"/install.lua
