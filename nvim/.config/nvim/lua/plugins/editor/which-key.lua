@@ -30,6 +30,7 @@ return {
                 },
                 ['n'] = { name = '+neogen' },
                 -- ['o'] = { name = '+open' },
+                ['r'] = { name = '+repl' },
                 ['s'] = { name = '+search' },
                 ['t'] = { name = '+competitest' },
                 -- ['w'] = { name = '+windows' },
