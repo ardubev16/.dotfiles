@@ -23,15 +23,6 @@ function M.config()
         timeout = 3000,
         top_down = true,
     })
-
-    -- FIXME: this is a workaround for the multiple offset_encodings issue
-    vim.notify = function(msg, ...)
-        if msg:match('warning: multiple different client offset_encodings') then
-            return
-        end
-
-        notify(msg, ...)
-    end
 end
 
 return M

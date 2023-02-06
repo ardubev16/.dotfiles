@@ -66,6 +66,9 @@ function M.config()
                 opts.server.capabilities = capabilities
                 require('rust-tools').setup(opts)
             else
+                if server == 'clangd' then
+                    capabilities.offsetEncoding = { 'utf-16' }
+                end
                 opts.capabilities = capabilities
                 require('lspconfig')[server].setup(opts)
             end
