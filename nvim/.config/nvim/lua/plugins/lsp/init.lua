@@ -10,7 +10,7 @@ return {
             -- 'mfussenegger/nvim-dap',
         },
         ft = { 'rust' },
-        config = {},
+        -- config = {},
     },
 
     {

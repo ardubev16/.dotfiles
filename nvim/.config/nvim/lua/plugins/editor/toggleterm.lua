@@ -1,5 +1,6 @@
 local M = {
     'akinsho/toggleterm.nvim',
+    event = 'BufReadPost',
     keys = {
         { '<leader>gt', '<cmd>lua _LAZYGIT_TOGGLE()<cr>', desc = 'Open LazyGit' },
         { '<leader>rp', '<cmd>lua _PYTHON_TOGGLE()<cr>', desc = 'Open Python REPL' },

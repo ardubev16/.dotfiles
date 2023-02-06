@@ -62,8 +62,13 @@ function M.config()
             if has_opts then
                 opts = server_opts
             end
-            opts.capabilities = capabilities
-            require('lspconfig')[server].setup(opts)
+            if server == 'rust_analyzer' then
+                opts.server.capabilities = capabilities
+                require('rust-tools').setup(opts)
+            else
+                opts.capabilities = capabilities
+                require('lspconfig')[server].setup(opts)
+            end
         end,
     })
 end

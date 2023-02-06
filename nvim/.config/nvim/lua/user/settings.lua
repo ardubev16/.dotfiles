@@ -34,6 +34,8 @@ local settings = {
                 filetypes = { 'markdown' },
             },
             black = {},
+            -- sqlformat = {},
+            sql_formatter = {},
         },
         diagnostics = {
             cppcheck = {},
@@ -46,6 +48,7 @@ local settings = {
             },
             vale = {},
             flake8 = {},
+            -- sqlfluff = { extra_args = { '--dialect', 'sqlite' } },
         },
         code_actions = {
             eslint_d = {},

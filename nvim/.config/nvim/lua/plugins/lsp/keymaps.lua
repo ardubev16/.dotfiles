@@ -28,8 +28,8 @@ function M.on_attach(client, buffer)
     self:map('<leader>ca', vim.lsp.buf.code_action, { desc = 'Code Action', mode = { 'n', 'v' }, has = 'codeAction' })
 
     local format = require('plugins.lsp.format').format
-    self:map('<leader>cf', format, { desc = 'Format Document', has = 'documentFormatting' })
-    self:map('<leader>cf', format, { desc = 'Format Range', mode = 'v', has = 'documentRangeFormatting' })
+    self:map('<leader>lf', format, { desc = 'Format Document', has = 'documentFormatting' })
+    self:map('<leader>lf', format, { desc = 'Format Range', mode = 'v', has = 'documentRangeFormatting' })
     self:map('<leader>cn', M.rename, { desc = 'Rename', has = 'rename' })
 
     if client.name == 'tsserver' and pcall(require, 'typescript') then
