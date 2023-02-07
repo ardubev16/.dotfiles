@@ -1,5 +1,5 @@
 return {
-    require('plugins.ui.gruvbox'),
+    require('plugins.ui.theme'),
     require('plugins.ui.bufferline'),
     require('plugins.ui.illuminate'),
     require('plugins.ui.lualine'),

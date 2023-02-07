@@ -27,7 +27,7 @@
   autoload -Uz is-at-least && is-at-least 5.1 || return
 
   # Left prompt segments.
-  typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(vi_mode dir vcs)
+  typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(prompt_char dir vcs)
   # Right prompt segments.
   typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status virtualenv)
 
