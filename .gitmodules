@@ -1,0 +1,4 @@
+[submodule "nvim/.config/nvim"]
+	path = nvim/.config/nvim
+	url = git@github.com:ardubev16/renso.nvim.git
+	branch = master
