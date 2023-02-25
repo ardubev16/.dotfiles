@@ -48,6 +48,7 @@ format = '\[[$symbol($version)]($style)\]'
 format = '\[[$symbol($version)]($style)\]'
 
 [directory]
+format = '[$read_only]($read_only_style)[$path]($style) '
 truncation_length = 1
 
 [docker_context]
@@ -73,7 +74,6 @@ format = '[git:\([$branch](bold red)\)](bold blue) '
 
 [git_status]
 format = '([$all_status$ahead_behind](bold yellow)) '
-# modified = '✗'
 
 [golang]
 format = '\[[$symbol($version)]($style)\]'
