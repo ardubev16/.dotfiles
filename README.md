@@ -21,8 +21,6 @@ Currently supported distros:
 
 There is a convenience script which hasn't been tested in a while, **use it at your own risk**!
 
-**WARNING:** Neovim plugins aren't set to a fixed commit, when you install / update them something may brake or not work.
-
 `init.sh` will install lua based on the packet manager available (also install brew on MacOS) and then run `install.lua`.
 `install.lua` will do the following:
 
