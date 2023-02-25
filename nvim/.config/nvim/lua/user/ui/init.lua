@@ -1,6 +1,0 @@
-require('user.ui.bufferline')
-require('user.ui.colorscheme')
-require('user.ui.illuminate')
-require('user.ui.lualine')
-require('user.ui.notify')
-require('user.ui.nvim-tree')

@@ -1,6 +1,6 @@
 # edit .dotfiles
 alias ezsh="$VIM $DOTFILES/zsh/.config/zsh"
-alias evim="$VIM $DOTFILES/nvim/.config/nvim/lua/user"
+alias evim="$VIM $DOTFILES/nvim/.config/nvim/lua"
 alias etmx="$VIM $DOTFILES/tmux/.config/tmux/tmux.conf"
 alias ei3="$VIM $DOTFILES/i3-xorg/.config/i3/config"
 alias epbr="$VIM $DOTFILES/i3-xorg/.config/polybar"
@@ -36,8 +36,4 @@ alias xsc="xclip -selection clipboard"
 alias abup="antibody bundle < $ZDOTDIR/99-plugins.txt > $ZDOTDIR/.plugins && exec zsh"
 alias ez="exec zsh"
 alias gspull="git pull && git submodule foreach \"git checkout master\""
-alias :q="exit" # vim goodness
-if command -v batcat &>/dev/null; then
-    alias bat="batcat"
-fi
-alias canial="cowsay canial | lolcat"
+alias cat="bat"

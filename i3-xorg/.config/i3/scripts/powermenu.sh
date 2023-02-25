@@ -14,7 +14,7 @@ selected_option=$(echo "$lock
 $logout
 $sleep
 $reboot
-$shutdown" | rofi -dmenu -config "~/.config/rofi/powermenu.rasi" )
+$shutdown" | rofi -dmenu -config "$HOME/.config/rofi/powermenu.rasi" )
 
 # Do something based on selected option
 case "$selected_option" in
@@ -36,4 +36,5 @@ case "$selected_option" in
     *)
         echo "No match"
         exit 1
+        ;;
 esac

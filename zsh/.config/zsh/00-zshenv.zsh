@@ -1,3 +1,4 @@
+# XDG directories
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
@@ -27,3 +28,17 @@ export WINEPREFIX="$XDG_DATA_HOME/wine"
 
 # Cache files
 export ZSH_COMPDUMP="$XDG_CACHE_HOME/zsh/zcompdump"
+
+# Editor
+VIM="nvim"
+export EDITOR=$VIM
+export VISUAL=$VIM
+export GIT_EDITOR=$VIM
+
+# Fzf
+export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git'"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+if [[ -f "$HOME/.env" ]]; then
+  source "$HOME/.env"
+fi

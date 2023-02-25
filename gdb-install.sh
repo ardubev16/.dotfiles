@@ -7,7 +7,7 @@ if [[ -z "$DOTFILES" ]]; then
     exit 1
 fi
 
-pushd $DOTFILES/gdb/.config/gdb
+pushd "$DOTFILES"/gdb/.config/gdb
 
 git clone https://github.com/hugsy/gef REPO-gef
 git clone https://github.com/pwndbg/pwndbg REPO-pwndbg

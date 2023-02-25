@@ -12,7 +12,7 @@ EOF
 }
 
 xbacklight_works() {
-    [[ ! -z $(xbacklight) ]]
+    [[ -n $(xbacklight) ]]
 }
 
 get_brightness() {
@@ -25,17 +25,17 @@ get_brightness() {
 
 inc_brightness() {
     if xbacklight_works; then
-        xbacklight -inc $1
+        xbacklight -inc "$1"
     else
-        brightnessctl set $1%+ &>/dev/null
+        brightnessctl set "$1"%+ &>/dev/null
     fi
 }
 
 dec_brightness() {
     if xbacklight_works; then
-        xbacklight -dec $1
+        xbacklight -dec "$1"
     else
-        brightnessctl set $1%- &>/dev/null
+        brightnessctl set "$1"%- &>/dev/null
     fi
 }
 
@@ -47,12 +47,12 @@ send_notification() {
 while getopts "hi:d:" opt; do
     case $opt in
         i)
-            inc_brightness $OPTARG
+            inc_brightness "$OPTARG"
             send_notification
             exit 0
             ;;
         d)
-            dec_brightness $OPTARG
+            dec_brightness "$OPTARG"
             send_notification
             exit 0
             ;;
@@ -61,6 +61,6 @@ while getopts "hi:d:" opt; do
             ;;
     esac
 done
-if [ $OPTIND -eq 1 ]; then
+if [ "$OPTIND" -eq 1 ]; then
     usage
 fi
