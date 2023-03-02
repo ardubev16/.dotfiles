@@ -1,3 +1,8 @@
+# Opts
+setopt extendedglob
+setopt globdots
+zstyle ':completion:*' special-dirs false
+
 # Docker
 zstyle ':completion:*:*:docker:*' option-stacking yes
 zstyle ':completion:*:*:docker-*:*' option-stacking yes

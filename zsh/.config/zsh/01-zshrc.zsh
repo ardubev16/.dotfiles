@@ -7,11 +7,8 @@
 export STARSHIP_CONFIG="$XDG_CONFIG_HOME/zsh/05-starship.toml"
 eval "$(starship init zsh)"
 
-# Options
+# To check performance of zsh startup use zprof
 # zmodload zsh/zprof
-setopt extendedglob
-
-export ZVM_INIT_MODE="sourcing"
 
 # NVM plugin config
 export NVM_COMPLETION=true
