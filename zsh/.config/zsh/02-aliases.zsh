@@ -25,11 +25,15 @@ alias wget="wget -c"
 alias ipe="curl -s ipinfo.io | jq"
 alias site-dl="wget --random-wait -rpe robots=off -U mozilla"
 
-# python alias
-alias py3="python3"
-alias py2="python2"
-alias ve="python3 -m venv ./venv"
-alias va="source ./venv/bin/activate"
+# display
+alias hdmiclone="xrandr --output HDMI-A-0 --auto --same-as eDP"
+alias hdmir="xrandr --output HDMI-A-0 --auto --right-of eDP"
+alias hdmil="xrandr --output HDMI-A-0 --auto --left-of eDP"
+alias hdmioff="xrandr --output HDMI-A-0 --off"
+
+# vpn
+alias sblingup="nmcli connection up sblingVPN"
+alias sblingdown="nmcli connection down sblingVPN"
 
 # misc
 alias xsc="xclip -selection clipboard"
