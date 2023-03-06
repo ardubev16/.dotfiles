@@ -31,10 +31,6 @@ alias hdmir="xrandr --output HDMI-A-0 --auto --right-of eDP"
 alias hdmil="xrandr --output HDMI-A-0 --auto --left-of eDP"
 alias hdmioff="xrandr --output HDMI-A-0 --off"
 
-# vpn
-alias sblingup="nmcli connection up sblingVPN"
-alias sblingdown="nmcli connection down sblingVPN"
-
 # misc
 alias xsc="xclip -selection clipboard"
 alias abup="antibody bundle < $ZDOTDIR/99-plugins.txt > $ZDOTDIR/.plugins && exec zsh"

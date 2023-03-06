@@ -4,7 +4,7 @@
 # 2) .zshrc:  used for interactive shell configuration, set options with "setopt" and
 #             "unsetopt", load shell modules, set history options, change prompt,
 #             setup zle and completion... Set variables used in interactive shell.
-export STARSHIP_CONFIG="$XDG_CONFIG_HOME/zsh/05-starship.toml"
+export STARSHIP_CONFIG="$XDG_CONFIG_HOME/zsh/02-starship.toml"
 eval "$(starship init zsh)"
 
 # To check performance of zsh startup use zprof
@@ -19,10 +19,11 @@ export NVM_LAZY_LOAD_EXTRA_COMMANDS=("$VIM")
 source "$ZDOTDIR"/.plugins
 
 # Other sources
-source "$ZDOTDIR"/02-aliases.zsh
-source "$ZDOTDIR"/03-functions.zsh
-source "$ZDOTDIR"/04-completions.zsh
-source "$ZDOTDIR"/06-ctf.zsh
+source "$ZDOTDIR"/03-aliases.zsh
+source "$ZDOTDIR"/04-functions.zsh
+source "$ZDOTDIR"/05-completions.zsh
+source "$ZDOTDIR"/06-vpn.zsh
+source "$ZDOTDIR"/07-ctf.zsh
 
 # Remove duplicate entries from PATH:
 pathPrepend "$HOME"/.local/bin
