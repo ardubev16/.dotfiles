@@ -28,4 +28,5 @@ source "$ZDOTDIR"/07-ctf.zsh
 # Remove duplicate entries from PATH:
 pathPrepend "$HOME"/.local/bin
 pathPrepend "$HOME"/.local/share/cargo/bin
+pathPrepend "$HOME"/.local/share/gem/ruby/3.0.0/bin
 PATH=$(echo "$PATH" | awk -v RS=':' -v ORS=":" '!a[$1]++{if (NR > 1) printf ORS; printf $a[$1]}')

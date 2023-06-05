@@ -13,3 +13,13 @@ alias yafu="docker run --rm -it eyjhb/yafu -threads 4"
 ilspy() {
     docker run --rm -itv "$PWD":/ilspy bannsec/ilspy_docker /bin/sh -c "cd /ilspy && ilspycmd  $*";
 }
+
+# start python script on a socket
+ctf-server() {
+    if [[ $# -ne 2 ]]; then
+        echo "Usage: ctf-server <port> <script>"
+        return 1
+    fi
+
+    socat -d TCP-LISTEN:"$1",reuseaddr,fork EXEC:"timeout -k 5 30 python3 -u $2"
+}
