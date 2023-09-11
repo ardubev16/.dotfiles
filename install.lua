@@ -57,6 +57,11 @@ local function install_deps(distro, deps)
     end
 end
 
+local function pull_submodules()
+    log.info('Pulling submodules')
+    assert_cmd('git submodule update --init --recursive')
+end
+
 local function stow_dirs(dirs)
     for _, dir in ipairs(dirs) do
         log.info('Stowing ' .. dir)
@@ -102,6 +107,7 @@ end
 install_deps(current_os, config.dependencies)
 install.font(current_os, config.font)
 
+pull_submodules()
 stow_dirs(config.stow_dirs)
 set_zsh()
 bundle_zsh_plugins()
