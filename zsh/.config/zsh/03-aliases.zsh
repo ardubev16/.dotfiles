@@ -1,6 +1,6 @@
 # edit .dotfiles
 alias ezsh="$VIM $DOTFILES/zsh/.config/zsh"
-alias evim="$VIM $DOTFILES/nvim/.config/nvim/lua"
+alias evim="$VIM $DOTFILES/nvim/.config/nvim"
 alias etmx="$VIM $DOTFILES/tmux/.config/tmux/tmux.conf"
 alias ei3="$VIM $DOTFILES/i3-xorg/.config/i3/config"
 alias epbr="$VIM $DOTFILES/i3-xorg/.config/polybar"
@@ -37,3 +37,4 @@ alias abup="antibody bundle < $ZDOTDIR/99-plugins.txt > $ZDOTDIR/.plugins && exe
 alias ez="exec zsh"
 alias gspull="git pull && git submodule foreach \"git checkout master\""
 alias cat="bat"
+alias rpg="openssl rand -hex"

@@ -1,6 +1,6 @@
 # SblingVPN
-alias sblingu="nmcli connection up sblingVPN"
-alias sblingd="nmcli connection down sblingVPN"
+alias sblingu="nmcli connection up sbling-vpn"
+alias sblingd="nmcli connection down sbling-vpn"
 
 # UNITN VPN
 function unitnu() {
