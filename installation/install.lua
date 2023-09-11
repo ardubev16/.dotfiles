@@ -13,7 +13,7 @@ return {
     end,
 
     pacman = function(pkg_name)
-        assert_cmd('sudo pacman -S --noconfirm ' .. pkg_name)
+        assert_cmd('sudo pacman -S --noconfirm --needed ' .. pkg_name)
     end,
 
     dnf = function(pkg_name)
@@ -25,14 +25,24 @@ return {
     end,
 
     font = function(distro, font)
+        local VERSION = 'v2.3.3'
+
         log.info('Installing Nerd-Font: ' .. font)
         if distro == 'darwin' then
             font = font:lower()
-            local cmd = 'brew tap homebrew/cask-fonts && brew install --cask font-' .. font .. '-nerd-font'
+            local cmd = 'brew tap homebrew/cask-fonts && brew install --cask font-'
+                .. font
+                .. '-nerd-font'
             assert_cmd(cmd)
         else
-            local wget = 'wget https://github.com/ryanoasis/nerd-fonts/releases/download/latest/' .. font .. '.zip'
-            local unzip = 'unzip ' .. font .. '.zip -d ' .. HOME .. '/.local/share/fonts'
+            local wget = 'wget https://github.com/ryanoasis/nerd-fonts/releases/download/'
+                .. VERSION
+                .. '/'
+                .. font
+                .. '.zip'
+            local font_dir = HOME .. '/.local/share/fonts'
+            local unzip = 'unzip ' .. font .. '.zip -d ' .. font_dir
+            assert_cmd('mkdir -p ' .. font_dir)
             assert_cmd(wget)
             assert_cmd(unzip)
             assert_cmd('rm ' .. font .. '.zip')

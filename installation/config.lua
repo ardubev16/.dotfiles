@@ -58,6 +58,7 @@ M.dependencies = {
     },
 
     wget = {},
+    unzip = {},
     xclip = {
         darwin = {
             ignore = true,
