@@ -5,3 +5,6 @@
 	recurse = true
 [core]
 	excludefile = ~/.config/git/ignore
+
+[includeIf "gitdir:~/Repos/work/"]
+    path = ~/.gitconfig-work
