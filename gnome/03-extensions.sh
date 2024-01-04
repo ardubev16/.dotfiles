@@ -41,4 +41,4 @@ dconf write /org/gnome/shell/extensions/forge/keybindings/window-toggle-float "[
 dconf write /org/gnome/shell/extensions/forge/keybindings/window-toggle-always-float "['<Shift><Super>f']"
 
 # vitals
-dconf write /org/gnome/shell/extensions/vitals/hot-sensors "['_temperature_thinkpad_cpu_', '_processor_usage_', '_memory_allocated_']"
+dconf write /org/gnome/shell/extensions/vitals/hot-sensors "['_temperature_thinkpad_cpu_', '_processor_usage_', '_memory_allocated_', '_storage_free_']"
