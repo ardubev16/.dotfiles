@@ -42,3 +42,7 @@ dconf write /org/gnome/shell/extensions/forge/keybindings/window-toggle-always-f
 
 # vitals
 dconf write /org/gnome/shell/extensions/vitals/hot-sensors "['_temperature_thinkpad_cpu_', '_processor_usage_', '_memory_allocated_', '_storage_free_']"
+
+# battery-health-charging
+dconf write /org/gnome/shell/extensions/Battery-Health-Charging/charging-mode 'bal'
+dconf write /org/gnome/shell/extensions/Battery-Health-Charging/show-system-indicator false

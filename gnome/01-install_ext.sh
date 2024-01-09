@@ -9,6 +9,7 @@ extensions=(
 	3843 # https://extensions.gnome.org/extension/3843/just-perfection/
 	4481 # https://extensions.gnome.org/extension/4481/forge/
 	5489 # https://extensions.gnome.org/extension/5489/search-light/
+	5724 # https://extensions.gnome.org/extension/5724/battery-health-charging/
 	5967 # https://extensions.gnome.org/extension/5967/workspaces-indicator-by-open-apps/
 )
 
