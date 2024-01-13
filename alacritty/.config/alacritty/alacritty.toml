@@ -22,9 +22,6 @@ yellow = "#d79921"
 background = "#282828"
 foreground = "#ebdbb2"
 
-[env]
-TERM = "xterm-256color"
-
 [font]
 size = 12
 
