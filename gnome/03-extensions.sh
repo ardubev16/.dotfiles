@@ -5,8 +5,8 @@ dconf write /org/gnome/shell/extensions/auto-move-windows/application-list "[\
     'Alacritty.desktop:1', \
     'google-chrome.desktop:2', \
     'virtualbox.desktop:3', \
-    'org.mozilla.Thunderbird.desktop:8', \
-    'discord.desktop:9', \
+    'org.mozilla.Thunderbird.desktop:8', 'mozilla-thunderbird.desktop:8', \
+    'discord.desktop:9', 'com.discordapp.Discord.desktop:9', \
     'org.telegram.desktop.desktop:10', 'whatsdesk.desktop:10'\
 ]"
 
@@ -39,6 +39,7 @@ dconf write /org/gnome/shell/extensions/forge/keybindings/focus-border-toggle "[
 dconf write /org/gnome/shell/extensions/forge/keybindings/window-swap-last-active "['']"
 dconf write /org/gnome/shell/extensions/forge/keybindings/window-toggle-float "['<Super>f']"
 dconf write /org/gnome/shell/extensions/forge/keybindings/window-toggle-always-float "['<Shift><Super>f']"
+dconf write /org/gnome/shell/extensions/forge/css-updated "'1705267223017'"
 
 # vitals
 dconf write /org/gnome/shell/extensions/vitals/hot-sensors "['_temperature_thinkpad_cpu_', '_processor_usage_', '_memory_allocated_', '_storage_free_']"
