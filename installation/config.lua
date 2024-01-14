@@ -42,20 +42,39 @@ M.dependencies = {
         ubuntu = {
             command = [[sudo add-apt-repository ppa:neovim-ppa/unstable -y && sudo apt update && sudo apt install -y neovim]],
         },
-        fedora = {
-            command = [[sudo dnf copr enable agriffis/neovim-nightly -y && sudo dnf install -y neovim]],
-        },
     },
     ripgrep = {},
     stow = {},
     tmux = {},
     zsh = {},
+    xxd = {},
+    gpp = {
+        fedora = {
+            name = 'g++',
+        },
+    },
+    fd = {
+        fedora = {
+            name = 'fd-find',
+        },
+    },
+    lazygit = {
+        fedora = {
+            command = [[sudo dnf copr enable atim/lazygit -y && sudo dnf install -y lazygit]],
+        },
+    },
+    starship = {
+        fedora = {
+            command = [[sudo dnf copr enable atim/starship -y && sudo dnf install -y starship]],
+        },
+    },
 
     python3 = {
         darwin = {
             ignore = true,
         },
     },
+    pipx = {},
 
     wget = {},
     unzip = {},
