@@ -4,6 +4,17 @@
 dconf write /org/gnome/mutter/dynamic-workspaces false
 dconf write /org/gnome/desktop/wm/preferences/num-workspaces 10
 
+dconf write /org/gnome/shell/keybindings/switch-to-application-1 "['']"
+dconf write /org/gnome/shell/keybindings/switch-to-application-2 "['']"
+dconf write /org/gnome/shell/keybindings/switch-to-application-3 "['']"
+dconf write /org/gnome/shell/keybindings/switch-to-application-4 "['']"
+dconf write /org/gnome/shell/keybindings/switch-to-application-5 "['']"
+dconf write /org/gnome/shell/keybindings/switch-to-application-6 "['']"
+dconf write /org/gnome/shell/keybindings/switch-to-application-7 "['']"
+dconf write /org/gnome/shell/keybindings/switch-to-application-8 "['']"
+dconf write /org/gnome/shell/keybindings/switch-to-application-9 "['']"
+dconf write /org/gnome/shell/keybindings/switch-to-application-10 "['']"
+
 dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-1 "['<Super>1']"
 dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-2 "['<Super>2']"
 dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-3 "['<Super>3']"

@@ -39,7 +39,6 @@ dconf write /org/gnome/shell/extensions/forge/keybindings/focus-border-toggle "[
 dconf write /org/gnome/shell/extensions/forge/keybindings/window-swap-last-active "['']"
 dconf write /org/gnome/shell/extensions/forge/keybindings/window-toggle-float "['<Super>f']"
 dconf write /org/gnome/shell/extensions/forge/keybindings/window-toggle-always-float "['<Shift><Super>f']"
-dconf write /org/gnome/shell/extensions/forge/css-updated "'1705267223017'"
 
 # vitals
 dconf write /org/gnome/shell/extensions/vitals/hot-sensors "['_temperature_thinkpad_cpu_', '_processor_usage_', '_memory_allocated_', '_storage_free_']"
