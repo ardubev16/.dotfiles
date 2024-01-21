@@ -25,9 +25,8 @@ return {
     end,
 
     font = function(distro, font)
-        local VERSION = 'v2.3.3'
-
         log.info('Installing Nerd-Font: ' .. font)
+        local filename = font .. '.tar.xz'
         if distro == 'darwin' then
             font = font:lower()
             local cmd = 'brew tap homebrew/cask-fonts && brew install --cask font-'
@@ -35,17 +34,14 @@ return {
                 .. '-nerd-font'
             assert_cmd(cmd)
         else
-            local wget = 'wget https://github.com/ryanoasis/nerd-fonts/releases/download/'
-                .. VERSION
-                .. '/'
-                .. font
-                .. '.zip'
+            local wget = 'wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/'
+                .. filename
             local font_dir = HOME .. '/.local/share/fonts'
-            local unzip = 'unzip ' .. font .. '.zip -d ' .. font_dir
+            local untar = 'tar -xvf ' .. filename .. ' -C ' .. font_dir
             assert_cmd('mkdir -p ' .. font_dir)
             assert_cmd(wget)
-            assert_cmd(unzip)
-            assert_cmd('rm ' .. font .. '.zip')
+            assert_cmd(untar)
+            assert_cmd('rm ' .. filename)
             assert_cmd('fc-cache -fv')
         end
     end,
