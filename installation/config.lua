@@ -2,7 +2,6 @@ local M = {
     font = 'JetBrainsMono',
     stow_dirs = {
         'bin',
-        'gdb',
         'git',
         'nvim',
         'tmux',
