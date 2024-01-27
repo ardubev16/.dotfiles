@@ -13,3 +13,6 @@ dconf write /org/gnome/desktop/interface/enable-hot-corners false
 dconf write /org/gnome/settings-daemon/plugins/color/night-light-enabled true
 dconf write /org/gnome/settings-daemon/plugins/color/night-light-temperature "uint32 3700"
 dconf write /org/gnome/mutter/edge-tiling false
+dconf write /org/gnome/desktop/interface/clock-format "'12h'"
+dconf write /org/gtk/settings/file-chooser/clock-format "'12h'"
+dconf write /org/gtk/gtk4/settings/file-chooser/clock-format "'12h'"
