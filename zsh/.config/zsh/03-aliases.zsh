@@ -32,6 +32,7 @@ alias hdmil="xrandr --output HDMI-A-0 --auto --left-of eDP"
 alias hdmioff="xrandr --output HDMI-A-0 --off"
 
 # misc
+alias open="xdg-open"
 alias xsc="xclip -selection clipboard"
 alias abup="antibody bundle < $ZDOTDIR/99-plugins.txt > $ZDOTDIR/.plugins && exec zsh"
 alias ez="exec zsh"
