@@ -1,6 +1,7 @@
 local M = {
     font = 'JetBrainsMono',
     stow_dirs = {
+        'alacritty',
         'bin',
         'git',
         'nvim',
