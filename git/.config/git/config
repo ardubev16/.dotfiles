@@ -1,10 +1,18 @@
 [user]
 	email = 43483037+ardubev16@users.noreply.github.com
 	name = Lorenzo Bevilacqua
+	signingkey = ~/.ssh/id_rsa.pub
+[gpg]
+	format = ssh
+[commit]
+	gpgsign = true
+
 [submodule]
 	recurse = true
 [core]
 	excludefile = ~/.config/git/ignore
+[rerere]
+	enabled = true
 
 [includeIf "gitdir:~/Repos/work/"]
     path = ~/.gitconfig-work
