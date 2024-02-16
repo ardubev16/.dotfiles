@@ -41,4 +41,3 @@ dconf write /org/gnome/desktop/wm/keybindings/move-to-workspace-10 "['<Super><Sh
 dconf write /org/gnome/desktop/wm/keybindings/close "['<Super>q']"
 dconf write /org/gnome/desktop/wm/keybindings/minimize "['']"                        # disable <Super>h
 dconf write /org/gnome/settings-daemon/plugins/media-keys/screensaver "['<Super>x']" # disable <Super>l
-dconf write /org/gnome/desktop/input-sources/xkb-options "['caps:ctrl_modifier']"

@@ -68,6 +68,11 @@ M.dependencies = {
             command = [[sudo dnf copr enable atim/starship -y && sudo dnf install -y starship]],
         },
     },
+    keyd = {
+        fedora = {
+            command = [[sudo dnf copr enable alternateved/keyd -y && sudo dnf install -y keyd]],
+        },
+    },
 
     python3 = {
         darwin = {
