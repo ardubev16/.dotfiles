@@ -17,6 +17,7 @@ My personal .dotfiles repository.
 Currently supported distros:
 
 - Arch Linux
+- Fedora
 - Ubuntu
 
 There is a convenience script which hasn't been tested in a while, **use it at your own risk**!

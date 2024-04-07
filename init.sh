@@ -63,22 +63,22 @@ elif linux; then
     log_info "$distro detected!"
 
     case $distro in
-        "ubuntu")
+    "ubuntu")
+        install_apt
+        ;;
+    "endeavouros" | "arch")
+        install_pacman
+        ;;
+    "fedora")
+        install_dnf
+        ;;
+    *)
+        if command -v apt &>/dev/null; then
             install_apt
-            ;;
-        "endeavouros" | "arch")
-            install_pacman
-            ;;
-        "fedora")
-            install_dnf
-            ;;
-        *)
-            if command -v apt &>/dev/null; then
-                install_apt
-            else
-                not_supported
-            fi
-            ;;
+        else
+            not_supported
+        fi
+        ;;
     esac
 else
     not_supported
