@@ -8,6 +8,7 @@ extensions=(
 	1460 # https://extensions.gnome.org/extension/1460/vitals/
 	3193 # https://extensions.gnome.org/extension/3193/blur-my-shell/
 	3843 # https://extensions.gnome.org/extension/3843/just-perfection/
+	3956 # https://extensions.gnome.org/extension/3956/gnome-fuzzy-app-search/
 	4481 # https://extensions.gnome.org/extension/4481/forge/
 	5489 # https://extensions.gnome.org/extension/5489/search-light/
 	5724 # https://extensions.gnome.org/extension/5724/battery-health-charging/
