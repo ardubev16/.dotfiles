@@ -39,6 +39,3 @@ alias ez="exec zsh"
 alias gspull="git pull && git submodule foreach \"git checkout master\""
 alias cat="bat"
 alias rpg="openssl rand -hex"
-if command -v podman &> /dev/null; then
-    alias docker="podman"
-fi
