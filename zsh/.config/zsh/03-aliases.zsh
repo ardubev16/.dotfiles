@@ -37,5 +37,10 @@ alias xsc="xclip -selection clipboard"
 alias abup="antibody bundle < $ZDOTDIR/99-plugins.txt > $ZDOTDIR/.plugins && exec zsh"
 alias ez="exec zsh"
 alias gspull="git pull && git submodule foreach \"git checkout master\""
-alias cat="bat"
 alias rpg="openssl rand -hex"
+
+if command -v bat &> /dev/null; then
+    alias cat="bat"
+elif command -v batcat &> /dev/null; then # package name on Ubuntu
+    alias cat="batcat"
+fi
