@@ -12,7 +12,6 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
 
 # History files
-export _Z_DATA="$XDG_STATE_HOME/z"
 export GDBHISTFILE="$XDG_STATE_HOME/gdb_history"
 export HISTFILE="$XDG_STATE_HOME/zsh_history"
 export LESSHISTFILE="$XDG_STATE_HOME/less_history"
