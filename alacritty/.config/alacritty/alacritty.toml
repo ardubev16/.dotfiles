@@ -42,10 +42,8 @@ family = "JetBrains Mono Nerd Font"
 style = "Regular"
 
 [window]
-decorations = "none"
-dynamic_padding = false
+decorations = "None"
 startup_mode = "Windowed"
 
-[window.padding]
-x = 0
-y = 0
+[mouse]
+hide_when_typing = true
