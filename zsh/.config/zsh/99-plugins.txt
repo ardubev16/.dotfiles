@@ -1,5 +1,6 @@
 lukechilds/zsh-nvm
 
+ohmyzsh/ohmyzsh
 ohmyzsh/ohmyzsh path:plugins/colored-man-pages
 ohmyzsh/ohmyzsh path:plugins/command-not-found
 ohmyzsh/ohmyzsh path:plugins/docker kind:fpath
