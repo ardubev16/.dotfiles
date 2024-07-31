@@ -6,6 +6,7 @@ dconf write /org/gnome/desktop/peripherals/keyboard/delay "uint32 250"
 dconf write /org/gnome/desktop/peripherals/keyboard/repeat-interval "uint32 20"
 dconf write /org/gnome/desktop/peripherals/touchpad/tap-to-click true
 
+dconf write /org/gnome/desktop/remote-desktop/rdp/screen-share-mode "'extend'"
 dconf write /org/gnome/desktop/sound/allow-volume-above-100-percent true
 dconf write /org/gnome/desktop/interface/color-scheme "'prefer-dark'"
 dconf write /org/gnome/desktop/interface/show-battery-percentage true
