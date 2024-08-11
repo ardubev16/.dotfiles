@@ -1,9 +1,8 @@
 local M = {
     font = 'JetBrainsMono',
     stow_dirs = {
-        'alacritty',
-        'bin',
         'git',
+        'kitty',
         'nvim',
         'tmux',
         'zsh',
@@ -93,14 +92,10 @@ M.dependencies = {
             ignore = true,
         },
     },
+    kitty = {},
 }
 
 M.i3xorg_deps = {
-    alacritty = {
-        ubuntu = {
-            ignore = true,
-        },
-    },
     i3 = {
         arch = {
             name = 'i3-gaps',
