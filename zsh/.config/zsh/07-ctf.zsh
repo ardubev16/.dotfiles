@@ -8,6 +8,8 @@ alias gdb-gef="gdb -q -ex init-gef"
 # docker containers
 alias ctf-stego="docker run --rm -itv \$PWD:/data -p 6901:6901 dominicbreuker/stego-toolkit /bin/bash"
 alias yafu="docker run --rm -it eyjhb/yafu -threads 4"
+alias mobsf="docker run --rm -it -p 8000:8000 opensecurity/mobile-security-framework-mobsf"
+alias dive="docker run -ti --rm  -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive"
 
 # docker container for ilspy
 ilspy() {
