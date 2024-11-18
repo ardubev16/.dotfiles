@@ -24,40 +24,62 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+    antibody
+    bat
+    cmake
+    curl
+    fd
+    fzf
+    gcc
+    gdb
+    git
+    gpp
+    jq
+    keyd
+    lazygit
     nh
     nushell
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # pkgs.hello
-
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
-
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
+    pipx
+    ripgrep
+    wget
+    xclip
+    xsel
+    xxd
+    zip
+    zsh
   ];
 
   programs = {
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
 
+    # gnome-shell = {
+    #   enable = true;
+    #   # extensions = [
+    #   #   { package = pkgs.gnomeExtensions.dashToPanel; }
+    #   # ];
+    # };
+
     kitty = {
       enable = true;
-      extraConfig = ''
-        hide_window_decorations yes
-        placement_strategy top-left
-      '';
+      settings = {
+        hide_window_decorations = true;
+        placement_strategy = "top-left";
+      };
     };
 
-
+    starship = {
+      enable = true;
+      enableZshIntegration = true;
+      settings = {
+        add_newline = false;
+        format = "$character$directory$git_branch$git_status";
+        right_format = "$cmd_duration$all";
+      };
+    };
   };
+  # stylix.targets.forge.enable = false;
+  # stylix.targets.gnome.enable = false;
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -91,7 +113,7 @@
   #  /etc/profiles/per-user/ardubev_16/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    FLAKE = "~/.dotfiles/nix";
+    # FLAKE = "~/.dotfiles/nix";
     # EDITOR = "emacs";
   };
 }
