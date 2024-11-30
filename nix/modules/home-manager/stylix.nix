@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  stylix.enable = true;
+  stylix.enable = false;
   stylix.polarity = "dark";
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
 
