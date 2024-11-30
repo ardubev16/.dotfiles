@@ -3,8 +3,7 @@
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "ardubev_16";
-  home.homeDirectory = "/home/ardubev_16";
+  home.homeDirectory = "/home/${config.home.username}";
 
   targets.genericLinux.enable = true;
   nix = {
@@ -62,6 +61,7 @@
 
     kitty = {
       enable = true;
+      package = config.lib.nixGL.wrap pkgs.kitty;
       settings = {
         hide_window_decorations = true;
         placement_strategy = "top-left";

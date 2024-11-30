@@ -7,21 +7,32 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixGL = {
+      url = "github:nix-community/nixGL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     stylix.url = "github:danth/stylix";
   };
 
-  outputs = { nixpkgs, home-manager, stylix, ... }:
-    let
-      system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
-    in {
+  outputs = { nixpkgs, home-manager, stylix, nixGL, ... }:
+    {
       homeConfigurations."ardubev_16" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
+        pkgs = import nixpkgs {
+          system = "x86_64-linux";
+          config.allowUnfree = true;
+        };
 
         modules = [
           ./modules/home-manager/home.nix
           ./modules/home-manager/stylix.nix
           stylix.homeManagerModules.stylix
+          (
+            { ... }:
+            {
+              nixGL.packages = nixGL.packages;
+              home.username = "ardubev_16";
+            }
+          )
         ];
       };
     };
