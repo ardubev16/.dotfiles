@@ -1,5 +1,55 @@
-{ ... }:
+{ pkgs, ... }:
 {
+  programs.bat.enable = true;
+  stylix.targets.bat.enable = true;
+
+  home.packages = with pkgs; [
+    cmake
+    curl
+    fd
+    fzf
+    gcc
+    gdb
+    git
+    gpp
+    jq
+    nh
+    pipx
+    ripgrep
+    wget
+    xclip
+    xsel
+    xxd
+    zip
+  ];
+
+  home.shellAliases = {
+    # better commands
+    ivm = "vim"; # because I can't type
+    mkdir = "mkdir -pv";
+    tmx = "tmux -2u a || tmux -2u";
+    cat = "bat";
+
+    # grep
+    agrep = "alias | grep";
+    hgrep = "history | grep";
+    psgrep = "ps aux | grep";
+
+    # network
+    ports = "netstat -tulanp";
+    wget = "wget -c";
+    ipe = "curl -s ipinfo.io | jq";
+    site-dl = "wget --random-wait -rpe robots=off -U mozilla";
+
+    # misc
+    open = "xdg-open";
+    xsc = "xclip -selection clipboard";
+    abup = "antibody bundle < $ZDOTDIR/99-plugins.txt > $ZDOTDIR/.plugins && exec zsh";
+    ez = "exec zsh";
+    gspull = "git pull && git submodule foreach \"git checkout master\"";
+    rpg = "openssl rand -hex";
+  };
+
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
