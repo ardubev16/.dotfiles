@@ -1,10 +1,12 @@
 { config, pkgs, ... }:
-
 {
   home.homeDirectory = "/home/${config.home.username}";
   targets.genericLinux.enable = true;
 
-  imports = [ ./stylix.nix ];
+  imports = [
+    ./stylix.nix
+    ../applications
+  ];
 
   nix = {
     package = pkgs.nix;
@@ -50,15 +52,6 @@
     #   # ];
     # };
 
-    kitty = {
-      enable = true;
-      package = config.lib.nixGL.wrap pkgs.kitty;
-      settings = {
-        hide_window_decorations = true;
-        placement_strategy = "top-left";
-      };
-    };
-
     starship = {
       enable = true;
       enableZshIntegration = true;
@@ -69,7 +62,6 @@
       };
     };
   };
-  stylix.targets.kitty.enable = true;
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
