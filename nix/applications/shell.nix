@@ -3,12 +3,8 @@
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
-    settings = {
-      add_newline = false;
-      format = "$character$directory$git_branch$git_status";
-      right_format = "$cmd_duration$all";
-    };
   };
+  xdg.configFile."starship.toml".source = ./../dotfiles/starship.toml;
 
   programs.zsh = {
     enable = true;
