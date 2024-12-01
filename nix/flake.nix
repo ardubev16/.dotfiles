@@ -16,24 +16,25 @@
 
   outputs = { nixpkgs, home-manager, stylix, nixGL, ... }:
     {
-      homeConfigurations."ardubev_16" = home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          system = "x86_64-linux";
-          config.allowUnfree = true;
-        };
+      homeConfigurations = {
+        "ardubev_16" = home-manager.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs {
+            system = "x86_64-linux";
+            config.allowUnfree = true;
+          };
 
-        modules = [
-          ./modules/home-manager/home.nix
-          ./modules/home-manager/stylix.nix
-          stylix.homeManagerModules.stylix
-          (
-            { ... }:
-            {
-              nixGL.packages = nixGL.packages;
-              home.username = "ardubev_16";
-            }
-          )
-        ];
+          modules = [
+            stylix.homeManagerModules.stylix
+            ./modules/home-manager/home.nix
+            (
+              { ... }:
+              {
+                nixGL.packages = nixGL.packages;
+                home.username = "ardubev_16";
+              }
+            )
+          ];
+        };
       };
     };
 }
