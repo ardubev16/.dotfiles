@@ -52,15 +52,6 @@
     #   # ];
     # };
 
-    starship = {
-      enable = true;
-      enableZshIntegration = true;
-      settings = {
-        add_newline = false;
-        format = "$character$directory$git_branch$git_status";
-        right_format = "$cmd_duration$all";
-      };
-    };
   };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
