@@ -25,7 +25,7 @@
 
           modules = [
             stylix.homeManagerModules.stylix
-            ./modules/home-manager/home.nix
+            ./common/home.nix
             (
               { ... }:
               {
