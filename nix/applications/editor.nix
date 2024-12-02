@@ -32,6 +32,5 @@
   # FIXME: merge this config with the theme by stylix.
   # xdg.configFile."lazygit".source = ../dotfiles/lazygit.yaml;
 
-  programs.git.enable = true;
   xdg.configFile."git".source = ../dotfiles/gitconfig;
 }
