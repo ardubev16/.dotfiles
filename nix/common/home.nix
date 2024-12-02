@@ -6,6 +6,7 @@
   imports = [
     ./stylix.nix
     ../applications
+    ../desktops/gnome.nix
   ];
 
   nix = {
@@ -39,18 +40,7 @@
     # zip
   ];
 
-  programs = {
-    # Let Home Manager install and manage itself.
-    home-manager.enable = true;
-
-    # gnome-shell = {
-    #   enable = true;
-    #   # extensions = [
-    #   #   { package = pkgs.gnomeExtensions.dashToPanel; }
-    #   # ];
-    # };
-
-  };
+  programs.home-manager.enable = true;
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.

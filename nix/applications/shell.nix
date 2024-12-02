@@ -13,7 +13,6 @@
     git
     gpp
     jq
-    nh
     pipx
     ripgrep
     wget
