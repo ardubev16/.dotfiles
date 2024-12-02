@@ -23,10 +23,13 @@
     enable = true;
     defaultEditor = true;
   };
+  # FIXME: the config becomse read-only, find a way to forward changes to original
+  # config to allow changes with :LazyExtras.
   xdg.configFile."nvim".source = config.lib.file.mkOutOfStoreSymlink ../dotfiles/nvim;
 
   programs.lazygit.enable = true;
   stylix.targets.lazygit.enable = true;
+  # FIXME: merge this config with the theme by stylix.
   # xdg.configFile."lazygit".source = ../dotfiles/lazygit.yaml;
 
   programs.git.enable = true;
