@@ -82,7 +82,7 @@
     enable = true;
     enableZshIntegration = true;
   };
-  xdg.configFile."starship.toml".source = ./../dotfiles/starship.toml;
+  xdg.configFile."starship.toml".source = ../dotfiles/starship.toml;
 
   programs.tmux = {
     enable = true;
@@ -95,8 +95,13 @@
     shortcut = "a";
 
     plugins = with pkgs; [
-      # FIXME: indicator on bar not working
-      tmuxPlugins.mode-indicator
+      {
+        plugin = tmuxPlugins.mode-indicator;
+        extraConfig = ''
+          # Theme
+          source-file ${../dotfiles/tmux-gruvbox-dark.conf}
+        '';
+      }
     ];
 
     extraConfig = ''
@@ -120,9 +125,6 @@
       bind P run-shell "tmux neww tmux-sessionizer -p"
       bind S run-shell "tmux neww tmux-sessionizer -u"
       bind C run-shell "tmux neww tmux-sessionizer -c"
-
-      # Theme
-      source-file ${../dotfiles/tmux-gruvbox-dark.conf}
     '';
   };
 }
