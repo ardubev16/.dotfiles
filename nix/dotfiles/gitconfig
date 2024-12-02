@@ -16,3 +16,5 @@
 
 [includeIf "gitdir:~/Repos/work/"]
     path = ~/.gitconfig-work
+
+# vim: ft=gitconfig
