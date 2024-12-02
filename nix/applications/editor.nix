@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   home.packages = with pkgs; [
     bat
@@ -6,8 +6,9 @@
     fd
     fzf
     git
-    lazygit
-    rg
+    go
+    nodejs
+    ripgrep
     ueberzugpp
     viu
   ];
@@ -19,6 +20,9 @@
     vimAlias = true;
     vimdiffAlias = true;
   };
+  xdg.configFile."nvim".source = config.lib.file.mkOutOfStoreSymlink ../dotfiles/nvim;
 
-  xdg.configFile."nvim".source = ../dotfiles/nvim;
+  programs.lazygit.enable = true;
+  stylix.targets.lazygit.enable = true;
+  # xdg.configFile."lazygit".source = ../dotfiles/lazygit.yaml;
 }
