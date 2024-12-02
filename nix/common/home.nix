@@ -6,7 +6,7 @@
   imports = [
     ./stylix.nix
     ../applications
-    ../desktops/gnome.nix
+    ../desktops/gnome
   ];
 
   nix = {

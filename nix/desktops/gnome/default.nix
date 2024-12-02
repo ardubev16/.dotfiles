@@ -1,22 +1,10 @@
-{ pkgs, lib, ... }:
+{ lib, ... }:
 {
-  programs.gnome-shell = {
-    enable = true;
-    extensions = with pkgs.gnomeExtensions; [
-      { package = appindicator; }
-      { package = auto-move-windows; }
-      { package = battery-health-charging; }
-      { package = forge; }
-      { package = fuzzy-app-search; }
-      { package = gsconnect; }
-      { package = just-perfection; }
-      { package = launch-new-instance; }
-      { package = removable-drive-menu; }
-      { package = search-light; }
-      { package = vitals; }
-      { package = workspaces-indicator-by-open-apps; }
-    ];
-  };
+  imports = [
+    ./extensions.nix
+  ];
+
+  programs.gnome-shell.enable = true;
 
   dconf.settings = with lib.hm.gvariant; {
     # src: https://github.com/pop-os/shell/issues/142#issuecomment-678185443
