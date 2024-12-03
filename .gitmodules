@@ -1,3 +1,3 @@
 [submodule "nvim/.config/nvim"]
-	path = nix/dotfiles/nvim
+	path = dotfiles/nvim
 	url = git@github.com:ardubev16/renso.lazy.git

@@ -23,7 +23,7 @@
     enable = true;
     defaultEditor = true;
   };
-  xdg.configFile."nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/nix/dotfiles/nvim";
+  xdg.configFile."nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/dotfiles/nvim";
 
   programs.lazygit.enable = true;
   stylix.targets.lazygit.enable = true;
