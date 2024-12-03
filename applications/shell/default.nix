@@ -6,6 +6,7 @@
   home.packages = with pkgs; [
     cmake
     curl
+    eza
     fd
     fzf
     gcc
@@ -55,12 +56,12 @@
       enable = true;
       plugins = [
         "getantidote/use-omz"
+        "ohmyzsh/ohmyzsh path:lib"
         "ohmyzsh/ohmyzsh path:plugins/colored-man-pages"
-        "ohmyzsh/ohmyzsh path:plugins/command-not-found"
         "ohmyzsh/ohmyzsh path:plugins/docker kind:fpath"
+        "ohmyzsh/ohmyzsh path:plugins/eza"
         "ohmyzsh/ohmyzsh path:plugins/git"
         "ohmyzsh/ohmyzsh path:plugins/virtualenv"
-        "ohmyzsh/ohmyzsh path:plugins/web-search"
         "ohmyzsh/ohmyzsh path:plugins/zsh-interactive-cd"
 
         "changyuheng/fz"
