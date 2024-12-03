@@ -55,7 +55,7 @@
     antidote = {
       enable = true;
       plugins = [
-        "ohmyzsh/ohmyzsh"
+        "getantidote/use-omz"
         "ohmyzsh/ohmyzsh path:plugins/colored-man-pages"
         "ohmyzsh/ohmyzsh path:plugins/command-not-found"
         "ohmyzsh/ohmyzsh path:plugins/docker kind:fpath"
@@ -71,7 +71,7 @@
         "zsh-users/zsh-syntax-highlighting"
       ];
     };
-    # initExtra = ''
+    # initExtra = /*sh*/ ''
     #   zmodload zsh/zprof
     # '';
   };
@@ -95,14 +95,14 @@
     plugins = with pkgs; [
       {
         plugin = tmuxPlugins.mode-indicator;
-        extraConfig = ''
+        extraConfig = /*tmux*/ ''
           # Theme
           source-file ${../dotfiles/tmux-gruvbox-dark.conf}
         '';
       }
     ];
 
-    extraConfig = ''
+    extraConfig = /*tmux*/ ''
       set -g renumber-windows on
       set -g default-terminal "tmux-256color"
       # undercurl support
