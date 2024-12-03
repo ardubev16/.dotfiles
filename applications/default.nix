@@ -1,7 +1,8 @@
 {
   imports = [
-    ./editor.nix
-    ./shell.nix
+    ./editor
+    ./shell
+    ./tmux
     ./terminal.nix
   ];
 }
