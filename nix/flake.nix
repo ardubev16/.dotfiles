@@ -9,9 +9,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixGL.url = "github:nix-community/nixGL";
+    nixGL = {
+      url = "github:nix-community/nixGL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    stylix.url = "github:danth/stylix/release-24.05";
+    stylix = {
+      url = "github:danth/stylix/release-24.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { nixpkgs, home-manager, stylix, nixGL, ... }:
