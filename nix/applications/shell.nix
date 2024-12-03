@@ -71,6 +71,9 @@
         "zsh-users/zsh-syntax-highlighting"
       ];
     };
+    # initExtra = ''
+    #   zmodload zsh/zprof
+    # '';
   };
 
   programs.starship = {

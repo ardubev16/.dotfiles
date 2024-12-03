@@ -17,27 +17,10 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
-    # bat
-    # cmake
-    # curl
-    # fd
-    # fzf
-    # gcc
-    # gdb
-    # git
-    # gpp
-    # jq
-    # keyd
-    # lazygit
-    # nh
-    # nushell
-    # pipx
-    # ripgrep
-    # wget
-    # xclip
-    # xsel
-    # xxd
-    # zip
+    docker
+    keyd
+    kubectl
+    nushell
   ];
 
   programs.home-manager.enable = true;
