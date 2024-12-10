@@ -1,10 +1,13 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 {
-  imports = [
-    ./extensions.nix
-  ];
+  imports = [ ./extensions.nix ];
 
   programs.gnome-shell.enable = true;
+  home.packages = with pkgs; [
+    dconf-editor
+    # gnome-extension-manager
+    gnome-tweaks
+  ];
 
   dconf.settings = with lib.hm.gvariant; {
     # src: https://github.com/pop-os/shell/issues/142#issuecomment-678185443
@@ -13,6 +16,7 @@
       edge-tiling = false;
     };
     "org/gnome/desktop/wm/preferences" = { num-workspaces = 10; };
+    "org/gnome/shell" = { favorite-apps = []; };
 
     "org/gnome/shell/keybindings" = {
       switch-to-application-1 = [];

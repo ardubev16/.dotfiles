@@ -4,7 +4,7 @@
   targets.genericLinux.enable = true;
 
   imports = [
-    ./stylix.nix
+    ./theme.nix
     ../applications
     ../desktops/gnome
   ];
