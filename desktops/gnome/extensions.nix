@@ -4,11 +4,12 @@
     extensions = with pkgs.gnomeExtensions; [
       { package = appindicator; }
       { package = auto-move-windows; }
-      { package = forge; }
+      # { package = forge; }
       { package = fuzzy-app-search; }
       { package = gsconnect; }
       { package = just-perfection; }
       { package = launch-new-instance; }
+      { package = pop-shell; }
       { package = removable-drive-menu; }
       { package = search-light; }
       { package = vitals; }
@@ -29,22 +30,45 @@
       ];
     };
 
-    "org/gnome/shell/extensions/forge" = {
-      window-gap-hidden-on-single = true;
-      window-gap-size = mkUint32 6;
-    };
-    "org/gnome/shell/extensions/forge/keybindings" = {
-      prefs-tiling-toggle = [];
-      focus-border-toggle = [];
-      window-swap-last-active = [];
-      window-toggle-float = [ "<Super>f" ];
-      window-toggle-always-float = [ "<Shift><Super>f" ];
-    };
+    # "org/gnome/shell/extensions/forge" = {
+    #   window-gap-hidden-on-single = true;
+    #   window-gap-size = mkUint32 6;
+    # };
+    # "org/gnome/shell/extensions/forge/keybindings" = {
+    #   prefs-tiling-toggle = [];
+    #   focus-border-toggle = [];
+    #   window-swap-last-active = [];
+    #   window-toggle-float = [ "<Super>f" ];
+    #   window-toggle-always-float = [ "<Shift><Super>f" ];
+    # };
 
     "org/gnome/shell/extensions/just-perfection" = {
       animation = 4;
       notification-banner-position = 2;
       activities-button = false;
+    };
+
+    "org/gnome/shell/extensions/pop-shell" = {
+      fullscreen-launcher = true;
+      pop-monitor-left = [];
+      pop-monitor-right = [];
+      pop-workspace-down = [];
+      pop-workspace-up = [];
+      smart-gaps = true;
+      tile-by-default = true;
+      tile-enter = [];
+      tile-move-down-global = ["<Shift><Super>j"];
+      tile-move-left-global = ["<Shift><Super>h"];
+      tile-move-right-global = ["<Shift><Super>l"];
+      tile-move-up-global = ["<Shift><Super>k"];
+      toggle-floating = ["<Super>f"];
+      toggle-tiling = [];
+    };
+    "org/gnome/settings-daemon/plugins/media-keys" = {
+      email = [];
+      help = [];
+      home = [];
+      www = [];
     };
 
     "org/gnome/shell/extensions/search-light" = {
