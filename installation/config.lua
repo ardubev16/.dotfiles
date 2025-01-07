@@ -6,6 +6,7 @@ local M = {
         'nvim',
         'tmux',
         'zsh',
+        'kanata',
     },
 }
 
