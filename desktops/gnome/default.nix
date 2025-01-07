@@ -5,7 +5,7 @@
   programs.gnome-shell.enable = true;
   home.packages = with pkgs; [
     dconf-editor
-    # gnome-extension-manager
+    gnome-extension-manager
     gnome-tweaks
   ];
 
