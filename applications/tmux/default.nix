@@ -4,6 +4,10 @@
     (pkgs.writeShellScriptBin "tmux-sessionizer" (builtins.readFile ./tmux-sessionizer))
   ];
 
+  home.sessionVariables = {
+    REPOS = "$HOME/Repos";
+  };
+
   programs.tmux = {
     enable = true;
     baseIndex = 1;

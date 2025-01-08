@@ -18,6 +18,7 @@
     };
     "org/gnome/desktop/wm/preferences".num-workspaces = 10;
     "org/gnome/shell" = {
+      disable-extension-version-validation = true;
       disabled-extensions = [];
       favorite-apps = [];
     };
