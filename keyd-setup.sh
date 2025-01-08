@@ -1,9 +1,18 @@
 #!/usr/bin/env bash
 
-set -e
+set -euo pipefail
 
-BASE_PATH=$(dirname "$(realpath "$0")")
+setup_keyd() {
+    if [[ -z $(command -v keyd) ]]; then
+        echo "keyd is not installed"
+        exit 1
+    fi
 
-sudo cp -r "$BASE_PATH/keyd" /etc
-sudo systemctl enable keyd
-sudo systemctl start keyd
+    local -r base_path=$(dirname "$(realpath "$0")")
+
+    sudo cp -r "$base_path/keyd" /etc
+    sudo systemctl enable keyd
+    sudo systemctl start keyd
+}
+
+setup_keyd
