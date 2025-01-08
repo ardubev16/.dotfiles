@@ -1,21 +1,21 @@
 { pkgs, lib, ... }:
-{
-  programs.gnome-shell = {
-    extensions = with pkgs.gnomeExtensions; [
-      { package = appindicator; }
-      { package = auto-move-windows; }
-      # { package = forge; }
-      { package = fuzzy-app-search; }
-      { package = gsconnect; }
-      { package = just-perfection; }
-      { package = launch-new-instance; }
-      { package = pop-shell; }
-      { package = removable-drive-menu; }
-      { package = search-light; }
-      { package = vitals; }
-      { package = workspaces-indicator-by-open-apps; }
-    ];
-  };
+let
+  extensions = with pkgs.gnomeExtensions; [
+    appindicator
+    auto-move-windows
+    # forge
+    fuzzy-app-search
+    gsconnect
+    just-perfection
+    launch-new-instance
+    pop-shell
+    removable-drive-menu
+    search-light
+    vitals
+    workspaces-indicator-by-open-apps
+  ];
+in {
+  programs.gnome-shell.extensions = builtins.map (e: { package = e; }) extensions;
 
   dconf.settings = with lib.hm.gvariant; {
     "org/gnome/shell/extensions/auto-move-windows" = {
