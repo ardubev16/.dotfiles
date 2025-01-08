@@ -9,14 +9,18 @@
     gnome-tweaks
   ];
 
+  dconf.enable = true;
   dconf.settings = with lib.hm.gvariant; {
     # src: https://github.com/pop-os/shell/issues/142#issuecomment-678185443
     "org/gnome/mutter" = {
       dynamic-workspaces = false;
       edge-tiling = false;
     };
-    "org/gnome/desktop/wm/preferences" = { num-workspaces = 10; };
-    "org/gnome/shell" = { favorite-apps = []; };
+    "org/gnome/desktop/wm/preferences".num-workspaces = 10;
+    "org/gnome/shell" = {
+      disabled-extensions = [];
+      favorite-apps = [];
+    };
 
     "org/gnome/shell/keybindings" = {
       switch-to-application-1 = [];
@@ -58,7 +62,7 @@
       minimize = []; # disable <Super>h
     };
 
-    "org/gnome/settings-daemon/plugins/media-keys" = { screensaver = ["<Super>x"]; };
+    "org/gnome/settings-daemon/plugins/media-keys".screensaver = ["<Super>x"];
 
     # keys speed
     "org/gnome/desktop/peripherals/keyboard" = {
@@ -66,10 +70,10 @@
       # 20 is the milliseconds delay, it equals to 50 keys per second
       repeat-interval = mkUint32 20;
     };
-    "org/gnome/desktop/peripherals/touchpad" = { tap-to-click = true; };
+    "org/gnome/desktop/peripherals/touchpad".tap-to-click = true;
 
-    "org/gnome/desktop/remote-desktop/rdp" = { screen-share-mode = "extend"; };
-    "org/gnome/desktop/sound" = { allow-volume-above-100-percent = true; };
+    "org/gnome/desktop/remote-desktop/rdp".screen-share-mode = "extend";
+    "org/gnome/desktop/sound".allow-volume-above-100-percent = true;
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
       show-battery-percentage = true;
@@ -80,7 +84,7 @@
       night-light-enabled = true;
       night-light-temperature = mkUint32 3700;
     };
-    "org/gtk/settings/file-chooser" = { clock-format = "12h"; };
-    "org/gtk/gtk4/settings/file-chooser" = { clock-format = "12h"; };
+    "org/gtk/settings/file-chooser".clock-format = "12h";
+    "org/gtk/gtk4/settings/file-chooser".clock-format = "12h";
   };
 }
