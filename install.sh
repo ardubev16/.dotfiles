@@ -2,25 +2,31 @@
 
 set -euo pipefail
 
-setup_keyd() {
-    if [[ -z $(command -v keyd) ]]; then
-        echo "keyd is not installed"
+check_dependencies() {
+    local -r dependencies=(
+        "git"
+        "curl"
+    )
+
+    local not_met=false
+    for dep in "${dependencies[@]}"; do
+        if [[ -z $(command -v "$dep") ]]; then
+            echo "$dep is not installed"
+            not_met=true
+        fi
+    done
+
+    if [[ "$not_met" == true ]]; then
         exit 1
     fi
-
-    local -r base_path=$(dirname "$(realpath "$0")")
-
-    sudo cp -r "$base_path/keyd" /etc
-    sudo systemctl enable keyd
-    sudo systemctl start keyd
 }
 
 install_nix() {
     if [[ -n $(command -v nix) ]]; then
-        echo "nix already installed"
         return
     fi
 
+    echo "[+] Installing Nix"
     # see: https://github.com/DeterminateSystems/nix-installer
     curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix |
         sh -s -- install
@@ -38,7 +44,7 @@ home_manager_switch() {
 }
 
 main() {
-    # setup_keyd
+    check_dependencies
 
     git submodule update --init --recursive
 
