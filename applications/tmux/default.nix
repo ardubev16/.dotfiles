@@ -1,11 +1,11 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   home.packages = [
     (pkgs.writeShellScriptBin "tmux-sessionizer" (builtins.readFile ./tmux-sessionizer))
   ];
 
   home.sessionVariables = {
-    REPOS = "$HOME/Repos";
+    REPOS = "${config.home.homeDirectory}/Repos";
   };
 
   programs.tmux = {
