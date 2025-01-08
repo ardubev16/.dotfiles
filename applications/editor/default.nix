@@ -24,11 +24,4 @@
     defaultEditor = true;
   };
   xdg.configFile."nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/applications/editor/nvim";
-
-  programs.lazygit.enable = true;
-  stylix.targets.lazygit.enable = true;
-  # FIXME: merge this config with the theme by stylix.
-  # xdg.configFile."lazygit".source = ./lazygit.yaml;
-
-  xdg.configFile."git".source = ./gitconfig;
 }
