@@ -22,4 +22,6 @@
     };
   };
   stylix.targets.alacritty.enable = true;
+
+  home.packages = [pkgs.ghostty];
 }
