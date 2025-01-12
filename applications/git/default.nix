@@ -9,5 +9,5 @@
   # FIXME: merge this config with the theme by stylix.
   # xdg.configFile."lazygit".source = ./lazygit.yaml;
 
-  xdg.configFile."git".source = ./gitconfig;
+  xdg.configFile."git/config".source = ./gitconfig;
 }
