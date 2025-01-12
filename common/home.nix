@@ -13,17 +13,20 @@
     package = pkgs.nix;
     settings.experimental-features = [ "nix-command" "flakes" ];
   };
+  programs.home-manager.enable = true;
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+    discord
     docker
-    keyd
+    htop
     kubectl
     nushell
+    spotify
+    telegram-desktop
+    thunderbird
   ];
-
-  programs.home-manager.enable = true;
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
