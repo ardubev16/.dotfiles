@@ -19,13 +19,16 @@
   # environment.
   home.packages = with pkgs; [
     discord
-    docker
     htop
+    k9s
     kubectl
+    kubernetes-helm
     nushell
+    pre-commit
     spotify
     telegram-desktop
     thunderbird
+    uv
   ];
 
   # This value determines the Home Manager release that your configuration is
