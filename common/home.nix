@@ -7,7 +7,8 @@ let
     kubernetes-helm
     kustomize
   ];
-in {
+in
+{
   home.homeDirectory = "/home/${config.home.username}";
   targets.genericLinux.enable = true;
 
@@ -19,20 +20,26 @@ in {
 
   nix = {
     package = pkgs.nix;
-    settings.experimental-features = [ "nix-command" "flakes" ];
+    settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
   };
   programs.home-manager.enable = true;
 
-  home.packages = with pkgs; [
-    discord
-    htop
-    nushell
-    pre-commit
-    spotify
-    telegram-desktop
-    thunderbird
-    uv
-  ] ++ k8s-tools;
+  home.packages =
+    with pkgs;
+    [
+      discord
+      htop
+      nushell
+      pre-commit
+      spotify
+      telegram-desktop
+      thunderbird
+      uv
+    ]
+    ++ k8s-tools;
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release

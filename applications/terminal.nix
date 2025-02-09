@@ -23,5 +23,5 @@
   };
   stylix.targets.alacritty.enable = true;
 
-  home.packages = [pkgs.ghostty];
+  home.packages = [ pkgs.ghostty ];
 }
