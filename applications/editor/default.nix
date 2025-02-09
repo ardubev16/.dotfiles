@@ -2,9 +2,12 @@
 {
   home.packages = with pkgs; [
     bat
+    cargo
     chafa
+    dotnet-sdk
     fd
     fzf
+    gh
     git
     go
     nodejs

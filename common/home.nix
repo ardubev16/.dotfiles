@@ -1,5 +1,13 @@
 { config, pkgs, ... }:
-{
+let
+  k8s-tools = with pkgs; [
+    argocd
+    k9s
+    kubectl
+    kubernetes-helm
+    kustomize
+  ];
+in {
   home.homeDirectory = "/home/${config.home.username}";
   targets.genericLinux.enable = true;
 
@@ -15,26 +23,16 @@
   };
   programs.home-manager.enable = true;
 
-  # The home.packages option allows you to install Nix packages into your
-  # environment.
   home.packages = with pkgs; [
-    argocd
-    cargo
     discord
-    dotnet-sdk
-    gh
     htop
-    k9s
-    kubectl
-    kubernetes-helm
-    kustomize
     nushell
     pre-commit
     spotify
     telegram-desktop
     thunderbird
     uv
-  ];
+  ] ++ k8s-tools;
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
