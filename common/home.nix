@@ -19,7 +19,10 @@
   # environment.
   home.packages = with pkgs; [
     argocd
+    cargo
     discord
+    dotnet-sdk
+    gh
     htop
     k9s
     kubectl
