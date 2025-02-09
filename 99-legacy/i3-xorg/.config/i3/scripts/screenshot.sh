@@ -12,7 +12,7 @@ else
     scrot -e 'xclip -selection clipboard -t image/png -i $f' \
         ~/Pictures/"$filename"
 fi
-    
+
 ACTION=$(dunstify -u low -A "default,Open" -i "camera-photo" "Screenshot saved" "$filename")
 
 case $ACTION in

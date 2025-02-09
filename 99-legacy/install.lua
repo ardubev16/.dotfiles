@@ -88,8 +88,8 @@ end
 
 local function install_i3xorg(distro)
     log.info('Do you want to install i3-xorg? [y/n] ')
-    local ans = io.read() == 'y'
-    if ans then
+    local answer = io.read() == 'y'
+    if answer then
         log.info('Installing i3-xorg')
         install_deps(distro, config.i3xorg_deps)
         stow_dirs({ 'i3-xorg', 'alacritty' })
