@@ -18,11 +18,13 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+    argocd
     discord
     htop
     k9s
     kubectl
     kubernetes-helm
+    kustomize
     nushell
     pre-commit
     spotify

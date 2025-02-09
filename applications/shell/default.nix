@@ -61,6 +61,7 @@
         "ohmyzsh/ohmyzsh path:plugins/docker kind:fpath"
         "ohmyzsh/ohmyzsh path:plugins/eza"
         "ohmyzsh/ohmyzsh path:plugins/git"
+        "ohmyzsh/ohmyzsh path:plugins/kubectl"
         "ohmyzsh/ohmyzsh path:plugins/virtualenv"
         "ohmyzsh/ohmyzsh path:plugins/zsh-interactive-cd"
 
