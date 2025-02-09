@@ -1,6 +1,6 @@
 { pkgs, ... }:
-
 {
+
   stylix.enable = true;
   stylix.autoEnable = false;
 
