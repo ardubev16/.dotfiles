@@ -16,14 +16,14 @@ in
   config = {
     home.packages =
       with pkgs;
-      (lib.mkIf cfg.kubernetes [
+      (lib.lists.optionals cfg.kubernetes [
         argocd
         k9s
         kubectl
         kubernetes-helm
         kustomize
       ])
-      ++ (lib.mkIf cfg.reverseEngineering [
+      ++ (lib.lists.optionals cfg.reverseEngineering [
         gef
         ghidra-bin
         pwntools
