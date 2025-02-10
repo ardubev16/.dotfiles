@@ -25,6 +25,7 @@ in
     programs.home-manager.enable = true;
 
     targets.genericLinux.enable = cfg.nonNixOS;
+    nixGL.packages = lib.mkIf cfg.nonNixOS inputs.nixGL.packages;
     nix = lib.mkIf cfg.nonNixOS {
       package = pkgs.nix;
       settings.experimental-features = [
