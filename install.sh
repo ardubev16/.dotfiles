@@ -39,7 +39,7 @@ home_manager_switch() {
         home-manager switch --flake .
     else
         nix-shell -p home-manager --run \
-            "home-manager --extra-experimental-features 'nix-command flakes' switch --flake ."
+            'home-manager --extra-experimental-features "nix-command flakes" switch --flake ".#${USER}@${HOSTNAME}"'
     fi
 }
 
