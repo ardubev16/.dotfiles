@@ -10,7 +10,6 @@ let
 in
 {
   imports = [
-    inputs.stylix.homeManagerModules.stylix
     inputs.self.homeModules.theme
     inputs.self.homeModules.toolsets
     ../../applications
@@ -18,15 +17,15 @@ in
   ];
 
   options.global = {
-    nonNixOS = lib.mkEnableOption "Enable non-NixOS specific configuration.";
+    notNixOS = lib.mkEnableOption "Enable non-NixOS specific configuration.";
   };
 
   config = {
     programs.home-manager.enable = true;
 
-    targets.genericLinux.enable = cfg.nonNixOS;
-    nixGL.packages = lib.mkIf cfg.nonNixOS inputs.nixGL.packages;
-    nix = lib.mkIf cfg.nonNixOS {
+    targets.genericLinux.enable = cfg.notNixOS;
+    nixGL.packages = lib.mkIf cfg.notNixOS inputs.nixGL.packages;
+    nix = lib.mkIf cfg.notNixOS {
       package = pkgs.nix;
       settings.experimental-features = [
         "nix-command"

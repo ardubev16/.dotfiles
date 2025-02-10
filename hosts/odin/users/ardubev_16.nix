@@ -2,7 +2,7 @@
 {
   imports = [ inputs.self.homeModules.baseUser ];
 
-  global.nonNixOS = true;
+  global.notNixOS = true;
 
   global.toolsets.kubernetes = true;
   home.packages = with pkgs; [
