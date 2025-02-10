@@ -5,10 +5,10 @@
   ...
 }:
 let
-  cfg = config.toolsets;
+  cfg = config.global.toolsets;
 in
 {
-  options.toolsets = with lib; {
+  options.global.toolsets = with lib; {
     kubernetes = mkEnableOption "Tools to interact with Kubernetes.";
     reverseEngineering = mkEnableOption "Tools to reverse engineer software.";
   };

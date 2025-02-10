@@ -1,4 +1,13 @@
-{ inputs, ... }:
+{
+  config,
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
+let
+  cfg = config.global;
+in
 {
   imports = [
     inputs.stylix.homeManagerModules.stylix
@@ -8,5 +17,20 @@
     ../../desktops/gnome
   ];
 
-  programs.home-manager.enable = true;
+  options.global = {
+    nonNixOS = lib.mkEnableOption "Enable non-NixOS specific configuration.";
+  };
+
+  config = {
+    programs.home-manager.enable = true;
+
+    targets.genericLinux.enable = cfg.nonNixOS;
+    nix = lib.mkIf cfg.nonNixOS {
+      package = pkgs.nix;
+      settings.experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+    };
+  };
 }
