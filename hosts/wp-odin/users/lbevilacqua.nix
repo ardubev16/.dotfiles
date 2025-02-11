@@ -8,6 +8,7 @@
   home.packages = with pkgs; [
     htop
     nushell
+    powershell
     pre-commit
     spotify
     telegram-desktop
