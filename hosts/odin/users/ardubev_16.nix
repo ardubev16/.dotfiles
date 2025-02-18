@@ -12,6 +12,7 @@
     pre-commit
     spotify
     telegram-desktop
+    terraform
     thunderbird
     uv
   ];
