@@ -11,7 +11,7 @@
     nushell
     pre-commit
     spotify
-    telegram-desktop
+    # telegram-desktop
     terraform
     thunderbird
     uv
