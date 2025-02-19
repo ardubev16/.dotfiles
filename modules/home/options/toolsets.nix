@@ -19,6 +19,7 @@ in
       (lib.lists.optionals cfg.kubernetes [
         argocd
         k9s
+        kubeconform
         kubectl
         kubernetes-helm
         kustomize
