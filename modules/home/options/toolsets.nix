@@ -11,6 +11,7 @@ in
   options.global.toolsets = with lib; {
     kubernetes = mkEnableOption "Tools to interact with Kubernetes.";
     reverseEngineering = mkEnableOption "Tools to reverse engineer software.";
+    yubikey = mkEnableOption "Tools to interact with YubiKey devices.";
   };
 
   config = {
@@ -29,6 +30,11 @@ in
         gef
         ghidra-bin
         pwntools
+      ])
+      ++ (lib.lists.optionals cfg.yubikey [
+        yubikey-manager
+        yubikey-touch-detector # TODO: configure: https://github.com/maximbaz/yubikey-touch-detector
+        yubioath-flutter
       ]);
   };
 }

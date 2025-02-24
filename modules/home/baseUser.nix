@@ -1,5 +1,7 @@
 { inputs, ... }:
 {
+  global.toolsets.yubikey = true;
+
   imports = [
     inputs.self.homeModules.options
     inputs.self.homeModules.theme
