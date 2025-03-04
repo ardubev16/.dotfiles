@@ -1,27 +1,37 @@
-{ pkgs, ... }:
+{ pkgs, perSystem, ... }:
+let
+  unstable-pkgs = with perSystem.nixpkgs-unstable; [
+    devenv
+  ];
+in
 {
+  home.packages =
+    with pkgs;
+    [
+      cmake
+      curl
+      eza
+      fd
+      fzf
+      gcc
+      gdb
+      git
+      gpp
+      jq
+      pipx
+      ripgrep
+      wget
+      xclip
+      xsel
+      xxd
+      zip
+    ]
+    ++ unstable-pkgs;
+
   programs.bat.enable = true;
   stylix.targets.bat.enable = true;
 
-  home.packages = with pkgs; [
-    cmake
-    curl
-    eza
-    fd
-    fzf
-    gcc
-    gdb
-    git
-    gpp
-    jq
-    pipx
-    ripgrep
-    wget
-    xclip
-    xsel
-    xxd
-    zip
-  ];
+  programs.direnv.enable = true;
 
   home.shellAliases = {
     # better commands
