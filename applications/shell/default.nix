@@ -31,7 +31,10 @@ in
   programs.bat.enable = true;
   stylix.targets.bat.enable = true;
 
-  programs.direnv.enable = true;
+  programs.direnv = {
+    enable = true;
+    config.global.hide_env_diff = true;
+  };
 
   home.shellAliases = {
     # better commands
@@ -87,9 +90,6 @@ in
     # '';
   };
 
-  programs.starship = {
-    enable = true;
-    enableZshIntegration = true;
-  };
+  programs.starship.enable = true;
   xdg.configFile."starship.toml".source = ./starship.toml;
 }

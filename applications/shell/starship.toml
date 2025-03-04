@@ -73,7 +73,7 @@ format = '\[[$symbol$account(@$domain)(\($region\))]($style)\]'
 format = '[git:\([$branch](bold red)\)](bold blue) '
 
 [git_status]
-format = '([$all_status$ahead_behind](bold yellow)) '
+format = '([$all_status$ahead_behind](bold yellow) )'
 
 [golang]
 format = '\[[$symbol($version)]($style)\]'
@@ -118,7 +118,10 @@ format = '\[[$symbol$project]($style)\]'
 format = '\[[$symbol($version)]($style)\]'
 
 [nix_shell]
-format = '\[[$symbol$state( \($name\))]($style)\]'
+impure_msg = "i"
+pure_msg = "p"
+symbol = "❄️"
+format = '\[[$symbol$state]($style)\]'
 
 [nodejs]
 format = '\[[$symbol($version)]($style)\]'
