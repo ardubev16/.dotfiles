@@ -8,12 +8,15 @@
   home.packages = with pkgs; [
     discord
     htop
+    mariadb
     nushell
     pre-commit
     spotify
     telegram-desktop
+    teleport
     terraform
     thunderbird
     uv
+    yazi
   ];
 }
