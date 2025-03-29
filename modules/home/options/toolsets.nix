@@ -23,12 +23,14 @@ in
         kube-review
         kubeconform
         kubectl
+        kubectl-cnpg
         kubernetes-helm
         kustomize
       ])
       ++ (lib.lists.optionals cfg.reverseEngineering [
         gef
         ghidra-bin
+        ilspycmd
         pwntools
       ])
       ++ (lib.lists.optionals cfg.yubikey [

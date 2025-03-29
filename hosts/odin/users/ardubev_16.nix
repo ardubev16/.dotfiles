@@ -5,6 +5,7 @@
   global.notNixOS = true;
 
   global.toolsets.kubernetes = true;
+  global.toolsets.reverseEngineering = true;
   home.packages = with pkgs; [
     discord
     htop
