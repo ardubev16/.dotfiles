@@ -28,8 +28,11 @@ in
         kustomize
       ])
       ++ (lib.lists.optionals cfg.reverseEngineering [
+        detect-it-easy
         gef
         ghidra-bin
+        hivex
+        ilspycmd
         ilspycmd
         pwntools
       ])
