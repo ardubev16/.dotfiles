@@ -7,6 +7,7 @@
   global.toolsets.kubernetes = true;
   home.packages = with pkgs; [
     git-filter-repo
+    git-lfs
     htop
     nushell
     powershell
