@@ -19,7 +19,9 @@ in
       with pkgs;
       (lib.lists.optionals cfg.kubernetes [
         argocd
+        dive
         k9s
+        kind
         kube-review
         kubeconform
         kubectl
