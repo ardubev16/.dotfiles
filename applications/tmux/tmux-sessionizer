@@ -2,7 +2,7 @@
 
 set -e
 
-usage() {
+function usage() {
     cat <<EOF
 "Usage: $0 [options] [command]"
     -a:                 show all repos
@@ -15,29 +15,35 @@ EOF
     exit 1
 }
 
+function list_repos() {
+    local -r base_path="$1"
+
+    find "$base_path" -type d -name '.git' -prune -exec dirname {} \;
+}
+
 while getopts "awpucs:h" opt; do
     case $opt in
-        a)
-            selected=$(find "$REPOS"/work "$REPOS"/personal "$REPOS"/unitn "$REPOS"/ctf -mindepth 1 -maxdepth 1 -type d | fzf)
-            ;;
-        w)
-            selected=$(find "$REPOS"/work -mindepth 1 -maxdepth 1 -type d | fzf)
-            ;;
-        p)
-            selected=$(find "$REPOS"/personal -mindepth 1 -maxdepth 1 -type d | fzf)
-            ;;
-        u)
-            selected=$(find "$REPOS"/unitn -mindepth 1 -maxdepth 1 -type d | fzf)
-            ;;
-        c)
-            selected=$(find "$REPOS"/ctf -mindepth 1 -maxdepth 1 -type d | fzf)
-            ;;
-        s)
-            selected=$OPTARG
-            ;;
-        h|*)
-            usage
-            ;;
+    a)
+        selected=$(list_repos "$REPOS" | fzf)
+        ;;
+    w)
+        selected=$(list_repos "$REPOS"/work | fzf)
+        ;;
+    p)
+        selected=$(list_repos "$REPOS"/personal | fzf)
+        ;;
+    u)
+        selected=$(list_repos "$REPOS"/unitn | fzf)
+        ;;
+    c)
+        selected=$(list_repos "$REPOS"/ctf | fzf)
+        ;;
+    s)
+        selected=$OPTARG
+        ;;
+    h | *)
+        usage
+        ;;
     esac
 done
 if [ "$OPTIND" -eq 1 ]; then
@@ -55,7 +61,7 @@ else
         exit 0
     fi
 
-    if ! tmux has-session -t="$selected_name" 2> /dev/null; then
+    if ! tmux has-session -t="$selected_name" 2>/dev/null; then
         tmux new-session -ds "$selected_name" -c "$selected"
     fi
 
