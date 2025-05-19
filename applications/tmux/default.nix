@@ -31,26 +31,27 @@
 
     extraConfig = # tmux
       ''
-        set -g renumber-windows on
-        set -g default-terminal "tmux-256color"
+        set-option -g renumber-windows on
+        set-option -g default-terminal "tmux-256color"
         # undercurl support
-        set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'
+        set-option -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'
         # support colors for undercurl
-        set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'
+        set-option -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'
 
         # Split panes using | and -
-        bind \\ split-window -h -c '#{pane_current_path}'
-        bind | split-window -v -c '#{pane_current_path}'
-        unbind '"'
-        unbind %
+        bind-key \\ split-window -h -c '#{pane_current_path}'
+        bind-key | split-window -v -c '#{pane_current_path}'
+        unbind-key '"'
+        unbind-key %
 
         # Custom binds
-        bind i run-shell 'tmux neww tmux-cht.sh'
-        bind A run-shell "tmux neww tmux-sessionizer -a"
-        bind W run-shell "tmux neww tmux-sessionizer -w"
-        bind P run-shell "tmux neww tmux-sessionizer -p"
-        bind S run-shell "tmux neww tmux-sessionizer -u"
-        bind C run-shell "tmux neww tmux-sessionizer -c"
+        bind-key R run-shell '\
+          tmux source-file ${config.xdg.configHome}/tmux/tmux.conf; \
+          tmux display-message "Sourced config file!"'
+        bind-key A run-shell 'tmux display-popup -E tmux-sessionizer -a'
+        bind-key W run-shell 'tmux display-popup -E tmux-sessionizer -w'
+        bind-key P run-shell 'tmux display-popup -E tmux-sessionizer -p'
+        bind-key S run-shell 'tmux display-popup -E tmux-sessionizer -u'
       '';
   };
 }

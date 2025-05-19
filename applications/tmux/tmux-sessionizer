@@ -18,25 +18,54 @@ EOF
 function list_repos() {
     local -r base_path="$1"
 
-    find "$base_path" -type d -name '.git' -prune -exec dirname {} \;
+    fd '.git' \
+        --hidden \
+        --no-ignore \
+        --type directory \
+        --prune \
+        --glob \
+        --absolute-path \
+        "$base_path" \
+        --exec-batch dirname |
+        sort --reverse
 }
 
-while getopts "awpucs:h" opt; do
+function pick_path() {
+    mapfile -t paths
+
+    [[ ${#paths[@]} -eq 0 ]] && return 1
+
+    common_prefix="${paths[0]}"
+    for path in "${paths[@]}"; do
+        while [[ "$path" != "$common_prefix"* ]]; do
+            common_prefix="${common_prefix%/*}"
+        done
+    done
+
+    local -r selected=$(
+        printf "%s\n" "${paths[@]}" |
+            sed "s:^$common_prefix/::" |
+            fzf
+    )
+
+    if [[ -n $selected ]]; then
+        echo "$common_prefix/$selected"
+    fi
+}
+
+while getopts "awpus:h" opt; do
     case $opt in
     a)
-        selected=$(list_repos "$REPOS" | fzf)
+        selected=$(list_repos "$REPOS" | pick_path)
         ;;
     w)
-        selected=$(list_repos "$REPOS"/work | fzf)
+        selected=$(list_repos "$REPOS"/work | pick_path)
         ;;
     p)
-        selected=$(list_repos "$REPOS"/personal | fzf)
+        selected=$(list_repos "$REPOS"/personal | pick_path)
         ;;
     u)
-        selected=$(list_repos "$REPOS"/unitn | fzf)
-        ;;
-    c)
-        selected=$(list_repos "$REPOS"/ctf | fzf)
+        selected=$(list_repos "$REPOS"/unitn | pick_path)
         ;;
     s)
         selected=$OPTARG
@@ -48,6 +77,10 @@ while getopts "awpucs:h" opt; do
 done
 if [ "$OPTIND" -eq 1 ]; then
     usage
+fi
+
+if [[ -z $selected ]]; then
+    exit 0
 fi
 
 if [[ -e "$selected/.tmuxp.yaml" ]]; then
