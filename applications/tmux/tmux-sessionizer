@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 
-set -e
+set -euo pipefail
 
 function usage() {
     cat <<EOF
 "Usage: $0 [options] [command]"
-    -a:                 show all repos
-    -w:                 show only work repos
-    -p:                 show only personal repos
-    -u:                 show only university repos
-    -s /path/to/repo:   select specific repo
-    -h:                 show this help
+    -a:     show all repos
+    -w:     show only work repos
+    -p:     show only personal repos
+    -u:     show only university repos
+    -s:     select from open sessions
+    -h:     show this help
 EOF
     exit 1
 }
@@ -53,7 +53,15 @@ function pick_path() {
     fi
 }
 
-while getopts "awpus:h" opt; do
+function select_session() {
+    local -r selected=$(tmux list-sessions -F'#{session_name}' | fzf)
+
+    if [[ -n $selected ]]; then
+        tmux switch-client -t "$selected"
+    fi
+}
+
+while getopts "awpush" opt; do
     case $opt in
     a)
         selected=$(list_repos "$REPOS" | pick_path)
@@ -68,7 +76,8 @@ while getopts "awpus:h" opt; do
         selected=$(list_repos "$REPOS"/unitn | pick_path)
         ;;
     s)
-        selected=$OPTARG
+        select_session
+        exit 0
         ;;
     h | *)
         usage

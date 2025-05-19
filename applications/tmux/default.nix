@@ -48,10 +48,15 @@
         bind-key R run-shell '\
           tmux source-file ${config.xdg.configHome}/tmux/tmux.conf; \
           tmux display-message "Sourced config file!"'
-        bind-key A run-shell 'tmux display-popup -E tmux-sessionizer -a'
-        bind-key W run-shell 'tmux display-popup -E tmux-sessionizer -w'
-        bind-key P run-shell 'tmux display-popup -E tmux-sessionizer -p'
-        bind-key S run-shell 'tmux display-popup -E tmux-sessionizer -u'
+
+        bind-key A display-popup -E tmux-sessionizer -a
+        bind-key W display-popup -E tmux-sessionizer -w
+        bind-key P display-popup -E tmux-sessionizer -p
+        bind-key U display-popup -E tmux-sessionizer -u
+        bind-key S display-popup -E tmux-sessionizer -s
+
+        bind-key -n M-o switch-client -p
+        bind-key -n M-i switch-client -n
       '';
   };
 }
