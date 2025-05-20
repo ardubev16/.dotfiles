@@ -2,6 +2,7 @@
 {
   home.packages = [
     (pkgs.writeShellScriptBin "tmux-sessionizer" (builtins.readFile ./tmux-sessionizer))
+    (pkgs.writeShellScriptBin "tmux-session-mngr" (builtins.readFile ./tmux-session-mngr))
   ];
 
   home.sessionVariables = {
@@ -54,6 +55,11 @@
         bind-key P display-popup -E tmux-sessionizer -p
         bind-key U display-popup -E tmux-sessionizer -u
         bind-key S display-popup -E tmux-sessionizer -s
+
+        bind-key t display-popup -E tmux-session-mngr -t
+        bind-key X display-popup -E tmux-session-mngr -c
+        bind-key M run-shell 'tmux-session-mngr -m'
+        bind-key N run-shell 'tmux-session-mngr -u'
 
         bind-key -n M-o switch-client -p
         bind-key -n M-i switch-client -n

@@ -1,0 +1,119 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+function usage() {
+    cat <<EOF
+Usage: $(basename "$0") [options]
+Options:
+  -t            Toggle mark on selected sessions
+  -m            Mark current session
+  -u            Unmark current session
+  -c            Close all unmarked sessions
+  -s <symbol>   Set the mark symbol (default: M)
+  -h            Show this help message
+EOF
+    exit 1
+}
+
+function mark() {
+    read -r session
+    local -r mark_symbol="$1"
+
+    [[ -z $session ]] && return 1
+
+    if echo "$session" | grep --quiet "\[$mark_symbol\]"; then
+        return 0
+    fi
+
+    local -r new_name="[$mark_symbol] $session"
+    tmux rename-session -t "$session" "$new_name"
+}
+
+function unmark() {
+    read -r session
+    local -r mark_symbol="$1"
+
+    [[ -z $session ]] && return 1
+
+    local -r new_name="${session/\[$mark_symbol\] /}"
+    tmux rename-session -t "$session" "$new_name"
+}
+
+function toggle_many() {
+    mapfile -t sessions
+    local -r mark_symbol="$1"
+
+    if [[ ${#sessions[@]} -eq 0 ]]; then
+        return 1
+    fi
+
+    for session in "${sessions[@]}"; do
+        echo "$session" |
+            if echo "$session" | grep --quiet "\[$mark_symbol\]"; then
+                unmark "$mark_symbol"
+            else
+                mark "$mark_symbol"
+            fi
+    done
+}
+
+function multiselect_sessions() {
+    tmux list-sessions -F'#{session_name}' |
+        fzf --multi \
+            --bind 'load:unbind(esc),space:toggle,ctrl-space:toggle,enter:toggle,alt-enter:accept-non-empty'
+}
+
+function select_unmarked_sessions() {
+    mapfile -t sessions < <(tmux list-sessions -F'#{session_name}')
+    local -r mark_symbol="$1"
+
+    if [[ ${#sessions[@]} -eq 0 ]]; then
+        return 1
+    fi
+
+    for session in "${sessions[@]}"; do
+        if echo "$session" | grep --quiet "\[$mark_symbol\]"; then
+            continue
+        fi
+
+        echo "$session"
+    done
+}
+
+function close_all_unmarked_sessions() {
+    local -r mark_symbol="$1"
+    read -rp "Are you sure you want to close all unmarked sessions? (y/n) " -n 1
+
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        select_unmarked_sessions "$mark_symbol" |
+            xargs --no-run-if-empty -L1 tmux kill-session -t
+    else
+        echo "Aborted."
+    fi
+}
+
+MARK_SYMBOL="M"
+
+while getopts "tmucs:h" opt; do
+    case $opt in
+    t)
+        multiselect_sessions | toggle_many "$MARK_SYMBOL"
+        ;;
+    m)
+        tmux display-message -p '#{session_name}' | mark "$MARK_SYMBOL"
+        ;;
+    u)
+        tmux display-message -p '#{session_name}' | unmark "$MARK_SYMBOL"
+        ;;
+    c)
+        close_all_unmarked_sessions "$MARK_SYMBOL"
+        ;;
+    s)
+        MARK_SYMBOL="$OPTARG"
+        ;;
+    h | *)
+        usage
+        ;;
+    esac
+done
