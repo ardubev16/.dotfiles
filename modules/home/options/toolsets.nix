@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  perSystem,
   ...
 }:
 let
@@ -15,13 +16,12 @@ in
   };
 
   config = {
-    home.packages =
-      with pkgs;
-      (lib.lists.optionals cfg.kubernetes [
+    home.packages = (with perSystem.nixpkgs-unstable; lib.lists.optionals cfg.kubernetes [
         argocd
         dive
         k9s
         kind
+        kube-linter
         kube-review
         kubeconform
         kubectl
@@ -29,7 +29,7 @@ in
         kubernetes-helm
         kustomize
       ])
-      ++ (lib.lists.optionals cfg.reverseEngineering [
+      ++ (with pkgs; lib.lists.optionals cfg.reverseEngineering [
         detect-it-easy
         gef
         ghidra-bin
@@ -38,7 +38,7 @@ in
         ilspycmd
         pwntools
       ])
-      ++ (lib.lists.optionals cfg.yubikey [
+      ++ (with pkgs; lib.lists.optionals cfg.yubikey [
         yubikey-manager
         yubikey-touch-detector # TODO: configure: https://github.com/maximbaz/yubikey-touch-detector
         yubioath-flutter
