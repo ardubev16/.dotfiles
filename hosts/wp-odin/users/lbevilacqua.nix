@@ -17,5 +17,8 @@
     telegram-desktop
     uv
     yazi
+  ] ++ [
+    openshift
+    tektoncd-cli
   ];
 }
