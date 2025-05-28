@@ -8,7 +8,7 @@ let
     # gsconnect
     just-perfection
     launch-new-instance
-    pop-shell
+    # pop-shell
     removable-drive-menu
     # search-light
     vitals
