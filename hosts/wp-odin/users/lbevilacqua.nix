@@ -5,7 +5,7 @@
   global.notNixOS = true;
 
   global.toolsets.kubernetes = true;
-  global.toolsets.reverseEngineering = true;
+  global.toolsets.security = true;
   home.packages = with pkgs; [
     git-filter-repo
     git-lfs

@@ -11,7 +11,7 @@ in
 {
   options.global.toolsets = with lib; {
     kubernetes = mkEnableOption "Tools to interact with Kubernetes.";
-    reverseEngineering = mkEnableOption "Tools to reverse engineer software.";
+    security = mkEnableOption "Tools to do security related activities.";
     yubikey = mkEnableOption "Tools to interact with YubiKey devices.";
   };
 
@@ -29,7 +29,8 @@ in
         kubernetes-helm
         kustomize
       ])
-      ++ (with pkgs; lib.lists.optionals cfg.reverseEngineering [
+      ++ (with pkgs; lib.lists.optionals cfg.security [
+        burpsuite
         detect-it-easy
         gef
         ghidra-bin
