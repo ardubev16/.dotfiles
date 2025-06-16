@@ -36,7 +36,6 @@ in
         ghidra-bin
         hivex
         ilspycmd
-        ilspycmd
         pwntools
       ])
       ++ (with pkgs; lib.lists.optionals cfg.yubikey [

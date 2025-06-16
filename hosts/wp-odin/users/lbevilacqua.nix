@@ -15,6 +15,9 @@
     pre-commit
     spotify
     telegram-desktop
+    terraform
+    tflint
+    trivy
     uv
     yazi
   ] ++ [
