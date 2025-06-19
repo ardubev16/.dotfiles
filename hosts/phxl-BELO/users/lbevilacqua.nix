@@ -7,6 +7,7 @@
   global.toolsets.kubernetes = true;
   global.toolsets.security = true;
   home.packages = with pkgs; [
+    azure-cli
     git-filter-repo
     git-lfs
     htop
