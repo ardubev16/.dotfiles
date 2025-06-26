@@ -10,6 +10,7 @@
     azure-cli
     git-filter-repo
     git-lfs
+    gnumake
     htop
     nushell
     powershell
@@ -20,6 +21,7 @@
     tflint
     trivy
     uv
+    yarn
     yazi
   ] ++ [
     openshift
