@@ -9,6 +9,7 @@
   home.packages = with pkgs; [
     discord
     htop
+    kmonad
     mariadb
     nushell
     pre-commit
