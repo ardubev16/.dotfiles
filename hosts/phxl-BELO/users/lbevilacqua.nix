@@ -12,6 +12,7 @@
     git-lfs
     gnumake
     htop
+    kmonad
     nushell
     powershell
     pre-commit
