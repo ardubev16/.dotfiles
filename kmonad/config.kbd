@@ -11,7 +11,7 @@
   tab   q       w       e       r       t       y       u       i       o       p       [       ]       \
   caps  a       s       d       f       g       h       j       k       l       ;       '               ret
   lsft  z       x       c       v       b       n       m       ,       .       /                       rsft
-        lctl    lmet    lalt           spc                      ralt    prnt    rctl            pgup    pgdn
+        lctl    lmet    lalt                    spc             ralt    prnt    rctl
 )
 
 (defalias HOME_A (tap-hold-next-release 200 a lmet))
@@ -31,13 +31,21 @@
   tab       q           w           f           p           b           j           l           u           y           ;           [       ]       \
   esc       @HOME_A     @HOME_R     @HOME_S     @HOME_T     g           m           @HOME_N     @HOME_E     @HOME_I     @HOME_O     '               ret
   XX        z           x           c           d           v           k           h           ,           .           /                           XX
-            XX          XX          XX                                  @SPC_NL                             XX          prnt        XX              pgup    pgdn
+            XX          XX          (layer-toggle _ML)                  @SPC_NL                 XX          prnt        XX
 )
 
 ;; Navigation Layer
 (deflayer _NL
-  _         _           _           _           _           _           again       S-ins       C-ins       S-del       undo        _       _       _
+  _         _           _           _           _           _           again       paste       copy        cut         undo        _       _       _
   _         lmet        lalt        lctl        lsft        _           h           j           k           l           caps        _               _
   _         _           _           _           _           _           home        pgdn        pgup        end         ins                         _
-            _           _           _                                   _                                   _           _           _               _       _
+            _           _           _                                   _                       _           _           _
+)
+
+;; Media Layer
+(deflayer _ML
+  _         _           _           _           _           _           XX          brdn        brup        XX          micm        _       _       _
+  _         lmet        lalt        lctl        lsft        _           prev        vold        volu        next        pp          _               _
+  _         _           _           _           _           _           XX          XX          XX          XX          mute                        _
+            _           _           _                                   _                       _           _           _
 )
