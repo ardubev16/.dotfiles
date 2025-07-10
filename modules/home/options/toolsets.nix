@@ -27,7 +27,10 @@ in
         kubectl
         kubectl-cnpg
         kubernetes-helm
+        kubeseal
+        kubevirt
         kustomize
+        kyverno
       ])
       ++ (with pkgs; lib.lists.optionals cfg.security [
         burpsuite
