@@ -7,8 +7,11 @@
   global.toolsets.kubernetes = true;
   global.toolsets.security = true;
   home.packages = with pkgs; [
+    act
     discord
+    gemini-cli
     htop
+    httpie
     kmonad
     mariadb
     nushell
