@@ -10,7 +10,7 @@ let
     launch-new-instance
     # pop-shell
     removable-drive-menu
-    # search-light
+    search-light
     vitals
     workspaces-indicator-by-open-apps
   ];
