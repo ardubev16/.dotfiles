@@ -1,5 +1,4 @@
 ;; Copyright 2025 Lorenzo Bevilacqua
-;; Heavily inspired by github.com/manna-harbour/miryoku
 ;; vim: ft=lisp
 
 (defcfg
@@ -7,7 +6,7 @@
   fallthrough true
 )
 (defsrc
-;;  grv   1       2       3       4       5       6       7       8       9       0       -       =       bspc
+  grv   1       2       3       4       5       6       7       8       9       0       -       =       bspc
   tab   q       w       e       r       t       y       u       i       o       p       [       ]       \
   caps  a       s       d       f       g       h       j       k       l       ;       '               ret
   lsft  z       x       c       v       b       n       m       ,       .       /                       rsft
@@ -16,38 +15,88 @@
 
 (defalias
     met_a (tap-hold-next-release 200 a lmet)
-    alt_r (tap-hold-next-release 200 r lalt)
+    alt_w (tap-hold-next-release 200 w lalt)
     ctl_s (tap-hold-next-release 200 s lctl)
     sft_t (tap-hold-next-release 200 t lsft)
+    sl_r  (tap-hold-next-release 200 r (layer-toggle _SL))
 
     sft_n (tap-hold-next-release 200 n rsft)
     ctl_e (tap-hold-next-release 200 e rctl)
-    alt_i (tap-hold-next-release 200 i lalt)
+    alt_y (tap-hold-next-release 200 y lalt)
     met_o (tap-hold-next-release 200 o rmet)
+    sl_i  (tap-hold-next-release 200 i (layer-toggle _SL))
 
-    spc_nl (tap-hold-next-release 200 spc (layer-toggle _NL))
+    medl (layer-toggle _MEDL)
+    numl (layer-toggle _NUML)
+    navl_spc (tap-hold-next-release 200 spc (layer-toggle _NAVL))
 )
 
 ;; Base Layer
 (deflayer _BL
-  tab       q           w           f           p           b           j           l           u           y           ;           [       ]       \
-  esc       @met_a      @alt_r      @ctl_s      @sft_t      g           m           @sft_n      @ctl_e      @alt_i      @met_o      '               ret
-  XX        z           x           c           d           v           k           h           ,           .           /                           XX
-            XX          XX          (layer-toggle _ML)                  @spc_nl                 XX          prnt        XX
+  XX        1           2           3           4           5           6           7           8           9           0           XX      XX      bspc
+  tab       q           @alt_w      f           p           b           j           l           u           @alt_y      apos        XX      XX      XX
+  esc       @met_a      @sl_r       @ctl_s      @sft_t      g           m           @sft_n      @ctl_e      @sl_i       @met_o      ret             ret
+  XX        z           x           c           d           v           k           h           comm        dot         slash                       XX
+            XX          XX          @medl                               @navl_spc               @numl       prnt        XX
 )
 
 ;; Navigation Layer
-(deflayer _NL
-  _         _           _           _           _           _           again       paste       copy        cut         undo        _       _       _
+(deflayer _NAVL
+  _         _           _           _           _           _           _           _           _           _           _           _       _       _
+  _         _           _           _           _           _           _           _           _           _           _           _       _       _
   _         lmet        lalt        lctl        lsft        _           h           j           k           l           caps        _               _
-  _         _           _           _           _           _           home        pgdn        pgup        end         ins                         _
+  _         _           _           _           _           _           home        pgdn        pgup        end         _                           _
+            _           _           _                                   _                       _           _           _
+)
+
+;; Number Layer
+(deflayer _NUML
+  _         _           _           _           _           _           _           _           _           _           _           _       _       _
+  _         _           7           8           9           _           _           _           _           _           _           _       _       _
+  _         0           4           5           6           _           rsft        rctl        lalt        rmet        _           _               _
+  _         _           1           2           3           _           _           _           _           _           _                           _
             _           _           _                                   _                       _           _           _
 )
 
 ;; Media Layer
-(deflayer _ML
+(deflayer _MEDL
+  _         _           _           _           _           _           _           _           _           _           _           _       _       _
   _         _           _           _           _           _           XX          brdn        brup        XX          micm        _       _       _
   _         lmet        lalt        lctl        lsft        _           prev        vold        volu        next        pp          _               _
   _         _           _           _           _           _           XX          XX          XX          XX          mute                        _
+            _           _           _                                   _                       _           _           _
+)
+
+(defalias
+    tild S-grv
+    exlm S-1
+    at   S-2
+    hash S-3
+    dlr  S-4
+    perc S-5
+    circ S-6
+    ampr S-7
+    astr S-8
+    lprn S-9
+    rprn S-0
+    unds S-min
+    plus S-eql
+
+    lcbr S-lbrc
+    rcbr S-rbrc
+    pipe S-bksl
+    coln S-scln
+    dquo S-apos
+    labk S-comm
+    rabk S-dot
+    ques S-slash
+)
+
+;; Symbol Layer
+(deflayer _SL
+  _         _           _           _           _           _           _           _           _           _           _           _       _       _
+  _         grv         @tild       @hash       @ampr       @pipe       @circ       @lcbr       @rcbr       min         @dquo       _       _       _
+  _         @exlm       @unds       @coln       eql         @dlr        @at         @lprn       @rprn       @unds       scln        _               _
+  _         @perc       @ques       @astr       @plus       bksl        slash       @labk       @rabk       lbrc        rbrc                        _
             _           _           _                                   _                       _           _           _
 )
