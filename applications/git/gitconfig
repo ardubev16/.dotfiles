@@ -9,6 +9,8 @@
 
 [submodule]
 	recurse = true
+[push]
+    recurseSubmodules = on-demand
 [core]
 	excludefile = ~/.config/git/ignore
 [rerere]

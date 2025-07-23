@@ -46,7 +46,7 @@ home_manager_switch() {
 main() {
     check_dependencies
 
-    git submodule update --init --recursive
+    git submodule update --init --recursive --remote
 
     install_nix
     home_manager_switch

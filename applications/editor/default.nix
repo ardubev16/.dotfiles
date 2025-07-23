@@ -21,6 +21,9 @@
     vim = "$EDITOR";
     vimdiff = "$EDITOR";
   };
+  home.sessionPath = [
+    "$HOME/.cargo/bin"
+  ];
 
   programs.neovim = {
     enable = true;
