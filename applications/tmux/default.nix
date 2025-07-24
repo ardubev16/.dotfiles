@@ -39,11 +39,9 @@
         # support colors for undercurl
         set-option -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'
 
-        # Split panes using | and -
-        bind-key \\ split-window -h -c '#{pane_current_path}'
-        bind-key | split-window -v -c '#{pane_current_path}'
-        unbind-key '"'
-        unbind-key %
+        # Split panes with current path
+        bind-key % split-window -h -c '#{pane_current_path}'
+        bind-key '"' split-window -v -c '#{pane_current_path}'
 
         # Custom binds
         bind-key R run-shell '\
