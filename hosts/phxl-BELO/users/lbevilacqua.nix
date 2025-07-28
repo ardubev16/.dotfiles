@@ -25,6 +25,7 @@
     yarn
     yazi
   ] ++ [
+    crc
     openshift
     tektoncd-cli
   ];

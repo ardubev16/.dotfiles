@@ -31,6 +31,7 @@ in
         kubevirt
         kustomize
         kyverno
+        skopeo
       ])
       ++ (with pkgs; lib.lists.optionals cfg.security [
         burpsuite
