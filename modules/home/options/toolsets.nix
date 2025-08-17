@@ -20,6 +20,7 @@ in
         argocd
         cilium-cli
         dive
+        hubble
         k9s
         kind
         kube-linter
