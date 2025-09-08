@@ -61,6 +61,7 @@ in
     ez = "exec zsh";
     gspull = "git pull && git submodule foreach \"git checkout master\"";
     rpg = "openssl rand -hex";
+    note = "vim $HOME/Documents/notes/$(date '+%Y-%m-%d_%a').md";
   };
 
   programs.zsh = {
@@ -85,9 +86,12 @@ in
         "zsh-users/zsh-syntax-highlighting"
       ];
     };
-    # initExtra = /*sh*/ ''
-    #   zmodload zsh/zprof
-    # '';
+    initExtra = /*sh*/ ''
+      # zmodload zsh/zprof
+      if [[ -f ~/.localvars ]]; then
+        source ~/.localvars
+      fi
+    '';
   };
 
   home.sessionPath = [
