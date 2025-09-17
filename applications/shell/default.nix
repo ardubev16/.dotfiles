@@ -86,7 +86,7 @@ in
         "zsh-users/zsh-syntax-highlighting"
       ];
     };
-    initExtra = /*sh*/ ''
+    initContent = /*sh*/ ''
       # zmodload zsh/zprof
       if [[ -f ~/.localvars ]]; then
         source ~/.localvars
