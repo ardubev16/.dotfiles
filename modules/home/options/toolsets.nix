@@ -17,6 +17,7 @@ in
 
   config = {
     home.packages = (with perSystem.nixpkgs-unstable; lib.lists.optionals cfg.kubernetes [
+        argo-rollouts
         argocd
         cilium-cli
         dive
