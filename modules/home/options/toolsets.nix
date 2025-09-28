@@ -24,6 +24,7 @@ in
         hubble
         k9s
         kind
+        kompose
         kube-linter
         kube-review
         kubeconform

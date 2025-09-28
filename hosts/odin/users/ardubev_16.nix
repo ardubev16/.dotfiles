@@ -8,6 +8,7 @@
   global.toolsets.security = true;
   home.packages = with pkgs; [
     act
+    cloc
     discord
     gemini-cli
     htop
@@ -16,6 +17,7 @@
     mariadb
     nushell
     pre-commit
+    prometheus-alertmanager
     spotify
     telegram-desktop
     teleport
