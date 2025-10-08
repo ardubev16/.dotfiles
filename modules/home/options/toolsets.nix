@@ -22,6 +22,7 @@ in
         cilium-cli
         dive
         hubble
+        jq
         k9s
         kind
         kompose
@@ -36,6 +37,7 @@ in
         kustomize
         kyverno
         skopeo
+        yq
       ])
       ++ (with pkgs; lib.lists.optionals cfg.security [
         burpsuite
