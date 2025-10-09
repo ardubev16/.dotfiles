@@ -9,8 +9,6 @@ let
   cfg = config.global;
 in
 {
-  imports = [ ./toolsets.nix ];
-
   options.global = {
     notNixOS = lib.mkEnableOption "Enable non-NixOS specific configuration.";
   };

@@ -4,6 +4,7 @@
 
   imports = [
     inputs.self.homeModules.options
+    inputs.self.homeModules.toolsets
     inputs.self.homeModules.theme
     ../../applications
     ../../desktops/gnome
