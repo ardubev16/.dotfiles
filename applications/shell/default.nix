@@ -36,6 +36,11 @@ in
     config.global.hide_env_diff = true;
   };
 
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
   home.shellAliases = {
     # better commands
     ivm = "vim"; # because I can't type
@@ -79,25 +84,27 @@ in
         "ohmyzsh/ohmyzsh path:plugins/virtualenv"
         "ohmyzsh/ohmyzsh path:plugins/zsh-interactive-cd"
 
-        "changyuheng/fz"
-
         "zsh-users/zsh-autosuggestions"
         "zsh-users/zsh-completions"
         "zsh-users/zsh-syntax-highlighting"
       ];
     };
-    initContent = /*sh*/ ''
-      # zmodload zsh/zprof
-      if [[ -f ~/.localvars ]]; then
-        source ~/.localvars
-      fi
-    '';
+    initContent = # sh
+      ''
+        # zmodload zsh/zprof
+        if [[ -f ~/.localvars ]]; then
+          source ~/.localvars
+        fi
+      '';
   };
 
   home.sessionPath = [
     "$HOME/.local/bin"
   ];
 
-  programs.starship.enable = true;
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+  };
   xdg.configFile."starship.toml".source = ./starship.toml;
 }
