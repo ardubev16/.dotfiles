@@ -37,7 +37,7 @@
   tab       q           @alt_w      f           p           b           j           l           u           @alt_y      apos        XX      XX      XX
   esc       @met_a      @syml_r     @ctl_s      @sft_t      g           m           @sft_n      @ctl_e      @syml_i     @met_o      ret             ret
   XX        z           x           c           d           v           k           h           comm        dot         slash                       XX
-            XX          XX          @medl                               @navl_spc               @numl       prnt        XX
+            XX          XX          @medl                               @navl_spc               @numl       prnt        ralt
 )
 
 ;; Navigation Layer
