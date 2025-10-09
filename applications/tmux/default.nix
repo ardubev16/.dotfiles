@@ -9,6 +9,31 @@
     REPOS = "${config.home.homeDirectory}/Repos";
   };
 
+  programs.zsh.initContent = # sh
+    ''
+      __trap_exit_tmux() {
+        [[ -z "$TMUX" ]] && return  # Not in tmux, ignore
+
+        # Ignore if more than one window or pane exists
+        local win_count=$(tmux list-windows 2>/dev/null | wc -l)
+        local pane_count=$(tmux list-panes 2>/dev/null | wc -l)
+        [[ $win_count -ne 1 || $pane_count -ne 1 ]] && return
+
+        # If in default session, create a new window instead of closing session
+        local default_session_name="0"
+        local current_session=$(tmux display-message -p '#{session_name}')
+        [[ "$current_session" == "$default_session_name" ]] && tmux new-window
+
+        # Switch client to default session
+        tmux switch-client -t "$default_session_name"
+      }
+
+      # Only set the trap in interactive shells
+      if [[ $- == *i* ]]; then
+        trap __trap_exit_tmux EXIT
+      fi
+    '';
+
   programs.tmux = {
     enable = true;
     baseIndex = 1;
