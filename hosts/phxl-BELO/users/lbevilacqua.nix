@@ -6,27 +6,30 @@
 
   global.toolsets.kubernetes = true;
   global.toolsets.security = true;
-  home.packages = with pkgs; [
-    azure-cli
-    git-filter-repo
-    git-lfs
-    gnumake
-    htop
-    kmonad
-    nushell
-    powershell
-    pre-commit
-    spotify
-    telegram-desktop
-    terraform
-    tflint
-    trivy
-    uv
-    yarn
-    yazi
-  ] ++ [
-    crc
-    openshift
-    tektoncd-cli
-  ];
+  home.packages =
+    with pkgs;
+    [
+      azure-cli
+      git-filter-repo
+      git-lfs
+      gnumake
+      htop
+      kmonad
+      nushell
+      powershell
+      pre-commit
+      spotify
+      telegram-desktop
+      terraform
+      tflint
+      trivy
+      uv
+      yarn
+      yazi
+    ]
+    ++ [
+      crc
+      openshift
+      tektoncd-cli
+    ];
 }
