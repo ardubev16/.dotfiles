@@ -2,7 +2,6 @@
 {
   home.packages = with pkgs; [
     bat
-    cargo
     chafa
     dotnet-sdk
     fd
@@ -12,6 +11,7 @@
     go
     nodejs
     ripgrep
+    rustup
     ueberzugpp
     viu
   ];
