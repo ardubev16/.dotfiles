@@ -13,6 +13,10 @@ in
   };
 
   config = lib.mkIf cfg.kubernetes {
+    home.shellAliases = {
+      kex = "kubectl explain";
+    };
+
     home.packages = with perSystem.nixpkgs-unstable; [
       argo-rollouts
       argocd
