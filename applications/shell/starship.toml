@@ -106,7 +106,9 @@ format = '\[[$symbol($version)]($style)\]'
 format = '\[[$symbol($version)]($style)\]'
 
 [kubernetes]
-format = '\[[$symbol$context( \($namespace\))]($style)\]'
+format = '\[[$symbol$context]($style)\]'
+symbol = "󱃾 "
+disabled = false
 
 [lua]
 format = '\[[$symbol($version)]($style)\]'
