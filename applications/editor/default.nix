@@ -9,6 +9,7 @@
     gh
     git
     go
+    luajitPackages.luarocks
     nodejs
     ripgrep
     rustup
