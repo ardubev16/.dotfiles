@@ -20,6 +20,7 @@ in
       (
         with pkgs;
         lib.lists.optionals cfg.security [
+          binaryninja-free
           burpsuite
           detect-it-easy
           gef
