@@ -1,4 +1,9 @@
-{ inputs, pkgs, ... }:
+{
+  inputs,
+  pkgs,
+  lib,
+  ...
+}:
 {
   imports = [ inputs.self.homeModules.baseUser ];
 
@@ -11,6 +16,7 @@
     cloc
     discord
     gemini-cli
+    gpclient
     htop
     httpie
     kmonad
@@ -26,4 +32,14 @@
     uv
     yazi
   ];
+
+  home.shellAliases = {
+    unitnvpn = ''
+      sudo ${lib.getExe' pkgs.gpclient "gpclient"}
+          --fix-openssl connect
+          --csd-wrapper /usr/libexec/openconnect/hipreport.sh
+          --default-browser
+          vpn-mfa.icts.unitn.it
+    '';
+  };
 }
