@@ -27,6 +27,7 @@ in
           ghidra-bin
           hivex
           ilspycmd
+          ngrok
           pwntools
         ]
       )
