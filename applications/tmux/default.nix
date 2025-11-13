@@ -24,8 +24,9 @@
         local current_session=$(tmux display-message -p '#{session_name}')
         [[ "$current_session" == "$default_session_name" ]] && tmux new-window
 
-        # Switch client to default session
-        tmux switch-client -t "$default_session_name"
+        # Switch client to default session if closing attached session
+        local is_session_attached=$(tmux display-message -p '#{session_attached}')
+        [[ "$is_session_attached" -ne 0 ]] && tmux switch-client -t "$default_session_name"
       }
 
       # Only set the trap in interactive shells
@@ -72,17 +73,14 @@
         bind-key R run-shell '\
           tmux source-file ${config.xdg.configHome}/tmux/tmux.conf; \
           tmux display-message "Sourced config file!"'
+        bind-key s choose-tree -sZ -O name
 
         bind-key A display-popup -E tmux-sessionizer -a
-        bind-key W display-popup -E tmux-sessionizer -w
-        bind-key P display-popup -E tmux-sessionizer -p
-        bind-key U display-popup -E tmux-sessionizer -u
         bind-key S display-popup -E tmux-sessionizer -s
 
         bind-key t display-popup -E tmux-session-mngr -t
         bind-key X display-popup -E tmux-session-mngr -c
         bind-key M run-shell 'tmux-session-mngr -m'
-        bind-key N run-shell 'tmux-session-mngr -u'
 
         bind-key -n M-o switch-client -p
         bind-key -n M-i switch-client -n

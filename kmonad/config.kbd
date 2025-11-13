@@ -9,7 +9,7 @@
   grv   1       2       3       4       5       6       7       8       9       0       -       =       bspc
   tab   q       w       e       r       t       y       u       i       o       p       [       ]       \
   caps  a       s       d       f       g       h       j       k       l       ;       '               ret
-  lsft  z       x       c       v       b       n       m       ,       .       /                       rsft
+  lsft  z       x       c       v       b       n       m       ,       .       /       rsft
         lctl    lmet    lalt                    spc             ralt    prnt    rctl
 )
 
@@ -33,10 +33,10 @@
 
 ;; Base Layer
 (deflayer _BL
-  XX        1           2           3           4           5           6           7           8           9           0           XX      XX      bspc
-  tab       q           @alt_w      f           p           b           j           l           u           @alt_y      apos        XX      XX      XX
-  esc       @met_a      @syml_r     @ctl_s      @sft_t      g           m           @sft_n      @ctl_e      @syml_i     @met_o      ret             ret
-  XX        z           x           c           d           v           k           h           comm        dot         slash                       XX
+  XX        XX          XX          XX          XX          XX          XX          XX          XX          XX          XX          XX      XX      XX
+  tab       q           @alt_w      f           p           b           j           l           u           @alt_y      apos        bspc    XX      XX
+  esc       @met_a      @syml_r     @ctl_s      @sft_t      g           m           @sft_n      @ctl_e      @syml_i     @met_o      ret             XX
+  XX        z           x           c           d           v           k           h           comm        dot         slash       del
             XX          XX          @medl                               @navl_spc               @numl       prnt        ralt
 )
 

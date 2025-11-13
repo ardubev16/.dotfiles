@@ -8,7 +8,6 @@ Usage: $(basename "$0") [options]
 Options:
   -t            Toggle mark on selected sessions
   -m            Mark current session
-  -u            Unmark current session
   -c            Close all unmarked sessions
   -s <symbol>   Set the mark symbol (default: M)
   -h            Show this help message
@@ -40,6 +39,20 @@ function unmark() {
     tmux rename-session -t "$session" "$new_name"
 }
 
+function toggle() {
+    read -r session
+    local -r mark_symbol="$1"
+
+    [[ -z $session ]] && return 1
+
+    echo "$session" |
+        if echo "$session" | grep --quiet "\[$mark_symbol\]"; then
+            unmark "$mark_symbol"
+        else
+            mark "$mark_symbol"
+        fi
+}
+
 function toggle_many() {
     mapfile -t sessions
     local -r mark_symbol="$1"
@@ -49,12 +62,7 @@ function toggle_many() {
     fi
 
     for session in "${sessions[@]}"; do
-        echo "$session" |
-            if echo "$session" | grep --quiet "\[$mark_symbol\]"; then
-                unmark "$mark_symbol"
-            else
-                mark "$mark_symbol"
-            fi
+        echo "$session" | toggle "$mark_symbol"
     done
 }
 
@@ -95,16 +103,13 @@ function close_all_unmarked_sessions() {
 
 MARK_SYMBOL="M"
 
-while getopts "tmucs:h" opt; do
+while getopts "tmcs:h" opt; do
     case $opt in
     t)
         multiselect_sessions | toggle_many "$MARK_SYMBOL"
         ;;
     m)
-        tmux display-message -p '#{session_name}' | mark "$MARK_SYMBOL"
-        ;;
-    u)
-        tmux display-message -p '#{session_name}' | unmark "$MARK_SYMBOL"
+        tmux display-message -p '#{session_name}' | toggle "$MARK_SYMBOL"
         ;;
     c)
         close_all_unmarked_sessions "$MARK_SYMBOL"
