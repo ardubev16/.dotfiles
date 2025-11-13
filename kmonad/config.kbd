@@ -44,7 +44,7 @@
 (deflayer _NAVL
   _         _           _           _           _           _           _           _           _           _           _           _       _       _
   _         _           _           _           _           _           _           _           _           _           _           _       _       _
-  _         lmet        lalt        lctl        lsft        _           h           j           k           l           caps        _               _
+  _         lmet        lalt        lctl        lsft        _           lft         down        up          rght        caps        _               _
   _         _           _           _           _           _           home        pgdn        pgup        end         _                           _
             _           _           _                                   _                       _           _           _
 )
