@@ -19,6 +19,7 @@
       powershell
       pre-commit
       spotify
+      teams-for-linux
       telegram-desktop
       terraform
       tflint
