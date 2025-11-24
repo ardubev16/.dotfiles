@@ -36,6 +36,7 @@ in
       kubevirt
       kustomize
       kyverno
+      nerdctl
       skopeo
       yq
     ];
