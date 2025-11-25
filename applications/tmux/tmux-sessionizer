@@ -54,7 +54,7 @@ function select_session() {
     local -r selected=$(tmux list-sessions -F'#{session_name}' | fzf)
 
     if [[ -n $selected ]]; then
-        tmux switch-client -t "$selected"
+        tmux switch-client -t="$selected"
     fi
 }
 
@@ -91,10 +91,10 @@ else
         exit 0
     fi
 
-    if ! tmux has-session -t "$selected_name" 2>/dev/null; then
+    if ! tmux has-session -t="$selected_name" 2>/dev/null; then
         tmux new-session -ds "$selected_name" -c "$selected"
         tmux send-keys -t "$selected_name" "vim ." Enter
     fi
 
-    tmux switch-client -t "$selected_name"
+    tmux switch-client -t="$selected_name"
 fi

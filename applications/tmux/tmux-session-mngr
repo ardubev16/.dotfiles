@@ -26,7 +26,7 @@ function mark() {
     fi
 
     local -r new_name="[$mark_symbol] $session"
-    tmux rename-session -t "$session" "$new_name"
+    tmux rename-session -t="$session" "$new_name"
 }
 
 function unmark() {
@@ -36,7 +36,7 @@ function unmark() {
     [[ -z $session ]] && return 1
 
     local -r new_name="${session/\[$mark_symbol\] /}"
-    tmux rename-session -t "$session" "$new_name"
+    tmux rename-session -t="$session" "$new_name"
 }
 
 function toggle() {
