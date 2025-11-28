@@ -12,6 +12,7 @@ in
 
   options.global.toolsets = with lib; {
     security = mkEnableOption "Tools to do security related activities.";
+    ai = mkEnableOption "AI tools and utilities.";
     yubikey = mkEnableOption "Tools to interact with YubiKey devices.";
   };
 
@@ -37,6 +38,12 @@ in
           yubikey-manager
           yubikey-touch-detector # TODO: configure: https://github.com/maximbaz/yubikey-touch-detector
           yubioath-flutter
+        ]
+      )
+      ++ (
+        with pkgs;
+        lib.lists.optionals cfg.ai [
+          gemini-cli
         ]
       );
   };

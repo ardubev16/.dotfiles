@@ -6,6 +6,8 @@
 
   global.toolsets.kubernetes = true;
   global.toolsets.security = true;
+  global.toolsets.ai = true;
+
   home.packages =
     with pkgs;
     [
