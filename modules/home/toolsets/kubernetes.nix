@@ -24,6 +24,7 @@ in
       dive
       hubble
       k9s
+      kargo
       kind
       kompose
       kube-linter
