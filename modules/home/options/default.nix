@@ -14,9 +14,11 @@ in
   };
 
   config = lib.mkIf cfg.notNixOS {
-    nixGL.packages = inputs.nixGL.packages;
+    targets.genericLinux = {
+      enable = true;
+      nixGL.packages = inputs.nixGL.packages;
+    };
 
-    targets.genericLinux.enable = true;
     nix = {
       package = pkgs.nix;
       settings.experimental-features = [
