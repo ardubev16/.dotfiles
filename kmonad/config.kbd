@@ -97,6 +97,6 @@
   _         _           _           _           _           _           _           _           _           _           _           _       _       _
   _         grv         @tild       @hash       @ampr       @pipe       @circ       @lcbr       @rcbr       min         @dquo       _       _       _
   _         @exlm       @unds       @coln       eql         @dlr        @at         @lprn       @rprn       @unds       scln        _               _
-  _         @perc       @ques       @astr       @plus       bksl        slash       @labk       @rabk       lbrc        rbrc                        _
+  _         @perc       @ques       @astr       @plus       slash       bksl        @labk       @rabk       lbrc        rbrc                        _
             _           _           _                                   _                       _           _           _
 )
