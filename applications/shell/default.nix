@@ -67,6 +67,11 @@ in
     gspull = "git pull && git submodule foreach \"git checkout master\"";
     rpg = "openssl rand -hex";
     note = "vim $HOME/Documents/notes/$(date '+%Y-%m-%d_%a').md";
+    tim = ''
+      TEMP_FILE=$(mktemp) \
+        && echo $TEMP_FILE \
+        && vim $TEMP_FILE
+      '';
   };
 
   programs.zsh = {

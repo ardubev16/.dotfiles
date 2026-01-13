@@ -11,6 +11,7 @@
   home.packages =
     with pkgs;
     [
+      awscli2
       azure-cli
       git-filter-repo
       git-lfs
@@ -35,4 +36,13 @@
       openshift
       tektoncd-cli
     ];
+
+  home.shellAliases = {
+    # Open Ansible logs in a temporary file from the clipboard, also add newlines
+    ansilog = ''
+      TEMP_FILE=$(mktemp) \
+        && xclip -select clipboard -out | sed "s/\\\\n/\\n/g" > $TEMP_FILE \
+        && vim $TEMP_FILE
+    '';
+  };
 }
