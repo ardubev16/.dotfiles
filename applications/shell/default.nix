@@ -1,4 +1,9 @@
-{ pkgs, perSystem, ... }:
+{
+  lib,
+  perSystem,
+  pkgs,
+  ...
+}:
 let
   unstable-pkgs = with perSystem.nixpkgs-unstable; [
     devenv
@@ -66,7 +71,7 @@ in
       TEMP_FILE=$(mktemp) \
         && echo $TEMP_FILE \
         && vim $TEMP_FILE
-      '';
+    '';
   };
 
   programs.zsh = {
@@ -105,6 +110,7 @@ in
     enable = true;
     enableBashIntegration = true;
     enableZshIntegration = true;
+
+    settings = lib.importTOML ./starship.toml;
   };
-  xdg.configFile."starship.toml".source = ./starship.toml;
 }

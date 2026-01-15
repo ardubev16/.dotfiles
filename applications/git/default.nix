@@ -1,8 +1,6 @@
 { pkgs, ... }:
 {
-  home.packages = with pkgs; [
-    git
-  ];
+  home.packages = with pkgs; [ git ];
 
   programs.lazygit.enable = true;
   stylix.targets.lazygit.enable = true;
