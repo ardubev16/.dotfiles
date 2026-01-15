@@ -3,6 +3,7 @@
   programs.kitty = {
     enable = true;
     package = config.lib.nixGL.wrap pkgs.kitty;
+    shellIntegration.mode = "disabled";
     settings = {
       hide_window_decorations = true;
       placement_strategy = "top-left";

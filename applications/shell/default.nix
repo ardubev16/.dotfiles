@@ -76,17 +76,17 @@ in
 
   programs.zsh = {
     enable = true;
+    # zprof.enable = true;
+
     antidote = {
       enable = true;
       plugins = [
         "getantidote/use-omz"
         "ohmyzsh/ohmyzsh path:lib"
         "ohmyzsh/ohmyzsh path:plugins/colored-man-pages"
-        "ohmyzsh/ohmyzsh path:plugins/docker kind:fpath"
         "ohmyzsh/ohmyzsh path:plugins/eza"
         "ohmyzsh/ohmyzsh path:plugins/git"
         "ohmyzsh/ohmyzsh path:plugins/kubectl"
-        "ohmyzsh/ohmyzsh path:plugins/virtualenv"
         "ohmyzsh/ohmyzsh path:plugins/zsh-interactive-cd"
 
         "zsh-users/zsh-autosuggestions"
@@ -96,7 +96,6 @@ in
     };
     initContent = # sh
       ''
-        # zmodload zsh/zprof
         if [[ -f ~/.localvars ]]; then
           source ~/.localvars
         fi
