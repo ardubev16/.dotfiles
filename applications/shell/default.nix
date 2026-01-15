@@ -53,16 +53,11 @@ in
     hgrep = "history | grep";
     psgrep = "ps aux | grep";
 
-    # network
-    ports = "netstat -tulanp";
+    # misc
     wget = "wget -c";
     ipe = "curl -s ipinfo.io | jq";
-    site-dl = "wget --random-wait -rpe robots=off -U mozilla";
-
-    # misc
     open = "xdg-open";
     xsc = "xclip -selection clipboard";
-    abup = "antibody bundle < $ZDOTDIR/99-plugins.txt > $ZDOTDIR/.plugins && exec zsh";
     ez = "exec zsh";
     gspull = "git pull && git submodule foreach \"git checkout master\"";
     rpg = "openssl rand -hex";
@@ -108,6 +103,7 @@ in
 
   programs.starship = {
     enable = true;
+    enableBashIntegration = true;
     enableZshIntegration = true;
   };
   xdg.configFile."starship.toml".source = ./starship.toml;

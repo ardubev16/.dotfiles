@@ -15,6 +15,8 @@ in
   config = lib.mkIf cfg.kubernetes {
     home.shellAliases = {
       kex = "kubectl explain";
+      kns = "kubens";
+      ktx = "kubectx";
     };
 
     home.packages = with perSystem.nixpkgs-unstable; [
@@ -32,6 +34,7 @@ in
       kubeconform
       kubectl
       kubectl-cnpg
+      kubectx
       kubernetes-helm
       kubeseal
       kubevirt
