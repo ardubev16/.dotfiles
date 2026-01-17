@@ -11,9 +11,6 @@ $git_status\
 right_format = """
 $cmd_duration\
 $kubernetes\
-$aws\
-$azure\
-$gcloud\
 $nix_shell\
 $python\
 $battery\
@@ -50,6 +47,11 @@ threshold = 20
 [jobs]
 format = '[$symbol$number]($style)'
 
+[kubernetes]
+disabled = false
+format = '\[[$symbol$context]($style)\]'
+symbol = "󱃾 "
+
 [nix_shell]
 impure_msg = "i"
 pure_msg = "p"
@@ -58,19 +60,3 @@ format = '\[[$symbol$state]($style)\]'
 
 [python]
 format = '\[[${symbol}${pyenv_prefix}(${version})(\($virtualenv\))]($style)\]'
-
-# Cloud
-[kubernetes]
-disabled = false
-format = '\[[$symbol$context]($style)\]'
-symbol = "󱃾 "
-
-[aws]
-format = '\[[$symbol($profile)(\($region\))(\[$duration\])]($style)\]'
-
-[azure]
-disabled = false
-format = '\[[$symbol($subscription)]($style)\]'
-
-[gcloud]
-format = '\[[$symbol$account(@$domain)(\($region\))]($style)\]'
