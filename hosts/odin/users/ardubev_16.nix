@@ -50,4 +50,6 @@
       obs-backgroundremoval
     ];
   };
+
+  services.activitywatch.enable = true;
 }
