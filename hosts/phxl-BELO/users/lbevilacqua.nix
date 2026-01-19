@@ -1,4 +1,14 @@
-{ inputs, pkgs, ... }:
+{
+  inputs,
+  perSystem,
+  pkgs,
+  ...
+}:
+let
+  unstable-pkgs = with perSystem.nixpkgs-unstable; [
+    awscli2 # >= 2.32.15
+  ];
+in
 {
   imports = [ inputs.self.homeModules.baseUser ];
 
@@ -11,7 +21,6 @@
   home.packages =
     with pkgs;
     [
-      awscli2
       azure-cli
       git-filter-repo
       git-lfs
@@ -35,7 +44,8 @@
       crc
       openshift
       tektoncd-cli
-    ];
+    ]
+    ++ unstable-pkgs;
 
   home.shellAliases = {
     # Open Ansible logs in a temporary file from the clipboard, also add newlines
