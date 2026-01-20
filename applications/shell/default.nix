@@ -87,7 +87,6 @@ in
         "ohmyzsh/ohmyzsh path:plugins/colored-man-pages"
         "ohmyzsh/ohmyzsh path:plugins/eza"
         "ohmyzsh/ohmyzsh path:plugins/git"
-        "ohmyzsh/ohmyzsh path:plugins/kubectl"
         "ohmyzsh/ohmyzsh path:plugins/zsh-interactive-cd"
 
         "zsh-users/zsh-autosuggestions"

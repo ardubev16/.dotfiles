@@ -14,9 +14,16 @@ in
 
   config = lib.mkIf cfg.kubernetes {
     home.shellAliases = {
+      k = "kubectl";
       kex = "kubectl explain";
       kns = "kubens";
       ktx = "kubectx";
+      kdbg = ''
+        kubectl run -it --rm \
+          --image nicolaka/netshoot:latest \
+          --restart Never \
+          "netshoot-debug-$RANDOM"
+      '';
     };
 
     home.packages = with perSystem.nixpkgs-unstable; [
