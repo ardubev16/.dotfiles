@@ -9,7 +9,7 @@ main() {
     fi
 
     local -r kmonad_path=$(dirname "$(realpath "$0")")
-    local -r service_file_path="$kmonad_path/hosts/$(hostname).kmonad.service"
+    local -r service_file_path="$kmonad_path/$(hostname)/kmonad.service"
 
     if [[ ! -f "$service_file_path" ]]; then
         echo "Service file not found for current host: $service_file_path"

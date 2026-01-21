@@ -1,0 +1,96 @@
+;; Copyright 2025 Lorenzo Bevilacqua
+;; vim: ft=lisp
+
+(defcfg
+  output (uinput-sink "KMonad output")
+  fallthrough false
+)
+(defsrc
+  tab   q       w       e       r       t               u       i       o       p       [       ]
+  caps  a       s       d       f       g               j       k       l       ;       '       ret
+  lsft  z       x       c       v       b               m       ,       .       /       rsft
+                        lalt                    spc             ralt    prnt
+)
+
+(defalias
+    met_a (tap-hold-next-release 200 a lmet)
+    alt_w (tap-hold-next-release 200 w lalt)
+    ctl_s (tap-hold-next-release 200 s lctl)
+    sft_t (tap-hold-next-release 200 t lsft)
+    syml_r (tap-hold-next-release 200 r (layer-toggle _SYML))
+
+    sft_n (tap-hold-next-release 200 n rsft)
+    ctl_e (tap-hold-next-release 200 e rctl)
+    alt_y (tap-hold-next-release 200 y lalt)
+    met_o (tap-hold-next-release 200 o rmet)
+    syml_i (tap-hold-next-release 200 i (layer-toggle _SYML))
+
+    medl (layer-toggle _MEDL)
+    numl (layer-toggle _NUML)
+    navl_spc (tap-hold-next-release 200 spc (layer-toggle _NAVL))
+)
+
+;; Base Layer
+(deflayer _BL
+  tab       q           @alt_w      f           p           b           j           l           u           @alt_y      apos        bspc
+  esc       @met_a      @syml_r     @ctl_s      @sft_t      g           m           @sft_n      @ctl_e      @syml_i     @met_o      ret
+  XX        z           x           c           d           v           k           h           comm        dot         slash
+                                    @medl                               @navl_spc               @numl       prnt
+)
+
+;; Navigation Layer
+(deflayer _NAVL
+  _         _           _           _           _           _           _           _           _           _           _           _
+  _         lmet        lalt        lctl        lsft        _           lft         down        up          rght        caps        _
+  _         _           _           _           _           _           home        pgdn        pgup        end         _
+                                    _                                   _                       _           _
+)
+
+;; Media Layer
+(deflayer _MEDL
+  _         _           _           _           _           _           XX          brdn        brup        XX          micm        _
+  _         lmet        lalt        lctl        lsft        _           prev        vold        volu        next        pp          _
+  _         _           _           _           _           _           XX          XX          XX          XX          mute
+                                    _                                   _                       _           _
+)
+
+;; Number Layer
+(deflayer _NUML
+  _         _           7           8           9           _           _           _           _           _           _           _
+  _         0           1           2           3           _           rsft        rctl        lalt        rmet        _           _
+  _         _           4           5           6           _           _           _           _           _           _
+                                    _                                   _                       _           _
+)
+
+(defalias
+    tild S-grv
+    exlm S-1
+    at   S-2
+    hash S-3
+    dlr  S-4
+    perc S-5
+    circ S-6
+    ampr S-7
+    astr S-8
+    lprn S-9
+    rprn S-0
+    unds S-min
+    plus S-eql
+
+    lcbr S-lbrc
+    rcbr S-rbrc
+    pipe S-bksl
+    coln S-scln
+    dquo S-apos
+    labk S-comm
+    rabk S-dot
+    ques S-slash
+)
+
+;; Symbol Layer
+(deflayer _SYML
+  _         grv         @tild       @hash       @ampr       @pipe       @circ       @lcbr       @rcbr       min         @dquo       _
+  _         @exlm       @unds       @coln       eql         @dlr        @at         @lprn       @rprn       @unds       scln        _
+  _         @perc       @ques       @astr       @plus       slash       bksl        @labk       @rabk       lbrc        rbrc
+                                    _                                   _                       _           _
+)
