@@ -19,7 +19,7 @@ main() {
     sudo cp "$service_file_path" /etc/systemd/system/kmonad.service
     sudo systemctl daemon-reload
     sudo systemctl enable kmonad.service
-    sudo systemctl start kmonad.service
+    sudo systemctl restart kmonad.service
 }
 
 main

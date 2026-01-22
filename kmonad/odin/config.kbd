@@ -9,7 +9,11 @@
   tab   q       w       e       r       t               u       i       o       p       [       ]
   caps  a       s       d       f       g               j       k       l       ;       '       ret
   lsft  z       x       c       v       b               m       ,       .       /       rsft
-                        lalt                    spc             ralt    prnt
+                        lalt                    spc             ralt
+
+  ;; Explicitly define keys to pass through
+  ;; - Apparently sys is prnt on this keyboard
+  esc  vold volu mute  lft down up rght  sys
 )
 
 (defalias
@@ -35,7 +39,9 @@
   tab       q           @alt_w      f           p           b           j           l           u           @alt_y      apos        bspc
   esc       @met_a      @syml_r     @ctl_s      @sft_t      g           m           @sft_n      @ctl_e      @syml_i     @met_o      ret
   XX        z           x           c           d           v           k           h           comm        dot         slash
-                                    @medl                               @navl_spc               @numl       prnt
+                                    @medl                               @navl_spc               @numl
+
+  esc  vold volu mute  lft down up rght  sys
 )
 
 ;; Navigation Layer
@@ -43,7 +49,9 @@
   _         _           _           _           _           _           _           _           _           _           _           _
   _         lmet        lalt        lctl        lsft        _           lft         down        up          rght        caps        _
   _         _           _           _           _           _           home        pgdn        pgup        end         _
-                                    _                                   _                       _           _
+                                    _                                   _                       _
+
+  _  _ _ _  _ _ _ _  _
 )
 
 ;; Media Layer
@@ -51,7 +59,9 @@
   _         _           _           _           _           _           XX          brdn        brup        XX          micm        _
   _         lmet        lalt        lctl        lsft        _           prev        vold        volu        next        pp          _
   _         _           _           _           _           _           XX          XX          XX          XX          mute
-                                    _                                   _                       _           _
+                                    _                                   _                       _
+
+  _  _ _ _  _ _ _ _  _
 )
 
 ;; Number Layer
@@ -59,7 +69,9 @@
   _         _           7           8           9           _           _           _           _           _           _           _
   _         0           1           2           3           _           rsft        rctl        lalt        rmet        _           _
   _         _           4           5           6           _           _           _           _           _           _
-                                    _                                   _                       _           _
+                                    _                                   _                       _
+
+  _  _ _ _  _ _ _ _  _
 )
 
 (defalias
@@ -92,5 +104,7 @@
   _         grv         @tild       @hash       @ampr       @pipe       @circ       @lcbr       @rcbr       min         @dquo       _
   _         @exlm       @unds       @coln       eql         @dlr        @at         @lprn       @rprn       @unds       scln        _
   _         @perc       @ques       @astr       @plus       slash       bksl        @labk       @rabk       lbrc        rbrc
-                                    _                                   _                       _           _
+                                    _                                   _                       _
+
+  _  _ _ _  _ _ _ _  _
 )
