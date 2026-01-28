@@ -77,6 +77,7 @@ in
   programs.zsh = {
     enable = true;
     enableCompletion = false;
+    history.extended = true;
     # zprof.enable = true;
 
     antidote = {
