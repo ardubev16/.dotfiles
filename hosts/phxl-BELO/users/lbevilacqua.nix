@@ -29,7 +29,7 @@ in
       kmonad
       nushell
       powershell
-      pre-commit
+      prek
       spotify
       teams-for-linux
       telegram-desktop

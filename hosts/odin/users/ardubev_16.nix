@@ -22,7 +22,7 @@
     kmonad
     mariadb
     nushell
-    pre-commit
+    prek
     prometheus-alertmanager
     spotify
     telegram-desktop
