@@ -47,6 +47,7 @@ in
       kubevirt
       kustomize
       kyverno
+      minikube
       nerdctl
       skopeo
       yq
