@@ -24,17 +24,17 @@ repos:
           - --exclude-file=./kmonad/phxl-BELO/config.kbd
 
   - repo: https://github.com/rhysd/actionlint
-    rev: 0933c147c9d6587653d45fdcb4c497c57a65f9af # frozen: v1.7.10
+    rev: 393031adb9afb225ee52ae2ccd7a5af5525e03e8  # frozen: v1.7.11
     hooks:
       - id: actionlint
 
   - repo: https://github.com/sqlfluff/sqlfluff
-    rev: 30e0e576b9d8e7e53fb02677bbd4ba1a49decc6b # frozen: 4.0.0
+    rev: ca2e228d873e15bca82cd588f1964f0ec0aa9762  # frozen: 4.0.4
     hooks:
       - id: sqlfluff-fix
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: 45ef068da5f21267bb2a7ec4a623092959f09ce5 # frozen: v0.14.14
+    rev: 0839f92796ae388643a08a21640a029b322be5c2  # frozen: v0.15.2
     hooks:
       # Run the linter.
       - id: ruff
@@ -45,7 +45,7 @@ repos:
         types_or: [python, pyi]
 
   - repo: https://github.com/astral-sh/uv-pre-commit
-    rev: 5419f5b504dd5329d26fdf936719cb3b08b3eadf # frozen: 0.9.28
+    rev: 6e1b55a6dbea001ba7b914eae67df3c4bbd3ff6e  # frozen: 0.10.4
     hooks:
       - id: uv-lock
 
