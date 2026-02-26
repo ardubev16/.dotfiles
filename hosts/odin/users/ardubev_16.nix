@@ -16,6 +16,7 @@
     cloc
     discord
     gemini-cli
+    google-cloud-sdk
     gpclient
     htop
     httpie
@@ -29,6 +30,7 @@
     teleport
     terraform
     thunderbird
+    typst
     uv
     yazi
   ];
