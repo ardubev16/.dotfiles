@@ -25,6 +25,7 @@ in
       git-filter-repo
       git-lfs
       gnumake
+      hclfmt
       htop
       kmonad
       nushell
@@ -34,6 +35,7 @@ in
       teams-for-linux
       telegram-desktop
       terraform
+      terragrunt
       tflint
       trivy
       uv
