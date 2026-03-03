@@ -20,6 +20,7 @@
     gpclient
     htop
     httpie
+    just
     kmonad
     mariadb
     nushell
