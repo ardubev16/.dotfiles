@@ -70,7 +70,7 @@ in
     tim = ''
       TEMP_FILE=$(mktemp) \
         && echo $TEMP_FILE \
-        && vim $TEMP_FILE
+        && vim $TEMP_FILE \
     '';
   };
 

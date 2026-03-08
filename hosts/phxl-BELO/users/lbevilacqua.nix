@@ -54,7 +54,7 @@ in
     ansilog = ''
       TEMP_FILE=$(mktemp) \
         && xclip -select clipboard -out | sed "s/\\\\n/\\n/g" > $TEMP_FILE \
-        && vim $TEMP_FILE
+        && vim $TEMP_FILE \
     '';
   };
 }

@@ -38,11 +38,11 @@
 
   home.shellAliases = {
     unitnvpn = ''
-      sudo ${lib.getExe' pkgs.gpclient "gpclient"}
-          --fix-openssl connect
-          --csd-wrapper /usr/libexec/openconnect/hipreport.sh
-          --default-browser
-          vpn-mfa.icts.unitn.it
+      sudo ${lib.getExe' pkgs.gpclient "gpclient"} \
+          --fix-openssl connect \
+          --csd-wrapper /usr/libexec/openconnect/hipreport.sh \
+          --default-browser \
+          vpn-mfa.icts.unitn.it \
     '';
   };
 

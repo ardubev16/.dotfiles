@@ -22,7 +22,7 @@ in
         kubectl run -it --rm \
           --image nicolaka/netshoot:latest \
           --restart Never \
-          "netshoot-debug-$RANDOM"
+          "netshoot-debug-$RANDOM" \
       '';
     };
 
