@@ -21,6 +21,7 @@ in
   config = lib.mkIf cfg.notNixOS {
     targets.genericLinux = {
       enable = true;
+      gpu.enable = cfg.gui;
       nixGL.packages = lib.mkIf cfg.gui inputs.nixGL.packages;
     };
 

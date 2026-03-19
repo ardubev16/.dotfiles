@@ -11,21 +11,19 @@
   global.toolsets.kubernetes = true;
   global.toolsets.ai = true;
 
-  home.packages =
-    with pkgs;
-    [
-      git-filter-repo
-      git-lfs
-      gnumake
-      htop
-      nushell
-      powershell
-      prek
-      trivy
-      uv
-      yarn
-      yazi
-    ];
+  home.packages = with pkgs; [
+    git-filter-repo
+    git-lfs
+    gnumake
+    htop
+    nushell
+    powershell
+    prek
+    trivy
+    uv
+    yarn
+    yazi
+  ];
 
   home.shellAliases = {
     # Open Ansible logs in a temporary file from the clipboard, also add newlines

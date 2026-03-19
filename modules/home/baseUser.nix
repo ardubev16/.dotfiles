@@ -1,7 +1,5 @@
 {
-  config,
   inputs,
-  lib,
   ...
 }:
 {
@@ -12,7 +10,8 @@
     inputs.self.homeModules.toolsets
     inputs.self.homeModules.theme
     ../../applications
-  ] ++ lib.optional config.global.gui ../../desktops/gnome;
+    ../../desktops/gnome
+  ];
 
   programs.home-manager.enable = true;
 
