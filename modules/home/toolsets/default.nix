@@ -20,25 +20,33 @@ in
     home.packages =
       (
         with pkgs;
-        lib.lists.optionals cfg.security [
-          binaryninja-free
-          burpsuite
-          detect-it-easy
-          gef
-          ghidra-bin
-          hivex
-          ilspycmd
-          ngrok
-          pwntools
-        ]
+        lib.lists.optionals cfg.security (
+          [
+            gef
+            hivex
+            ilspycmd
+            ngrok
+            pwntools
+          ]
+          ++ lib.optionals config.global.gui [
+            binaryninja-free
+            burpsuite
+            detect-it-easy
+            ghidra-bin
+          ]
+        )
       )
       ++ (
         with pkgs;
-        lib.lists.optionals cfg.yubikey [
-          yubikey-manager
-          yubikey-touch-detector # TODO: configure: https://github.com/maximbaz/yubikey-touch-detector
-          yubioath-flutter
-        ]
+        lib.lists.optionals cfg.yubikey (
+          [
+            yubikey-manager
+            yubikey-touch-detector # TODO: configure: https://github.com/maximbaz/yubikey-touch-detector
+          ]
+          ++ lib.optionals config.global.gui [
+            yubioath-flutter
+          ]
+        )
       )
       ++ (
         with pkgs;

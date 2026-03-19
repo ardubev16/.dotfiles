@@ -1,4 +1,9 @@
-{ inputs, ... }:
+{
+  config,
+  inputs,
+  lib,
+  ...
+}:
 {
   global.toolsets.yubikey = true;
 
@@ -7,8 +12,7 @@
     inputs.self.homeModules.toolsets
     inputs.self.homeModules.theme
     ../../applications
-    ../../desktops/gnome
-  ];
+  ] ++ lib.optional config.global.gui ../../desktops/gnome;
 
   programs.home-manager.enable = true;
 

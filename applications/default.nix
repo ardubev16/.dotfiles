@@ -1,9 +1,13 @@
 {
+  config,
+  lib,
+  ...
+}:
+{
   imports = [
     ./editor
     ./git
     ./shell
     ./tmux
-    ./terminal.nix
-  ];
+  ] ++ lib.optional config.global.gui ./terminal.nix;
 }

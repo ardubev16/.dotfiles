@@ -8,6 +8,7 @@
   imports = [ inputs.self.homeModules.baseUser ];
 
   global.notNixOS = true;
+  global.gui = true;
 
   global.toolsets.kubernetes = true;
   global.toolsets.security = true;
