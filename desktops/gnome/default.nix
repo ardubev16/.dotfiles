@@ -70,7 +70,7 @@
         minimize = [ ]; # disable <Super>h
       };
 
-      "org/gnome/settings-daemon/plugins/media-keys".screensaver = [ "<Super>x" ];
+      "org/gnome/settings-daemon/plugins/media-keys".screensaver = [ "<Super>l" ];
 
       # keys speed
       "org/gnome/desktop/peripherals/keyboard" = {
