@@ -16,7 +16,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/codespell-project/codespell
-    rev: 63c8f8312b7559622c0d82815639671ae42132ac # frozen: v2.4.1
+    rev: 2ccb47ff45ad361a21071a7eedda4c37e6ae8c5a # frozen: v2.4.2
     hooks:
       - id: codespell
         args:
@@ -24,17 +24,17 @@ repos:
           - --exclude-file=./kmonad/phxl-BELO/config.kbd
 
   - repo: https://github.com/rhysd/actionlint
-    rev: 393031adb9afb225ee52ae2ccd7a5af5525e03e8 # frozen: v1.7.11
+    rev: 914e7df21a07ef503a81201c76d2b11c789d3fca # frozen: v1.7.12
     hooks:
       - id: actionlint
 
   - repo: https://github.com/sqlfluff/sqlfluff
-    rev: ca2e228d873e15bca82cd588f1964f0ec0aa9762 # frozen: 4.0.4
+    rev: ec5ed61d83ae336c65c4c15396a23772ce9d2fcc # frozen: 4.1.0
     hooks:
       - id: sqlfluff-fix
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: a27a2e47c7751b639d2b5badf0ef6ff11fee893f # frozen: v0.15.4
+    rev: c60c980e561ed3e73101667fe8365c609d19a438 # frozen: v0.15.9
     hooks:
       # Run the linter.
       - id: ruff
@@ -45,11 +45,11 @@ repos:
         types_or: [python, pyi]
 
   - repo: https://github.com/astral-sh/uv-pre-commit
-    rev: 099118db1761b62a9c5a3680a66fa6e2d973bcad # frozen: 0.10.7
+    rev: 0397b68f6f88c024f1d2b355a9818779f6336d16 # frozen: 0.11.3
     hooks:
       - id: uv-lock
 
   - repo: https://github.com/gitleaks/gitleaks
-    rev: 6eaad039603a4de39fddd1cf5f727391efe9974e # frozen: v8.30.0
+    rev: 83d9cd684c87d95d656c1458ef04895a7f1cbd8e # frozen: v8.30.1
     hooks:
       - id: gitleaks
