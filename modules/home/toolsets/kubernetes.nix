@@ -31,7 +31,9 @@ in
       argocd
       cilium-cli
       dive
+      dyff
       hubble
+      jqp
       k9s
       kargo
       kind
@@ -57,6 +59,10 @@ in
       enable = true;
       enableZshIntegration = true;
       enableAlias = true;
+    };
+
+    home.sessionVariables = {
+      KUBECTL_EXTERNAL_DIFF = "dyff between --omit-header --set-exit-code";
     };
   };
 }
