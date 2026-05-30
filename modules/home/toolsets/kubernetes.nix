@@ -33,6 +33,7 @@ in
       dive
       dyff
       hubble
+      istioctl
       jqp
       k9s
       kargo
