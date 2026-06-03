@@ -23,7 +23,6 @@ in
       git
       gpp
       jq
-      pipx
       ripgrep
       wget
       xclip
