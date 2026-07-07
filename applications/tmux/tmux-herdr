@@ -106,8 +106,8 @@ function create_worktree() {
 function cleanup_extra_panes() {
     local -r ws_id="$1" pane_id="$2"
 
-    local extra_panes
-    extra_panes=$(_herdr pane list --workspace "$ws_id" |
+    local -a extra_panes
+    mapfile -t extra_panes < <(_herdr pane list --workspace "$ws_id" |
         jq --raw-output \
             --arg pane_id "$pane_id" \
             '.result.panes | map(select(.pane_id != $pane_id).pane_id) | .[]')
@@ -131,7 +131,7 @@ function start_agent() {
         cwd=$(_herdr workspace list |
             jq --raw-output \
                 --arg ws_id "$ws_id" \
-                '.result.workspaces | map(select(.workspace_id == $ws_id).worktree.checkout_path)')
+                '.result.workspaces | map(select(.workspace_id == $ws_id).worktree.checkout_path)[0]')
 
         pane_id=$(_herdr agent start "$name" --workspace "$ws_id" --cwd "$cwd" -- $DEFAULT_HARNESS |
             jq --raw-output '.result.agent.pane_id')
