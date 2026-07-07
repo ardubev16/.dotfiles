@@ -40,6 +40,7 @@ function _herdr() {
     local out
     out=$(_herdr_interactive "$@")
 
+    # echo -e "$*\n$(echo "$out" | jq --color-output)\n" >&2
     [[ -z $out ]] && return 1
     echo "$out"
 }
@@ -56,6 +57,30 @@ function get_repo_metadata() {
     _repo_full_path=$(dirname "$_git_dir")
     _repo_name=$(basename "$_repo_full_path")
     _project_name=$(basename "$(dirname "$_repo_full_path")")
+}
+
+function select_branch() {
+    local fzf_out fzf_exit=0
+    branches=$(git branch)
+    fzf_out=$({
+        grep '^\*' <<<"$branches"
+        grep -v '^\*' <<<"$branches"
+    } | fzf --print-query --prompt="⎇ branch: ") || fzf_exit=$?
+
+    # NOTE: Ctrl-C returns 130
+    [[ $fzf_exit == 130 ]] && return 130
+
+    local -r query=$(sed -n '1p' <<<"$fzf_out")
+    local -r selection=$(sed -n '2p' <<<"$fzf_out")
+
+    local branch_name
+    if [[ -n "$selection" ]]; then
+        branch_name="${selection:2}"
+    else
+        branch_name="$query"
+    fi
+
+    echo "$branch_name"
 }
 
 function create_workspace() {
@@ -92,7 +117,7 @@ function create_worktree() {
                 '.result.worktrees | map(select(.branch == $branch).path)[0]')
 
         if [[ $wt_path == "null" ]]; then
-            wt_id=$(_herdr worktree create --workspace "$ws_id" --branch "$branch" --label "$branch" |
+            wt_id=$(_herdr worktree create --cwd "$path" --branch "$branch" --label "$branch" |
                 jq --raw-output '.result.worktree.open_workspace_id')
         else
             wt_id=$(_herdr worktree open --cwd "$path" --path "$wt_path" --label "$branch" |
@@ -118,7 +143,7 @@ function cleanup_extra_panes() {
 }
 
 function start_agent() {
-    local -r ws_id="$1" name="$2"
+    local -r ws_id="$1" name="$2" repo_path="$3"
 
     local pane_id
     pane_id=$(_herdr agent list |
@@ -133,13 +158,14 @@ function start_agent() {
                 --arg ws_id "$ws_id" \
                 '.result.workspaces | map(select(.workspace_id == $ws_id).worktree.checkout_path)[0]')
 
+        if [[ $cwd == "null" ]]; then
+            cwd="$repo_path"
+        fi
         pane_id=$(_herdr agent start "$name" --workspace "$ws_id" --cwd "$cwd" -- $DEFAULT_HARNESS |
             jq --raw-output '.result.agent.pane_id')
 
         cleanup_extra_panes "$ws_id" "$pane_id"
     fi
-
-    echo "$pane_id"
 }
 
 function select_agent() {
@@ -158,35 +184,18 @@ function select_agent() {
 }
 
 function new_agent() {
-    local repo_full_path repo_name project_name
+    local repo_full_path repo_name project_name branch_name
     get_repo_metadata repo_full_path repo_name project_name
-
-    local query_selection fzf_exit=0
-    query_selection=$(git branch | tac | fzf --print-query --prompt="⎇ branch: ") || fzf_exit=$?
-    # NOTE: Ctrl-C returns 130
-    [[ $fzf_exit == 130 ]] && return 130
-
-    local -r query=$(sed -n '1p' <<<"$query_selection")
-    local -r selected_branch=$(sed -n '2p' <<<"$query_selection")
-
-    local branch_name
-    if [[ -n "$selected_branch" ]]; then
-        branch_name="${selected_branch:2}"
-    else
-        branch_name="$query"
-    fi
+    branch_name=$(select_branch)
 
     local -r workspace_name="${project_name}::${repo_name}"
     local -r agent_name="${workspace_name}::${branch_name}"
 
-    local ws_id
+    local ws_id wt_id
     ws_id=$(create_workspace "$workspace_name" "$repo_full_path")
-    if [[ $selected_branch != "* $branch_name" ]]; then
-        ws_id=$(create_worktree "$ws_id" "$branch_name" "$repo_full_path")
-    fi
+    wt_id=$(create_worktree "$ws_id" "$branch_name" "$repo_full_path")
 
-    local pane_id
-    pane_id=$(start_agent "$ws_id" "$agent_name")
+    start_agent "$wt_id" "$agent_name" "$repo_full_path"
 
     _herdr agent focus "$agent_name" >/dev/null
 }
