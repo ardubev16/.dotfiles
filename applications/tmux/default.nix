@@ -1,7 +1,13 @@
-{ pkgs, config, ... }:
+{
+  pkgs,
+  config,
+  perSystem,
+  ...
+}:
 {
   home.packages = [
     (pkgs.writeShellScriptBin "tmux-sessionizer" (builtins.readFile ./tmux-sessionizer))
+    perSystem.nixpkgs-unstable.herdr
   ];
 
   home.sessionVariables = {

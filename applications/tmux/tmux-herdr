@@ -1,0 +1,93 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Herdr:
+#   - workspace <-> project
+#   - tab <-> repository
+#   - pane <-> branch / worktree
+#
+# Tmux:
+#   - session <-> proj::repo (proj is repo/..)
+#
+# Commands:
+#   - [new] -> get proj+repo -> choose branch (default local) -> create worktree (if branch != local) -> start agent -> open Herdr
+#   - [local-open] -> get proj+repo -> open Herdr
+#   - [open] -> open Herdr (previously open session)
+#   - [attach] -> get proj+repo -> choose pane (if multiple) -> open harness in tmux pane
+#   - when tmux session is closed -> close relevant Herdr tabs
+
+function usage() {
+    cat <<EOF
+"Usage: $0 [options]"
+    -n:     Start new Agent
+    -l:     Open Herdr with tab corresponding to current Tmux session
+    -o:     Open to previously open Herdr session
+    -a:     Attach to a Herdr pane corresponding to current Tmux session
+EOF
+    exit 1
+}
+
+function new_agent() {
+    # 1. Find repo root
+    # 2. Find repo parent -> proj
+    # 3. Ask to choose branch
+    # 4a. Work on repo path
+    # 4b. Create worktree
+    # 5. Create workspace if not exist
+    # 6. Create tab if not exist
+    # 7. Start agent (preconfigured through tmux config, e.g. Claude Code)
+    # 7bis. Cleanup redundant pane (if cannot find a better way to handle this)
+    # 8. Focus on newly started Agent
+    # 9. Open Herdr
+    echo "Not implemented yet"
+    exit 1
+}
+
+function local_open() {
+    # 1. Find repo root
+    # 2. Find repo parent -> proj
+    # 3. Get tabs
+    # 4a. Ask to choose branch if tabs > 1
+    # 5. Focus on workspace + tab
+    # 6. Open Herdr
+    echo "Not implemented yet"
+    exit 1
+}
+
+function attach() {
+    # 1. Find repo root
+    # 2. Find repo parent -> proj
+    # 3. Get tabs
+    # 4a. Ask to choose branch if tabs > 1
+    # 5. Agent attach to chosen workspace + tab
+    echo "Not implemented yet"
+    exit 1
+}
+
+while getopts "nloah" opt; do
+    case $opt in
+    n)
+        new_agent
+        exit 0
+        ;;
+    l)
+        local_open
+        exit 0
+        ;;
+    o)
+        herdr
+        exit 0
+        ;;
+    a)
+        attach
+        exit 0
+        ;;
+    h | *)
+        usage
+        ;;
+    esac
+done
+if [ "$OPTIND" -eq 1 ]; then
+    usage
+fi
