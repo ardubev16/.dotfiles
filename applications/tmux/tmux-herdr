@@ -4,6 +4,7 @@ set -euo pipefail
 shopt -s inherit_errexit
 
 DEFAULT_HARNESS=claude
+DEFAULT_HERDR_SESSION=tmux-herdr
 
 # Herdr:
 #   - workspace <-> project
@@ -32,7 +33,7 @@ EOF
 }
 
 function _herdr_interactive() {
-    HERDR_SESSION=tmux-herdr herdr "$@"
+    HERDR_SESSION="$DEFAULT_HERDR_SESSION" herdr "$@"
 }
 
 function _herdr() {
@@ -64,14 +65,14 @@ function create_workspace() {
     ws_id=$(_herdr workspace list |
         jq --raw-output \
             --arg label "$name" \
-            '.result.workspace | map(select(.label == $label).workspace_id)[0]')
+            '.result.workspaces | map(select(.label == $label).workspace_id)[0]')
 
     if [[ $ws_id == "null" ]]; then
         ws_id=$(_herdr workspace create --label "$name" --cwd "$path" |
             jq --raw-output '.result.workspace.workspace_id')
     fi
 
-    eche "$ws_id"
+    echo "$ws_id"
 }
 
 function create_worktree() {
@@ -117,7 +118,7 @@ function cleanup_extra_panes() {
 }
 
 function start_agent() {
-    local -r ws_id="$1" name="$2" cwd="$3"
+    local -r ws_id="$1" name="$2"
 
     local pane_id
     pane_id=$(_herdr agent list |
@@ -126,8 +127,14 @@ function start_agent() {
             '.result.agents | map(select(.name == $name).pane_id)[0]')
 
     if [[ $pane_id == "null" ]]; then
+        local cwd
+        cwd=$(_herdr workspace list |
+            jq --raw-output \
+                --arg ws_id "$ws_id" \
+                '.result.workspaces | map(select(.workspace_id == $ws_id).worktree.checkout_path)')
+
         pane_id=$(_herdr agent start "$name" --workspace "$ws_id" --cwd "$cwd" -- $DEFAULT_HARNESS |
-            jq --raw-output '.result.agent.pane_id') # FIXME: cwd
+            jq --raw-output '.result.agent.pane_id')
 
         cleanup_extra_panes "$ws_id" "$pane_id"
     fi
@@ -146,7 +153,7 @@ function select_agent() {
     if [[ ${#agents[@]} == 1 ]]; then
         echo "${agents[0]}"
     else
-        echo "${agents[@]}" | fzf
+        printf "%s\n" "${agents[@]}" | fzf
     fi
 }
 
@@ -156,6 +163,7 @@ function new_agent() {
 
     local query_selection fzf_exit=0
     query_selection=$(git branch | tac | fzf --print-query --prompt="⎇ branch: ") || fzf_exit=$?
+    # NOTE: Ctrl-C returns 130
     [[ $fzf_exit == 130 ]] && return 130
 
     local -r query=$(sed -n '1p' <<<"$query_selection")
@@ -178,7 +186,7 @@ function new_agent() {
     fi
 
     local pane_id
-    pane_id=$(start_agent "$ws_id" "$agent_name" "$repo_full_path")
+    pane_id=$(start_agent "$ws_id" "$agent_name")
 
     _herdr agent focus "$agent_name" >/dev/null
 }
