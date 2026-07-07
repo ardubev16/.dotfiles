@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
 set -euo pipefail
+shopt -s inherit_errexit
+
+DEFAULT_HARNESS=claude
 
 # Herdr:
 #   - workspace <-> project
@@ -28,20 +31,156 @@ EOF
     exit 1
 }
 
+function _herdr_interactive() {
+    HERDR_SESSION=tmux-herdr herdr "$@"
+}
+
+function _herdr() {
+    local out
+    out=$(_herdr_interactive "$@")
+
+    [[ -z $out ]] && return 1
+    echo "$out"
+}
+
+function get_repo_metadata() {
+    local -n _repo_full_path="$1" _repo_name="$2" _project_name="$3"
+
+    local _git_dir
+    _git_dir=$(git rev-parse --absolute-git-dir 2>/dev/null) || {
+        echo "Not a git repo."
+        return 1
+    }
+
+    _repo_full_path=$(dirname "$_git_dir")
+    _repo_name=$(basename "$_repo_full_path")
+    _project_name=$(basename "$(dirname "$_repo_full_path")")
+}
+
+function create_workspace() {
+    local -r name="$1" path="$2"
+
+    local ws_id
+    ws_id=$(_herdr workspace list |
+        jq --raw-output \
+            --arg label "$name" \
+            '.result.workspace | map(select(.label == $label).workspace_id)[0]')
+
+    if [[ $ws_id == "null" ]]; then
+        ws_id=$(_herdr workspace create --label "$name" --cwd "$path" |
+            jq --raw-output '.result.workspace.workspace_id')
+    fi
+
+    eche "$ws_id"
+}
+
+function create_worktree() {
+    local -r ws_id="$1" branch="$2" path="$3"
+
+    local wt_id
+    wt_id=$(_herdr worktree list --workspace "$ws_id" |
+        jq --raw-output \
+            --arg branch "$branch" \
+            '.result.worktrees | map(select(.branch == $branch).open_workspace_id)[0]')
+
+    if [[ $wt_id == "null" ]]; then
+        local wt_path
+        wt_path=$(_herdr worktree list --cwd "$path" |
+            jq --raw-output \
+                --arg branch "$branch" \
+                '.result.worktrees | map(select(.branch == $branch).path)[0]')
+
+        if [[ $wt_path == "null" ]]; then
+            wt_id=$(_herdr worktree create --workspace "$ws_id" --branch "$branch" --label "$branch" |
+                jq --raw-output '.result.worktree.open_workspace_id')
+        else
+            wt_id=$(_herdr worktree open --cwd "$path" --path "$wt_path" --label "$branch" |
+                jq --raw-output '.result.worktree.open_workspace_id')
+        fi
+    fi
+
+    echo "$wt_id"
+}
+
+function cleanup_extra_panes() {
+    local -r ws_id="$1" pane_id="$2"
+
+    local extra_panes
+    extra_panes=$(_herdr pane list --workspace "$ws_id" |
+        jq --raw-output \
+            --arg pane_id "$pane_id" \
+            '.result.panes | map(select(.pane_id != $pane_id).pane_id) | .[]')
+
+    for pane in "${extra_panes[@]}"; do
+        _herdr pane close "$pane"
+    done
+}
+
+function start_agent() {
+    local -r ws_id="$1" name="$2" cwd="$3"
+
+    local pane_id
+    pane_id=$(_herdr agent list |
+        jq --raw-output \
+            --arg name "$name" \
+            '.result.agents | map(select(.name == $name).pane_id)[0]')
+
+    if [[ $pane_id == "null" ]]; then
+        pane_id=$(_herdr agent start "$name" --workspace "$ws_id" --cwd "$cwd" -- $DEFAULT_HARNESS |
+            jq --raw-output '.result.agent.pane_id') # FIXME: cwd
+
+        cleanup_extra_panes "$ws_id" "$pane_id"
+    fi
+
+    echo "$pane_id"
+}
+
+function select_agent() {
+    local -r name="$1"
+
+    local agents
+    mapfile -t agents < <(_herdr agent list | jq --raw-output '.result.agents | map(.name) | .[]' | grep "$name")
+
+    [[ ${#agents[@]} == 0 ]] && return 1
+
+    if [[ ${#agents[@]} == 1 ]]; then
+        echo "${agents[0]}"
+    else
+        echo "${agents[@]}" | fzf
+    fi
+}
+
 function new_agent() {
-    # 1. Find repo root
-    # 2. Find repo parent -> proj
-    # 3. Ask to choose branch
-    # 4a. Work on repo path
-    # 4b. Create worktree
-    # 5. Create workspace if not exist
-    # 6. Create tab if not exist
-    # 7. Start agent (preconfigured through tmux config, e.g. Claude Code)
-    # 7bis. Cleanup redundant pane (if cannot find a better way to handle this)
-    # 8. Focus on newly started Agent
-    # 9. Open Herdr
-    echo "Not implemented yet"
-    exit 1
+    local repo_full_path repo_name project_name
+    get_repo_metadata repo_full_path repo_name project_name
+
+    local query_selection fzf_exit=0
+    query_selection=$(git branch | tac | fzf --print-query --prompt="⎇ branch: ") || fzf_exit=$?
+    [[ $fzf_exit == 130 ]] && return 130
+
+    local -r query=$(sed -n '1p' <<<"$query_selection")
+    local -r selected_branch=$(sed -n '2p' <<<"$query_selection")
+
+    local branch_name
+    if [[ -n "$selected_branch" ]]; then
+        branch_name="${selected_branch:2}"
+    else
+        branch_name="$query"
+    fi
+
+    local -r workspace_name="${project_name}::${repo_name}"
+    local -r agent_name="${workspace_name}::${branch_name}"
+
+    local ws_id
+    ws_id=$(create_workspace "$workspace_name" "$repo_full_path")
+    if [[ $selected_branch != "* $branch_name" ]]; then
+        ws_id=$(create_worktree "$ws_id" "$branch_name" "$repo_full_path")
+    fi
+
+    local pane_id
+    pane_id=$(start_agent "$ws_id" "$agent_name" "$repo_full_path")
+
+    _herdr agent focus "$agent_name" >/dev/null
 }
 
 function local_open() {
@@ -56,13 +195,13 @@ function local_open() {
 }
 
 function attach() {
-    # 1. Find repo root
-    # 2. Find repo parent -> proj
-    # 3. Get tabs
-    # 4a. Ask to choose branch if tabs > 1
-    # 5. Agent attach to chosen workspace + tab
-    echo "Not implemented yet"
-    exit 1
+    local repo_full_path repo_name project_name
+    get_repo_metadata repo_full_path repo_name project_name
+
+    local agent_name
+    agent_name=$(select_agent "${project_name}::${repo_name}")
+
+    _herdr_interactive agent attach "$agent_name"
 }
 
 while getopts "nloah" opt; do
@@ -76,7 +215,7 @@ while getopts "nloah" opt; do
         exit 0
         ;;
     o)
-        herdr
+        _herdr_interactive
         exit 0
         ;;
     a)

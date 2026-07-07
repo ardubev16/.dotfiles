@@ -61,10 +61,13 @@
       }
     ];
 
-    extraConfig = # tmux
+    extraConfig = # sh
       ''
         set-option -g renumber-windows on
         set-option -g default-terminal "tmux-256color"
+        set-option -g allow-passthrough on
+        set-option -s extend-keys on
+        set-option -as terminal-features 'xterm*:extkeys'
         # undercurl support
         set-option -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'
         # support colors for undercurl
