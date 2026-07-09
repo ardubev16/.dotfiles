@@ -86,12 +86,11 @@
         bind-key A display-popup -E tmux-sessionizer -a
         bind-key S display-popup -E tmux-sessionizer -s
 
-        # bind-key t display-popup -E tmux-session-mngr -t
-        # bind-key X display-popup -E tmux-session-mngr -c
-        # bind-key M run-shell 'tmux-session-mngr -m'
-
         bind-key -n M-o switch-client -p
         bind-key -n M-i switch-client -n
+
+        set-option -g @plugin 'ardubev16/tmux-herdr'
+        run '~/.tmux/plugins/tpm/tpm'
       '';
   };
 }
