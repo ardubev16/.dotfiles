@@ -1,8 +1,13 @@
-{ pkgs, config, ... }:
+{
+  pkgs,
+  config,
+  perSystem,
+  ...
+}:
 {
   home.packages = [
     (pkgs.writeShellScriptBin "tmux-sessionizer" (builtins.readFile ./tmux-sessionizer))
-    (pkgs.writeShellScriptBin "tmux-session-mngr" (builtins.readFile ./tmux-session-mngr))
+    perSystem.nixpkgs-unstable.herdr
   ];
 
   home.sessionVariables = {
@@ -56,10 +61,13 @@
       }
     ];
 
-    extraConfig = # tmux
+    extraConfig = # sh
       ''
         set-option -g renumber-windows on
         set-option -g default-terminal "tmux-256color"
+        set-option -g allow-passthrough on
+        set-option -s extend-keys on
+        set-option -as terminal-features 'xterm*:extkeys'
         # undercurl support
         set-option -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'
         # support colors for undercurl
@@ -78,12 +86,11 @@
         bind-key A display-popup -E tmux-sessionizer -a
         bind-key S display-popup -E tmux-sessionizer -s
 
-        bind-key t display-popup -E tmux-session-mngr -t
-        bind-key X display-popup -E tmux-session-mngr -c
-        bind-key M run-shell 'tmux-session-mngr -m'
-
         bind-key -n M-o switch-client -p
         bind-key -n M-i switch-client -n
+
+        set-option -g @plugin 'ardubev16/tmux-herdr'
+        run '~/.tmux/plugins/tpm/tpm'
       '';
   };
 }
