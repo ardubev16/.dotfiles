@@ -28,6 +28,7 @@
     prek
     prometheus-alertmanager
     spotify
+    talosctl
     telegram-desktop
     teleport
     terraform
