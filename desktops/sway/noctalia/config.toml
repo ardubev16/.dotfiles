@@ -3,13 +3,17 @@
 # resources / tray / network / volume / battery right.
 
 [shell]
-time_format  = "{:%-I:%M %p}"
 polkit_agent = true
+
+[shell.panel]
+# Panels (control center, calendar, tray…) open under the clicked widget, not bar-centre.
+open_near_click_control_center = true
+open_near_click_launcher       = false
 
 [theme]
 mode    = "dark"
 source  = "builtin"
-builtin = "Noctalia"
+builtin = "Gruvbox"
 
 [audio]
 enable_overdrive = true            # volume above 100%, as in GNOME
@@ -32,19 +36,23 @@ shadow             = false
 reserve_space      = true
 capsule            = false
 
-start  = ["workspaces"]
+start  = ["taskbar"]
 center = ["clock"]
-end    = ["cpu", "ram", "temp", "disk", "tray", "network", "volume", "battery"]
+end    = ["cpu", "ram", "temp", "disk", "gap", "tray", "network", "volume", "battery"]
 
-[widget.workspaces]
-style                = "regular"
-show_labels          = true
-label_source         = "id"
-show_all_outputs     = false       # each bar lists the workspaces of its own monitor
-focused_output_only  = false
+# One capsule per workspace holding the icons of the apps open on it
+# (like the GNOME "workspaces by open apps" extension).
+[widget.taskbar]
+group_by_workspace        = true
+group_single_icon_per_app = true
+hide_empty_workspaces     = false
+workspace_group_capsule   = true
+workspace_group_content   = "icons"
+workspace_label_placement = "inside"
+show_active_indicator     = false
 
 [widget.clock]
-format         = "{:%a %b %-d  %-I:%M %p}"
+format         = "{:%b %-d %-I:%M %p}"
 tooltip_format = "{:%A, %B %d, %Y}"
 
 [widget.cpu]
@@ -64,5 +72,15 @@ type = "sysmon"
 stat = "disk_free"
 path = "/"
 
+[widget.gap]
+type   = "spacer"
+length = 24
+
 [widget.tray]
 hide_passive = true
+
+[widget.network]
+show_label = false
+
+[widget.volume]
+show_label = false

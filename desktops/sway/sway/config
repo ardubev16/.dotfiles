@@ -2,7 +2,11 @@
 # Sway and Noctalia are installed as system packages (dnf install sway noctalia).
 
 set $mod Mod4
-set $term ~/.nix-profile/bin/kitty
+# Sway itself starts with a minimal env (no ~/.nix-profile/bin, no ssh agent), which
+# breaks launcher entries such as `Exec=Telegram`. Everything started from here
+# (Noctalia, the apps it launches, kitty) inherits this env instead.
+set $env env PATH=$HOME/.nix-profile/bin:/nix/var/nix/profiles/default/bin:$HOME/.local/bin:$HOME/.cargo/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/gcr/ssh TERMINAL=kitty LC_TIME=en_US.UTF-8
+set $term $env kitty
 set $ipc noctalia msg
 
 # ── Input ────────────────────────────────────────────────────────────────────
@@ -61,16 +65,16 @@ bindsym $mod+7 workspace number 7
 bindsym $mod+8 workspace number 8
 bindsym $mod+9 workspace number 9
 bindsym $mod+0 workspace number 10
-bindsym $mod+Shift+1 move container to workspace number 1
-bindsym $mod+Shift+2 move container to workspace number 2
-bindsym $mod+Shift+3 move container to workspace number 3
-bindsym $mod+Shift+4 move container to workspace number 4
-bindsym $mod+Shift+5 move container to workspace number 5
-bindsym $mod+Shift+6 move container to workspace number 6
-bindsym $mod+Shift+7 move container to workspace number 7
-bindsym $mod+Shift+8 move container to workspace number 8
-bindsym $mod+Shift+9 move container to workspace number 9
-bindsym $mod+Shift+0 move container to workspace number 10
+bindsym $mod+Shift+1 move container to workspace number 1; workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2; workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3; workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4; workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5; workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6; workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7; workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8; workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9; workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10; workspace number 10
 
 # Move the current workspace between monitors / focus another monitor
 bindsym $mod+Ctrl+Shift+h move workspace to output left
@@ -131,7 +135,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+e exec $ipc panel-toggle session
 
 # ── Startup ──────────────────────────────────────────────────────────────────
-exec noctalia
+exec $env noctalia
 
 # Distro-provided: imports env into systemd/dbus (Fedora: 50-systemd-user.conf)
 include /etc/sway/config.d/*
