@@ -10,6 +10,20 @@ polkit_agent = true
 open_near_click_control_center = true
 open_near_click_launcher       = false
 
+# Like GNOME: saved to ~/Pictures/Screenshots and copied to the clipboard.
+[shell.screenshot]
+directory         = "~/Pictures/Screenshots"
+filename_pattern  = "Screenshot From %Y-%m-%d %H-%M-%S"
+save_to_file      = true
+copy_to_clipboard = true
+
+[shell.animation]
+enabled = true
+speed   = 1.5                     # 1.0 = default; higher = faster
+
+[shell.launcher]
+categories = false                # hide the application category chips in the launcher
+
 [theme]
 mode    = "dark"
 source  = "builtin"
