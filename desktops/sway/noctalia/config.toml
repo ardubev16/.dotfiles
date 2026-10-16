@@ -1,0 +1,68 @@
+# Noctalia config. Symlinked to ~/.config/noctalia/config.toml by desktops/sway/default.nix.
+# Layout mirrors the GNOME setup: workspaces left, clock centre,
+# resources / tray / network / volume / battery right.
+
+[shell]
+time_format  = "{:%-I:%M %p}"
+polkit_agent = true
+
+[theme]
+mode    = "dark"
+source  = "builtin"
+builtin = "Noctalia"
+
+[audio]
+enable_overdrive = true            # volume above 100%, as in GNOME
+
+[nightlight]
+enabled           = true
+temperature_night = 3700
+
+[bar]
+order = ["main"]
+
+[bar.main]
+position           = "top"
+thickness          = 32
+margin_ends        = 0
+margin_edge        = 0
+radius             = 0
+concave_edge_corners = false
+shadow             = false
+reserve_space      = true
+capsule            = false
+
+start  = ["workspaces"]
+center = ["clock"]
+end    = ["cpu", "ram", "temp", "disk", "tray", "network", "volume", "battery"]
+
+[widget.workspaces]
+style                = "regular"
+show_labels          = true
+label_source         = "id"
+show_all_outputs     = false       # each bar lists the workspaces of its own monitor
+focused_output_only  = false
+
+[widget.clock]
+format         = "{:%a %b %-d  %-I:%M %p}"
+tooltip_format = "{:%A, %B %d, %Y}"
+
+[widget.cpu]
+type = "sysmon"
+stat = "cpu_usage"
+
+[widget.ram]
+type = "sysmon"
+stat = "ram_pct"
+
+[widget.temp]
+type = "sysmon"
+stat = "cpu_temp"
+
+[widget.disk]
+type = "sysmon"
+stat = "disk_free"
+path = "/"
+
+[widget.tray]
+hide_passive = true

@@ -1,0 +1,137 @@
+# Sway config. Symlinked to ~/.config/sway by desktops/sway/default.nix.
+# Sway and Noctalia are installed as system packages (dnf install sway noctalia).
+
+set $mod Mod4
+set $term ~/.nix-profile/bin/kitty
+set $ipc noctalia msg
+
+# ── Input ────────────────────────────────────────────────────────────────────
+input type:keyboard {
+    xkb_layout us
+    xkb_options lv3:menu_switch,compose:ralt
+    xkb_numlock enabled
+    repeat_delay 250
+    repeat_rate 50
+}
+input type:touchpad {
+    tap enabled
+    natural_scroll enabled
+}
+
+# ── Outputs ──────────────────────────────────────────────────────────────────
+# Desk: BenQ (left), Samsung Odyssey G5 (centre, primary), laptop panel (right).
+# Connector names change with the dock port, so both variants are listed;
+# unknown outputs are ignored. Check with: swaymsg -t get_outputs
+output eDP-1 pos 4480 360
+output DP-2  pos 0 360
+output DP-4  pos 0 360
+output DP-3  pos 1920 0 mode 2560x1440@144Hz
+output DP-5  pos 1920 0 mode 2560x1440@144Hz
+
+# ── Look ─────────────────────────────────────────────────────────────────────
+default_border pixel 2
+hide_edge_borders smart
+smart_borders on
+gaps inner 0
+focus_follows_mouse no
+floating_modifier $mod normal
+
+# ── Workspaces ───────────────────────────────────────────────────────────────
+# Default monitors; the first available output in each list wins, the laptop
+# panel is the fallback so everything works with a single screen.
+workspace 1  output DP-3 DP-5 eDP-1
+workspace 2  output DP-3 DP-5 eDP-1
+workspace 3  output DP-3 DP-5 eDP-1
+workspace 4  output DP-3 DP-5 eDP-1
+workspace 5  output DP-3 DP-5 eDP-1
+workspace 6  output eDP-1 DP-3 DP-5
+workspace 7  output DP-2 DP-4 eDP-1
+workspace 8  output DP-2 DP-4 eDP-1
+workspace 9  output DP-2 DP-4 eDP-1
+workspace 10 output DP-2 DP-4 eDP-1
+
+# Switch to / send to workspace N
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
+
+# Move the current workspace between monitors / focus another monitor
+bindsym $mod+Ctrl+Shift+h move workspace to output left
+bindsym $mod+Ctrl+Shift+l move workspace to output right
+bindsym $mod+Ctrl+h focus output left
+bindsym $mod+Ctrl+l focus output right
+
+# Open apps on their workspace (replaces GNOME auto-move-windows).
+# app_id = native Wayland, class = XWayland.
+assign [app_id="kitty"]                         workspace number 1
+assign [app_id="brave-browser"]                 workspace number 2
+assign [app_id="(?i)zen.*"]                     workspace number 2
+assign [class="VirtualBox.*"]                   workspace number 3
+assign [app_id="(?i)spotify"]                   workspace number 7
+assign [class="(?i)spotify"]                    workspace number 7
+assign [app_id="(?i)(org.mozilla.)?thunderbird"] workspace number 8
+assign [app_id="(?i)(discord|vesktop)"]         workspace number 9
+assign [class="(?i)discord"]                    workspace number 9
+assign [app_id="org.telegram.desktop"]          workspace number 10
+
+# ── Windows ──────────────────────────────────────────────────────────────────
+bindsym $mod+q kill
+bindsym $mod+f floating toggle
+bindsym $mod+Shift+f fullscreen toggle
+
+bindsym $mod+Left  focus left
+bindsym $mod+Down  focus down
+bindsym $mod+Up    focus up
+bindsym $mod+Right focus right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+bindsym $mod+b splith
+bindsym $mod+v splitv
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Noctalia settings window floats
+for_window [app_id="dev.noctalia.Noctalia"] floating enable
+
+# ── Launchers ────────────────────────────────────────────────────────────────
+bindsym $mod+Return exec $term
+bindsym $mod+space  exec $ipc panel-toggle launcher
+bindsym $mod+s      exec $ipc panel-toggle control-center
+bindsym $mod+comma  exec $ipc settings-toggle
+bindsym $mod+l      exec $ipc session lock
+bindsym Alt+Tab     exec $ipc window-switcher hold
+
+bindsym --locked XF86AudioRaiseVolume  exec $ipc volume-up
+bindsym --locked XF86AudioLowerVolume  exec $ipc volume-down
+bindsym --locked XF86AudioMute         exec $ipc volume-mute
+bindsym --locked XF86MonBrightnessUp   exec $ipc brightness-up
+bindsym --locked XF86MonBrightnessDown exec $ipc brightness-down
+
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+e exec $ipc panel-toggle session
+
+# ── Startup ──────────────────────────────────────────────────────────────────
+exec noctalia
+
+# Distro-provided: imports env into systemd/dbus (Fedora: 50-systemd-user.conf)
+include /etc/sway/config.d/*

@@ -11,6 +11,7 @@
     inputs.self.homeModules.theme
     ../../applications
     ../../desktops/gnome
+    ../../desktops/sway
   ];
 
   programs.home-manager.enable = true;
