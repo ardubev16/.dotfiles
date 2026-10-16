@@ -36,7 +36,20 @@ output DP-5  pos 1920 0 mode 2560x1440@144Hz
 default_border pixel 2
 hide_edge_borders smart
 smart_borders on
-gaps inner 0
+gaps inner 6
+smart_gaps on                     # no gaps/rounding when a window is alone (fullscreen-like use)
+
+# SwayFX effects (these commands are errors on plain sway)
+corner_radius 8
+smart_corner_radius enable
+blur enable
+blur_passes 2
+blur_radius 4
+shadows enable
+shadow_blur_radius 20
+shadow_color #00000066
+default_dim_inactive 0.08
+dim_inactive_colors.unfocused #000000FF
 focus_follows_mouse no
 floating_modifier $mod normal
 
