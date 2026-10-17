@@ -97,16 +97,19 @@ bindsym $mod+Ctrl+l focus output right
 
 # Open apps on their workspace (replaces GNOME auto-move-windows).
 # app_id = native Wayland, class = XWayland.
-assign [app_id="kitty"]                         workspace number 1
-assign [app_id="brave-browser"]                 workspace number 2
-assign [app_id="(?i)zen.*"]                     workspace number 2
-assign [class="VirtualBox.*"]                   workspace number 3
-assign [app_id="(?i)spotify"]                   workspace number 7
-assign [class="(?i)spotify"]                    workspace number 7
-assign [app_id="(?i)(org.mozilla.)?thunderbird"] workspace number 8
-assign [app_id="(?i)(discord|vesktop)"]         workspace number 9
-assign [class="(?i)discord"]                    workspace number 9
-assign [app_id="org.telegram.desktop"]          workspace number 10
+assign [app_id="kitty"]                          workspace number 1
+assign [app_id="brave-browser"]                  workspace number 2
+assign [app_id="brave-origin"]                   workspace number 2
+assign [app_id="(?i)zen.*"]                      workspace number 2
+assign [app_id="(?i).*zotero.*"]                 workspace number 3
+assign [class="(?i).*zotero.*"]                  workspace number 3
+assign [app_id="(?i)spotify"]                    workspace number 7
+assign [class="(?i)spotify"]                     workspace number 7
+assign [app_id="(?i)(discord|vesktop)"]          workspace number 8
+assign [class="(?i)discord"]                     workspace number 8
+assign [app_id="(?i)(org.mozilla.)?thunderbird"] workspace number 9
+assign [app_id="org.telegram.desktop"]           workspace number 10
+assign [app_id="brave-hnpfjngllnobngcgfapefoaidbinmjnm-Default"] workspace number 10
 
 # ── Windows ──────────────────────────────────────────────────────────────────
 bindsym $mod+q kill

@@ -67,12 +67,14 @@ hl.window_rule({ name = "smart-gaps-f", match = { float = false, workspace = "f[
 local assign = {
     { "kitty",                              "1"  },
     { "brave-browser",                      "2"  },
+    { "brave-origin",                       "2"  },
     { "(?i)zen.*",                          "2"  },
-    { "VirtualBox.*",                       "3"  },
+    { "(?i).*zotero.*",                     "3"  },
     { "(?i)spotify",                        "7"  },
-    { "(?i)(org\\.mozilla\\.)?thunderbird", "8"  },
-    { "(?i)(discord|vesktop)",              "9"  },
+    { "(?i)(discord|vesktop)",              "8"  },
+    { "(?i)(org\\.mozilla\\.)?thunderbird", "9"  },
     { "org\\.telegram\\.desktop",           "10" },
+    { "brave-hnpfjngllnobngcgfapefoaidbinmjnm-Default", "10" },
 }
 for n, a in ipairs(assign) do
     hl.window_rule({ name = "assign-" .. n, match = { class = "^" .. a[1] .. "$" }, workspace = a[2] .. " silent" })
@@ -86,8 +88,8 @@ hl.window_rule({ name = "noctalia-settings", match = { class = "^dev\\.noctalia\
 -----------------------
 hl.config({
     general = {
-        gaps_in     = 3,   -- 6px between windows (3 per side), like sway `gaps inner 6`
-        gaps_out    = 0,   -- no outer gap
+        gaps_in     = 3,   -- 6px between windows (3 per side)
+        gaps_out    = 6,   -- gap to the screen edges; removed for a lone window by the smart-gaps rules
         border_size = 2,
         col = {
             active_border   = "rgba(d79921ff)", -- gruvbox yellow
@@ -129,7 +131,7 @@ hl.config({
         numlock_by_default = true,
         repeat_delay       = 250,
         repeat_rate        = 50,
-        follow_mouse       = 0, -- sway: focus_follows_mouse no
+        follow_mouse       = 1, -- focus the window under the pointer without clicking
         touchpad = {
             natural_scroll = true,
             tap_to_click   = true,
@@ -139,6 +141,18 @@ hl.config({
 
 -- Noctalia animates its own surfaces
 hl.layer_rule({ name = "noctalia-no-anim", match = { namespace = "^noctalia-" }, no_anim = true })
+
+-- Animations. `speed` is in deciseconds per animation: LOWER = FASTER (stock is ~4-5 for windows).
+hl.curve("snap",   { type = "bezier", points = { {0.2, 0.9},  {0.1, 1} } })
+hl.curve("linear", { type = "bezier", points = { {0, 0},      {1, 1}   } })
+hl.animation({ leaf = "global",     enabled = true, speed = 3,   bezier = "snap" })
+hl.animation({ leaf = "windows",    enabled = true, speed = 1.8, bezier = "snap" })
+hl.animation({ leaf = "windowsIn",  enabled = true, speed = 1.8, bezier = "snap",   style = "popin 90%" })
+hl.animation({ leaf = "windowsOut", enabled = true, speed = 1.2, bezier = "linear", style = "popin 90%" })
+hl.animation({ leaf = "fade",       enabled = true, speed = 1.5, bezier = "snap" })
+hl.animation({ leaf = "border",     enabled = true, speed = 2,   bezier = "snap" })
+hl.animation({ leaf = "layers",     enabled = true, speed = 1.5, bezier = "snap",   style = "fade" })
+hl.animation({ leaf = "workspaces", enabled = true, speed = 1.5, bezier = "snap",   style = "slide" })
 
 ---------------------
 ---- KEYBINDINGS ----
@@ -188,11 +202,12 @@ hl.bind(mod .. " + V", hl.dsp.layout("togglesplit"))
 hl.bind(mod .. " + E", hl.dsp.layout("togglesplit"))
 hl.bind(mod .. " + W", hl.dsp.group.toggle())
 
--- Workspaces: Super+N switches, Super+Shift+N sends the window AND follows it
+-- Workspaces: Super+N switches, Super+Shift+N sends the window AND follows it.
+-- Bound by keycode (10..19 = keys 1..0) so it works regardless of keysym/shift level or remapped layers.
 for i = 1, 10 do
-    local key = i % 10 -- 10 maps to key 0
-    hl.bind(mod .. " + " .. key,         hl.dsp.focus({ workspace = i }))
-    hl.bind(mod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i, follow = true }))
+    local code = "code:" .. (9 + i)
+    hl.bind(mod .. " + " .. code,           hl.dsp.focus({ workspace = i }))
+    hl.bind(mod .. " + SHIFT + " .. code,   hl.dsp.window.move({ workspace = i, follow = true }))
 end
 
 -- Monitors: focus another monitor / move the current workspace to another monitor

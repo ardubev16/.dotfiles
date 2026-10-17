@@ -1,6 +1,6 @@
 { config, lib, ... }:
 {
-  # Noctalia is a system package (dnf); shared by the sway and niri sessions.
+  # Noctalia is a system package (dnf); shared by the sway and hyprland sessions.
   config = lib.mkIf config.global.gui {
     # Only the file: Noctalia writes GUI overrides next to it, which must stay out of the repo.
     xdg.configFile."noctalia/config.toml".source =

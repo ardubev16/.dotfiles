@@ -1,5 +1,5 @@
 # Noctalia config. Symlinked to ~/.config/noctalia/config.toml by desktops/noctalia/default.nix.
-# Shared by the sway and niri sessions. Layout mirrors the GNOME setup:
+# Shared by the sway and hyprland sessions. Layout mirrors the GNOME setup:
 # workspaces left, clock centre, resources / tray / network / volume / battery right.
 
 [shell]
@@ -64,7 +64,7 @@ capsule = false
 scale = 1.2
 
 start = ["taskbar"]
-center = ["clock"]
+center = ["clock", "notifications"]
 end = [
     "group:res",
     "gap",
@@ -91,7 +91,7 @@ widget_spacing = 12
 [widget.taskbar]
 group_by_workspace = true
 group_single_icon_per_app = true
-hide_empty_workspaces = false
+hide_empty_workspaces = true
 workspace_group_capsule = true
 workspace_group_content = "icons"
 workspace_label_placement = "inside"
@@ -99,8 +99,19 @@ show_active_indicator = false
 icon_scale = 1.2
 
 [widget.clock]
-format = "{:%b %-d %-I:%M %p}"
+format = "{:%b %-d  %-I:%M %p}"
 tooltip_format = "{:%A, %B %d, %Y}"
+
+# Clock opens the calendar, the bell next to it the notifications (the sidebar switches between them).
+[widget.clock.actions]
+left = "panel-toggle control-center calendar"
+right = "panel-toggle control-center notifications"
+
+[widget.notifications]
+hide_when_no_unread = true
+
+[widget.notifications.actions]
+left = "panel-toggle control-center notifications"
 
 [widget.cpu]
 type = "sysmon"

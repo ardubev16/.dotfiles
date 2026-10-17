@@ -12,7 +12,6 @@
     ../../applications
     ../../desktops/gnome
     ../../desktops/hyprland
-    ../../desktops/niri
     ../../desktops/noctalia
     ../../desktops/sway
   ];
