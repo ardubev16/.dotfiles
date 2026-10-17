@@ -1,0 +1,248 @@
+// Niri config. Symlinked to ~/.config/niri by desktops/niri/default.nix.
+// Niri, xwayland-satellite and Noctalia are system packages (dnf).
+
+// Niri sessions inherit the systemd user env (no ~/.nix-profile/bin), which breaks
+// launcher entries such as `Exec=Telegram`. Everything niri spawns gets this instead.
+environment {
+    PATH "/home/ardubev_16/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/home/ardubev_16/.local/bin:/home/ardubev_16/.cargo/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin"
+    SSH_AUTH_SOCK "/run/user/1000/gcr/ssh"
+    TERMINAL "kitty"
+    LC_TIME "en_US.UTF-8"
+}
+
+input {
+    keyboard {
+        xkb {
+            layout "us"
+            options "lv3:menu_switch,compose:ralt"
+        }
+        repeat-delay 250
+        repeat-rate 50
+        numlock
+    }
+    touchpad {
+        tap
+        natural-scroll
+    }
+    focus-follows-mouse max-scroll-amount="0%"
+}
+
+// ── Outputs ──────────────────────────────────────────────────────────────────
+// Desk: BenQ (left), Samsung Odyssey G5 (centre), laptop panel (right).
+// Connector names change with the dock port, so both variants are listed;
+// unknown outputs are ignored. Check with: niri msg outputs
+output "eDP-1" {
+    position x=4480 y=360
+}
+output "DP-2" {
+    position x=0 y=360
+}
+output "DP-4" {
+    position x=0 y=360
+}
+output "DP-3" {
+    mode "2560x1440@144.000"
+    position x=1920 y=0
+}
+output "DP-5" {
+    mode "2560x1440@144.000"
+    position x=1920 y=0
+}
+
+// ── Workspaces ───────────────────────────────────────────────────────────────
+// Ten fixed, named workspaces. open-on-output takes one output, so the pins below
+// assume the DP-5 (Odyssey) / DP-4 (BenQ) dock variant; if an output is missing
+// the workspace opens on another monitor instead.
+workspace "1" { open-on-output "DP-5"; }
+workspace "2" { open-on-output "DP-5"; }
+workspace "3" { open-on-output "DP-5"; }
+workspace "4" { open-on-output "DP-5"; }
+workspace "5" { open-on-output "DP-5"; }
+workspace "6" { open-on-output "eDP-1"; }
+workspace "7" { open-on-output "DP-4"; }
+workspace "8" { open-on-output "DP-4"; }
+workspace "9" { open-on-output "DP-4"; }
+workspace "10" { open-on-output "DP-4"; }
+
+// ── Look ─────────────────────────────────────────────────────────────────────
+prefer-no-csd
+
+layout {
+    gaps 6
+    center-focused-column "never"
+
+    // One window fills the screen; Mod+R cycles to half width for side-by-side.
+    default-column-width { proportion 1.0; }
+    preset-column-widths {
+        proportion 0.5
+        proportion 1.0
+    }
+
+    focus-ring {
+        width 2
+        active-color "#d79921"
+        inactive-color "#504945"
+    }
+    border { off; }
+    shadow {
+        on
+        softness 20
+        spread 2
+        offset x=0 y=4
+        color "#00000066"
+    }
+
+    // Transparent so Noctalia's stationary wallpaper (backdrop layer) shows through.
+    background-color "transparent"
+}
+
+window-rule {
+    geometry-corner-radius 8
+    clip-to-geometry true
+}
+
+// Blur behind windows (niri 26.04+)
+window-rule {
+    background-effect {
+        blur true
+        xray false
+    }
+}
+
+// Noctalia settings window floats
+window-rule {
+    match app-id="dev.noctalia.Noctalia"
+    open-floating true
+    default-column-width { fixed 1080; }
+    default-window-height { fixed 920; }
+}
+
+// Stationary wallpaper (see Noctalia docs, "Option 2")
+layer-rule {
+    match namespace="^noctalia-wallpaper"
+    place-within-backdrop true
+}
+overview {
+    workspace-shadow { off; }
+}
+
+// ── Open apps on their workspace (replaces GNOME auto-move-windows) ──────────
+// X11 apps go through xwayland-satellite and report their WM_CLASS as app-id.
+window-rule {
+    match app-id=r#"^kitty$"#
+    open-on-workspace "1"
+}
+window-rule {
+    match app-id=r#"^brave-browser$"#
+    match app-id=r#"(?i)^zen"#
+    open-on-workspace "2"
+}
+window-rule {
+    match app-id=r#"^VirtualBox"#
+    open-on-workspace "3"
+}
+window-rule {
+    match app-id=r#"(?i)^spotify$"#
+    open-on-workspace "7"
+}
+window-rule {
+    match app-id=r#"(?i)^(org\.mozilla\.)?thunderbird$"#
+    open-on-workspace "8"
+}
+window-rule {
+    match app-id=r#"(?i)^(discord|vesktop)$"#
+    open-on-workspace "9"
+}
+window-rule {
+    match app-id=r#"^org\.telegram\.desktop$"#
+    open-on-workspace "10"
+}
+
+// ── Startup ──────────────────────────────────────────────────────────────────
+spawn-at-startup "noctalia"
+
+// Lets Noctalia notification actions activate windows.
+debug {
+    honor-xdg-activation-with-invalid-serial
+}
+
+hotkey-overlay {
+    skip-at-startup
+}
+
+// ── Keys ─────────────────────────────────────────────────────────────────────
+binds {
+    Mod+Shift+Slash { show-hotkey-overlay; }
+
+    // Launchers / Noctalia
+    Mod+Return hotkey-overlay-title="Terminal" { spawn "kitty"; }
+    Mod+Space  hotkey-overlay-title="Launcher" { spawn-sh "noctalia msg panel-toggle launcher"; }
+    Mod+S      { spawn-sh "noctalia msg panel-toggle control-center"; }
+    Mod+Comma  { spawn-sh "noctalia msg settings-toggle"; }
+    Mod+L      { spawn-sh "noctalia msg session lock"; }
+    Mod+Shift+E { spawn-sh "noctalia msg panel-toggle session"; }
+    Alt+Tab    { spawn-sh "noctalia msg window-switcher hold"; }
+
+    XF86AudioRaiseVolume  allow-when-locked=true { spawn-sh "noctalia msg volume-up"; }
+    XF86AudioLowerVolume  allow-when-locked=true { spawn-sh "noctalia msg volume-down"; }
+    XF86AudioMute         allow-when-locked=true { spawn-sh "noctalia msg volume-mute"; }
+    XF86MonBrightnessUp   allow-when-locked=true { spawn-sh "noctalia msg brightness-up"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn-sh "noctalia msg brightness-down"; }
+
+    // Screenshots (GNOME-style): area / screen / all screens
+    Print       { spawn-sh "noctalia msg screenshot-region"; }
+    Shift+Print { spawn-sh "noctalia msg screenshot-fullscreen pick"; }
+    Ctrl+Print  { spawn-sh "noctalia msg screenshot-fullscreen all"; }
+
+    // Workspaces: Mod+N switches, Mod+Shift+N sends the window and follows it
+    Mod+1 { focus-workspace "1"; }
+    Mod+2 { focus-workspace "2"; }
+    Mod+3 { focus-workspace "3"; }
+    Mod+4 { focus-workspace "4"; }
+    Mod+5 { focus-workspace "5"; }
+    Mod+6 { focus-workspace "6"; }
+    Mod+7 { focus-workspace "7"; }
+    Mod+8 { focus-workspace "8"; }
+    Mod+9 { focus-workspace "9"; }
+    Mod+0 { focus-workspace "10"; }
+    Mod+Shift+1 { move-window-to-workspace "1" focus=true; }
+    Mod+Shift+2 { move-window-to-workspace "2" focus=true; }
+    Mod+Shift+3 { move-window-to-workspace "3" focus=true; }
+    Mod+Shift+4 { move-window-to-workspace "4" focus=true; }
+    Mod+Shift+5 { move-window-to-workspace "5" focus=true; }
+    Mod+Shift+6 { move-window-to-workspace "6" focus=true; }
+    Mod+Shift+7 { move-window-to-workspace "7" focus=true; }
+    Mod+Shift+8 { move-window-to-workspace "8" focus=true; }
+    Mod+Shift+9 { move-window-to-workspace "9" focus=true; }
+    Mod+Shift+0 { move-window-to-workspace "10" focus=true; }
+
+    // Monitors: focus another monitor / move the current workspace to another monitor
+    Mod+Ctrl+H       { focus-monitor-left; }
+    Mod+Ctrl+L       { focus-monitor-right; }
+    Mod+Ctrl+Shift+H { move-workspace-to-monitor-left; }
+    Mod+Ctrl+Shift+L { move-workspace-to-monitor-right; }
+
+    // Windows
+    Mod+Q repeat=false { close-window; }
+    Mod+F { toggle-window-floating; }
+    Mod+Shift+F { fullscreen-window; }
+    Mod+O repeat=false { toggle-overview; }
+
+    Mod+Left  { focus-column-left; }
+    Mod+Right { focus-column-right; }
+    Mod+Up    { focus-window-up; }
+    Mod+Down  { focus-window-down; }
+    Mod+Shift+H { move-column-left; }
+    Mod+Shift+L { move-column-right; }
+    Mod+Shift+J { move-window-down; }
+    Mod+Shift+K { move-window-up; }
+
+    // Layout: columns replace Sway's splits/tabs
+    Mod+R { switch-preset-column-width; }
+    Mod+M { maximize-column; }
+    Mod+W { toggle-column-tabbed-display; }
+    Mod+BracketLeft  { consume-or-expel-window-left; }
+    Mod+BracketRight { consume-or-expel-window-right; }
+
+    Mod+Shift+P { power-off-monitors; }
+}

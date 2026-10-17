@@ -1,6 +1,6 @@
-# Noctalia config. Symlinked to ~/.config/noctalia/config.toml by desktops/sway/default.nix.
-# Layout mirrors the GNOME setup: workspaces left, clock centre,
-# resources / tray / network / volume / battery right.
+# Noctalia config. Symlinked to ~/.config/noctalia/config.toml by desktops/noctalia/default.nix.
+# Shared by the sway and niri sessions. Layout mirrors the GNOME setup:
+# workspaces left, clock centre, resources / tray / network / volume / battery right.
 
 [shell]
 font_family = "Adwaita Sans"

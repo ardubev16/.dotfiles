@@ -11,6 +11,8 @@
     inputs.self.homeModules.theme
     ../../applications
     ../../desktops/gnome
+    ../../desktops/niri
+    ../../desktops/noctalia
     ../../desktops/sway
   ];
 
