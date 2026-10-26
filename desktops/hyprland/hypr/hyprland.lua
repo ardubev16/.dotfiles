@@ -38,7 +38,7 @@ hl.monitor({ output = "DP-5",  mode = "2560x1440@144", position = "1920x0",   sc
 local odyssey = { "DP-3", "DP-5", "eDP-1" }
 local laptop  = { "eDP-1", "DP-3", "DP-5" }
 local benq    = { "DP-2", "DP-4", "eDP-1" }
-local pins = { odyssey, odyssey, odyssey, odyssey, odyssey, laptop, benq, benq, benq, benq }
+local pins = { odyssey, odyssey, odyssey, odyssey, odyssey, laptop, benq, benq, benq, laptop }
 
 local function first_connected(list)
     for _, name in ipairs(list) do
@@ -70,7 +70,7 @@ local assign = {
     { "brave-origin",                       "2"  },
     { "(?i)zen.*",                          "2"  },
     { "(?i).*zotero.*",                     "3"  },
-    { "(?i)spotify",                        "7"  },
+    { "(?i)spotify",                        "6"  },
     { "(?i)(discord|vesktop)",              "8"  },
     { "(?i)(org\\.mozilla\\.)?thunderbird", "9"  },
     { "org\\.telegram\\.desktop",           "10" },

@@ -65,7 +65,7 @@ workspace 6  output eDP-1 DP-3 DP-5
 workspace 7  output DP-2 DP-4 eDP-1
 workspace 8  output DP-2 DP-4 eDP-1
 workspace 9  output DP-2 DP-4 eDP-1
-workspace 10 output DP-2 DP-4 eDP-1
+workspace 10 output eDP-1 DP-3 DP-5
 
 # Switch to / send to workspace N
 bindsym $mod+1 workspace number 1
@@ -103,8 +103,8 @@ assign [app_id="brave-origin"]                   workspace number 2
 assign [app_id="(?i)zen.*"]                      workspace number 2
 assign [app_id="(?i).*zotero.*"]                 workspace number 3
 assign [class="(?i).*zotero.*"]                  workspace number 3
-assign [app_id="(?i)spotify"]                    workspace number 7
-assign [class="(?i)spotify"]                     workspace number 7
+assign [app_id="(?i)spotify"]                    workspace number 6
+assign [class="(?i)spotify"]                     workspace number 6
 assign [app_id="(?i)(discord|vesktop)"]          workspace number 8
 assign [class="(?i)discord"]                     workspace number 8
 assign [app_id="(?i)(org.mozilla.)?thunderbird"] workspace number 9
