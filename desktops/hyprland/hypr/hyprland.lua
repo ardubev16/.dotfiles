@@ -171,6 +171,10 @@ hl.bind("XF86AudioLowerVolume",  hl.dsp.exec_cmd(ipc .. " volume-down"),     lr)
 hl.bind("XF86AudioMute",         hl.dsp.exec_cmd(ipc .. " volume-mute"),     { locked = true })
 hl.bind("XF86MonBrightnessUp",   hl.dsp.exec_cmd(ipc .. " brightness-up"),   lr)
 hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd(ipc .. " brightness-down"), lr)
+hl.bind("XF86AudioPlay",  hl.dsp.exec_cmd(ipc .. " media toggle"),   { locked = true })
+hl.bind("XF86AudioPause", hl.dsp.exec_cmd(ipc .. " media pause"),    { locked = true })
+hl.bind("XF86AudioNext",  hl.dsp.exec_cmd(ipc .. " media next"),     { locked = true })
+hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd(ipc .. " media previous"), { locked = true })
 
 -- Screenshots (GNOME-style): area / screen / all screens
 hl.bind("Print",         hl.dsp.exec_cmd(ipc .. " screenshot-region"))
