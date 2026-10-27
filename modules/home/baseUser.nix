@@ -13,7 +13,6 @@
     ../../desktops/gnome
     ../../desktops/hyprland
     ../../desktops/noctalia
-    ../../desktops/sway
   ];
 
   programs.home-manager.enable = true;

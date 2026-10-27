@@ -1,5 +1,5 @@
 # Noctalia config. Symlinked to ~/.config/noctalia/config.toml by desktops/noctalia/default.nix.
-# Shared by the sway and hyprland sessions. Layout mirrors the GNOME setup:
+# Layout mirrors the GNOME setup:
 # workspaces left, clock centre, resources / tray / network / volume / battery right.
 
 [shell]
@@ -17,6 +17,28 @@ open_near_click_launcher = false
 [lockscreen]
 transition = []
 
+# Idle: lock after 5 min of inactivity, and switch the screen off 5 s after the session is locked.
+# Videos (Brave "Wake Lock") and caffeine are idle inhibitors, which Noctalia respects.
+[idle]
+pre_action_fade_seconds = 0
+
+[idle.behavior.lock]
+action = "lock"
+timeout = 300
+enabled = true
+
+[idle.behavior.screen-off]
+action = "screen_off"
+timeout = 0           # never while unlocked
+locked_timeout = 5    # 5 s after locking
+enabled = true
+
+# GNOME had: blank + lock at 300 s idle, suspend at 900 s idle (on AC and on battery).
+[idle.behavior.suspend]
+action = "lock_and_suspend"
+timeout = 900
+enabled = true
+
 # Like GNOME: saved to ~/Pictures/Screenshots and copied to the clipboard.
 [shell.screenshot]
 directory = "~/Pictures/Screenshots"
@@ -31,7 +53,8 @@ enabled = true
 speed = 1.0    # 1.0 = default; higher = faster
 
 [shell.launcher]
-categories = false # hide the application category chips in the launcher
+layout = "simple"  # search field + results only
+categories = false # hide the category chip row
 app_grid = true    # apps as an icon grid
 
 [theme]
@@ -113,7 +136,7 @@ left = "panel-toggle control-center calendar"
 right = "panel-toggle control-center notifications"
 
 [widget.notifications]
-hide_when_no_unread = true
+hide_when_no_unread = false
 
 [widget.notifications.actions]
 left = "panel-toggle control-center notifications"

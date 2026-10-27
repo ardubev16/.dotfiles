@@ -1,6 +1,5 @@
 -- Hyprland config (Lua, Hyprland >= 0.55). Symlinked to ~/.config/hypr by desktops/hyprland/default.nix.
--- Hyprland and Noctalia are system packages (dnf). Mirrors desktops/sway/sway/config 1:1
--- (same keys, same workspace/monitor/app mapping); keep the two in sync.
+-- Hyprland and Noctalia are system packages (dnf).
 
 local home     = os.getenv("HOME")
 local terminal = "kitty"
@@ -34,7 +33,7 @@ hl.monitor({ output = "DP-5",  mode = "2560x1440@144", position = "1920x0",   sc
 ---- WORKSPACES  ------
 -----------------------
 -- Default monitor per workspace: the first connected output in each list wins, the laptop
--- panel is the fallback so everything works with a single screen (same lists as sway).
+-- panel is the fallback so everything works with a single screen.
 local odyssey = { "DP-3", "DP-5", "eDP-1" }
 local laptop  = { "eDP-1", "DP-3", "DP-5" }
 local benq    = { "DP-2", "DP-4", "eDP-1" }
@@ -56,13 +55,13 @@ end
 apply_pins()
 hl.on("monitor.added", apply_pins)
 
--- Smart gaps: a lone window (or a fullscreen one) has no gaps, border or rounding (sway: smart_gaps/smart_borders).
+-- Smart gaps: a lone window (or a fullscreen one) has no gaps, border or rounding.
 hl.workspace_rule({ workspace = "w[tv1]", gaps_out = 0, gaps_in = 0 })
 hl.workspace_rule({ workspace = "f[1]",   gaps_out = 0, gaps_in = 0 })
 hl.window_rule({ name = "smart-gaps-w", match = { float = false, workspace = "w[tv1]" }, border_size = 0, rounding = 0 })
 hl.window_rule({ name = "smart-gaps-f", match = { float = false, workspace = "f[1]" },   border_size = 0, rounding = 0 })
 
--- Open apps on their workspace without switching to it (sway `assign`; replaces GNOME auto-move-windows).
+-- Open apps on their workspace without switching to it (replaces GNOME auto-move-windows).
 -- Native Wayland class = app_id; XWayland class = WM_CLASS.
 local assign = {
     { "kitty",                              "1"  },
@@ -120,6 +119,12 @@ hl.config({
 
     dwindle = { preserve_split = true },
 
+    -- Keyboard focus changes may still warp the pointer, but it returns to where it was
+    -- once you move the mouse again.
+    cursor = {
+        warp_back_after_non_mouse_input = true,
+    },
+
     misc = {
         force_default_wallpaper = 0,
         disable_hyprland_logo   = true, -- Noctalia draws the wallpaper
@@ -141,6 +146,9 @@ hl.config({
 
 -- Noctalia animates its own surfaces
 hl.layer_rule({ name = "noctalia-no-anim", match = { namespace = "^noctalia-" }, no_anim = true })
+
+-- Touchpad: 3-finger horizontal swipe switches workspaces
+hl.gesture({ fingers = 3, direction = "horizontal", action = "workspace" })
 
 -- Animations. `speed` is in deciseconds per animation: LOWER = FASTER (stock is ~4-5 for windows).
 hl.curve("snap",   { type = "bezier", points = { {0.2, 0.9},  {0.1, 1} } })
@@ -220,7 +228,7 @@ hl.bind(mod .. " + CTRL + L",         hl.dsp.focus({ monitor = "r" }))
 hl.bind(mod .. " + CTRL + SHIFT + H", hl.dsp.workspace.move({ monitor = "l" }))
 hl.bind(mod .. " + CTRL + SHIFT + L", hl.dsp.workspace.move({ monitor = "r" }))
 
--- Mouse: Super+drag moves, Super+right-drag resizes (sway floating_modifier)
+-- Mouse: Super+drag moves, Super+right-drag resizes
 hl.bind(mod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
 hl.bind(mod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
