@@ -62,6 +62,7 @@ in
     ipe = "curl -s ipinfo.io | jq";
     open = "xdg-open";
     xsc = "xclip -selection clipboard";
+    wlc = "wl-copy";
     ez = "exec zsh";
     gspull = "git pull && git submodule foreach \"git checkout master\"";
     rpg = "openssl rand -hex";
