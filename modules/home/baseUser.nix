@@ -11,6 +11,8 @@
     inputs.self.homeModules.theme
     ../../applications
     ../../desktops/gnome
+    ../../desktops/hyprland
+    ../../desktops/noctalia
   ];
 
   programs.home-manager.enable = true;

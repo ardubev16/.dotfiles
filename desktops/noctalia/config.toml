@@ -1,0 +1,189 @@
+# Noctalia config. Symlinked to ~/.config/noctalia/config.toml by desktops/noctalia/default.nix.
+# Layout mirrors the GNOME setup:
+# workspaces left, clock centre, resources / tray / network / volume / battery right.
+
+[shell]
+font_family = "Adwaita Sans"
+polkit_agent = true
+screen_time_enabled = true
+
+[shell.panel]
+# Panels (control center, calendar, tray…) open under the clicked widget, not bar-centre.
+open_near_click_control_center = true
+open_near_click_launcher = false
+
+# No lock/unlock transition: with the default 1.5 s fade the lid-close suspend starts while the
+# desktop is still on screen, so it is visible again for a moment on resume.
+[lockscreen]
+transition = []
+
+# Idle: lock after 5 min of inactivity, and switch the screen off 5 s after the session is locked.
+# Videos (Brave "Wake Lock") and caffeine are idle inhibitors, which Noctalia respects.
+[idle]
+pre_action_fade_seconds = 0
+
+[idle.behavior.lock]
+action = "lock"
+timeout = 300
+enabled = true
+
+[idle.behavior.screen-off]
+action = "screen_off"
+timeout = 0           # never while unlocked
+locked_timeout = 5    # 5 s after locking
+enabled = true
+
+# GNOME had: blank + lock at 300 s idle, suspend at 900 s idle (on AC and on battery).
+[idle.behavior.suspend]
+action = "lock_and_suspend"
+timeout = 900
+enabled = true
+
+# Like GNOME: saved to ~/Pictures/Screenshots and copied to the clipboard.
+[shell.screenshot]
+directory = "~/Pictures/Screenshots"
+filename_pattern = "Screenshot From %Y-%m-%d %H-%M-%S"
+save_to_file = true
+copy_to_clipboard = true
+confirm_region = true
+remember_last_region = true
+
+[shell.animation]
+enabled = true
+speed = 1.0    # 1.0 = default; higher = faster
+
+[shell.launcher]
+layout = "simple"  # search field + results only
+categories = false # hide the category chip row
+app_grid = true    # apps as an icon grid
+
+[theme]
+mode = "dark"
+source = "builtin"
+builtin = "Gruvbox"
+
+[theme.templates]
+enable_builtin_templates = false
+
+[control_center]
+hidden_tabs = ["weather"]
+sidebar_section = "none"
+
+[audio]
+enable_overdrive = true # volume above 100%, as in GNOME
+
+[nightlight]
+enabled = true
+temperature_night = 3700
+
+[bar]
+order = ["main"]
+
+[bar.main]
+position = "top"
+thickness = 32
+margin_ends = 0
+margin_edge = 0
+radius = 0
+concave_edge_corners = false
+shadow = false
+reserve_space = true
+capsule = false
+scale = 1.2
+
+start = ["taskbar"]
+center = ["clock", "notifications"]
+end = [
+    "group:res",
+    "gap",
+    "tray",
+    "gap",
+    "network",
+    "bluetooth",
+    "volume",
+    "battery",
+    "control-center",
+]
+
+# CPU / RAM / temp / disk share one capsule; clicking any of them opens
+# Control Center → System (graphs and resource details).
+[[bar.main.capsule_group]]
+id = "res"
+members = ["cpu", "ram", "temp", "disk"]
+fill = "surface_variant"
+padding = 8.0
+widget_spacing = 12
+
+# One capsule per workspace holding the icons of the apps open on it
+# (like the GNOME "workspaces by open apps" extension).
+[widget.taskbar]
+group_by_workspace = true
+group_single_icon_per_app = true
+hide_empty_workspaces = true
+workspace_group_capsule = true
+workspace_group_content = "icons"
+workspace_label_placement = "inside"
+show_active_indicator = false
+icon_scale = 1.2
+
+[widget.clock]
+format = "{:%b %-d  %-I:%M %p}"
+tooltip_format = "{:%A, %B %d, %Y}"
+
+# Clock opens the calendar, the bell next to it the notifications (the sidebar switches between them).
+[widget.clock.actions]
+left = "panel-toggle control-center calendar"
+right = "panel-toggle control-center notifications"
+
+[widget.notifications]
+hide_when_no_unread = false
+
+[widget.notifications.actions]
+left = "panel-toggle control-center notifications"
+
+[widget.cpu]
+type = "sysmon"
+stat = "cpu_usage"
+[widget.cpu.actions]
+left = "panel-toggle control-center system"
+
+[widget.ram]
+type = "sysmon"
+stat = "ram_pct"
+[widget.ram.actions]
+left = "panel-toggle control-center system"
+
+[widget.temp]
+type = "sysmon"
+stat = "cpu_temp"
+[widget.temp.actions]
+left = "panel-toggle control-center system"
+
+[widget.disk]
+type = "sysmon"
+stat = "disk_free"
+path = "/"
+[widget.disk.actions]
+left = "panel-toggle control-center system"
+
+[widget.gap]
+type = "spacer"
+length = 24
+
+[widget.tray]
+hide_passive = true
+
+[widget.network]
+show_label = false
+
+[widget.volume]
+show_label = false
+
+[weather]
+enabled = false
+
+[battery]
+warning_threshold = 20
+
+[desktop_widgets]
+enabled = false
