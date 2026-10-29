@@ -50,7 +50,7 @@ in
       kubevirt
       kustomize
       kyverno
-      minikube
+      # minikube
       nerdctl
       skopeo
       yq
