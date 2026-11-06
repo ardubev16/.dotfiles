@@ -10,6 +10,7 @@ $git_status\
 
 right_format = """
 $cmd_duration\
+$container\
 $kubernetes\
 $nix_shell\
 $python\
@@ -38,6 +39,9 @@ use_git_executable = true
 ### Right Prompt ###
 [cmd_duration]
 format = '\[[⏱ $duration]($style)\]'
+
+[container]
+format = '\[[$symbol $name]($style)\]'
 
 [battery]
 format = '\[[$symbol$percentage]($style)\]'

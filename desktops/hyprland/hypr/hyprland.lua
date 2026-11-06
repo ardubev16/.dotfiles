@@ -119,10 +119,9 @@ hl.config({
 
     dwindle = { preserve_split = true },
 
-    -- Keyboard focus changes may still warp the pointer, but it returns to where it was
-    -- once you move the mouse again.
+    -- The pointer never jumps to a window when focus changes (taskbar clicks, keyboard focus).
     cursor = {
-        warp_back_after_non_mouse_input = true,
+        no_warps = true,
     },
 
     misc = {
