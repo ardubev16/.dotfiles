@@ -110,7 +110,7 @@ end = [
 [[bar.main.capsule_group]]
 id = "res"
 members = ["cpu", "ram", "temp", "disk"]
-fill = "surface_variant"
+fill = "surface_container"
 padding = 8.0
 widget_spacing = 12
 
@@ -181,6 +181,9 @@ show_label = false
 
 [weather]
 enabled = false
+
+[calendar]
+enabled = true
 
 [battery]
 warning_threshold = 20
