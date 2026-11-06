@@ -13,6 +13,7 @@
       settings = {
         hide_window_decorations = true;
         placement_strategy = "top-left";
+        remember_window_size = false;
       };
     };
     stylix.targets.kitty.enable = true;

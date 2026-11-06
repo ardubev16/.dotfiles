@@ -55,13 +55,11 @@ end
 apply_pins()
 hl.on("monitor.added", apply_pins)
 
--- Smart gaps: a lone window (or a fullscreen one) has no gaps, border or rounding.
-hl.workspace_rule({ workspace = "w[tv1]", gaps_out = 0, gaps_in = 0 })
-hl.workspace_rule({ workspace = "f[1]",   gaps_out = 0, gaps_in = 0 })
-hl.window_rule({ name = "smart-gaps-w", match = { float = false, workspace = "w[tv1]" }, border_size = 0, rounding = 0 })
-hl.window_rule({ name = "smart-gaps-f", match = { float = false, workspace = "f[1]" },   border_size = 0, rounding = 0 })
+-- A lone window (or a fullscreen one) has no border; gaps, rounding and shadow stay.
+hl.window_rule({ name = "lone-no-border-w", match = { float = false, workspace = "w[tv1]" }, border_size = 0 })
+hl.window_rule({ name = "lone-no-border-f", match = { float = false, workspace = "f[1]" },   border_size = 0 })
 
--- Open apps on their workspace without switching to it (replaces GNOME auto-move-windows).
+-- Open apps on their workspace and switch to it (replaces GNOME auto-move-windows).
 -- Native Wayland class = app_id; XWayland class = WM_CLASS.
 local assign = {
     { "kitty",                              "1"  },
@@ -76,7 +74,7 @@ local assign = {
     { "brave-hnpfjngllnobngcgfapefoaidbinmjnm-Default", "10" },
 }
 for n, a in ipairs(assign) do
-    hl.window_rule({ name = "assign-" .. n, match = { class = "^" .. a[1] .. "$" }, workspace = a[2] .. " silent" })
+    hl.window_rule({ name = "assign-" .. n, match = { class = "^" .. a[1] .. "$" }, workspace = a[2] })
 end
 
 -- Noctalia settings window floats
@@ -88,7 +86,7 @@ hl.window_rule({ name = "noctalia-settings", match = { class = "^dev\\.noctalia\
 hl.config({
     general = {
         gaps_in     = 3,   -- 6px between windows (3 per side)
-        gaps_out    = 6,   -- gap to the screen edges; removed for a lone window by the smart-gaps rules
+        gaps_out    = 6,   -- gap to the screen edges
         border_size = 2,
         col = {
             active_border   = "rgba(d79921ff)", -- gruvbox yellow
