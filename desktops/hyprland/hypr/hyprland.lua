@@ -1,5 +1,4 @@
--- Hyprland config (Lua, Hyprland >= 0.55). Symlinked to ~/.config/hypr by desktops/hyprland/default.nix.
--- Hyprland and Noctalia are system packages (dnf).
+-- Requires Hyprland >= 0.55 (Lua config).
 
 local home     = os.getenv("HOME")
 local terminal = "kitty"
@@ -59,7 +58,7 @@ hl.on("monitor.added", apply_pins)
 hl.window_rule({ name = "lone-no-border-w", match = { float = false, workspace = "w[tv1]" }, border_size = 0 })
 hl.window_rule({ name = "lone-no-border-f", match = { float = false, workspace = "f[1]" },   border_size = 0 })
 
--- Open apps on their workspace and switch to it (replaces GNOME auto-move-windows).
+-- Open apps on their workspace and switch to it.
 -- Native Wayland class = app_id; XWayland class = WM_CLASS.
 local assign = {
     { "kitty",                              "1"  },
@@ -77,7 +76,6 @@ for n, a in ipairs(assign) do
     hl.window_rule({ name = "assign-" .. n, match = { class = "^" .. a[1] .. "$" }, workspace = a[2] })
 end
 
--- Noctalia settings window floats
 hl.window_rule({ name = "noctalia-settings", match = { class = "^dev\\.noctalia\\.Noctalia$" }, float = true })
 
 -----------------------
@@ -86,7 +84,7 @@ hl.window_rule({ name = "noctalia-settings", match = { class = "^dev\\.noctalia\
 hl.config({
     general = {
         gaps_in     = 3,   -- 6px between windows (3 per side)
-        gaps_out    = 6,   -- gap to the screen edges
+        gaps_out    = 6,
         border_size = 2,
         col = {
             active_border   = "rgba(d79921ff)", -- gruvbox yellow
@@ -144,7 +142,6 @@ hl.config({
 -- Noctalia animates its own surfaces
 hl.layer_rule({ name = "noctalia-no-anim", match = { namespace = "^noctalia-" }, no_anim = true })
 
--- Touchpad: 3-finger horizontal swipe switches workspaces
 hl.gesture({ fingers = 3, direction = "horizontal", action = "workspace" })
 
 -- Animations. `speed` is in deciseconds per animation: LOWER = FASTER (stock is ~4-5 for windows).
@@ -182,7 +179,7 @@ hl.bind("XF86AudioPause", hl.dsp.exec_cmd(ipc .. " media pause"),    { locked = 
 hl.bind("XF86AudioNext",  hl.dsp.exec_cmd(ipc .. " media next"),     { locked = true })
 hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd(ipc .. " media previous"), { locked = true })
 
--- Screenshots (GNOME-style): area / screen / all screens
+-- Screenshots: area / screen / all screens
 hl.bind("Print",         hl.dsp.exec_cmd(ipc .. " screenshot-region"))
 hl.bind("SHIFT + Print", hl.dsp.exec_cmd(ipc .. " screenshot-fullscreen pick"))
 hl.bind("CTRL + Print",  hl.dsp.exec_cmd(ipc .. " screenshot-fullscreen all"))
