@@ -69,6 +69,10 @@ enable_overdrive = true # volume above 100%
 enabled = true
 temperature_night = 3700
 
+# Overlay layer so toasts show above fullscreen apps (videos); the default "top" is hidden by them.
+[notification]
+layer = "overlay"
+
 [bar]
 order = ["main"]
 
