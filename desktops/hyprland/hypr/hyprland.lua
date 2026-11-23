@@ -172,8 +172,10 @@ hl.bind("XF86AudioRaiseVolume",  hl.dsp.exec_cmd(ipc .. " volume-up"),       lr)
 hl.bind("XF86AudioLowerVolume",  hl.dsp.exec_cmd(ipc .. " volume-down"),     lr)
 hl.bind("XF86AudioMute",         hl.dsp.exec_cmd(ipc .. " volume-mute"),     { locked = true })
 hl.bind("XF86AudioMicMute",      hl.dsp.exec_cmd(ipc .. " mic-mute"),        { locked = true })
-hl.bind("XF86MonBrightnessUp",   hl.dsp.exec_cmd(ipc .. " brightness-up"),   lr)
-hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd(ipc .. " brightness-down"), lr)
+-- Target the laptop panel: without one Noctalia uses its "current output", which fails when that is
+-- an external monitor (no DDC) or stale after undocking ("current output has no brightness control").
+hl.bind("XF86MonBrightnessUp",   hl.dsp.exec_cmd(ipc .. " brightness-up eDP-1"),   lr)
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd(ipc .. " brightness-down eDP-1"), lr)
 hl.bind("XF86AudioPlay",  hl.dsp.exec_cmd(ipc .. " media toggle"),   { locked = true })
 hl.bind("XF86AudioPause", hl.dsp.exec_cmd(ipc .. " media pause"),    { locked = true })
 hl.bind("XF86AudioNext",  hl.dsp.exec_cmd(ipc .. " media next"),     { locked = true })

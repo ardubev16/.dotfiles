@@ -21,7 +21,6 @@ repos:
       - id: codespell
         args:
           - --exclude-file=./kmonad/odin/config.kbd
-          - --exclude-file=./kmonad/phxl-BELO/config.kbd
 
   - repo: https://github.com/rhysd/actionlint
     rev: 393031adb9afb225ee52ae2ccd7a5af5525e03e8 # frozen: v1.7.11
