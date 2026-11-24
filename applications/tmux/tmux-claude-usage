@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+# Claude plan usage box for the tmux status bar (inspired by github.com/enieuwy/showy-quota):
+# time until the 5h reset, 5h gauge, 5h used %, 7d gauge, 7d used %.
+# Each gauge is a Nerd Font pie (md-circle_outline, then md-circle_slice_1..8) coloured on a smooth
+# green → yellow → red gradient by % used.
+# Data: the endpoint CodexBar uses, with omp's Anthropic OAuth login (omp refreshes the token while running).
+# shortcut: never refreshes the token itself; keeps the last good data until omp renews an expired one.
+
+cache="${XDG_RUNTIME_DIR:-/tmp}/tmux-claude-usage.json"
+db="$HOME/.omp/agent/agent.db"
+
+# tmux polls every status-interval; hit the API at most every 5 minutes, re-render (countdown) every time.
+if [[ ! -f $cache ]] || (($(date +%s) - $(stat -c %Y "$cache") >= 300)); then
+    token=$(sqlite3 -readonly "$db" "SELECT json_extract(data, '$.access') FROM auth_credentials
+        WHERE provider = 'anthropic' AND credential_type = 'oauth' AND disabled_cause IS NULL
+        ORDER BY updated_at DESC LIMIT 1" 2>/dev/null || true)
+    [[ -z $token ]] && exit 0 # no omp Anthropic login (e.g. work host): show nothing
+
+    # Header via stdin so the token never appears in the process list.
+    if json=$(printf 'Authorization: Bearer %s\n' "$token" |
+        curl -fsS -m 10 -H @- -H 'anthropic-beta: oauth-2025-04-20' https://api.anthropic.com/api/oauth/usage 2>/dev/null); then
+        printf '%s' "$json" >"$cache"
+    else
+        touch "$cache" # keep last good data, retry in 5 minutes
+    fi
+fi
+
+# Box colours follow the theme's inactive window tabs (bg=colour239, fg=colour223).
+[[ -s $cache ]] || {
+    printf '#[fg=colour223,bg=colour239] claude – #[default]'
+    exit 0
+}
+
+jq -r '
+    # Linear blend #afaf00 (0%) → #ffaf00 (50%) → #d75f5f (100%): gruvbox-ish green, yellow, red.
+    def color: (. / 100) as $t
+        | (if $t < 0.5 then [[175,175,0], [255,175,0], $t * 2] else [[255,175,0], [215,95,95], $t * 2 - 1] end)
+        | . as [$a, $b, $f]
+        | "#" + ([range(3) as $i | $a[$i] + ($b[$i] - $a[$i]) * $f | round
+                  | [(. / 16 | floor), . % 16] | map("0123456789abcdef"[.:.+1]) | join("")] | join(""));
+    def gauge: ([.utilization // 0, 100] | min) as $used
+        | ($used / 100 * 8 | round) as $k
+        | "#[fg=\($used | color)]\([if $k == 0 then 984934 else 985757 + $k end] | implode)"  # U+F0766 / U+F0A9E+k-1
+          + "#[fg=colour223] \($used | round)%";
+
+    # shortcut: assumes resets_at is UTC ("+00:00"), as the API returns today
+    (if .five_hour.resets_at == null then "-:--"  # no 5h window running
+     else ([(.five_hour.resets_at[0:19] + "Z" | fromdateiso8601) - now, 0] | max) as $s
+     | "\($s / 3600 | floor):\($s % 3600 / 60 | floor | tostring | if length < 2 then "0" + . else . end)" end) as $reset
+    | "#[fg=colour223,bg=colour239] \($reset) \(.five_hour | gauge) \(.seven_day | gauge) #[default]"
+' "$cache"

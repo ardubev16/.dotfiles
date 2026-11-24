@@ -7,6 +7,15 @@
 {
   home.packages = [
     (pkgs.writeShellScriptBin "tmux-sessionizer" (builtins.readFile ./tmux-sessionizer))
+    (pkgs.writeShellApplication {
+      name = "tmux-claude-usage";
+      runtimeInputs = [
+        pkgs.curl
+        pkgs.jq
+        pkgs.sqlite
+      ];
+      text = builtins.readFile ./tmux-claude-usage;
+    })
     perSystem.nixpkgs-unstable.herdr
   ];
 
