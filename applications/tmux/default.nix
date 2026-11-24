@@ -1,7 +1,7 @@
 {
   pkgs,
   config,
-  perSystem,
+  lib,
   ...
 }:
 {
@@ -16,12 +16,21 @@
       ];
       text = builtins.readFile ./tmux-claude-usage;
     })
-    perSystem.nixpkgs-unstable.herdr
   ];
 
   home.sessionVariables = {
     REPOS = "${config.home.homeDirectory}/Repos";
   };
+
+  # TODO: use tmuxPlugins.mkTmuxPlugin + fetchFromGitHub once tmux-agents is stable enough
+  # (drops the TPM checkout and the skipped first run on fresh machines).
+  # Idempotent: install.sh strips its own hooks before re-adding them.
+  home.activation.tmuxAgentsIntegrations = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    script="${config.xdg.configHome}/tmux/plugins/tmux-agents/integrations/install.sh"
+    if [[ -x $script ]]; then
+      PATH="${pkgs.jq}/bin:$PATH" run "$script" install
+    fi
+  '';
 
   programs.zsh.initContent = # sh
     ''
@@ -75,7 +84,7 @@
         set-option -g renumber-windows on
         set-option -g default-terminal "tmux-256color"
         set-option -g allow-passthrough on
-        set-option -s extend-keys on
+        set-option -s extended-keys on
         set-option -as terminal-features 'xterm*:extkeys'
         # undercurl support
         set-option -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'
@@ -98,7 +107,11 @@
         bind-key -n M-o switch-client -p
         bind-key -n M-i switch-client -n
 
-        set-option -g @plugin 'ardubev16/tmux-herdr'
+        set-option -g @tmux_agents_worktree_dir "$REPOS/.worktrees"
+        set-option -g @tmux_agents_worktree_command 'omp'
+        set-option -g @tmux_agents_dashboard_build 'on'
+        set-option -g @plugin 'ardubev16/tmux-agents'
+
         run '~/.tmux/plugins/tpm/tpm'
       '';
   };
