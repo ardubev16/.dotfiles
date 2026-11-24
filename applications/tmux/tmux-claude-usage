@@ -44,8 +44,10 @@ jq -r '
           + "#[fg=colour223] \($used | round)%";
 
     # shortcut: assumes resets_at is UTC ("+00:00"), as the API returns today
-    (if .five_hour.resets_at == null then "-:--"  # no 5h window running
+    (if .five_hour.resets_at == null then "--"  # no 5h window running
      else ([(.five_hour.resets_at[0:19] + "Z" | fromdateiso8601) - now, 0] | max) as $s
-     | "\($s / 3600 | floor):\($s % 3600 / 60 | floor | tostring | if length < 2 then "0" + . else . end)" end) as $reset
+     | ($s / 3600 | floor) as $h | ($s % 3600 / 60 | floor) as $m
+     | if $h > 0 then "\($h)h\($m | tostring | if length < 2 then "0" + . else . end)" else "\($m)m" end
+     end) as $reset
     | "#[fg=colour223,bg=colour239] \($reset) \(.five_hour | gauge) \(.seven_day | gauge) #[default]"
 ' "$cache"
