@@ -14,7 +14,6 @@ hl.env("PATH", home .. "/.nix-profile/bin:/nix/var/nix/profiles/default/bin:" ..
     "/.local/bin:" .. home .. "/.cargo/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin")
 hl.env("SSH_AUTH_SOCK", os.getenv("XDG_RUNTIME_DIR") .. "/gcr/ssh")
 hl.env("TERMINAL", "kitty")
-hl.env("LC_TIME", "en_US.UTF-8")
 
 ------------------
 ---- MONITORS ----
