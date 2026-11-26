@@ -107,6 +107,7 @@
         bind-key -n M-o switch-client -p
         bind-key -n M-i switch-client -n
 
+        set-option -g @tmux_agents_theme 'gruvbox-dark'
         set-option -g @tmux_agents_worktree_dir "$REPOS/.worktrees"
         set-option -g @tmux_agents_worktree_command 'omp'
         set-option -g @tmux_agents_dashboard_build 'on'
