@@ -12,20 +12,18 @@
     viu
   ];
 
-  home.shellAliases = {
-    vi = "$EDITOR";
-    vim = "$EDITOR";
-    vimdiff = "$EDITOR";
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    sideloadInitLua = true;
+    viAlias = true;
+    vimAlias = true;
+    vimdiffAlias = true;
   };
   home.sessionPath = [
     "$HOME/.cargo/bin"
   ];
 
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-    sideloadInitLua = true;
-  };
   xdg.configFile."nvim".source =
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/applications/editor/nvim";
 }

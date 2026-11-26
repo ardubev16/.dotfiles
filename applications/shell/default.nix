@@ -1,4 +1,5 @@
 {
+  config,
   lib,
   perSystem,
   pkgs,
@@ -8,6 +9,19 @@ let
   unstable-pkgs = with perSystem.nixpkgs-unstable; [
     devenv
   ];
+
+  antidotePlugins = pkgs.writeText "antidote-plugins" ''
+    getantidote/use-omz
+    ohmyzsh/ohmyzsh path:lib
+    ohmyzsh/ohmyzsh path:plugins/colored-man-pages
+    ohmyzsh/ohmyzsh path:plugins/eza
+    ohmyzsh/ohmyzsh path:plugins/git
+    ohmyzsh/ohmyzsh path:plugins/zsh-interactive-cd
+
+    zsh-users/zsh-autosuggestions
+    zsh-users/zsh-completions
+    zsh-users/zsh-syntax-highlighting
+  '';
 in
 {
   home.packages =
@@ -39,10 +53,7 @@ in
     config.global.hide_env_diff = true;
   };
 
-  programs.zoxide = {
-    enable = true;
-    enableZshIntegration = true;
-  };
+  programs.zoxide.enable = true;
 
   home.shellAliases = {
     # better commands
@@ -78,27 +89,23 @@ in
     history.extended = true;
     # zprof.enable = true;
 
-    antidote = {
-      enable = true;
-      plugins = [
-        "getantidote/use-omz"
-        "ohmyzsh/ohmyzsh path:lib"
-        "ohmyzsh/ohmyzsh path:plugins/colored-man-pages"
-        "ohmyzsh/ohmyzsh path:plugins/eza"
-        "ohmyzsh/ohmyzsh path:plugins/git"
-        "ohmyzsh/ohmyzsh path:plugins/zsh-interactive-cd"
-
-        "zsh-users/zsh-autosuggestions"
-        "zsh-users/zsh-completions"
-        "zsh-users/zsh-syntax-highlighting"
-      ];
-    };
-    initContent = # sh
+    # Not programs.zsh.antidote: it hard-codes the static plugin file into shared /tmp,
+    # where another local user could plant code before the first shell after boot.
+    # The file name carries the bundle's store hash, so a changed plugin list regenerates it.
+    initContent = lib.mkMerge [
+      (lib.mkOrder 550 # sh
+        ''
+          source ${pkgs.antidote}/share/antidote/antidote.zsh
+          antidote load ${antidotePlugins} ${config.xdg.cacheHome}/antidote/${builtins.baseNameOf antidotePlugins}.zsh
+        ''
+      )
+      # sh
       ''
         if [[ -f ~/.localvars ]]; then
           source ~/.localvars
         fi
-      '';
+      ''
+    ];
   };
 
   home.sessionPath = [
@@ -107,8 +114,6 @@ in
 
   programs.starship = {
     enable = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
 
     settings = lib.importTOML ./starship.toml;
   };
