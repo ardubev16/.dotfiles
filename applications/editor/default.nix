@@ -1,17 +1,12 @@
 { config, pkgs, ... }:
 {
   home.packages = with pkgs; [
-    bat
     chafa
     dotnet-sdk
-    fd
-    fzf
     gh
-    git
     go
     luajitPackages.luarocks
     nodejs
-    ripgrep
     rustup
     ueberzugpp
     viu

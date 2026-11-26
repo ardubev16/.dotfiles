@@ -20,7 +20,6 @@ in
       fzf
       gcc
       gdb
-      git
       gpp
       jq
       ripgrep
@@ -55,16 +54,15 @@ in
     # grep
     agrep = "alias | grep";
     hgrep = "history | grep";
-    psgrep = "ps aux | grep";
+    psgrep = "pgrep -af";
 
     # misc
-    wget = "wget -c";
     ipe = "curl -s ipinfo.io | jq";
     open = "xdg-open";
     xsc = "xclip -selection clipboard";
     wlc = "wl-copy";
     ez = "exec zsh";
-    gspull = "git pull && git submodule foreach \"git checkout master\"";
+    gspull = "git pull && git submodule foreach 'git checkout \"$(git rev-parse --abbrev-ref origin/HEAD | sed s@^origin/@@)\"'";
     rpg = "openssl rand -hex";
     note = "vim $HOME/Documents/notes/$(date '+%Y-%m-%d_%a').md";
     tim = ''
