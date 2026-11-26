@@ -1,100 +1,47 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
-
 function usage() {
     cat <<EOF
-"Usage: $0 [options] [command]"
-    -a:     show all repos
-    -s:     select from open sessions
+Usage: $0 [-a] [-h]
+    -a:     pick a repo under \$REPOS and open its session
     -h:     show this help
 EOF
     exit 1
 }
 
-function list_repos() {
-    local -r base_path="$1"
-
-    fd '.git' \
+# Repo paths relative to $REPOS, e.g. personal/foo
+function pick_repo() {
+    fd .git \
         --hidden \
         --no-ignore \
         --type directory \
         --prune \
         --glob \
-        --absolute-path \
-        "$base_path" \
-        --exec-batch dirname |
-        sort --reverse
+        --base-directory "$REPOS" \
+        --format '{//}' |
+        sort --reverse |
+        fzf
 }
 
-function pick_path() {
-    mapfile -t paths
-
-    [[ ${#paths[@]} -eq 0 ]] && return 1
-
-    common_prefix="${paths[0]}"
-    for path in "${paths[@]}"; do
-        while [[ "$path" != "$common_prefix"* ]]; do
-            common_prefix="${common_prefix%/*}"
-        done
-    done
-
-    local -r selected=$(
-        printf "%s\n" "${paths[@]}" |
-            sed "s:^$common_prefix/::" |
-            fzf
-    )
-
-    if [[ -n $selected ]]; then
-        echo "$common_prefix/$selected"
-    fi
-}
-
-function select_session() {
-    local -r selected=$(tmux list-sessions -F'#{session_name}' | fzf)
-
-    if [[ -n $selected ]]; then
-        tmux switch-client -t="$selected"
-    fi
-}
-
-while getopts "ash" opt; do
+selected=""
+while getopts "ah" opt; do
     case $opt in
-    a)
-        selected=$(list_repos "$REPOS" | pick_path)
-        ;;
-    s)
-        select_session
-        exit 0
-        ;;
-    h | *)
-        usage
-        ;;
+    a) selected=$(pick_repo) || exit 0 ;;
+    *) usage ;;
     esac
 done
-if [ "$OPTIND" -eq 1 ]; then
-    usage
+[[ $OPTIND -eq 1 ]] && usage
+[[ -z $selected ]] && exit 0
+
+# Relative path keeps work/api and personal/api apart; tmux disallows '.' in session names.
+name=${selected//./_}
+
+if ! tmux has-session -t="$name" 2>/dev/null; then
+    tmux new-session -ds "$name" -c "$REPOS/$selected"
+    tmux send-keys -t="$name:" "vim ." Enter
 fi
 
-if [[ -z $selected ]]; then
-    exit 0
+if [[ -z ${TMUX:-} ]]; then
+    exec tmux attach-session -t="$name"
 fi
-
-if [[ -e "$selected/.tmuxp.yaml" ]]; then
-    tmuxp load -y "$selected/.tmuxp.yaml"
-else
-    selected_name=$(basename "$selected" | tr . _)
-    tmux_running=$(pgrep tmux)
-
-    if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
-        tmux new-session -s "$selected_name" -c "$selected"
-        exit 0
-    fi
-
-    if ! tmux has-session -t="$selected_name" 2>/dev/null; then
-        tmux new-session -ds "$selected_name" -c "$selected"
-        tmux send-keys -t "$selected_name" "vim ." Enter
-    fi
-
-    tmux switch-client -t="$selected_name"
-fi
+tmux switch-client -t="$name"

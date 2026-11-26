@@ -6,7 +6,14 @@
 }:
 {
   home.packages = [
-    (pkgs.writeShellScriptBin "tmux-sessionizer" (builtins.readFile ./tmux-sessionizer))
+    (pkgs.writeShellApplication {
+      name = "tmux-sessionizer";
+      runtimeInputs = [
+        pkgs.fd
+        pkgs.fzf
+      ];
+      text = builtins.readFile ./tmux-sessionizer;
+    })
     (pkgs.writeShellApplication {
       name = "tmux-claude-usage";
       runtimeInputs = [
@@ -36,6 +43,8 @@
     ''
       __trap_exit_tmux() {
         [[ -z "$TMUX" ]] && return  # Not in tmux, ignore
+        # Only the pane's own shell, not a nested one (e.g. `zsh` then `exit`)
+        [[ $$ == $(tmux display-message -p '#{pane_pid}') ]] || return
 
         # Ignore if more than one window or pane exists
         local win_count=$(tmux list-windows 2>/dev/null | wc -l)
@@ -85,24 +94,22 @@
         set-option -g default-terminal "tmux-256color"
         set-option -g allow-passthrough on
         set-option -s extended-keys on
-        set-option -as terminal-features 'xterm*:extkeys'
+        # Fixed indexes so re-sourcing overwrites instead of appending duplicates
+        set-option -s terminal-features[10] 'xterm*:extkeys'
         # undercurl support
-        set-option -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'
+        set-option -s terminal-overrides[10] '*:Smulx=\E[4::%p1%dm'
         # support colors for undercurl
-        set-option -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'
+        set-option -s terminal-overrides[11] '*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'
 
         # Split panes with current path
         bind-key % split-window -h -c '#{pane_current_path}'
         bind-key '"' split-window -v -c '#{pane_current_path}'
 
         # Custom binds
-        bind-key R run-shell '\
-          tmux source-file ${config.xdg.configHome}/tmux/tmux.conf; \
-          tmux display-message "Sourced config file!"'
+        bind-key R source-file ${config.xdg.configHome}/tmux/tmux.conf \; display-message "Sourced config file!"
         bind-key s choose-tree -sZ -O name
 
         bind-key A display-popup -E tmux-sessionizer -a
-        bind-key S display-popup -E tmux-sessionizer -s
 
         bind-key -n M-o switch-client -p
         bind-key -n M-i switch-client -n
